@@ -1,0 +1,31 @@
+teiHeader { display: none }
+
+lg > head {
+    color : red ;
+    text-align: center;
+    font-weight: bold ;
+    display: block ;
+}
+
+lg {
+    padding: 1em
+}
+
+l { 
+    display: block ;
+}
+
+l > seg {
+    margin-right: 2em
+}
+
+caesura {
+    visibility: hidden ;
+    margin-right: 1em; 
+}
+
+xcaesura {
+    display: inline ;
+    position:relative;
+    left: 100px
+}

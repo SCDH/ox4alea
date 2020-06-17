@@ -1,0 +1,58 @@
+teiHeader { display: none }
+
+
+@font-face {
+    font-family:"Arabic Typesetting";
+    /*The location of the loaded TTF font must be relative to the CSS*/
+    src:url("arabt100.ttf");
+}
+
+
+@font-face {
+    font-family:"Doulos SIL";
+    /*The location of the loaded TTF font must be relative to the CSS*/
+    src:url("DoulosSIL-R.ttf");
+}
+
+body {
+    font-family:"Arabic Typesetting";
+}
+
+lg > head > title {
+    color : red ;
+    text-align: center;
+    font-weight: bold ;
+    display: block ;
+}
+
+lg {
+    padding: 1em ;
+}
+
+l { 
+    display: block ;
+    direction: rtl;
+}
+
+l > seg {
+    margin-right: 2em
+}
+
+caesura {
+    visibility: hidden ;
+    margin-right: 1em; 
+}
+
+app,lem {
+    -oxy-display-tags: none;
+    color:gray;
+}
+
+app > rdg {
+    display: none ;
+}
+
+
+note {
+    display: none ;
+}

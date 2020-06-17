@@ -1,0 +1,59 @@
+teiHeader { display: none }
+
+@font-face {
+    font-family:"Arabic Typesetting";
+    /*The location of the loaded TTF font must be relative to the CSS*/
+    src:url("arabt100.ttf");
+}
+
+body {
+    font-family:"Arabic Typesetting";
+}
+
+lg > head {
+    color : red ;
+    text-align: center;
+    font-weight: bold ;
+    display: block ;
+}
+
+lg {
+    padding: 1em;
+}
+
+l { 
+    display: block ;
+    direction: rtl;
+}
+
+l > seg {
+    margin-right: 2em
+}
+
+caesura {
+    visibility: hidden ;
+}
+
+note {
+    background-color: yellow;
+    -oxy-display-tags: none;
+}
+
+app {
+    display: inline ;
+}
+
+lem {
+    color: green ;
+    -oxy-display-tags: none;
+}
+
+rdg::before {
+    content:'|';
+}
+
+rdg {
+    color: blue ;
+    -oxy-display-tags: none;
+    direction:inherit !important;
+}
