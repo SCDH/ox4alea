@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description
+    xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:ht="http://www.w3.org/1999/xhtml"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xml:xpath-default-namespace="http://www.tei-c.org/ns/1.0"
+    stylesheet="../../framework/xsl/preview.xsl">
+  
+    <x:scenario label="Simple line with ceasura as direct child ...">
+	<!-- Please note, that this also produces the title and the
+	     empty table row that separates line groups (lg) -->
+	<x:context>
+	    <tei:body>
+		<tei:lg>
+		    <tei:lg>
+			<tei:l>Aa Bb Cc <tei:caesura/>Dd Ee Ff</tei:l>
+		    </tei:lg>
+		</tei:lg>
+	    </tei:body>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"
+	    pending="How does xspec handle whitespace?"/>
+	<x:expect label="results in 3 table columns">
+	    <ht:table>
+		<ht:tr>...</ht:tr>
+		<ht:tr>...</ht:tr>
+		<ht:tr>
+		    <ht:td style="...">1</ht:td>
+		    <ht:td style="...">Aa Bb Cc </ht:td>
+		    <ht:td>Dd Ee Ff</ht:td>
+		</ht:tr>
+	    </ht:table>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario label="Line with ceasura as direct child and app element ...">
+	<x:context>
+	    <tei:body>
+		<tei:lg>
+		    <tei:lg>
+			<tei:l>
+			    <tei:app><tei:lem wit="a">Aa</tei:lem><tei:rdg wit="b">Aaa</tei:rdg>
+			    </tei:app> Bb Cc <tei:caesura
+			    />Dd Ee Ff</tei:l>
+		    </tei:lg>
+		</tei:lg>
+	    </tei:body>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"
+	    pending="How does xspec handle whitespace?"/>
+	<x:expect label="results in 3 table columns">
+	    <ht:table>
+		<ht:tr>...</ht:tr>
+		<ht:tr>...</ht:tr>
+		<ht:tr>
+		    <ht:td style="...">1</ht:td>
+		    <ht:td style="...">Aa Bb Cc </ht:td>
+		    <ht:td>Dd Ee Ff</ht:td>
+		</ht:tr>
+	    </ht:table>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario
+	label="Line with ceasura nested in app element like in #1 ...">
+	<x:context>
+	    <tei:body>
+		<tei:lg>
+		    <tei:lg>
+			<tei:l>
+			    <app>
+				<lem wit="a">Aa Bb Cc <tei:caesura/>Dd Ee Ff</lem>
+				<rdg wit="b">Aaa Bbb Ccc</rdg>
+			    </app>
+			</tei:l>
+		    </tei:lg>
+		</tei:lg>
+	    </tei:body>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"
+	    pending="How does xspec handle whitespace?"/>
+	<x:expect label="results in 3 table columns">
+	    <ht:table>
+		<ht:tr>...</ht:tr>
+		<ht:tr>...</ht:tr>
+		<ht:tr>
+		    <ht:td style="...">1</ht:td>
+		    <ht:td style="...">Aa Bb Cc </ht:td>
+		    <ht:td>Dd Ee Ff</ht:td>
+		</ht:tr>
+	    </ht:table>
+	</x:expect>
+    </x:scenario>
+
+</x:description>
