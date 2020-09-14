@@ -107,12 +107,30 @@
     
     <xsl:template match="body/lg/lg/l">
         <xsl:choose>
-            <xsl:when test="descendant::caesura">
-                <!-- todo: Annahme hier: es gibt nur ein caesura. Müsste vorher mit Schematron abgeprüft werden. -->
+            <!-- todo: Annahme hier: es gibt nur ein caesura. Müsste vorher mit Schematron abgeprüft werden. -->
+	    <!-- Fallunterscheidung für Vorkommen und Positionen von caesura. -->
+            <xsl:when test="child::caesura">
+		<!-- Fall: caesura directes Kind von line -->
                 <tr xmlns="http://www.w3.org/1999/xhtml">
                     <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="position()"/></td>
-                    <td style="padding-left: 40px"><xsl:apply-templates select="descendant::caesura/preceding-sibling::node()"/></td>
-                    <td><xsl:apply-templates select="descendant::caesura/following-sibling::node()"/></td>
+                    <td style="padding-left: 40px"><xsl:apply-templates select="child::caesura/preceding-sibling::node()"/></td>
+                    <td><xsl:apply-templates select="child::caesura/following-sibling::node()"/></td>
+                </tr>
+            </xsl:when>
+            <xsl:when test="descendant::lem/descendant-or-self::caesura">
+		<!-- Fall: caesura teilt lem wie in #1 -->
+                <tr xmlns="http://www.w3.org/1999/xhtml">
+                    <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="position()"/></td>
+                    <td style="padding-left: 40px"><xsl:apply-templates select="descendant::lem/descendant-or-self::caesura/preceding-sibling::node()"/></td>
+                    <td><xsl:apply-templates select="descendant::lem/descendant-or-self::caesura/following-sibling::node()"/></td>
+                </tr>
+            </xsl:when>
+            <xsl:when test="descendant::caesura and not(descendant::lem/descendant-or-self::caesura)">
+		<!-- Fall: kein caesura in lem, aber in rdg -->
+                <tr xmlns="http://www.w3.org/1999/xhtml">
+                    <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="position()"/></td>
+                    <td style="padding-left: 40px"><xsl:apply-templates select="*[not(ancestor-or-self::rdg)]"/></td>
+                    <td></td>
                 </tr>
             </xsl:when>
             <xsl:otherwise>
