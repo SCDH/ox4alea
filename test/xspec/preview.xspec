@@ -29,8 +29,7 @@
 	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"
-	    pending="How does xspec handle whitespace?"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
 	    <ht:table>
 		<ht:tr>...</ht:tr>
@@ -62,8 +61,7 @@
 	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"
-	    pending="How does xspec handle whitespace?"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
 	    <ht:table>
 		<ht:tr>...</ht:tr>
@@ -98,8 +96,7 @@
 	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"
-	    pending="How does xspec handle whitespace?"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
 	    <ht:table>
 		<ht:tr>...</ht:tr>
@@ -134,8 +131,7 @@
 	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc'"
-	    pending="How does xspec handle whitespace?"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc'"/>
 	<x:expect label="results in 3 table columns">
 	    <ht:table>
 		<ht:tr>...</ht:tr>
@@ -170,8 +166,7 @@
 	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"
-	    pending="How does xspec handle whitespace?"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
 	    <ht:table>
 		<ht:tr>...</ht:tr>
