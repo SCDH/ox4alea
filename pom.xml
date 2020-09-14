@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.wwu.scdh.oxygen.alea</groupId>
+    <artifactId>scdh-alea-oxygen-extension</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    
+    <name>scdh-alea-oxygen-extension</name>
+    <!-- TODO: change it to the project's website -->
+    <url>http://www.example.com</url>
+
+    <build>
+	<plugins>
+	    <plugin>
+		<groupId>io.xspec.maven</groupId>
+		<artifactId>xspec-maven-plugin</artifactId>
+		<configuration>
+                    <!--coverage>true</coverage-->
+		    <generateSurefireReport>true</generateSurefireReport>
+		    <testDir>test/xspec</testDir>
+		</configuration>
+		<executions>
+                    <execution>
+			<phase>test</phase>
+			<goals>
+                            <goal>run-xspec</goal>
+			</goals>
+                    </execution>
+		</executions>
+            </plugin>
+	</plugins>
+    </build>
+
+</project>
