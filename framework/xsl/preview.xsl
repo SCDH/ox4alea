@@ -107,16 +107,17 @@
     
     <xsl:template match="body/lg/lg/l">
         <xsl:choose>
-            <xsl:when test="caesura">
+            <xsl:when test="descendant::caesura">
                 <!-- todo: Annahme hier: es gibt nur ein caesura. Müsste vorher mit Schematron abgeprüft werden. -->
                 <tr xmlns="http://www.w3.org/1999/xhtml">
                     <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="position()"/></td>
-                    <td style="padding-left: 40px"><xsl:apply-templates select="caesura/preceding-sibling::node()"/></td>
-                    <td><xsl:apply-templates select="caesura/following-sibling::node()"/></td>
+                    <td style="padding-left: 40px"><xsl:apply-templates select="descendant::caesura/preceding-sibling::node()"/></td>
+                    <td><xsl:apply-templates select="descendant::caesura/following-sibling::node()"/></td>
                 </tr>
             </xsl:when>
             <xsl:otherwise>
                 <tr >
+                    <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="position()"/></td>
                     <td colspan="2"><xsl:copy-of select="descendant::node()"></xsl:copy-of></td>
                 </tr>
             </xsl:otherwise>
