@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="21.0" xml:space="preserve">
+<serialized version="22.1" xml:space="preserve">
 	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
@@ -17,10 +17,27 @@
 											<Integer>-1</Integer>
 										</field>
 										<field name="value">
-											<String>TEI P5 - Extension</String>
+											<String>TEI P5 - ALEA-Extension</String>
 										</field>
 										<field name="patchHandling">
 											<String>set</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>classpath</String>
+										</field>
+										<field name="index">
+											<Integer>4</Integer>
+										</field>
+										<field name="value">
+											<String>${framework}/../resources</String>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
 										</field>
 										<field name="anchor">
 											<null/>
@@ -1519,7 +1536,7 @@
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 7</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -1560,7 +1577,7 @@
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 8</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -4032,6 +4049,18 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 												<field name="alias">
 													<String>${i18n(figure.wizard)}</String>
 												</field>
+												<field name="replacementFor">
+													<String>figure</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
 											</contextItem>
 											<contextItem>
 												<field name="targets">
@@ -4045,6 +4074,18 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 												<field name="alias">
 													<String>${i18n(table.wizard)}</String>
 												</field>
+												<field name="replacementFor">
+													<String>table</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
 											</contextItem>
 											<contextItem>
 												<field name="targets">
@@ -4056,24 +4097,25 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 													<String>insert.table.row.below</String>
 												</field>
 												<field name="alias">
-													<String>${i18n(row.wizard)}</String>
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<String>row</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>true</Boolean>
 												</field>
 											</contextItem>
 										</contextItem-array>
 									</field>
 									<field name="removeItems">
-										<contextRemoveItem-array>
-											<contextRemoveItem>
-												<field name="targets">
-													<list>
-														<Integer>0</Integer>
-													</list>
-												</field>
-												<field name="renderName">
-													<String>row</String>
-												</field>
-											</contextRemoveItem>
-										</contextRemoveItem-array>
+										<null/>
 									</field>
 								</contextProvider>
 							</field>
@@ -4196,9 +4238,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
 								</field>
-								<field name="outputFile">
-									<File>${cfd}/${cfn}.html</File>
-								</field>
 								<field name="outputResource">
 									<String>${cfd}/${cfn}.html</String>
 								</field>
@@ -4281,9 +4320,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								</field>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
-								</field>
-								<field name="outputFile">
-									<File>${cfd}/${cfn}.pdf</File>
 								</field>
 								<field name="outputResource">
 									<String>${cfd}/${cfn}.pdf</String>
@@ -4517,9 +4553,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
 								</field>
-								<field name="outputFile">
-									<null/>
-								</field>
 								<field name="outputResource">
 									<null/>
 								</field>
@@ -4559,13 +4592,20 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="extensionURLs">
 									<String-array>
 										<String>${oxygenHome}/classes/</String>
-										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
+										<String>${oxygenHome}/lib/oxygenCommons.jar</String>
+										<String>${oxygenHome}/lib/oxygen.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthor.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloper.jar</String>
+										<String>${oxygenHome}/lib/oxygenEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthorEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloperEclipse.jar</String>
 										<String>${oxygenHome}/lib/*resolver*.jar</String>
 										<String>${oxygenHome}/lib/*xerces*.jar</String>
 										<String>${oxygenHome}/lib/*saxon*9*.jar</String>
-										<String>${oxygenHome}/lib/*saxon*6*.jar</String>
+										<String>${oxygenHome}/lib/saxon*6*.jar</String>
 										<String>${oxygenHome}/lib/xml-apis-ext.jar</String>
-										<String>${oxygenHome}/lib/log4j.jar</String>
+										<String>${oxygenHome}/lib/*log4j*.jar</String>
+										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
 									</String-array>
 								</field>
 							</antScenario>
@@ -4761,9 +4801,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
 								</field>
-								<field name="outputFile">
-									<null/>
-								</field>
 								<field name="outputResource">
 									<null/>
 								</field>
@@ -4803,13 +4840,20 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="extensionURLs">
 									<String-array>
 										<String>${oxygenHome}/classes/</String>
-										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
+										<String>${oxygenHome}/lib/oxygenCommons.jar</String>
+										<String>${oxygenHome}/lib/oxygen.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthor.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloper.jar</String>
+										<String>${oxygenHome}/lib/oxygenEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthorEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloperEclipse.jar</String>
 										<String>${oxygenHome}/lib/*resolver*.jar</String>
 										<String>${oxygenHome}/lib/*xerces*.jar</String>
 										<String>${oxygenHome}/lib/*saxon*9*.jar</String>
-										<String>${oxygenHome}/lib/*saxon*6*.jar</String>
+										<String>${oxygenHome}/lib/saxon*6*.jar</String>
 										<String>${oxygenHome}/lib/xml-apis-ext.jar</String>
-										<String>${oxygenHome}/lib/log4j.jar</String>
+										<String>${oxygenHome}/lib/*log4j*.jar</String>
+										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
 									</String-array>
 								</field>
 							</antScenario>
@@ -5005,9 +5049,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
 								</field>
-								<field name="outputFile">
-									<null/>
-								</field>
 								<field name="outputResource">
 									<null/>
 								</field>
@@ -5047,13 +5088,20 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="extensionURLs">
 									<String-array>
 										<String>${oxygenHome}/classes/</String>
-										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
+										<String>${oxygenHome}/lib/oxygenCommons.jar</String>
+										<String>${oxygenHome}/lib/oxygen.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthor.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloper.jar</String>
+										<String>${oxygenHome}/lib/oxygenEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthorEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloperEclipse.jar</String>
 										<String>${oxygenHome}/lib/*resolver*.jar</String>
 										<String>${oxygenHome}/lib/*xerces*.jar</String>
 										<String>${oxygenHome}/lib/*saxon*9*.jar</String>
-										<String>${oxygenHome}/lib/*saxon*6*.jar</String>
+										<String>${oxygenHome}/lib/saxon*6*.jar</String>
 										<String>${oxygenHome}/lib/xml-apis-ext.jar</String>
-										<String>${oxygenHome}/lib/log4j.jar</String>
+										<String>${oxygenHome}/lib/*log4j*.jar</String>
+										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
 									</String-array>
 								</field>
 							</antScenario>
