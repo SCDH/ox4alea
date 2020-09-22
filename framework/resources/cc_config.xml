@@ -12,50 +12,11 @@
     xsi:schemaLocation="http://www.oxygenxml.com/ns/ccfilter/config http://www.oxygenxml.com/ns/ccfilter/config/ccConfigSchemaFilter.xsd"
     xmlns="http://www.oxygenxml.com/ns/ccfilter/config">
 
-    <!-- Restrict content of the wit attribute -->
+    <!-- Restrict the value of @wit attributes to the IDs of the witnesses 
+        given in the sourceDesc of the current file. -->
     <match attributeName="wit" editable="onlyAllowedItems">
-        <items>
-            <item value="K"/>
-            <item value="B"/>
-            <item value="Y"/>
-            <item value="W"/>
-            <item value="S"/>
-        </items>
+        <xslt href="cc_wit.xsl" useCache="false" action="replace"/>
     </match>
-
-
-    <!-- The contributed values are obtained by executing the given XSLT -->
-    <!--match elementName="writing" elementNS="http://www.tei-c.org/ns/1.0" attributeName="who">
-        <xslt href="../xsl/get_values_from_db.xsl" useCache="false" action="replace"/-->
-        <!-- Here is a sample XSLT that extracts the values from the current document: -->
-
-        <!--
-        <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    exclude-result-prefixes="xs xd"
-    version="2.0">
-    <xsl:param name="documentSystemID"></xsl:param>
-    
-    <xsl:template name="start">
-        <xsl:variable name="persons" select="doc($documentSystemID)//*:castItem"/>
-        <items action="replace">
-            <xsl:apply-templates select="$persons">
-                <xsl:sort select="./name/text()"/>
-            </xsl:apply-templates>
-        </items>
-    </xsl:template>
-    
-    <xsl:template match="*:castItem">
-        <item 
-            value="#{./*:role/@xml:id}" 
-            annotation="{concat(./*:role/text(), ' -> ', ./*:roleDesc/text())}"/>
-    </xsl:template>
-    
-</xsl:stylesheet>
-        -->
-    <!--/match-->
-
 
     <!--
         
