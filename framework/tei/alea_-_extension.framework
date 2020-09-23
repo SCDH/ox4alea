@@ -347,7 +347,7 @@
 																<serializableOrderedMap>
 																	<entry>
 																		<String>fragment</String>
-																		<String>&lt;app xmlns="http://www.tei-c.org/ns/1.0">&lt;lem>&lt;/lem>&lt;rdg wit="${ask('Sigel',generic)}">${caret}&lt;/rdg>&lt;/app></String>
+																		<String>&lt;app xmlns="http://www.tei-c.org/ns/1.0">&lt;lem>&lt;/lem>&lt;rdg wit="${ask('Sigel',editable_combobox,('#K': '#K = ك'; '#B': '#B = ب'; '#Y': '#Y = ي'; '#A': '#A = ٓا'; '#M': '#M = م'; '#W': '#W = '; '#S': '#S = س'; '#GH': '#GH = غ'; '#QH': '#QH = ﮫﻗ'; '#T': '#T = ت'; '#D': '#D = د'; '#N': '#N = ن'; '#BR': '#BR = رﺑ'; '#P': '#P = پ'; '#L': '#L = ل'; '#HT': '#HT = تﺣ'; '#HR': '#HR = رﺣ'; '#SA': '#SA = ص'; '#R': '#R = ر'; '#DH': '#DH = ذ'; '#AN': '#AN = ع'; '#KH': '#KH = خ'), '')}">${caret}&lt;/rdg>&lt;/app></String>
 																	</entry>
 																</serializableOrderedMap>
 															</field>
@@ -409,7 +409,7 @@
 																<serializableOrderedMap>
 																	<entry>
 																		<String>fragment</String>
-																		<String>&lt;rdg xmlns="http://www.tei-c.org/ns/1.0" wit="${ask('Sigel',generic)}">${caret}&lt;/rdg></String>
+																		<String>&lt;rdg xmlns="http://www.tei-c.org/ns/1.0" wit="${ask('Sigel',editable_combobox,('#K': '#K = ك'; '#B': '#B = ب'; '#Y': '#Y = ي'; '#A': '#A = ٓا'; '#M': '#M = م'; '#W': '#W = '; '#S': '#S = س'; '#GH': '#GH = غ'; '#QH': '#QH = ﮫﻗ'; '#T': '#T = ت'; '#D': '#D = د'; '#N': '#N = ن'; '#BR': '#BR = رﺑ'; '#P': '#P = پ'; '#L': '#L = ل'; '#HT': '#HT = تﺣ'; '#HR': '#HR = رﺣ'; '#SA': '#SA = ص'; '#R': '#R = ر'; '#DH': '#DH = ذ'; '#AN': '#AN = ع'; '#KH': '#KH = خ'), '')}">${caret}&lt;/rdg></String>
 																	</entry>
 																	<entry>
 																		<String>insertLocation</String>
