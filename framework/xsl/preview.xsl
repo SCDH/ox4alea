@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
     exclude-result-prefixes="xs" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="2.0">
     
     <xsl:output media-type="text/html"/>
-    
+
+    <!-- ${pdu} oxygen editor variable: project root directory URI -->
+    <xsl:param name="pdu" select="string('.')" as="xs:string"/>
+
+    <!-- Filename of witness catalogue. -->
+    <xsl:param name="witnessCat" select="'WitnessCatalogue.xml'" as="xs:string"/>
+
+    <xsl:include href="libwit.xsl"/>
+
     <xsl:template match="/">
         <html xmlns="http://www.w3.org/1999/xhtml">
             <head>
@@ -63,7 +72,7 @@
                                 <xsl:for-each select="app">
                                     <xsl:value-of select="lem"/>]
                                     <xsl:for-each select="rdg">
-                                        <xsl:value-of select="."/><span style="padding-left: 3px">:</span><span style="color: gray"><xsl:value-of select="@wit"/></span>
+                                        <xsl:value-of select="."/><span style="padding-left: 3px">:</span><span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit)"/></span>
                                         <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
                                     </xsl:for-each>
                                     <xsl:if test="following-sibling::app"><span style="padding: 8px">|</span></xsl:if>

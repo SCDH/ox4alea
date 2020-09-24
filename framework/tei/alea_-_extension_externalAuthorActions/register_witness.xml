@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="section">
+  <a:name>Register Witness</a:name>
+  <a:description>Adds a new witness to the TEI header, choosen from the witness catalogue of the current project.</a:description>
+  <a:operations>
+    <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>local-name() = 'sourceDesc' and not(./*:listWit)</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="fragment"><![CDATA[
+<listWit xmlns="http://www.tei-c.org/ns/1.0">
+    <witness xml:id="${ask('Sigel',editable_combobox,(${xpath_eval(string-join(for $w in doc("${pdu}/WitnessCatalogue.xml")/*:TEI/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, " = ", $w/abbr[@type='siglum' and @xml:lang='ar'], "   ", $w/text(), "'"), ';')  )}), '')}"/>
+</listWit>]]>
+        </a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
