@@ -11,7 +11,7 @@
     <a:operation id="SurroundWithFragmentOperation">
       <a:xpathCondition>local-name()='l' or local-name()='head'</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><![CDATA[<app xmlns="http://www.tei-c.org/ns/1.0"><lem></lem><rdg wit="${ask('Sigel',editable_combobox,(${xpath_eval(string-join(for $w in doc("${cf}")/*:TEI/*:teiHeader//*:witness/@xml:id return concat("'#", $w, "':'", $w, "'"), ';')  )}), '')}">${caret}</rdg></app>]]></a:argument>
+        <a:argument name="fragment"><![CDATA[<app xmlns="http://www.tei-c.org/ns/1.0"><lem></lem><rdg wit="${ask('Sigel',editable_combobox,(${xpath_eval(string-join(for $w in doc("${cf}")/*:TEI/*:teiHeader//*:witness/@xml:id return concat("'#", $w, "':'#", $w, "'"), ';')  )}), '')}">${caret}</rdg></app>]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
