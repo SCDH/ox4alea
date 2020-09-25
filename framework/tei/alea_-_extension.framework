@@ -715,7 +715,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>13</Integer>
+											<Integer>12</Integer>
 										</field>
 										<field name="value">
 											<null/>
@@ -735,27 +735,14 @@
 											<Integer>12</Integer>
 										</field>
 										<field name="value">
-											<null/>
+											<toolbarItem>
+												<field name="actionID">
+													<String>register_witness</String>
+												</field>
+											</toolbarItem>
 										</field>
 										<field name="patchHandling">
-											<String>removeIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>11</Integer>
-										</field>
-										<field name="value">
-											<null/>
-										</field>
-										<field name="patchHandling">
-											<String>removeIndex</String>
+											<String>addIndex</String>
 										</field>
 										<field name="anchor">
 											<null/>
