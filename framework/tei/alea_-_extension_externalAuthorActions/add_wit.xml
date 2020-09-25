@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+
+An author action saved in its own file instead of the framework configuration file.
+
+The file must be saved inside one of the following locations:
+1. {framework_directory}/externalAuthorActions - please note that if you have multiple frameworks saved in the same
+directory, this action will appear in all of them.
+2. {framework_directory}/{framework_file_name}_externalAuthorActions - this location is useful when you have multiple 
+frameworks in the same directory, but you want to have this action only in one of them.
+Only the framework saved inside {framework_file_name}.framework will have this particular action.
+-->
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="add_wit">
+  <a:name>Add Witness</a:name>
+  <a:description>Adds a new witness.</a:description>
+  <a:smallIconPath href="${frameworks}/sdf/pin-16.png"/>
+  <a:largeIconPath href="${frameworks}/sdf/pin-24.png"/>
+  <a:operations>
+    <a:operation id="ChangeAttributeOperation">
+      <a:xpathCondition>local-name() = 'lem' or local-name() = 'rdg'</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="name">wit</a:argument>
+        <a:argument name="namespace">http://www.tei-c.org/ns/1.0</a:argument>
+        <a:argument name="value"><![CDATA[${ask('Siglen', generic, '${xpath_eval(@wit)}' )}]]></a:argument>
+        <a:argument name="removeIfEmpty">true</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
