@@ -13,7 +13,12 @@
       <a:arguments>
         <a:argument name="fragment"><![CDATA[
 <listWit xmlns="http://www.tei-c.org/ns/1.0">
-    <witness xmlns="http://www.tei-c.org/ns/1.0" xml:id="${ask('Textzeuge',combobox,(${xpath_eval(string-join(for $w in doc("${pdu}/WitnessCatalogue.xml")/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';')  )}), '')}"/>
+    <witness xmlns="http://www.tei-c.org/ns/1.0" xml:id="${ask('Textzeuge',combobox,(${xpath_eval(
+          let $catFile := "${pdu}/WitnessCatalogue.xml" return
+          if (doc-available($catFile))
+              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';'))
+              else ("'error':'no witness catalogue found'") )}),
+'')}"/>
 </listWit>]]>
         </a:argument>
       </a:arguments>
@@ -22,7 +27,12 @@
       <a:xpathCondition>local-name() = 'listWit'</a:xpathCondition>
       <a:arguments>
         <!-- TODO: don't allow duplicates! -->
-        <a:argument name="fragment"><![CDATA[<witness xmlns="http://www.tei-c.org/ns/1.0" xml:id="${ask('Textzeuge',combobox,(${xpath_eval(string-join(for $w in doc("${pdu}/WitnessCatalogue.xml")/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';')  )}), '')}"/>]]>
+        <a:argument name="fragment"><![CDATA[<witness xmlns="http://www.tei-c.org/ns/1.0" xml:id="${ask('Textzeuge',combobox, (${xpath_eval(
+          let $catFile := "${pdu}/WitnessCatalogue.xml" return
+          if (doc-available($catFile))
+              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';'))
+              else ("'error':'no witness catalogue found'") )}),
+'')}"/>]]>
         </a:argument>
       </a:arguments>
     </a:operation>
