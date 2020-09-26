@@ -39,5 +39,10 @@
         <xsl:param name="in" as="xs:string"/>
         <xsl:value-of select="replace(normalize-space($in), '#', '')"/>
     </xsl:function>
+    
+    <xsl:function name="scdh:tokenize-wit">
+        <xsl:param name="witnesses" as="xs:string"/>
+        <xsl:value-of select="tokenize($witnesses, '[,،\s]+')"/>
+    </xsl:function>
 
 </xsl:stylesheet>
