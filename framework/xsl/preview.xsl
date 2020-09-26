@@ -12,6 +12,8 @@
 
     <!-- Filename of witness catalogue. -->
     <xsl:param name="witnessCat" select="'WitnessCatalogue.xml'" as="xs:string"/>
+    
+    <xsl:param name="debug" select="false()" as="xs:boolean"/>
 
     <xsl:include href="libwit.xsl"/>
 
@@ -54,6 +56,15 @@
                 </style>
             </head>
             <body>
+                <xsl:if test="not(doc-available(concat($pdu, '/', $witnessCat))) or $debug">
+                    <section>
+                        <xsl:text>Project Directory URL (PDU): </xsl:text>
+                        <xsl:value-of select="$pdu"/>
+                        <br/>
+                        <xsl:text>Witness Catalogue: </xsl:text>
+                        <xsl:value-of select="$witnessCat"/>
+                    </section>
+                </xsl:if>
                 <section class="content">
                     <xsl:apply-templates select="TEI/text/body/lg"/>                    
                 </section>

@@ -15,7 +15,7 @@
         <!-- TODO: improve separator between sigla -->
         <!-- TODO: return $i if not found in catalogue -->
         <xsl:value-of select="if (doc-available($witnessFile)) 
-            then (string-join(for $i in tokenize($id, '\s+') return doc($witnessFile)/*:TEI/*:text//*:witness[@xml:id=scdh:normalize-id($i)]//*:abbr[@type='siglum'][1]), '&#xa0;')
+            then (string-join(for $i in tokenize($id, '\s+') return doc($witnessFile)/TEI/text//witness[@xml:id=scdh:normalize-id($i)]//abbr[@type='siglum'][1]), '&#xa0;')
             else ($id)"/>
     </xsl:function>
     

@@ -37,7 +37,7 @@
     </xsl:template>
     
     <xsl:template match="listWit">
-        <xsl:copy-of select="*"/>
+        <xsl:copy-of select="."/>
         <xsl:for-each
             select="let $headWits := /TEI/teiHeader//witness/@xml:id,
                         $usedWits := /descendant::*[@wit]/scdh:get-witness-id($pdu, $witnessCat, @wit) return
