@@ -37,16 +37,18 @@
     </xsl:template>
     
     <xsl:template match="listWit">
-        <xsl:copy-of select="."/>
-        <xsl:for-each
-            select="let $headWits := /TEI/teiHeader//witness/@xml:id,
-                        $usedWits := /descendant::*[@wit]/scdh:get-witness-id($pdu, $witnessCat, @wit) return
-                    for $w in distinct-values(tokenize(replace(string-join($usedWits, ' '), '#', ''), '\s+')) return
-                        if (exists(index-of($headWits, $w))) then () else $w">
-            <witness>
-                <xsl:attribute name="xml:id" select="."/>
-            </witness>
-        </xsl:for-each>        
+        <listWit>
+            <xsl:copy-of select="*"/>
+            <xsl:for-each
+                select="let $headWits := /TEI/teiHeader//witness/@xml:id,
+                            $usedWits := /descendant::*[@wit]/scdh:get-witness-id($pdu, $witnessCat, @wit) return
+                        for $w in distinct-values(tokenize(replace(string-join($usedWits, ' '), '#', ''), '\s+')) return
+                            if (exists(index-of($headWits, $w))) then () else $w">
+                <witness>
+                    <xsl:attribute name="xml:id" select="."/>
+                </witness>
+            </xsl:for-each>
+        </listWit>
     </xsl:template>
 
 </xsl:stylesheet>
