@@ -66,6 +66,24 @@
 	test="normalize-space(.) = 'ڤ'"/>
   </x:scenario>
 
+  <x:scenario
+      label="getting multiple sigla"
+      pending="Make separator work!">
+    <x:call function="scdh:getWitnessSiglum">
+      <x:param select="'../../framework/samples'"/>
+      <x:param select="'WitnessCatalogue.xml'"/>
+      <x:param select="'#W #S'"/>
+      <x:param select="'HAL'"/>
+    </x:call>
+    <!-- TODO: make these tests work! -->
+    <x:expect
+	label="VEH"
+	test="normalize-space(.) = 'ڤHALس'"/>
+    <x:expect
+	label="arabic VEH and SEEN"
+	test="normalize-space(.) = 'ڤ س'"/>
+  </x:scenario>
+
   <x:scenario label="getting multiple sigla">
     <x:call function="scdh:getWitnessSiglum">
       <x:param select="'../../framework/samples'"/>
@@ -73,13 +91,26 @@
       <x:param select="'#W #S'"/>
       <x:param select="'HAL'"/>
     </x:call>
-    <!-- TODO: make this test work -->
-    <!--x:expect
-	label="VEH"
-	test="normalize-space(.) = 'ڤHALس'"/-->
     <x:expect
 	label="arabic VEH and SEEN"
 	test="normalize-space(.) = 'ڤ س'"/>
+  </x:scenario>
+
+  <x:scenario
+      label="getting siglum sequence from witness catalogue"
+      pending="Make get-witness-siglum-seq return a sequence!" >
+    <x:call function="scdh:get-witness-siglum-seq">
+      <x:param select="'../../framework/samples'"/>
+      <x:param select="'WitnessCatalogue.xml'"/>
+      <x:param select="'#W  #S    HAL'"/>
+    </x:call>
+    <!-- TODO: make these tests work! -->
+    <x:expect
+	label="sequence of 3 strings"
+	test="./last() = 3"/>
+    <x:expect
+	label="equals to sequence"
+	test="( = ('ڤ', 'س', 'HAL')"/>
   </x:scenario>
 
   <x:scenario label="getting siglum sequence from witness catalogue">
@@ -88,13 +119,6 @@
       <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="'#W  #S    HAL'"/>
     </x:call>
-    <!-- TODO: make these tests work! -->
-    <!--x:expect
-	label="sequence of 3 strings"
-	test="./last() = 3"/>
-    <x:expect
-	label="equals to sequence"
-	test="( = ('ڤ', 'س', 'HAL')"/-->
     <x:expect
 	label="equals to sequence"
 	test="normalize-space(.) = 'ڤ س HAL'"/>
