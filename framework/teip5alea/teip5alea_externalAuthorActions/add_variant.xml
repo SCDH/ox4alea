@@ -5,8 +5,8 @@
   id="add_variant">
   <a:name>Add Variant</a:name>
   <a:description>Variante hinzufügen</a:description>
-  <a:smallIconPath href="${frameworks}/sdf/delta-16.png"/>
-  <a:largeIconPath href="${frameworks}/sdf/delta-24.png"/>
+  <a:smallIconPath href="${framework}/images/delta-16.png"/>
+  <a:largeIconPath href="${framework}/images/delta-24.png"/>
   <a:operations>
     <a:operation id="SurroundWithFragmentOperation">
       <a:xpathCondition>local-name()='l' or local-name()='head'</a:xpathCondition>
