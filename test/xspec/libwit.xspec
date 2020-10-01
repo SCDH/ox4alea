@@ -130,7 +130,7 @@
   
   <x:scenario label="getting IDs for empty string siglum from witness catalogue">
     <x:call function="scdh:get-witness-id">
-      <x:param select="'../../framework/teip5alea/samples'"/>
+      <x:param select="'../samples'"/>
       <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="''"/>
     </x:call>
