@@ -107,7 +107,7 @@
 										<field name="value">
 											<cssFile>
 												<field name="href">
-													<String>${framework}/add-sigla.css</String>
+													<String>${framework}/css/add-sigla.css</String>
 												</field>
 												<field name="title">
 													<String>+ Sigla</String>
