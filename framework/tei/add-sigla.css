@@ -1,0 +1,4 @@
+lem:before, rdg:before {
+  background-color: inherit;
+  content: "‪[" attr(wit) "]‬ ";
+  }
