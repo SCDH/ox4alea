@@ -95,9 +95,14 @@
                 <hr/>
                 <section class="comments">
                     <xsl:for-each select="TEI/text/body/lg/(head|lg/l)">
+                        <xsl:variable name="linenr" select="if (/TEI/text/body/lg/head) then position() - 1 else position()"/>
                         <xsl:if test="note">
                             <div xmlns="http://www.w3.org/1999/xhtml" class="variants">
-                                <span style="font-size: 8pt;padding-left: 20px"><xsl:value-of select="position()"/></span>
+                                <span style="font-size: 8pt;padding-left: 20px">
+                                    <xsl:if test="$linenr gt 0">
+                                        <xsl:value-of select="$linenr"/>
+                                    </xsl:if>
+                                </span>
                                 <xsl:for-each select="note">
                                     <xsl:value-of select="."/>
                                     <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
