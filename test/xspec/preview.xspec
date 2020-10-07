@@ -6,7 +6,7 @@
     xmlns:x="http://www.jenitennison.com/xslt/xspec"
     xmlns:ht="http://www.w3.org/1999/xhtml"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
-    stylesheet="../../framework/xsl/preview.xsl">
+    stylesheet="../../frameworks/teip5alea/xsl/preview.xsl">
 
 
     <!-- Tests for the processing of the CAESURA element -->

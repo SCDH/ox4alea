@@ -5,8 +5,8 @@
   id="add_wit">
   <a:name>Add Witness</a:name>
   <a:description>Adds a new witness.</a:description>
-  <a:smallIconPath href="${frameworks}/sdf/pin-16.png"/>
-  <a:largeIconPath href="${frameworks}/sdf/pin-24.png"/>
+  <a:smallIconPath href="${framework}/images/pin-16.png"/>
+  <a:largeIconPath href="${framework}/images/pin-24.png"/>
   <a:operations>
     <a:operation id="ChangeAttributeOperation">
       <a:xpathCondition>local-name() = 'lem' or local-name() = 'rdg'</a:xpathCondition>

@@ -34,7 +34,7 @@
 											<Integer>4</Integer>
 										</field>
 										<field name="value">
-											<String>${framework}/../resources</String>
+											<String>${framework}/resources</String>
 										</field>
 										<field name="patchHandling">
 											<String>addIndex</String>
@@ -53,7 +53,7 @@
 										<field name="value">
 											<cssFile>
 												<field name="href">
-													<String>${framework}/collapsed.css</String>
+													<String>${framework}/css/collapsed.css</String>
 												</field>
 												<field name="title">
 													<String>kompakt</String>
@@ -80,7 +80,7 @@
 										<field name="value">
 											<cssFile>
 												<field name="href">
-													<String>${framework}/expanded.css</String>
+													<String>${framework}/css/expanded.css</String>
 												</field>
 												<field name="title">
 													<String>expandiert</String>
@@ -107,7 +107,7 @@
 										<field name="value">
 											<cssFile>
 												<field name="href">
-													<String>${framework}/add-sigla.css</String>
+													<String>${framework}/css/add-sigla.css</String>
 												</field>
 												<field name="title">
 													<String>+ Sigla</String>
@@ -187,10 +187,10 @@
 													<String>Verstrennung einfügen</String>
 												</field>
 												<field name="largeIconPath">
-													<String>${frameworks}/sdf/diamond-24.png</String>
+													<String>${framework}/images/diamond-24.png</String>
 												</field>
 												<field name="smallIconPath">
-													<String>${frameworks}/sdf/diamond-16.png</String>
+													<String>${framework}/images/diamond-16.png</String>
 												</field>
 												<field name="accessKey">
 													<String></String>
@@ -257,10 +257,10 @@
 													<String>Vers einfügen</String>
 												</field>
 												<field name="largeIconPath">
-													<String>${frameworks}/sdf/tilde-24.png</String>
+													<String>${framework}/images/tilde-24.png</String>
 												</field>
 												<field name="smallIconPath">
-													<String>${frameworks}/sdf/tilde-16.png</String>
+													<String>${framework}/images/tilde-16.png</String>
 												</field>
 												<field name="accessKey">
 													<String>v</String>
@@ -327,10 +327,10 @@
 													<String>Strophe einfügen</String>
 												</field>
 												<field name="largeIconPath">
-													<String>${frameworks}/sdf/brackets-24.png</String>
+													<String>${framework}/images/brackets-24.png</String>
 												</field>
 												<field name="smallIconPath">
-													<String>${frameworks}/sdf/brackets-16.png</String>
+													<String>${framework}/images/brackets-16.png</String>
 												</field>
 												<field name="accessKey">
 													<String>s</String>
@@ -397,10 +397,10 @@
 													<String>Anker einfügen</String>
 												</field>
 												<field name="largeIconPath">
-													<String>${frameworks}/sdf/pin-24.png</String>
+													<String>${framework}/images/pin-24.png</String>
 												</field>
 												<field name="smallIconPath">
-													<String>${frameworks}/sdf/pin-16.png</String>
+													<String>${framework}/images/pin-16.png</String>
 												</field>
 												<field name="accessKey">
 													<String></String>
@@ -467,10 +467,10 @@
 													<String>Fußnote einfügen</String>
 												</field>
 												<field name="largeIconPath">
-													<String>${frameworks}/sdf/comment-24.png</String>
+													<String>${framework}/images/comment-24.png</String>
 												</field>
 												<field name="smallIconPath">
-													<String>${frameworks}/sdf/comment-16.png</String>
+													<String>${framework}/images/comment-16.png</String>
 												</field>
 												<field name="accessKey">
 													<String></String>
@@ -1108,7 +1108,7 @@
 													<String></String>
 												</field>
 												<field name="inputXSLURL">
-													<String>${framework}/../xsl/preview.xsl</String>
+													<String>${framework}/xsl/preview.xsl</String>
 												</field>
 												<field name="inputXMLURL">
 													<String>${currentFileURL}</String>
@@ -1232,7 +1232,7 @@
 													<String></String>
 												</field>
 												<field name="inputXSLURL">
-													<String>${framework}/../xsl/latinizeWit.xsl</String>
+													<String>${framework}/xsl/latinizeWit.xsl</String>
 												</field>
 												<field name="inputXMLURL">
 													<String>${currentFileURL}</String>
