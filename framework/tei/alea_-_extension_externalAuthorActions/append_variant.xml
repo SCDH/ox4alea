@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="append_variant">
+  <a:name>Append Variant</a:name>
+  <a:description>Variante anhängen</a:description>
+  <a:smallIconPath href="${frameworks}/sdf/delta-16.png"/>
+  <a:largeIconPath href="${frameworks}/sdf/delta-24.png"/>
+  <a:operations>
+    <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>local-name()='rdg'</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="fragment"><![CDATA[<rdg xmlns="http://www.tei-c.org/ns/1.0" wit="${ask('Sigel',combobox,(${xpath_eval(string-join(let $headWits := doc("${cf}")/*:TEI/*:teiHeader//*:witness/@xml:id, $catFile := "${pdu}/WitnessCatalogue.xml", $catWits := if (doc-available($catFile)) then doc($catFile)/*:TEI/*:text//*:witness else () return for $w in $headWits return concat("'#", $w, "':'#", $w, ' = ', $catWits[@xml:id eq $w]//*:abbr[@type eq 'siglum'][1], "'"), ';')  )}), '')}">${caret}</rdg>]]></a:argument>
+        <a:argument name="insertLocation">..</a:argument>
+        <a:argument name="insertPosition">Inside as last child</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accelerator>shift TAB</a:accelerator>
+  <a:accessKey>A</a:accessKey>
+  <a:enabledInReadOnlyContext>false</a:enabledInReadOnlyContext>
+</a:authorAction>

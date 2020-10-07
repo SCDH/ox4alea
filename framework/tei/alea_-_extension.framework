@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="21.0" xml:space="preserve">
+<serialized version="22.1" xml:space="preserve">
 	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
@@ -17,10 +17,27 @@
 											<Integer>-1</Integer>
 										</field>
 										<field name="value">
-											<String>TEI P5 - Extension</String>
+											<String>TEI P5 - ALEA-Extension</String>
 										</field>
 										<field name="patchHandling">
 											<String>set</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>classpath</String>
+										</field>
+										<field name="index">
+											<Integer>4</Integer>
+										</field>
+										<field name="value">
+											<String>${framework}/../resources</String>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
 										</field>
 										<field name="anchor">
 											<null/>
@@ -78,6 +95,77 @@
 										</field>
 										<field name="anchor">
 											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>4</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
+													<String>${framework}/add-sigla.css</String>
+												</field>
+												<field name="title">
+													<String>+ Sigla</String>
+												</field>
+												<field name="alternate">
+													<Boolean>true</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>5</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
+													<String>${baseFramework}/xml/tei/css/tei_oxygen.css</String>
+												</field>
+												<field name="title">
+													<String>Basic</String>
+												</field>
+												<field name="alternate">
+													<Boolean>false</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>0</Integer>
+										</field>
+										<field name="value">
+											<null/>
+										</field>
+										<field name="patchHandling">
+											<String>removeIndex</String>
+										</field>
+										<field name="anchor">
+											<String>${baseFramework}/xml/tei/css/tei_oxygen.css</String>
 										</field>
 									</poPatch>
 									<poPatch>
@@ -300,138 +388,6 @@
 										<field name="value">
 											<action>
 												<field name="id">
-													<String>add_variant</String>
-												</field>
-												<field name="name">
-													<String>Add Variant</String>
-												</field>
-												<field name="description">
-													<String>Variante hinzufügen</String>
-												</field>
-												<field name="largeIconPath">
-													<String>${frameworks}/sdf/delta-24.png</String>
-												</field>
-												<field name="smallIconPath">
-													<String>${frameworks}/sdf/delta-16.png</String>
-												</field>
-												<field name="accessKey">
-													<String>v</String>
-												</field>
-												<field name="accelerator">
-													<String>ctrl shift V</String>
-												</field>
-												<field name="actionModes">
-													<actionMode-array>
-														<actionMode>
-															<field name="xpathCondition">
-																<String>local-name()='l' or local-name()='head'</String>
-															</field>
-															<field name="argValues">
-																<serializableOrderedMap>
-																	<entry>
-																		<String>fragment</String>
-																		<String>&lt;app xmlns="http://www.tei-c.org/ns/1.0">&lt;lem>&lt;/lem>&lt;rdg wit="${ask('Sigel',generic)}">${caret}&lt;/rdg>&lt;/app></String>
-																	</entry>
-																</serializableOrderedMap>
-															</field>
-															<field name="operationID">
-																<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
-															</field>
-														</actionMode>
-													</actionMode-array>
-												</field>
-												<field name="enabledInReadOnlyContext">
-													<Boolean>false</Boolean>
-												</field>
-											</action>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/actionDescriptors</String>
-										</field>
-										<field name="index">
-											<Integer>40</Integer>
-										</field>
-										<field name="value">
-											<action>
-												<field name="id">
-													<String>append_variant</String>
-												</field>
-												<field name="name">
-													<String>Append Variant</String>
-												</field>
-												<field name="description">
-													<String>Variante anhängen</String>
-												</field>
-												<field name="largeIconPath">
-													<String>${frameworks}/sdf/delta-24.png</String>
-												</field>
-												<field name="smallIconPath">
-													<String>${frameworks}/sdf/delta-16.png</String>
-												</field>
-												<field name="accessKey">
-													<String>A</String>
-												</field>
-												<field name="accelerator">
-													<String>shift TAB</String>
-												</field>
-												<field name="actionModes">
-													<actionMode-array>
-														<actionMode>
-															<field name="xpathCondition">
-																<String>local-name()='rdg'</String>
-															</field>
-															<field name="argValues">
-																<serializableOrderedMap>
-																	<entry>
-																		<String>fragment</String>
-																		<String>&lt;rdg xmlns="http://www.tei-c.org/ns/1.0" wit="${ask('Sigel',generic)}">${caret}&lt;/rdg></String>
-																	</entry>
-																	<entry>
-																		<String>insertLocation</String>
-																		<String>..</String>
-																	</entry>
-																	<entry>
-																		<String>insertPosition</String>
-																		<String>Inside as last child</String>
-																	</entry>
-																</serializableOrderedMap>
-															</field>
-															<field name="operationID">
-																<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-															</field>
-														</actionMode>
-													</actionMode-array>
-												</field>
-												<field name="enabledInReadOnlyContext">
-													<Boolean>false</Boolean>
-												</field>
-											</action>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/actionDescriptors</String>
-										</field>
-										<field name="index">
-											<Integer>41</Integer>
-										</field>
-										<field name="value">
-											<action>
-												<field name="id">
 													<String>add_anchor</String>
 												</field>
 												<field name="name">
@@ -497,7 +453,7 @@
 											<String>authorExtensionDescriptor/actionDescriptors</String>
 										</field>
 										<field name="index">
-											<Integer>42</Integer>
+											<Integer>40</Integer>
 										</field>
 										<field name="value">
 											<action>
@@ -830,7 +786,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>13</Integer>
+											<Integer>12</Integer>
 										</field>
 										<field name="value">
 											<null/>
@@ -850,10 +806,14 @@
 											<Integer>12</Integer>
 										</field>
 										<field name="value">
-											<null/>
+											<toolbarItem>
+												<field name="actionID">
+													<String>register_witness</String>
+												</field>
+											</toolbarItem>
 										</field>
 										<field name="patchHandling">
-											<String>removeIndex</String>
+											<String>addIndex</String>
 										</field>
 										<field name="anchor">
 											<null/>
@@ -864,13 +824,17 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>11</Integer>
+											<Integer>13</Integer>
 										</field>
 										<field name="value">
-											<null/>
+											<toolbarItem>
+												<field name="actionID">
+													<String>add_wit</String>
+												</field>
+											</toolbarItem>
 										</field>
 										<field name="patchHandling">
-											<String>removeIndex</String>
+											<String>addIndex</String>
 										</field>
 										<field name="anchor">
 											<null/>
@@ -1111,6 +1075,273 @@
 										</field>
 										<field name="anchor">
 											<String>insert image</String>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>scenarios</String>
+										</field>
+										<field name="index">
+											<Integer>5</Integer>
+										</field>
+										<field name="value">
+											<scenario>
+												<field name="advancedOptionsMap">
+													<null/>
+												</field>
+												<field name="name">
+													<String>ALEA Preview</String>
+												</field>
+												<field name="baseURL">
+													<String></String>
+												</field>
+												<field name="footerURL">
+													<String></String>
+												</field>
+												<field name="fOPMethod">
+													<String>pdf</String>
+												</field>
+												<field name="fOProcessorName">
+													<String>Apache FOP</String>
+												</field>
+												<field name="headerURL">
+													<String></String>
+												</field>
+												<field name="inputXSLURL">
+													<String>${framework}/../xsl/preview.xsl</String>
+												</field>
+												<field name="inputXMLURL">
+													<String>${currentFileURL}</String>
+												</field>
+												<field name="defaultScenario">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="isFOPPerforming">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="type">
+													<String>XSL</String>
+												</field>
+												<field name="saveAs">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="openInBrowser">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="outputResource">
+													<String>${cfn}.html</String>
+												</field>
+												<field name="openOtherLocationInBrowser">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="locationToOpenInBrowserURL">
+													<null/>
+												</field>
+												<field name="openInEditor">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="showInHTMLPane">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="showInXMLPane">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="showInSVGPane">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="showInResultSetPane">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useXSLTInput">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="xsltParams">
+													<list>
+														<transformationParameter>
+															<field name="paramDescription">
+																<paramDescriptor>
+																	<field name="localName">
+																		<String>pdu</String>
+																	</field>
+																	<field name="prefix">
+																		<null/>
+																	</field>
+																	<field name="namespace">
+																		<null/>
+																	</field>
+																</paramDescriptor>
+															</field>
+															<field name="value">
+																<String>${xpath_eval("'${pdu}'")}</String>
+															</field>
+															<field name="hasXPathValue">
+																<Boolean>true</Boolean>
+															</field>
+															<field name="isStatic">
+																<Boolean>false</Boolean>
+															</field>
+														</transformationParameter>
+													</list>
+												</field>
+												<field name="cascadingStylesheets">
+													<String-array/>
+												</field>
+												<field name="xslTransformer">
+													<String>Saxon-PE</String>
+												</field>
+												<field name="extensionURLs">
+													<String-array/>
+												</field>
+											</scenario>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>scenarios</String>
+										</field>
+										<field name="index">
+											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<scenario>
+												<field name="advancedOptionsMap">
+													<null/>
+												</field>
+												<field name="name">
+													<String>ALEA Latinize Witnesses</String>
+												</field>
+												<field name="baseURL">
+													<String></String>
+												</field>
+												<field name="footerURL">
+													<String></String>
+												</field>
+												<field name="fOPMethod">
+													<String>pdf</String>
+												</field>
+												<field name="fOProcessorName">
+													<String>Apache FOP</String>
+												</field>
+												<field name="headerURL">
+													<String></String>
+												</field>
+												<field name="inputXSLURL">
+													<String>${framework}/../xsl/latinizeWit.xsl</String>
+												</field>
+												<field name="inputXMLURL">
+													<String>${currentFileURL}</String>
+												</field>
+												<field name="defaultScenario">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="isFOPPerforming">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="type">
+													<String>XSL</String>
+												</field>
+												<field name="saveAs">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="openInBrowser">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="outputResource">
+													<String>${currentFileURL}</String>
+												</field>
+												<field name="openOtherLocationInBrowser">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="locationToOpenInBrowserURL">
+													<null/>
+												</field>
+												<field name="openInEditor">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="showInHTMLPane">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="showInXMLPane">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="showInSVGPane">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="showInResultSetPane">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useXSLTInput">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="xsltParams">
+													<list>
+														<transformationParameter>
+															<field name="paramDescription">
+																<paramDescriptor>
+																	<field name="localName">
+																		<String>pdu</String>
+																	</field>
+																	<field name="prefix">
+																		<null/>
+																	</field>
+																	<field name="namespace">
+																		<null/>
+																	</field>
+																</paramDescriptor>
+															</field>
+															<field name="value">
+																<String>${xpath_eval("${pdu}")}</String>
+															</field>
+															<field name="hasXPathValue">
+																<Boolean>false</Boolean>
+															</field>
+															<field name="isStatic">
+																<Boolean>false</Boolean>
+															</field>
+														</transformationParameter>
+													</list>
+												</field>
+												<field name="cascadingStylesheets">
+													<String-array/>
+												</field>
+												<field name="xslTransformer">
+													<String>Saxon-PE</String>
+												</field>
+												<field name="extensionURLs">
+													<String-array/>
+												</field>
+											</scenario>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>defaultTransformationScenarios</String>
+										</field>
+										<field name="index">
+											<Integer>-1</Integer>
+										</field>
+										<field name="value">
+											<list>
+												<String>ALEA Preview</String>
+											</list>
+										</field>
+										<field name="patchHandling">
+											<String>set</String>
+										</field>
+										<field name="anchor">
+											<null/>
 										</field>
 									</poPatch>
 									<poPatch>
@@ -1519,7 +1750,7 @@
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 7</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -1560,7 +1791,7 @@
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<null/>
+											<String>M1 M2 8</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -4032,6 +4263,18 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 												<field name="alias">
 													<String>${i18n(figure.wizard)}</String>
 												</field>
+												<field name="replacementFor">
+													<String>figure</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
 											</contextItem>
 											<contextItem>
 												<field name="targets">
@@ -4045,6 +4288,18 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 												<field name="alias">
 													<String>${i18n(table.wizard)}</String>
 												</field>
+												<field name="replacementFor">
+													<String>table</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
 											</contextItem>
 											<contextItem>
 												<field name="targets">
@@ -4056,24 +4311,25 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 													<String>insert.table.row.below</String>
 												</field>
 												<field name="alias">
-													<String>${i18n(row.wizard)}</String>
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<String>row</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>true</Boolean>
 												</field>
 											</contextItem>
 										</contextItem-array>
 									</field>
 									<field name="removeItems">
-										<contextRemoveItem-array>
-											<contextRemoveItem>
-												<field name="targets">
-													<list>
-														<Integer>0</Integer>
-													</list>
-												</field>
-												<field name="renderName">
-													<String>row</String>
-												</field>
-											</contextRemoveItem>
-										</contextRemoveItem-array>
+										<null/>
 									</field>
 								</contextProvider>
 							</field>
@@ -4196,9 +4452,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
 								</field>
-								<field name="outputFile">
-									<File>${cfd}/${cfn}.html</File>
-								</field>
 								<field name="outputResource">
 									<String>${cfd}/${cfn}.html</String>
 								</field>
@@ -4281,9 +4534,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								</field>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
-								</field>
-								<field name="outputFile">
-									<File>${cfd}/${cfn}.pdf</File>
 								</field>
 								<field name="outputResource">
 									<String>${cfd}/${cfn}.pdf</String>
@@ -4517,9 +4767,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
 								</field>
-								<field name="outputFile">
-									<null/>
-								</field>
 								<field name="outputResource">
 									<null/>
 								</field>
@@ -4559,13 +4806,20 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="extensionURLs">
 									<String-array>
 										<String>${oxygenHome}/classes/</String>
-										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
+										<String>${oxygenHome}/lib/oxygenCommons.jar</String>
+										<String>${oxygenHome}/lib/oxygen.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthor.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloper.jar</String>
+										<String>${oxygenHome}/lib/oxygenEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthorEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloperEclipse.jar</String>
 										<String>${oxygenHome}/lib/*resolver*.jar</String>
 										<String>${oxygenHome}/lib/*xerces*.jar</String>
 										<String>${oxygenHome}/lib/*saxon*9*.jar</String>
-										<String>${oxygenHome}/lib/*saxon*6*.jar</String>
+										<String>${oxygenHome}/lib/saxon*6*.jar</String>
 										<String>${oxygenHome}/lib/xml-apis-ext.jar</String>
-										<String>${oxygenHome}/lib/log4j.jar</String>
+										<String>${oxygenHome}/lib/*log4j*.jar</String>
+										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
 									</String-array>
 								</field>
 							</antScenario>
@@ -4761,9 +5015,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
 								</field>
-								<field name="outputFile">
-									<null/>
-								</field>
 								<field name="outputResource">
 									<null/>
 								</field>
@@ -4803,13 +5054,20 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="extensionURLs">
 									<String-array>
 										<String>${oxygenHome}/classes/</String>
-										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
+										<String>${oxygenHome}/lib/oxygenCommons.jar</String>
+										<String>${oxygenHome}/lib/oxygen.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthor.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloper.jar</String>
+										<String>${oxygenHome}/lib/oxygenEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthorEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloperEclipse.jar</String>
 										<String>${oxygenHome}/lib/*resolver*.jar</String>
 										<String>${oxygenHome}/lib/*xerces*.jar</String>
 										<String>${oxygenHome}/lib/*saxon*9*.jar</String>
-										<String>${oxygenHome}/lib/*saxon*6*.jar</String>
+										<String>${oxygenHome}/lib/saxon*6*.jar</String>
 										<String>${oxygenHome}/lib/xml-apis-ext.jar</String>
-										<String>${oxygenHome}/lib/log4j.jar</String>
+										<String>${oxygenHome}/lib/*log4j*.jar</String>
+										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
 									</String-array>
 								</field>
 							</antScenario>
@@ -5005,9 +5263,6 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="openInBrowser">
 									<Boolean>true</Boolean>
 								</field>
-								<field name="outputFile">
-									<null/>
-								</field>
 								<field name="outputResource">
 									<null/>
 								</field>
@@ -5047,13 +5302,20 @@ oxy:current-selected-element()[ancestor-or-self::*:cell]</String>
 								<field name="extensionURLs">
 									<String-array>
 										<String>${oxygenHome}/classes/</String>
-										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
+										<String>${oxygenHome}/lib/oxygenCommons.jar</String>
+										<String>${oxygenHome}/lib/oxygen.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthor.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloper.jar</String>
+										<String>${oxygenHome}/lib/oxygenEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenAuthorEclipse.jar</String>
+										<String>${oxygenHome}/lib/oxygenDeveloperEclipse.jar</String>
 										<String>${oxygenHome}/lib/*resolver*.jar</String>
 										<String>${oxygenHome}/lib/*xerces*.jar</String>
 										<String>${oxygenHome}/lib/*saxon*9*.jar</String>
-										<String>${oxygenHome}/lib/*saxon*6*.jar</String>
+										<String>${oxygenHome}/lib/saxon*6*.jar</String>
 										<String>${oxygenHome}/lib/xml-apis-ext.jar</String>
-										<String>${oxygenHome}/lib/log4j.jar</String>
+										<String>${oxygenHome}/lib/*log4j*.jar</String>
+										<String>${oxygenHome}/lib/oxygen-basic-utilities.jar</String>
 									</String-array>
 								</field>
 							</antScenario>
