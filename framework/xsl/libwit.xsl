@@ -30,7 +30,7 @@
         <xsl:param name="witnessCat" as="xs:string"/>
         <xsl:param name="id" as="xs:string"/>
         <xsl:variable name="witnessFile" select="concat($pdu, '/', $witnessCat)"/>
-        <xsl:value-of select="if (doc-available($witnessFile))
+        <xsl:sequence select="if (doc-available($witnessFile))
 			      then let $witnesses := doc($witnessFile)/TEI/text//witness return
 			           for $i in tokenize($id, '\s+') return 
 				       if (exists($witnesses[@xml:id=scdh:normalize-id($i)])) 
