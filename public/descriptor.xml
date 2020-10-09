@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xt:extensions xmlns:xt="http://www.oxygenxml.com/ns/extension"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
+    <xt:extension id="scdh-alea-oxygen-extension">
+        <xt:location href="https://zivgitlab.uni-muenster.de/api/v4/projects/2415/packages/maven/de/wwu/scdh/oxygen/alea/scdh-alea-oxygen-extension/1.0.0/scdh-alea-oxygen-extension-1.0.0.jar"/>
+        <xt:version>1.0.0</xt:version>
+        <xt:oxy_version>14.0+</xt:oxy_version>
+        <xt:type>framework</xt:type>
+        <xt:author>Christian Lück</xt:author>
+        <xt:name>TEI P5 - ALEA-Extension</xt:name>
+        <xt:description xmlns="http://www.w3.org/1999/xhtml">&lt;oXygen> framework developed for ALEA in a generic manner</xt:description>
+        <xt:license>
+<![CDATA[
+
+END USER LICENSE AGREEMENT
+
+GPL v3
+
+]]></xt:license>
+    </xt:extension>
+</xt:extensions>
