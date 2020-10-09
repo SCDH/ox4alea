@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension id="scdh-alea-oxygen-extension">
-        <xt:location href="https://zivgitlab.uni-muenster.de/api/v4/projects/2415/packages/maven/de/wwu/scdh/oxygen/alea/scdh-alea-oxygen-extension/1.0.0/scdh-alea-oxygen-extension-1.0.0.jar"/>
+        <xt:location href="scdh-alea-oxygen-extension-1.0.0.jar"/>
         <xt:version>1.0.0</xt:version>
         <xt:oxy_version>14.0+</xt:oxy_version>
         <xt:type>framework</xt:type>

@@ -4,14 +4,12 @@
 
 ## Installation
 
-The framework can be installed from the following URL:
+The framework can be installed with &lt;oXygen/> installation and
+update mechanism. Therefore, the following URL has to be entered into
+the form "Show addons from:" of the dialogue box from "Help" -> "Install
+new addons...".
 
-[https://zivgitlab.uni-muenster.de/SCDH/hees-alea/oxygen-framework/-/package_files/3594/download](https://zivgitlab.uni-muenster.de/SCDH/hees-alea/oxygen-framework/-/package_files/3594/download)
-
-The linked `scdh-alea-oxygen-extension-<VERSION>.jar` must first be
-downloaded and then the downloaded file can be installed.
-
-TODO: Provide an install/update site. oXygen needs an xml registry of packages!
+[https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/descriptor.xml](https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/descriptor.xml)
 
 As an alternative, the framework can be packaged locally for
 installation or it can be installed for hacking.
