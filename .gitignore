@@ -3,3 +3,6 @@
 target
 test/xspec/xspec
 default-oxygen-frameworks
+
+# ignore maven settings
+settings.xml

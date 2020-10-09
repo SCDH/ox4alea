@@ -13,6 +13,8 @@
 
     <properties>
 	<oxygen.sdk.version>22.1.0.0</oxygen.sdk.version>
+	<distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</distribution.url>
+	<!--distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/2415/packages/maven</distribution.url-->
     </properties>
 
     <repositories>
@@ -21,7 +23,23 @@
 	    <name>oXygen XML SDK Maven Repository</name>
 	    <url>https://oxygenxml.com/maven/</url>
 	</repository>
+	<repository>
+	    <id>gitlab-maven</id>
+	    <url>${distribution.url}</url>
+	</repository>
     </repositories>
+
+    <distributionManagement>
+	<repository>
+	    <id>gitlab-maven</id>
+	    <url>${distribution.url}</url>
+	</repository>
+	<snapshotRepository>
+	    <id>gitlab-maven</id>
+	    <url>${distribution.url}</url>
+	</snapshotRepository>
+    </distributionManagement>
+
     
     <dependencies>
       <dependency>
