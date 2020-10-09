@@ -4,7 +4,23 @@
 
 ## Installation
 
-TODO: as package
+The framework can be installed from the following URL, which must
+therefore be entered to &lt;oXygen/>'s framework locations.
+
+TODO
+
+As an alternative, the framework be packaged locally for installation
+or it can be installed for hacking.
+
+## Packaging
+
+Packaging is done with [`maven`](https://maven.apache.org/).
+
+	$ mvn package
+	
+This will create a `scdh-alea-oxygen-extension-<VERSION>.jar` in the
+`target` folder. This jar-File contains the framework (and its
+dependencies) and can be distributed to users.
 
 ## Hacking
 
