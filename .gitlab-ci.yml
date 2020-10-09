@@ -28,7 +28,14 @@ deploy:jdk11:
   only:
     - master
 
+
 pages:
+  image: busybox:latest
   stage: deploy
+  script:
+    - ls -l
+  artifacts:
+    paths:
+      - public
   only:
     - master
