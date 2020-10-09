@@ -26,6 +26,9 @@ verify:jdk11:
 deploy:jdk11:
   script:
     - 'mvn deploy -s ci_settings.xml'
+  artifacts:
+    paths:
+      - target
   only:
     - master
 
