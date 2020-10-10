@@ -7,7 +7,6 @@ cache:
   paths:
     - .m2/repository
     - default-oxygen-frameworks
-    - public
 
 # For merge requests do not `deploy` but only run `verify`.
 .verify: &verify
@@ -37,8 +36,10 @@ pages:
   image: busybox:latest
   stage: deploy
   script:
+    - mkdir -p public
     - ls -la
     - cp -v target/*.jar public/
+    - cp -v target/generated-resources/xml/xslt/pom.xml public/descriptor.xml
   artifacts:
     paths:
       - public
