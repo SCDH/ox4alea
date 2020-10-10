@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -42,13 +41,13 @@
 
     
     <dependencies>
-      <dependency>
-        <groupId>com.oxygenxml</groupId>
-        <artifactId>frameworks</artifactId>
-        <version>${oxygen.sdk.version}</version>
-        <type>zip</type>
-        <scope>provided</scope>
-      </dependency>
+	<dependency>
+            <groupId>com.oxygenxml</groupId>
+            <artifactId>frameworks</artifactId>
+            <version>${oxygen.sdk.version}</version>
+            <type>zip</type>
+            <scope>provided</scope>
+	</dependency>
     </dependencies>
 
     <build>
@@ -70,6 +69,13 @@
 			</goals>
                     </execution>
 		</executions>
+		<dependencies>
+		    <dependency>
+			<groupId>net.sf.saxon</groupId>
+			<artifactId>Saxon-HE</artifactId>
+			<version>9.9.1-6</version>
+		    </dependency>
+		</dependencies>
             </plugin>
 
             <plugin>
@@ -166,8 +172,8 @@
 		<dependencies>
 		    <dependency>
 			<groupId>net.sf.saxon</groupId>
-			<artifactId>saxon</artifactId>
-			<version>8.7</version>
+			<artifactId>Saxon-HE</artifactId>
+			<version>10.2</version>
 		    </dependency>
 		</dependencies>
 	    </plugin>
