@@ -769,6 +769,23 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
+											<Integer>13</Integer>
+										</field>
+										<field name="value">
+											<null/>
+										</field>
+										<field name="patchHandling">
+											<String>removeIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
 											<Integer>12</Integer>
 										</field>
 										<field name="value">
@@ -791,28 +808,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>register_witness</String>
-												</field>
-											</toolbarItem>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>13</Integer>
-										</field>
-										<field name="value">
-											<toolbarItem>
-												<field name="actionID">
-													<String>add_wit</String>
+													<String>add_note</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -905,7 +901,49 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>add_note</String>
+													<String>append_variant</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>10</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
+													<String>add_wit</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>11</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
+													<String>register_witness</String>
 												</field>
 											</toolbarItem>
 										</field>
