@@ -3,10 +3,10 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
   id="add_wit">
-  <a:name>Add Witness</a:name>
-  <a:description>Adds a new witness.</a:description>
-  <a:smallIconPath href="${framework}/images/pin-16.png"/>
-  <a:largeIconPath href="${framework}/images/pin-24.png"/>
+  <a:name>Edit Witnesses</a:name>
+  <a:description>Edit new witnesses</a:description>
+  <a:smallIconPath href="${framework}/images/sheetsedit-16.png"/>
+  <a:largeIconPath href="${framework}/images/sheetsedit-24.png"/>
   <a:operations>
     <a:operation id="ChangeAttributeOperation">
       <a:xpathCondition>local-name() = 'lem' or local-name() = 'rdg'</a:xpathCondition>

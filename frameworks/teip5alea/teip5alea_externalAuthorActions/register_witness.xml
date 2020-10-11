@@ -5,8 +5,8 @@
   id="register_witness">
   <a:name>Register Witness</a:name>
   <a:description>Register Witness</a:description>
-  <a:smallIconPath href="${framework}/images/pin-16.png"/>
-  <a:largeIconPath href="${framework}/images/pin-24.png"/>
+  <a:smallIconPath href="${framework}/images/sheetswrench-16.png"/>
+  <a:largeIconPath href="${framework}/images/sheetswrench-24.png"/>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>local-name() = 'sourceDesc' and not(./*:listWit)</a:xpathCondition>
