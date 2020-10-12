@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="add-gap">
+  <a:name>Add gap</a:name>
+  <a:description>Add gap</a:description>
+  <a:smallIconPath href="${framework}/images/brackets-16.png"/>
+  <a:largeIconPath href="${framework}/images/brackets-24.png"/>
+  <a:operations>
+    <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>local-name() = 'l' or local-name() = 'lem' or local-name() = 'rdg' or local-name() = 'head'</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="fragment">
+<![CDATA[<gap xmlns="http://www.tei-c.org/ns/1.0" reason="${ask('Reason', editable_combobox, ('cancelled':'cancelled';'deleted':'deleted';'editorial':'editorial';'illegible':'illegible';'inaudible':'inaudible';'irrelevant':'irrelevant';'sampling':'sampling'), 'illegible')}" unit="word" quantity="${ask('Quantity in words', generic, '')}"/>]]>
+        </a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>

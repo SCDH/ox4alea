@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+    id="mark-unclear">
+    <a:name>Mark unclear</a:name>
+    <a:description>Mark unclear</a:description>
+    <a:smallIconPath href="${framework}/images/bracketsquestion-16.png"/>
+    <a:largeIconPath href="${framework}/images/bracketsquestion-24.png"/>
+    <a:operations>
+        <a:operation id="SurroundWithFragmentOperation">
+            <a:xpathCondition>local-name() = 'l' or local-name() = 'lem' or local-name() = 'rdg' or local-name() = 'head'</a:xpathCondition>
+            <a:arguments>
+                <a:argument name="fragment">
+<![CDATA[<unclear xmlns="http://www.tei-c.org/ns/1.0" reason="${ask('Reason', editable_combobox, ('illegible':'illegible';'inaudible':'inaudible';'faded':'faded';'background noise':'background noise';'eccentric_ductus':'eccentric ductus'), 'illegible')}"/>]]>
+                </a:argument>
+            </a:arguments>
+        </a:operation>
+    </a:operations>
+    <a:accessKey/>
+</a:authorAction>
+
