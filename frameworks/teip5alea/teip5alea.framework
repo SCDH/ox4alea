@@ -769,13 +769,17 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>13</Integer>
+											<Integer>14</Integer>
 										</field>
 										<field name="value">
-											<null/>
+											<toolbarItem>
+												<field name="actionID">
+													<String>add_note</String>
+												</field>
+											</toolbarItem>
 										</field>
 										<field name="patchHandling">
-											<String>removeIndex</String>
+											<String>addIndex</String>
 										</field>
 										<field name="anchor">
 											<null/>
@@ -808,7 +812,70 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>add_note</String>
+													<String>add-corr</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>13</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
+													<String>add-sic</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>14</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
+													<String>add-gap</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>15</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
+													<String>mark-unclear</String>
 												</field>
 											</toolbarItem>
 										</field>
