@@ -5,7 +5,7 @@
 
     <groupId>de.wwu.scdh.oxygen.alea</groupId>
     <artifactId>scdh-alea-oxygen-extension</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     
     <name>scdh-alea-oxygen-extension</name>
     <url>https://zivgitlab.uni-muenster.de/SCDH/hees-alea/oxygen-framework</url>
@@ -86,12 +86,12 @@
                     <target>
 			<zip destfile="${project.build.directory}/classes/frameworks.zip" duplicate="fail">
 			    <zipfileset dir="frameworks"></zipfileset>
-			    <zipfileset dir="default-oxygen-frameworks">
+			    <!--zipfileset dir="default-oxygen-frameworks">
 				<include name="tei/**" />
 			    </zipfileset>
 			    <zipfileset dir=".">
 				<include name="README.md"/>
-			    </zipfileset>
+			    </zipfileset-->
 			</zip>
                     </target>
 		</configuration>
