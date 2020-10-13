@@ -5,8 +5,8 @@
   id="edit_evidence">
   <a:name>Edit evidence</a:name>
   <a:description>Edit evidence</a:description>
-  <a:smallIconPath href="${framework}/images/brackets-16.png"/>
-  <a:largeIconPath href="${framework}/images/brackets-24.png"/>
+  <a:smallIconPath href="${framework}/images/evid-16.png"/>
+  <a:largeIconPath href="${framework}/images/evid-24.png"/>
   <a:operations>
     <a:operation id="ChangeAttributeOperation">
       <a:xpathCondition>local-name() = 'sic' or local-name() = 'corr' or local-name() = 'gap' or local-name() = 'unclear'</a:xpathCondition>

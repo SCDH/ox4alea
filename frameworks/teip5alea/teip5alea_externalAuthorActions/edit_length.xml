@@ -5,8 +5,8 @@
   id="edit_length">
   <a:name>Edit Length</a:name>
   <a:description>Edit length</a:description>
-  <a:smallIconPath href="${framework}/images/brackets-16.png"/>
-  <a:largeIconPath href="${framework}/images/brackets-24.png"/>
+  <a:smallIconPath href="${framework}/images/len-16.png"/>
+  <a:largeIconPath href="${framework}/images/len-24.png"/>
   <a:operations>
     <a:operation id="ChangeAttributesOperation">
       <a:xpathCondition>local-name() = 'sic' or local-name() = 'corr' or local-name() = 'gap' or local-name() = 'unclear'</a:xpathCondition>

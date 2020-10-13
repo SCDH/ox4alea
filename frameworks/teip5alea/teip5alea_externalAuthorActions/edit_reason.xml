@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+    id="edit_reason">
+    <a:name>Edit reason</a:name>
+    <a:description>Edit reason</a:description>
+    <a:smallIconPath href="${framework}/images/reas-16.png"/>
+    <a:largeIconPath href="${framework}/images/reas-24.png"/>
+    <a:operations>
+        <a:operation id="ChangeAttributeOperation">
+            <a:xpathCondition>local-name() = 'gap'</a:xpathCondition>
+            <a:arguments>
+                <a:argument name="name">reason</a:argument>
+                <!--a:argument name="namespace">http://www.tei-c.org/ns/1.0</a:argument-->
+                <a:argument name="value"><![CDATA[${ask('Reason', editable_combobox, ('cancelled':'cancelled';'deleted':'deleted';'editorial':'editorial';'illegible':'illegible';'inaudible':'inaudible';'irrelevant':'irrelevant';'sampling':'sampling'), '${xpath_eval(@reason)}')}]]></a:argument>
+                <a:argument name="removeIfEmpty">true</a:argument>
+            </a:arguments>
+        </a:operation>
+        <a:operation id="ChangeAttributeOperation">
+            <a:xpathCondition>local-name() = 'unclear'</a:xpathCondition>
+            <a:arguments>
+                <a:argument name="name">reason</a:argument>
+                <!--a:argument name="namespace">http://www.tei-c.org/ns/1.0</a:argument-->
+                <a:argument name="value"><![CDATA[${ask('Reason', editable_combobox, ('illegible':'illegible';'inaudible':'inaudible';'faded':'faded';'background noise':'background noise';'eccentric_ductus':'eccentric ductus'), '${xpath_eval(@reason)}')}]]></a:argument>
+                <a:argument name="removeIfEmpty">true</a:argument>
+            </a:arguments>
+        </a:operation>
+    </a:operations>
+    <a:accessKey/>
+</a:authorAction>
