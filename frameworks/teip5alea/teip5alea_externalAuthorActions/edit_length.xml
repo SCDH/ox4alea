@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="edit_length">
+  <a:name>Edit Length</a:name>
+  <a:description>Edit length</a:description>
+  <a:smallIconPath href="${framework}/images/len-16.png"/>
+  <a:largeIconPath href="${framework}/images/len-24.png"/>
+  <a:operations>
+    <a:operation id="ChangeAttributesOperation">
+      <a:xpathCondition>local-name() = 'sic' or local-name() = 'corr' or local-name() = 'gap' or local-name() = 'unclear'</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="attributeNames">unit
+          quantity</a:argument>
+        <!--a:argument name="namespace">http://www.tei-c.org/ns/1.0</a:argument-->
+        <a:argument name="values"><![CDATA[${ask('Unit', editable_combobox, ('cm':'centimeters';'mm':'milimeters';'in':'inches';'line':'lines of text';'char':'characters';'word':'words'), '${xpath_eval(@unit)}')}]]>
+<![CDATA[${ask('Quantity', generic, '${xpath_eval(@quantity)}')}]]></a:argument>
+        <a:argument name="removeIfEmpty">true</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
