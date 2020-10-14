@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="insert_lyrics">
+  <a:name>Insert Lyrics</a:name>
+  <a:description>Insert Lyrics</a:description>
+  <a:smallIconPath href="/images/lyric.png"/>
+  <a:largeIconPath href="/images/lyric.png"/>
+  <a:operations>
+    <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>self::*:div</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="fragment"><lg xmlns="http://www.tei-c.org/ns/1.0"><head/><lg><l/></lg></lg></a:argument>
+        <a:argument name="insertLocation"/>
+        <a:argument name="insertPosition">Inside as first child</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:enabledInReadOnlyContext>false</a:enabledInReadOnlyContext>
+</a:authorAction>

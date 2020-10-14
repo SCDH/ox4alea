@@ -829,7 +829,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>instert_stanza</String>
+													<String>insert_lyrics</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -846,6 +846,27 @@
 										</field>
 										<field name="index">
 											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
+													<String>instert_stanza</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>7</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
