@@ -12,21 +12,20 @@
 	<xt:extensions 
 	    xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
 	    <xt:extension id="{/project/artifactId}">
-		<xt:location href="https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/{/project/artifactId}-{/project/version}.jar"/>
+		<xt:location href="https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/{/project/artifactId}-{/project/version}-package.zip"/>
 		<xt:version><xsl:value-of select="/project/version"/></xt:version>
 		<xt:oxy_version>14.0+</xt:oxy_version>
 		<xt:type>framework</xt:type>
-		<xt:author>Christian Lück</xt:author>
+		<xt:author>Christian Lück, Immanuel Normann</xt:author>
 		<xt:name>TEI P5 - ALEA-Extension</xt:name>
-		<xt:description xmlns="http://www.w3.org/1999/xhtml">&lt;oXygen/&gt; framework developed for ALEA in a generic manner</xt:description>
+		<xt:description
+		    xmlns="http://www.w3.org/1999/xhtml"
+		    >An &lt;oXygen/&gt; author framework extending TEI P5,
+		developed at SCDH, Westfälische Wilhelms-Universität
+		Münster, for the ALEA research project</xt:description>
 		<xt:license>
-		    <![CDATA[
-			     
-END USER LICENSE AGREEMENT
-
-GPL v3
-
-		    ]]></xt:license>
+		    <xsl:value-of select="unparsed-text('../LICENSE')"/>
+		</xt:license>
 	    </xt:extension>
 	</xt:extensions>
     </xsl:template>
