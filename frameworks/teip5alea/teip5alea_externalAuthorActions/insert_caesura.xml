@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="insert_caesura">
+  <a:name>Insert Caesura</a:name>
+  <a:description>Verstrennung einfügen</a:description>
+  <a:smallIconPath href="${framework}/images/diamond-16.png"/>
+  <a:largeIconPath href="${framework}/images/diamond-24.png"/>
+  <a:operations>
+    <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>local-name()='l'</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="fragment"><caesura xmlns="http://www.tei-c.org/ns/1.0"/>${caret}</a:argument>
+        <a:argument name="insertPosition">After</a:argument>
+        <a:argument name="schemaAware">true</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accelerator>TAB</a:accelerator>
+  <a:enabledInReadOnlyContext>false</a:enabledInReadOnlyContext>
+</a:authorAction>
