@@ -829,6 +829,27 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
+													<String>instert_stanza</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
 													<String>insert_caesura</String>
 												</field>
 											</toolbarItem>
@@ -889,6 +910,23 @@
 										</field>
 										<field name="anchor">
 											<String>insert image</String>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>templatesLocations</String>
+										</field>
+										<field name="index">
+											<Integer>1</Integer>
+										</field>
+										<field name="value">
+											<String>${pd}/templates</String>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
 										</field>
 									</poPatch>
 									<poPatch>

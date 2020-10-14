@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:tei="http://www.tei-c.org/ns/1.0"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
   id="insert_verse">
-  <a:name>Insert Verse</a:name>
-  <a:description>Vers einfügen</a:description>
-  <a:smallIconPath href="${framework}/images/tilde-16.png"/>
-  <a:largeIconPath href="${framework}/images/tilde-24.png"/>
+  <a:name>New Verse/Paragraph</a:name>
+  <a:description>New Verse/Paragraph</a:description>
+  <a:smallIconPath href="${framework}/images/enter-16.png"/>
+  <a:largeIconPath href="${framework}/images/enter-24.png"/>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>local-name()='l'</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><l xmlns="http://www.tei-c.org/ns/1.0"/></a:argument>
+        <a:argument name="fragment"><tei:l/></a:argument>
+        <a:argument name="insertLocation"/>
+        <a:argument name="insertPosition">After</a:argument>
+      </a:arguments>
+    </a:operation>
+    <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>local-name()='body' or local-name()='p' or local-name()='div'</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="fragment"><tei:p/></a:argument>
         <a:argument name="insertLocation"/>
         <a:argument name="insertPosition">After</a:argument>
       </a:arguments>
