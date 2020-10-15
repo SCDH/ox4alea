@@ -30,7 +30,7 @@ deploy:jdk11:
       - target
   only:
     - master
-    - tag
+    - tags
 
 
 pages:
