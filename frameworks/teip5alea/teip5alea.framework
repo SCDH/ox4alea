@@ -117,6 +117,33 @@
 										<field name="value">
 											<cssFile>
 												<field name="href">
+													<String>${framework}/css/ltr.css</String>
+												</field>
+												<field name="title">
+													<String>+ Left-to-right script</String>
+												</field>
+												<field name="alternate">
+													<Boolean>true</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
 													<String>${baseFramework}/xml/tei/css/tei_oxygen.css</String>
 												</field>
 												<field name="title">

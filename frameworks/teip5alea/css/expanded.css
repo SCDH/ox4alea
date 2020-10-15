@@ -8,6 +8,7 @@ teiHeader { display: none }
 
 body {
     font-family:"Arabic Typesetting";
+    direction: rtl;
 }
 
 lg > head {
@@ -23,7 +24,6 @@ lg {
 
 l { 
     display: block ;
-    direction: rtl;
 }
 
 l > seg {
