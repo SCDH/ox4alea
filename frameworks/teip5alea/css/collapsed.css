@@ -56,3 +56,17 @@ app > rdg {
 note {
     display: none ;
 }
+
+choice {
+    -oxy-display-tags: none;
+    color: gray;
+}
+
+corr {
+    -oxy-display-tags: none;
+    direction:inherit !important;
+}
+
+sic {
+    display: none;
+}
