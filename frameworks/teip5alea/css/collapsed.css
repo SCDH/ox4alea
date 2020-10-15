@@ -75,3 +75,8 @@ unclear {
     color: gray;
     -oxy-display-tags: none;
 }
+
+gap {
+    content: "[...]";
+    -oxy-display-tags: none;
+}

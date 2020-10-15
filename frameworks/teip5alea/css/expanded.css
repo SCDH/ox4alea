@@ -77,3 +77,8 @@ sic {
     -oxy-display-tags: none;
     direction:inherit !important;
 }
+
+gap {
+    content: "‪[...(" attr(reason) ")...]‬ ";
+    -oxy-display-tags: none;
+}
