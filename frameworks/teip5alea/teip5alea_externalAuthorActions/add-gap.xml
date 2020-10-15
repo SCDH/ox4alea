@@ -9,7 +9,7 @@
   <a:largeIconPath href="${framework}/images/brackets-24.png"/>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
-      <a:xpathCondition>local-name() = 'l' or local-name() = 'lem' or local-name() = 'rdg' or local-name() = 'head'</a:xpathCondition>
+      <a:xpathCondition>self::*:div|self::*:p|self::*:l|self::*:lem|self::*:rdg|self::*:head</a:xpathCondition>
       <a:arguments>
         <a:argument name="fragment">
 <![CDATA[<gap xmlns="http://www.tei-c.org/ns/1.0" reason="${ask('Reason', editable_combobox, ('cancelled':'cancelled';'deleted':'deleted';'editorial':'editorial';'illegible':'illegible';'inaudible':'inaudible';'irrelevant':'irrelevant';'sampling':'sampling'), 'illegible')}" unit="word" quantity="${ask('Quantity in words', generic, '')}"/>]]>

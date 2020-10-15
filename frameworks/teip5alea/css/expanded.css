@@ -57,3 +57,28 @@ rdg {
     -oxy-display-tags: none;
     direction:inherit !important;
 }
+
+choice {
+    -oxy-display-tags: none;
+}
+
+corr {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: green;
+    -oxy-display-tags: none;
+    direction:inherit !important;
+}
+
+sic {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: red;
+    -oxy-display-tags: none;
+    direction:inherit !important;
+}
+
+gap {
+    content: "‪[...(" attr(reason) ")...]‬ ";
+    -oxy-display-tags: none;
+}

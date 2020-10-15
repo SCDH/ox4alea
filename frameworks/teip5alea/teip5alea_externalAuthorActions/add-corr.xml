@@ -10,12 +10,12 @@
   <a:largeIconPath href="${framework}/images/corr-24.png"/>
   <a:operations>
     <a:operation id="SurroundWithFragmentOperation">
-      <a:xpathCondition>local-name() = 'l' or local-name() = 'lem' or local-name() = 'rdg' or local-name() = 'head'</a:xpathCondition>
+      <a:xpathCondition>self::*:p|self::*:l|self::*:lem|self::*:rdg|self::*:head</a:xpathCondition>
       <a:arguments>
         <a:argument name="fragment">
 <choice xmlns="http://www.tei-c.org/ns/1.0">
     <sic/>
-    <corr><![CDATA[${ask('Korrektur', '')}]]></corr>
+    <corr><![CDATA[${ask('Korrektur', generic, '')}]]></corr>
 </choice>
         </a:argument>
       </a:arguments>
