@@ -14,15 +14,18 @@
 	    <xt:extension id="{/project/artifactId}">
 		<xt:location href="https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/{/project/artifactId}-{/project/version}-package.zip"/>
 		<xt:version><xsl:value-of select="/project/version"/></xt:version>
-		<xt:oxy_version>14.0+</xt:oxy_version>
+		<xt:oxy_version>15.1+</xt:oxy_version>
 		<xt:type>framework</xt:type>
 		<xt:author>Christian Lück, Immanuel Normann</xt:author>
 		<xt:name>TEI P5 - ALEA-Extension</xt:name>
-		<xt:description
-		    xmlns="http://www.w3.org/1999/xhtml"
-		    >An &lt;oXygen/&gt; author framework extending TEI P5,
-		developed at SCDH, Westfälische Wilhelms-Universität
-		Münster, for the ALEA research project</xt:description>
+		<xt:description xmlns="http://www.w3.org/1999/xhtml">
+		    An &lt;oXygen/&gt; author framework extending TEI P5,
+		    developed at SCDH, Westfälische Wilhelms-Universität
+		    Münster. It is developed for the ALEA (Arabische
+		    Literatur Elfhundert bis Achtzehnhundert) research
+		    group and has support for right-to-left scripts,
+		    though is generically designed.
+		</xt:description>
 		<xt:license>
 		    <xsl:value-of select="unparsed-text('../LICENSE')"/>
 		</xt:license>
