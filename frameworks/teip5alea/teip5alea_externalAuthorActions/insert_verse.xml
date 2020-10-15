@@ -4,8 +4,8 @@
   xmlns:tei="http://www.tei-c.org/ns/1.0"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
   id="insert_verse">
-  <a:name>New Verse/Paragraph</a:name>
-  <a:description>New Verse/Paragraph</a:description>
+  <a:name>Insert Paragraph/Verse</a:name>
+  <a:description>Insert Paragraph/Verse (context-sentive insertion)</a:description>
   <a:smallIconPath href="${framework}/images/enter-16.png"/>
   <a:largeIconPath href="${framework}/images/enter-24.png"/>
   <a:operations>
@@ -26,7 +26,7 @@
       </a:arguments>
     </a:operation>
   </a:operations>
-  <a:accelerator>ENTER</a:accelerator>
+  <a:accelerator>ctrl ENTER</a:accelerator>
   <a:accessKey>v</a:accessKey>
   <a:enabledInReadOnlyContext>false</a:enabledInReadOnlyContext>
 </a:authorAction>
