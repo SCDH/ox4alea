@@ -30,6 +30,7 @@ deploy:jdk11:
       - target
   only:
     - master
+    - tag
 
 
 pages:
@@ -44,4 +45,6 @@ pages:
     paths:
       - public
   only:
-    - master
+    # https://gitlab.com/gitlab-org/gitlab-foss/-/issues/27818
+    variables:
+      - $CI_COMMIT_TAG =~ /^v\d+.\d+.\d+$/
