@@ -9,10 +9,10 @@
   <a:largeIconPath href="${framework}/images/sheetsplus-24.png"/>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
-      <a:xpathCondition>local-name()='rdg'</a:xpathCondition>
+      <a:xpathCondition>ancestor-or-self::*:app</a:xpathCondition>
       <a:arguments>
         <a:argument name="fragment"><![CDATA[<rdg xmlns="http://www.tei-c.org/ns/1.0" wit="${ask('Sigel',combobox,(${xpath_eval(string-join(let $headWits := doc("${cf}")/*:TEI/*:teiHeader//*:witness/@xml:id, $catFile := "${pdu}/WitnessCatalogue.xml", $catWits := if (doc-available($catFile)) then doc($catFile)/*:TEI/*:text//*:witness else () return for $w in $headWits return concat("'#", $w, "':'#", $w, ' = ', $catWits[@xml:id eq $w]//*:abbr[@type eq 'siglum'][1], "'"), ';')  )}), '')}">${caret}</rdg>]]></a:argument>
-        <a:argument name="insertLocation">..</a:argument>
+        <a:argument name="insertLocation">ancestor-or-self::*:app</a:argument>
         <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>
     </a:operation>
