@@ -70,3 +70,8 @@ corr {
 sic {
     display: none;
 }
+
+unclear {
+    color: gray;
+    -oxy-display-tags: none;
+}
