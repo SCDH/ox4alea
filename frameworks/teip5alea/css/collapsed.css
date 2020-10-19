@@ -16,6 +16,7 @@ teiHeader { display: none }
 
 body {
     font-family:"Arabic Typesetting";
+    direction: rtl;
 }
 
 lg > head > title {
@@ -31,7 +32,6 @@ lg {
 
 l { 
     display: block ;
-    direction: rtl;
 }
 
 l > seg {

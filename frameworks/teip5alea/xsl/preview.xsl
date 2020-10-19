@@ -3,6 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
     exclude-result-prefixes="xs" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
+    xmlns="http://www.w3.org/1999/xhtml"
     version="2.0">
     
     <xsl:output media-type="text/html"/>
@@ -13,12 +14,15 @@
     <!-- Filename of witness catalogue. -->
     <xsl:param name="witnessCat" select="'WitnessCatalogue.xml'" as="xs:string"/>
     
-    <xsl:param name="debug" select="false()" as="xs:boolean"/>
+    <!-- writing direction, defaults to 'rtl' (right-to-left) -->
+    <xsl:param name="direction" select="'rtl'" as="xs:string"/>
 
+    <xsl:param name="debug" select="false()" as="xs:boolean"/>
+    
     <xsl:include href="libwit.xsl"/>
 
     <xsl:template match="/">
-        <html xmlns="http://www.w3.org/1999/xhtml">
+        <html>
             <head>
                 <title>ALEA Vorschau</title>
                 <style>
@@ -27,14 +31,14 @@
                         text-align: center;
                     }
                     body {
-                        direction: rtl;
+                        direction: <xsl:value-of select="$direction"/>;
                         font-family:"Arabic Typesetting";                    
                     }
                     .variants {
-                        direction: rtl
+                        direction: <xsl:value-of select="$direction"/>;
                     }
                     .comments {
-                        direction: rtl
+                        direction: <xsl:value-of select="$direction"/>;
                     }
                     hr {
                         margin: 20px
