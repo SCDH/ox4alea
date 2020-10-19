@@ -75,24 +75,9 @@
                 </section>
                 <hr/>
                 <section class="variants">
-                    <!-- todo: Für eine einheitliche Ausrichtung Zeilennummern und Varianten in eine Tabelle packen -->
-                    <xsl:for-each select="TEI/text/body/lg/(head|lg/l)">
-                        <xsl:if test="app">
-                            <div xmlns="http://www.w3.org/1999/xhtml" class="variants">
-                                <span style="font-size: 8pt;padding-left: 20px">
-                                    <xsl:value-of select="scdh:line-number(.)"/>
-                                </span>
-                                <xsl:for-each select="app">
-                                    <xsl:value-of select="lem"/>]
-                                    <xsl:for-each select="rdg">
-                                        <xsl:value-of select="."/><span style="padding-left: 3px">:</span><span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
-                                        <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
-                                    </xsl:for-each>
-                                    <xsl:if test="following-sibling::app"><span style="padding: 8px">|</span></xsl:if>
-                                </xsl:for-each>
-                            </div>
-                        </xsl:if>
-                    </xsl:for-each>                    
+                    <table>
+                        <xsl:apply-templates select="//l[descendant::app]" mode="apparatus"/>
+                    </table>
                 </section>
                 <hr/>
                 <section class="comments">
@@ -173,6 +158,30 @@
         <xsl:param name="el" as="element()"/>
         <xsl:value-of select="string(count($el/preceding-sibling::l union $el/ancestor::*/preceding::*//l)+1)"/>
     </xsl:function>
+
+    <xsl:template match="l" mode="apparatus">
+        <tr>
+            <td><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td>
+                <xsl:for-each select="app|gap|unclear">
+                    <xsl:apply-templates select="." mode="apparatus"/>
+                    <xsl:if test="following-sibling::app|gap|unclear">
+                        <span style="white-space:nowrap">&#8201;</span><xsl:text>|&#8195;</xsl:text>
+                    </xsl:if>
+                </xsl:for-each>
+            </td>
+        </tr>
+    </xsl:template>
+
+    <xsl:template match="app" mode="apparatus">
+        <xsl:value-of select="lem"/>]
+        <xsl:for-each select="rdg">
+            <xsl:value-of select="."/>
+            <span style="padding-left: 3px">:</span>
+            <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
+            <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
+        </xsl:for-each>
+    </xsl:template>
 
     <xsl:template match="l/note">
         <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
