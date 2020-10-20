@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title/>
+         </titleStmt>
+         <publicationStmt>
+            <authority/>
+         </publicationStmt>
+         <sourceDesc>
+            <listWit><witness xml:id="W"/><witness xml:id="S"/><witness xml:id="A"/></listWit>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <lg>
+            <head>
+               <title>
+                  <l><app>
+                        <lem>وقال يمدح قاضي القضاة</lem>
+                        <rdg wit="#W">قال يمدح قاضي القضاة تقي الدين السبكي رحمه اللّه تعالى</rdg>
+                        <rdg wit="#S">وقال يمدح قاضي القضاة</rdg>
+                     </app> [من الطويل]</l>
+               </title>
+            </head>
+            <lg>
+               <l>دَعَا شَجْوُهُ فَقْدَ <gap reason="illegible" unit="word" quantity="5"
+                     cert="medium" resp="asdf"/> الأَحِبَّةِ وَالصَبَا<caesura/>
+                  <choice>
+                     <corr>فَمَا</corr>
+                     <sic>asdf</sic>
+                  </choice> لِلكَرَى فِي مُقْلَتَيْهِ مَسَاغُ</l>
+               <l><app>
+                     <lem>أَحِبَّايَ</lem>
+                     <rdg wit="#W">أخلّاي</rdg>
+                  </app> لِي فِي <app>
+                     <lem>اليَوْمِ</lem>
+                     <rdg wit="#W #S">اللوم</rdg>
+                  </app> شُغْلٌ بِصَبْوَتِي<caesura/>وَشَيْبِي وَفِي أَهْلِ المَلَامِ فَرَاغُ</l>
+               <l>وَكَمْ عَاقَتْ اللُوُّامُ وَالشَّيْبُ فِي الهَوَى<caesura/>مُحِبًّا وَفِي جِلْدِ المُحِبِّ دَبَاغُ</l>
+               <l>صَبَغْتُ مَشِيبِي رَاجِيًا عَوْدَةَ الصَبَا<caesura/>وَهَيْهَاتَ مِنْهُ عَوْدَةٌ وَبَلَاغُ</l>
+               <l>كَذلِكَ أَفْكَارُ  <unclear reason="illegible">المَشِيبِ</unclear>  إِذَا <app>
+                     <lem>نَزَتْ</lem>
+                     <rdg wit="#S">نوت</rdg>
+                  </app><caesura/>فَفِي بَعْضِ بَاذِنْجَانِهِنَّ صِبَاغُ</l>
+               <l><app>
+                     <lem>دَعِ</lem>
+                     <rdg wit="#W">وداع</rdg>
+                  </app> الغَيَّ بَعْدَ الأَرْبَعِينَ فَكَمْ دَعَا<caesura/>هُدَاةَ الوَرَى دَاعِي <app>
+                     <lem>الغَرامِ</lem>
+                     <rdg wit="#A #S">الغواة</rdg>
+                     <rdg wit="#W">asdf</rdg>
+                  </app> فَرَاغُوا</l>
+               <l> ثَنَى كُلُّ <app>
+                     <lem>بَاعٍ</lem>
+                     <rdg wit="#W #S">باغ</rdg>
+                  </app> عَنْ <app>
+                     <lem wit="#S">مَدَاهَا</lem>
+                     <rdg wit="#W">ثناها</rdg>
+                  </app> مُمَدَّحُ <caesura/>كَأَنَّ ثَنَاهُ فِي البَسِيطَةِ بَاغُ</l>
+               <l><app>
+                     <lem>وَوَافَى وَأَوْقَاتُ الزَمَانِ كَثِيفةٌ<caesura/>فَأَوْقَاتُنَا زُهْرُ
+                        الصِفَاةِ رَفَاغُ</lem>
+                     <rdg wit="#W">لا ترد
+                        في ڤ</rdg>
+                  </app></l>
+               <l>أَخُو الفَضْلِ والأَلْفَاظِ قَالَتْ عَلَمَتْ<caesura/>فَأَصْغَى إِلَيْهَا المَادِحُونَ وَصَاغُوا</l>
+               <l>وَقَاضِي قُضَاةِ الشَامِ وَالذِكْرِ وَالنَّدَى<caesura/><app>
+                     <lem>نَححىث ... فَالنَفَى</lem>
+                     <rdg wit="#W">بِحَيْثُ سِكِّينَ فَالْتَقَى</rdg>
+                  </app> فَأَبَاغُ</l>
+               <l>عَلَى كُلِّ وَادٍ لِلنَدَى <app>
+                     <lem>مِنْهُ مَبْسَمٌ</lem>
+                     <rdg wit="#W">مباسم</rdg>
+                  </app><caesura/>وَفِي كُلِّ حَيٍّ لِلْصَنَائِعِ دَاغُ</l>
+               <l>مِنَ <note xml:id="iff_brj_gnb"/>النَفَرِ السَامِينَ كَادَ
+                  وَلِيدُهُمْ<caesura/>يَقُولُ لِنُظَّامِ <app>
+                     <lem>المَحَامِدِ</lem>
+                     <rdg wit="#W #S">المَدائح</rdg>
+                  </app> نَاغُو</l>
+               <l>كَأَنَّ العُلَى شَخْصٌ لَهُمْ مِنْهُ <app>
+                     <lem>رَأْسُهَا</lem>
+                     <rdg wit="#W">باسما</rdg>
+                     <rdg wit="#S">رأسه</rdg>
+                  </app><caesura/>وَفِي النَّاسِ كَعْبٌ <app>
+                     <lem>لِلْعُلَى</lem>
+                     <rdg wit="#W">للولى</rdg>
+                  </app>
+                  <app>
+                     <lem>وَدِمَاغُ</lem>
+                     <rdg wit="#W">ودباغ</rdg>
+                  </app></l>
+               <l>أَ مَوْلَايَ <app>
+                     <lem>خُذْ هَاذَاتَ</lem>
+                     <rdg wit="#W">خذها ذات</rdg>
+                  </app> نَظْمٍ مُوَشَّعٍ<caesura/>عَلَى أَوْجُهِ الأَنْدَادِ <app>
+                     <lem>ذَلِكَ دَاغُ</lem>
+                     <rdg wit="#W">رداغ</rdg>
+                     <rdg wit="#S">منه رداغ</rdg>
+                  </app></l>
+               <l>وَمَا القَوْلُ إِلَّا <app>
+                     <lem>كَالوَرَى</lem>
+                     <rdg wit="#W">كالوى</rdg>
+                  </app> مُتَفَاوِتٌ<caesura/>فَمِنْهُ صَهِيلٌ أَو فَمِنْهُ ثُوَاغُ</l>
+            </lg>
+         </lg>
+      </body>
+   </text>
+</TEI>
