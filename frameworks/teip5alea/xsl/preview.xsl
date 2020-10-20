@@ -20,6 +20,9 @@
 
     <xsl:param name="debug" select="false()" as="xs:boolean"/>
     
+    <!-- language of static content strings, e.g. in the apparatus -->
+    <xsl:param name="language" select="'ar'" as="xs:string"/>
+    
     <xsl:include href="libwit.xsl"/>
 
     <xsl:template match="/">
@@ -76,7 +79,9 @@
                 <hr/>
                 <section class="variants">
                     <table>
-                        <xsl:apply-templates select="//l[descendant::app]" mode="apparatus"/>
+                        <xsl:apply-templates
+                            select="//l[descendant::app or descendant::gap or descendant::unclear or descendant::choice]"
+                            mode="apparatus"/>
                     </table>
                 </section>
                 <hr/>
@@ -163,9 +168,9 @@
         <tr>
             <td><xsl:value-of select="scdh:line-number(.)"/></td>
             <td>
-                <xsl:for-each select="app|gap|unclear">
+                <xsl:for-each select="app|gap|unclear|choice">
                     <xsl:apply-templates select="." mode="apparatus"/>
-                    <xsl:if test="following-sibling::app|gap|unclear">
+                    <xsl:if test="position() != last()">
                         <span style="white-space:nowrap">&#8201;</span><xsl:text>|&#8195;</xsl:text>
                     </xsl:if>
                 </xsl:for-each>
@@ -183,12 +188,62 @@
         </xsl:for-each>
     </xsl:template>
 
+    <xsl:template match="unclear" mode="apparatus">
+        <xsl:apply-templates select="."/>]
+        <xsl:text>‪</xsl:text><!-- left-to-right-embedding -->
+        <xsl:text>unclear</xsl:text>
+        <xsl:if test="@reason">
+            <xsl:text>, reason: </xsl:text>
+            <xsl:value-of select="@reason"/>
+        </xsl:if>
+        <xsl:text>‬</xsl:text><!-- pop directional mapping -->
+    </xsl:template>
+    
+    <xsl:template match="gap" mode="apparatus">
+        <xsl:text>[...]</xsl:text>
+        <xsl:text>‪</xsl:text><!-- left-to-right-embedding -->
+        <xsl:text>gap</xsl:text>
+        <xsl:if test="@quantity and @unit">
+            <xsl:text>, length: </xsl:text>
+            <xsl:value-of select="@quantity"/>
+            <xsl:text>&#160;</xsl:text>
+            <xsl:value-of select="@unit"/>
+        </xsl:if>
+        <xsl:if test="@reason">
+            <xsl:text>, reason: </xsl:text>
+            <xsl:value-of select="@reason"/>
+        </xsl:if>
+        <xsl:text>‬</xsl:text><!-- pop directional mapping -->
+    </xsl:template>
+    
+    <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">
+        <xsl:value-of select="corr"/>]
+        <xsl:text>‪</xsl:text><!-- left-to-right-embedding -->
+        <xsl:text>reading: </xsl:text>
+        <xsl:text>‬</xsl:text><!-- pop directional mapping -->
+        <xsl:value-of select="sic"/>
+    </xsl:template>
+    
     <xsl:template match="l/note">
         <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
     </xsl:template>
       
-    <xsl:template match="(l|head)/app">
-        <xsl:value-of select="lem"/>
+    <xsl:template match="app">
+        <xsl:apply-templates select="lem"/>
+    </xsl:template>
+    
+    <xsl:template match="gap">
+        <xsl:text>[...]</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="unclear">
+        <!--xsl:text>[? </xsl:text-->
+        <xsl:apply-templates />
+        <!--xsl:text> ?]</xsl:text-->
+    </xsl:template>
+    
+    <xsl:template match="choice[child::sic and child::corr]">
+        <xsl:apply-templates select="corr"/>
     </xsl:template>
     
     <xsl:template name="variants">
