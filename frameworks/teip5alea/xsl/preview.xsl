@@ -117,7 +117,7 @@
     </xsl:template>
     
     <xsl:template match="lg/lg">
-        <tr xmlns="http://www.w3.org/1999/xhtml"><td colspan="2"></td></tr>
+        <tr xmlns="http://www.w3.org/1999/xhtml"><td colspan="3"></td></tr>
         <xsl:apply-templates select="l"/>
     </xsl:template>
     
@@ -150,9 +150,9 @@
                 </tr>
             </xsl:when>
             <xsl:otherwise>
-                <tr >
+                <tr>
                     <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-                    <td colspan="2"><xsl:copy-of select="descendant::node()"></xsl:copy-of></td>
+                    <td colspan="2"><xsl:apply-templates/></td>
                 </tr>
             </xsl:otherwise>
         </xsl:choose>
@@ -161,14 +161,14 @@
     <!-- returns the line number of a given element as string -->
     <xsl:function name="scdh:line-number" as="xs:string">
         <xsl:param name="el" as="element()"/>
-        <xsl:value-of select="string(count($el/preceding-sibling::l union $el/ancestor::*/preceding::*//l)+1)"/>
+        <xsl:value-of select="string(count($el/preceding-sibling::l union $el/ancestor::*/preceding::*//l union $el/ancestor::*/preceding::*//head)+1)"/>
     </xsl:function>
 
     <xsl:template match="l" mode="apparatus">
         <tr>
             <td><xsl:value-of select="scdh:line-number(.)"/></td>
             <td>
-                <xsl:for-each select="app|gap|unclear|choice">
+                <xsl:for-each select="app|gap|unclear|choice|app/lem/(gap|unclear|choice)">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span style="white-space:nowrap">&#8201;</span><xsl:text>|&#8195;</xsl:text>
@@ -179,7 +179,7 @@
     </xsl:template>
 
     <xsl:template match="app" mode="apparatus">
-        <xsl:value-of select="lem"/>]
+        <xsl:apply-templates select="lem"/>]
         <xsl:for-each select="rdg">
             <xsl:value-of select="."/>
             <span style="padding-left: 3px">:</span>

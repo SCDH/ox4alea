@@ -26,7 +26,7 @@
 	</x:context>
 	<x:expect
 	    label="count of columns"
-	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
+	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 1+2+3"/>
 	<x:expect
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = 'Titel1Aa Bb Cc Dd Ee Ff'"/>
@@ -35,7 +35,7 @@
 		<ht:tr>...</ht:tr>
 		<ht:tr>...</ht:tr>
 		<ht:tr>
-		    <ht:td style="...">1</ht:td>
+		    <ht:td style="...">2</ht:td>
 		    <ht:td style="...">Aa Bb Cc </ht:td>
 		    <ht:td>Dd Ee Ff</ht:td>
 		</ht:tr>
@@ -95,10 +95,10 @@
 	</x:context>
 	<x:expect
 	    label="count of columns"
-	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 3+2"/>
+	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 1+2+3"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = 'Titel1Aa Bb Cc Dd Ee Ff'"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1TitelAa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
 	    <ht:table>
 		<ht:tr>...</ht:tr>
@@ -117,7 +117,7 @@
 	<x:context>
 	    <tei:body>
 		<tei:lg>
-		    <tei:head>Titel</tei:head>
+			<tei:head>Titel</tei:head>
 		    <tei:lg>
 			<tei:l>
 			    <tei:app>
