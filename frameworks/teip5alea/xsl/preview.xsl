@@ -161,7 +161,10 @@
     <!-- returns the line number of a given element as string -->
     <xsl:function name="scdh:line-number" as="xs:string">
         <xsl:param name="el" as="element()"/>
-        <xsl:value-of select="string(count($el/preceding-sibling::l union $el/ancestor::*/preceding::*//l union $el/ancestor::*/preceding::*//head)+1)"/>
+        <xsl:value-of select="string(count($el/preceding-sibling::l union
+                                           $el/ancestor::*/preceding::*//l union
+                                           $el/ancestor::*/preceding::head[not(exists(descendant::l))] union
+                                           $el/ancestor::*/preceding::*//head[not(exists(descendant::l))]) + 1)"/>
     </xsl:function>
 
     <xsl:template match="l" mode="apparatus">

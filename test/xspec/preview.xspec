@@ -6,6 +6,7 @@
     xmlns:x="http://www.jenitennison.com/xslt/xspec"
     xmlns:ht="http://www.w3.org/1999/xhtml"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
     stylesheet="../../frameworks/teip5alea/xsl/preview.xsl">
 
 
@@ -182,6 +183,33 @@
 		</ht:tr>
 	    </ht:table>
 	</x:expect>
+    </x:scenario>
+
+    <x:scenario
+	label="Line numbering">
+	<x:call function="scdh:line-number">
+	    <x:param
+		name="el" select="doc('../../../frameworks/teip5alea/samples/Trawr-Gesang.xml')//*:l[2]"/>
+	</x:call>
+	<x:expect select="'3'"/>
+    </x:scenario>
+
+    <x:scenario
+	label="Line numbering in alternative">
+	<x:call function="scdh:line-number">
+	    <x:param
+		name="el" select="doc('../../../frameworks/teip5alea/samples/Trawr-Gesang2.xml')//*:lg/*:lg[1]/*:l[2]"/>
+	</x:call>
+	<x:expect select="'3'"/>
+    </x:scenario>
+
+    <x:scenario
+        label="Line numbering in subsequent divisions">
+        <x:call function="scdh:line-number">
+            <x:param
+                name="el" select="doc('../../../frameworks/teip5alea/samples/Trawr-Gesang2.xml')//*:lg/*:lg[2]/*:l[2]"/>
+        </x:call>
+        <x:expect select="'5'"/>
     </x:scenario>
 
 </x:description>
