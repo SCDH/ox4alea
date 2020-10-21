@@ -163,8 +163,8 @@
         <xsl:param name="el" as="element()"/>
         <xsl:value-of select="string(count($el/preceding-sibling::l union
                                            $el/ancestor::*/preceding::*//l union
-                                           $el/ancestor::*/preceding::head[not(exists(descendant::l))] union
-                                           $el/ancestor::*/preceding::*//head[not(exists(descendant::l))]) + 1)"/>
+                                           $el/ancestor::*/preceding::head[empty(descendant::l)] union
+                                           $el/ancestor::*/preceding::*//head[empty(descendant::l)]) + 1)"/>
     </xsl:function>
 
     <xsl:template match="l" mode="apparatus">
