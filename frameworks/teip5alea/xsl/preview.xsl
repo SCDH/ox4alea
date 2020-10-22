@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE stylesheet [
+    <!ENTITY lre "&#x202a;" >
+    <!ENTITY rle "&#x202b;" >
+    <!ENTITY pdf "&#x202c;" >
+]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
@@ -197,7 +202,7 @@
     <xsl:template match="app" mode="apparatus">
         <xsl:apply-templates select="lem"/>]
         <xsl:for-each select="rdg">
-            <xsl:value-of select="."/>
+            <xsl:apply-templates select="." mode="apparatus"/>
             <span style="padding-left: 3px">:</span>
             <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
             <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
@@ -206,36 +211,32 @@
 
     <xsl:template match="unclear" mode="apparatus">
         <xsl:apply-templates select="."/>]
-        <xsl:value-of select="scdh:i18n('unclear', '‪unclear‬')"/>
+        <xsl:value-of select="scdh:i18n('unclear', '&lre;unclear&pdf;')"/>
         <xsl:if test="@reason">
-            <xsl:value-of select="scdh:i18n('reason', '‪, reason:‬')"/>
-            <xsl:value-of select="scdh:i18n(@reason, @reason)"/>
+            <xsl:value-of select="scdh:i18n(', ', ', ')"/>
+            <xsl:value-of select="scdh:i18n(@reason, concat('&lre;', @reason, '&pdf;'))"/>
         </xsl:if>
     </xsl:template>
     
     <xsl:template match="gap" mode="apparatus">
         <xsl:text>[...] </xsl:text>
-        <xsl:text>‪</xsl:text><!-- left-to-right-embedding -->
-        <xsl:text>gap</xsl:text>
-        <xsl:if test="@quantity and @unit">
-            <xsl:text>, length: </xsl:text>
-            <xsl:value-of select="@quantity"/>
-            <xsl:text>&#160;</xsl:text>
-            <xsl:value-of select="@unit"/>
-        </xsl:if>
         <xsl:if test="@reason">
-            <xsl:text>, reason: </xsl:text>
-            <xsl:value-of select="@reason"/>
+            <xsl:value-of select="scdh:i18n(@reason, concat('&lre;', @reason, '&pdf;'))"/>
         </xsl:if>
-        <xsl:text>‬</xsl:text><!-- pop directional mapping -->
+        <xsl:if test="@quantity and @unit">
+            <xsl:value-of select="scdh:i18n(', ', ', ')"/>
+            <xsl:value-of select="scdh:i18n(@quantity, concat('&lre;', @quantity, '&pdf;'))"/>
+            <xsl:text>&#160;</xsl:text>
+            <xsl:value-of select="scdh:i18n(@unit, concat('&lre;', @unit, '&pdf;'))"/>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">
-        <xsl:value-of select="corr"/>]
-        <xsl:text>‪</xsl:text><!-- left-to-right-embedding -->
-        <xsl:text>reading: </xsl:text>
-        <xsl:text>‬</xsl:text><!-- pop directional mapping -->
+        <xsl:value-of select="corr"/>
+        <xsl:text>] </xsl:text>
         <xsl:value-of select="sic"/>
+        <span style="padding-left: 3px">:</span>
+        <span style="color: gray"><xsl:value-of select="scdh:i18n('reading', '&lre;reading&pdf;')"/></span>
     </xsl:template>
     
     <xsl:template match="l/note">
