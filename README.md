@@ -65,7 +65,14 @@ the browser in `target/xspec-reports/index.html`.
 The test suite or single tests can also be run from the root of this
 repository with
 
-	<path-to/xspec.sh> test/xspec/*.xspec
+	<path-to/xspec.sh> -catalog catalog.xml test/xspec/*.xspec
 
-This requires `XSpec` and `Saxon-HE` installed. The test result is in
-`test/xspec/xspec/*-review.html`.
+This requires `XSpec` and `Saxon-HE` and the [XML
+Resolver](https://mvnrepository.com/artifact/xml-resolver/xml-resolver)
+installed. Provided that you've run maven before and maven caches its
+downloads under the `~/.m2/repository` folder you can set an
+environment variable as follows:
+
+	export SAXON_CP=~/.m2/repository/net/sf/saxon/Saxon-HE/9.9.1-6/Saxon-HE-9.9.1-6.jar:~/.m2/repository/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar
+
+The test result is in `test/xspec/xspec/*-review.html`.

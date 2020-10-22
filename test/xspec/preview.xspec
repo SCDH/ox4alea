@@ -189,7 +189,7 @@
 	label="Line numbering">
 	<x:call function="scdh:line-number">
 	    <x:param
-		name="el" select="doc('../../../frameworks/teip5alea/samples/Trawr-Gesang.xml')//*:l[2]"/>
+		name="el" select="doc('Trawr-Gesang.xml')//*:l[2]"/>
 	</x:call>
 	<x:expect select="'3'"/>
     </x:scenario>
@@ -198,7 +198,7 @@
 	label="Line numbering in alternative">
 	<x:call function="scdh:line-number">
 	    <x:param
-		name="el" select="doc('../../../frameworks/teip5alea/samples/Trawr-Gesang2.xml')//*:lg/*:lg[1]/*:l[2]"/>
+		name="el" select="doc('Trawr-Gesang2.xml')//*:lg/*:lg[1]/*:l[2]"/>
 	</x:call>
 	<x:expect select="'3'"/>
     </x:scenario>
@@ -207,7 +207,7 @@
         label="Line numbering in subsequent divisions">
         <x:call function="scdh:line-number">
             <x:param
-                name="el" select="doc('../../../frameworks/teip5alea/samples/Trawr-Gesang2.xml')//*:lg/*:lg[2]/*:l[2]"/>
+                name="el" select="doc('Trawr-Gesang2.xml')//*:lg/*:lg[2]/*:l[2]"/>
         </x:call>
         <x:expect select="'5'"/>
     </x:scenario>
