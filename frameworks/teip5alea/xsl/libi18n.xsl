@@ -8,9 +8,9 @@
     
     <xsl:param name="framework" select=".."/>
     <xsl:param name="translations" select=" concat($framework, '/i18n/translate.xml')"/>
+    <xsl:param name="language"/>
     
-    <xsl:function name="scdh:translate">
-        <xsl:param name="language"/>
+    <xsl:function name="scdh:i18n">
         <xsl:param name="key"/>
         <xsl:param name="default"/>
         <xsl:value-of select="if (doc-available($translations)) 

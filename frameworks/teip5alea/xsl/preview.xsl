@@ -9,6 +9,9 @@
     
     <xsl:output media-type="text/html"/>
 
+    <xsl:include href="libwit.xsl"/>
+    <!--xsl:include href="libi18n.xsl"/-->
+
     <!-- ${pdu} oxygen editor variable: project root directory URI -->
     <xsl:param name="pdu" select="string('.')" as="xs:string"/>
 
@@ -21,9 +24,19 @@
     <xsl:param name="debug" select="false()" as="xs:boolean"/>
     
     <!-- language of static content strings, e.g. in the apparatus -->
-    <xsl:param name="language" select="'ar'" as="xs:string"/>
-    
-    <xsl:include href="libwit.xsl"/>
+    <xsl:param name="language"/>
+
+    <xsl:param name="translations" select="'translate.xml'"/>
+
+    <xsl:function name="scdh:i18n">
+        <xsl:param name="key"/>
+        <xsl:param name="default"/>
+        <xsl:value-of select="if (doc-available($translations))
+            then (let $t:=doc($translations)/*:translation/*:key[@value eq $key]/val[@lang eq $language] return
+            (if (exists($t)) then $t else $default))
+            else $default"/>
+    </xsl:function>
+
 
     <xsl:template match="/">
         <html>
@@ -74,7 +87,7 @@
                     </section>
                 </xsl:if>
                 <section class="content">
-                    <xsl:apply-templates select="TEI/text/body/lg"/>                    
+                    <xsl:apply-templates select="TEI/text/body"/>
                 </section>
                 <hr/>
                 <section class="variants">
@@ -193,17 +206,15 @@
 
     <xsl:template match="unclear" mode="apparatus">
         <xsl:apply-templates select="."/>]
-        <xsl:text>‪</xsl:text><!-- left-to-right-embedding -->
-        <xsl:text>unclear</xsl:text>
+        <xsl:value-of select="scdh:i18n('unclear', '‪unclear‬')"/>
         <xsl:if test="@reason">
-            <xsl:text>, reason: </xsl:text>
-            <xsl:value-of select="@reason"/>
+            <xsl:value-of select="scdh:i18n('reason', '‪, reason:‬')"/>
+            <xsl:value-of select="scdh:i18n(@reason, @reason)"/>
         </xsl:if>
-        <xsl:text>‬</xsl:text><!-- pop directional mapping -->
     </xsl:template>
     
     <xsl:template match="gap" mode="apparatus">
-        <xsl:text>[...]</xsl:text>
+        <xsl:text>[...] </xsl:text>
         <xsl:text>‪</xsl:text><!-- left-to-right-embedding -->
         <xsl:text>gap</xsl:text>
         <xsl:if test="@quantity and @unit">

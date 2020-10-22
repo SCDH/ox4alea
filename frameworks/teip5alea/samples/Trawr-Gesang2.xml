@@ -14,6 +14,7 @@
          </publicationStmt>
          <sourceDesc>
             <p>https://de.wikipedia.org/wiki/Zäsur</p>
+            <listWit><witness xml:id="W"/></listWit>
          </sourceDesc>
       </fileDesc>
   </teiHeader>
@@ -24,11 +25,11 @@
                <head><l>Trawr-Gesang von der noth Christi am Oelberg in dem Garten</l></head>
                <lg>
                   <l>Bey stiller nacht <caesura/> zur ersten wacht</l>
-                  <l>Ein stimm sich gund zu klagen.</l>
+                  <l><app><lem>Ein stimm <gap reason="illegible" quantity="0" unit="word"/></lem><rdg wit="#W">Eine Stimme</rdg></app> sich gund zu klagen.</l>
                </lg>
                <lg>
-                  <l>Jch nam in acht <caesura/> waß die doch sagt;</l>
-                  <l>That hin mit augen schlagen. </l>
+                  <l><unclear>Jch</unclear> nam in acht <caesura/> waß die doch sagt;</l>
+                  <l>That hin mit <app><lem><choice><sic>augen</sic><corr>Augen</corr></choice></lem><rdg wit="#W">einer Buchseite</rdg></app> schlagen. </l>
                </lg>
             </lg>
          </text>
