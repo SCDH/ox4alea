@@ -44,6 +44,7 @@
                     <!--coverage>true</coverage-->
 		    <generateSurefireReport>true</generateSurefireReport>
 		    <testDir>test/xspec</testDir>
+		    <catalogFile>${project.basedir}/catalog.xml</catalogFile>
 		</configuration>
 		<executions>
                     <execution>

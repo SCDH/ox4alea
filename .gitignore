@@ -1,4 +1,5 @@
 *~
+*.html
 
 target
 test/xspec/xspec
