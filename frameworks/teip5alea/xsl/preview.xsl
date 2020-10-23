@@ -15,7 +15,7 @@
     <xsl:output media-type="text/html"/>
 
     <xsl:include href="libwit.xsl"/>
-    <!--xsl:include href="libi18n.xsl"/-->
+    <xsl:include href="libi18n.xsl"/>
 
     <!-- ${pdu} oxygen editor variable: project root directory URI -->
     <xsl:param name="pdu" select="string('.')" as="xs:string"/>
@@ -23,25 +23,23 @@
     <!-- Filename of witness catalogue. -->
     <xsl:param name="witnessCat" select="'WitnessCatalogue.xml'" as="xs:string"/>
     
-    <!-- writing direction, defaults to 'rtl' (right-to-left) -->
-    <xsl:param name="direction" select="'rtl'" as="xs:string"/>
-
     <xsl:param name="debug" select="false()" as="xs:boolean"/>
-    
-    <!-- language of static content strings, e.g. in the apparatus -->
-    <xsl:param name="language"/>
 
-    <xsl:param name="translations" select="'translate.xml'"/>
+    <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
+    <xsl:param name="ui-language" as="xs:string" select="''"/>
 
-    <xsl:function name="scdh:i18n">
-        <xsl:param name="key"/>
-        <xsl:param name="default"/>
-        <xsl:value-of select="if (doc-available($translations))
-            then (let $t:=doc($translations)/*:translation/*:key[@value eq $key]/val[@lang eq $language] return
-            (if (exists($t)) then $t else $default))
-            else $default"/>
+    <xsl:function name="scdh:ui-language">
+        <xsl:param name="context" as="node()"/>
+        <xsl:param name="default" as="xs:string"/>
+        <xsl:value-of
+            select="if ($ui-language eq '') then scdh:language($context, $default) else $ui-language"/>
     </xsl:function>
 
+    <xsl:function name="scdh:ui-language">
+        <xsl:param name="context" as="node()"/>
+        <xsl:value-of
+            select="if ($ui-language eq '') then scdh:language($context, 'ar') else $ui-language"/>
+    </xsl:function>
 
     <xsl:template match="/">
         <html>
@@ -53,20 +51,20 @@
                         text-align: center;
                     }
                     body {
-                        direction: <xsl:value-of select="$direction"/>;
+                        direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
                         font-family:"Arabic Typesetting";                    
                     }
                     .variants {
-                        direction: <xsl:value-of select="$direction"/>;
+                        direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
                     }
                     .comments {
-                        direction: <xsl:value-of select="$direction"/>;
+                        direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
                     }
                     hr {
                         margin: 20px
                     }
                     td {
-                        text-align: right;  
+                        text-align: <xsl:value-of select="scdh:language-align(TEI/text)"/>;
                         justify-content: space-between;
                         justify-self: stretch;
                     }
@@ -89,6 +87,9 @@
                         <br/>
                         <xsl:text>Witness Catalogue: </xsl:text>
                         <xsl:value-of select="$witnessCat"/>
+                        <br/>
+                        <xsl:text>UI language: </xsl:text>
+                        <xsl:value-of select="$ui-language"/>
                     </section>
                 </xsl:if>
                 <section class="content">
@@ -211,23 +212,23 @@
 
     <xsl:template match="unclear" mode="apparatus">
         <xsl:apply-templates select="."/>]
-        <xsl:value-of select="scdh:i18n('unclear', '&lre;unclear&pdf;')"/>
+        <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'unclear', '&lre;unclear&pdf;')"/>
         <xsl:if test="@reason">
-            <xsl:value-of select="scdh:i18n(', ', ', ')"/>
-            <xsl:value-of select="scdh:i18n(@reason, concat('&lre;', @reason, '&pdf;'))"/>
+            <xsl:value-of select="scdh:translate(scdh:ui-language(.), ', ', ', ')"/>
+            <xsl:value-of select="scdh:translate(scdh:ui-language(.), @reason, concat('&lre;', @reason, '&pdf;'))"/>
         </xsl:if>
     </xsl:template>
     
     <xsl:template match="gap" mode="apparatus">
         <xsl:text>[...] </xsl:text>
         <xsl:if test="@reason">
-            <xsl:value-of select="scdh:i18n(@reason, concat('&lre;', @reason, '&pdf;'))"/>
+            <xsl:value-of select="scdh:translate(scdh:ui-language(.), @reason, concat('&lre;', @reason, '&pdf;'))"/>
         </xsl:if>
         <xsl:if test="@quantity and @unit">
-            <xsl:value-of select="scdh:i18n(', ', ', ')"/>
-            <xsl:value-of select="scdh:i18n(@quantity, concat('&lre;', @quantity, '&pdf;'))"/>
+            <xsl:value-of select="scdh:translate(scdh:ui-language(.), ', ', ', ')"/>
+            <xsl:value-of select="scdh:translate(scdh:ui-language(.), @quantity, concat('&lre;', @quantity, '&pdf;'))"/>
             <xsl:text>&#160;</xsl:text>
-            <xsl:value-of select="scdh:i18n(@unit, concat('&lre;', @unit, '&pdf;'))"/>
+            <xsl:value-of select="scdh:translate(scdh:ui-language(.), @unit, concat('&lre;', @unit, '&pdf;'))"/>
         </xsl:if>
     </xsl:template>
     
@@ -236,7 +237,7 @@
         <xsl:text>] </xsl:text>
         <xsl:value-of select="sic"/>
         <span style="padding-left: 3px">:</span>
-        <span style="color: gray"><xsl:value-of select="scdh:i18n('reading', '&lre;reading&pdf;')"/></span>
+        <span style="color: gray"><xsl:value-of select="scdh:translate(scdh:ui-language(.), 'reading', '&lre;reading&pdf;')"/></span>
     </xsl:template>
     
     <xsl:template match="l/note">
