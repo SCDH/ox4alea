@@ -220,7 +220,7 @@
     </xsl:template>
     
     <xsl:template match="gap" mode="apparatus">
-        <xsl:text>[...] </xsl:text>
+        <!--xsl:text>[...] </xsl:text-->
         <xsl:if test="@reason">
             <xsl:value-of select="scdh:translate(scdh:ui-language(.), @reason, concat('&lre;', @reason, '&pdf;'))"/>
         </xsl:if>
