@@ -2,7 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    exclude-result-prefixes="xs"
+    xmlns="http://www.w3.org/1999/xhtml"
+    exclude-result-prefixes="xs scdh"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="2.0">
     
@@ -67,5 +68,30 @@
             (if (exists($t)) then $t else $default))
             else $default"/>
     </xsl:function>
+
+    <xsl:template name="direction-style">
+        <style>
+            body {
+            direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
+            font-family:"Arabic Typesetting";
+            }
+            .variants {
+            direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
+            }
+            .comments {
+            direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
+            }
+            td {
+            text-align: <xsl:value-of select="scdh:language-align(TEI/text)"/>;
+            justify-content: space-between;
+            justify-self: stretch;
+            }
+            @font-face {
+            font-family:"Arabic Typesetting";
+            /*The location of the loaded TTF font must be relative to the CSS*/
+            src:url("arabt100.ttf");
+            }
+        </style>
+    </xsl:template>
 
 </xsl:stylesheet>
