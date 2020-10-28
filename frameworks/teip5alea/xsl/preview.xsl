@@ -99,8 +99,12 @@
                 <section class="variants">
                     <table>
                         <xsl:apply-templates
-                            select="//l[descendant::app or descendant::gap or descendant::unclear or descendant::choice]"
-                            mode="apparatus"/>
+                            select="//l[descendant::app or
+                                        descendant::gap or
+                                        descendant::unclear or
+                                        descendant::choice or
+                                        ancestor::app]"
+                            mode="apparatus-number"/>
                     </table>
                 </section>
                 <hr/>
@@ -186,11 +190,11 @@
                                            $el/ancestor::*/preceding::*//head[empty(descendant::l)]) + 1)"/>
     </xsl:function>
 
-    <xsl:template match="l" mode="apparatus">
+    <xsl:template match="(l|app//l)" mode="apparatus-number">
         <tr>
             <td><xsl:value-of select="scdh:line-number(.)"/></td>
             <td>
-                <xsl:for-each select="app|gap|unclear|choice|app/lem/(gap|unclear|choice)">
+                <xsl:for-each select="app|gap|unclear|choice|app/lem/(gap|unclear|choice)|ancestor::app">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span style="white-space:nowrap">&#8201;</span><xsl:text>|&#8195;</xsl:text>
@@ -208,6 +212,20 @@
             <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
             <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
         </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="l[ancestor::app]" mode="apparatus">
+        <xsl:apply-templates select="ancestor::app[1]/lem"/>]
+        <xsl:for-each select="ancestor::app[1]/rdg">
+            <xsl:apply-templates select="." mode="apparatus"/>
+            <span style="padding-left: 3px">:</span>
+            <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
+            <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="(lem[. eq '']|rdg[. eq ''])" mode="apparatus">
+        <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'missing', '&lre;missing&pdf;')"/>
     </xsl:template>
 
     <xsl:template match="unclear" mode="apparatus">
@@ -239,6 +257,7 @@
         <span style="padding-left: 3px">:</span>
         <span style="color: gray"><xsl:value-of select="scdh:translate(scdh:ui-language(.), 'reading', '&lre;reading&pdf;')"/></span>
     </xsl:template>
+
     
     <xsl:template match="l/note">
         <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
@@ -247,7 +266,11 @@
     <xsl:template match="app">
         <xsl:apply-templates select="lem"/>
     </xsl:template>
-    
+
+    <xsl:template match="(lem[not(/*|/text())]|rdg[not(/*|/text())])">
+        <xsl:text>[!!!]</xsl:text>
+    </xsl:template>
+
     <xsl:template match="gap">
         <xsl:text>[...]</xsl:text>
     </xsl:template>
