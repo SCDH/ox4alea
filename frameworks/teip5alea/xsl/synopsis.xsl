@@ -96,8 +96,8 @@
                     <xsl:with-param name="class" select="'lemma'" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:when>
-            <xsl:when test="exists(child::*[@wit eq $wit])">
-                <xsl:apply-templates select="child::*[@wit eq $wit]" mode="synopsis">
+            <xsl:when test="some $w in tokenize(string-join(child::*/@wit, ' '), '\s+') satisfies $w eq $wit">
+                <xsl:apply-templates select="child::*[some $w in tokenize(@wit, '\s+') satisfies $w eq $wit]" mode="synopsis">
                     <xsl:with-param name="class" select="'variant'" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:when>
