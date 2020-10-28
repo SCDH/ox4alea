@@ -87,6 +87,31 @@
         </html>
     </xsl:template>
 
+    <xsl:template match="l[ancestor::app]" mode="synopsis">
+        <xsl:param name="wit" tunnel="yes"/>
+        <xsl:param name="class" tunnel="yes"/>
+        <xsl:choose>
+            <xsl:when test="$wit eq 'lemma'">
+                <xsl:apply-templates select="ancestor::app[1]/lem/l/node()" mode="synopsis">
+                    <xsl:with-param name="class" select="'lemma'" tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:when
+                test="some $w in tokenize(string-join(ancestor::app[1]/*/@wit, ' '), '\s+') satisfies $w eq $wit">
+                <xsl:apply-templates
+                    select="ancestor::app[1]/*[some $w in tokenize(@wit, '\s+') satisfies $w eq $wit]/l/node()"
+                    mode="synopsis">
+                    <xsl:with-param name="class" select="'variant'" tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="ancestor::app[1]/lem/l/node()" mode="synopsis">
+                    <xsl:with-param name="class" select="'lemma'" tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:template match="app" mode="synopsis">
         <xsl:param name="wit" tunnel="yes"/>
         <xsl:param name="class" tunnel="yes"/>
