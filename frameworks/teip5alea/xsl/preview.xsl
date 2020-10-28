@@ -210,7 +210,17 @@
     </xsl:template>
 
     <xsl:template match="(lem[. eq '']|rdg[. eq ''])" mode="apparatus">
-        <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'missing', '&lre;missing&pdf;')"/>
+        <xsl:choose>
+            <xsl:when test="parent::app/lem/l|parent::app/rdg/l">
+                <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'verse missing', '&lre;verse missing&pdf;')"/>
+            </xsl:when>
+            <xsl:when test="parent::app/lem/p|parent::app/rdg/p">
+                <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'paragraph missing', '&lre;paragraph missing&pdf;')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'missing', '&lre;missing&pdf;')"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="unclear" mode="apparatus">
