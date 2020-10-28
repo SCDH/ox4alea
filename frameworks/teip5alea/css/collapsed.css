@@ -34,6 +34,11 @@ l {
     display: block ;
 }
 
+app > lem > l, app > rdg > l {
+    display: inline-block;
+    -oxy-display-tags: none;
+}
+
 l > seg {
     margin-right: 2em
 }
