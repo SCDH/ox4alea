@@ -16,6 +16,7 @@
 
     <xsl:include href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
+    <xsl:include href="libcommon.xsl"/>
 
     <!-- ${pdu} oxygen editor variable: project root directory URI -->
     <xsl:param name="pdu" select="string('.')" as="xs:string"/>
@@ -181,15 +182,6 @@
         </xsl:choose>
     </xsl:template>
     
-    <!-- returns the line number of a given element as string -->
-    <xsl:function name="scdh:line-number" as="xs:string">
-        <xsl:param name="el" as="element()"/>
-        <xsl:value-of select="string(count($el/preceding-sibling::l union
-                                           $el/ancestor::*/preceding::*//l union
-                                           $el/ancestor::*/preceding::head[empty(descendant::l)] union
-                                           $el/ancestor::*/preceding::*//head[empty(descendant::l)]) + 1)"/>
-    </xsl:function>
-
     <xsl:template match="(l|app//l)" mode="apparatus-number">
         <tr>
             <td><xsl:value-of select="scdh:line-number(.)"/></td>
@@ -205,18 +197,11 @@
     </xsl:template>
 
     <xsl:template match="app" mode="apparatus">
-        <xsl:apply-templates select="lem"/>]
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates select="lem"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>]
         <xsl:for-each select="rdg">
-            <xsl:apply-templates select="." mode="apparatus"/>
-            <span style="padding-left: 3px">:</span>
-            <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
-            <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
-        </xsl:for-each>
-    </xsl:template>
-
-    <xsl:template match="l[ancestor::app]" mode="apparatus">
-        <xsl:apply-templates select="ancestor::app[1]/lem"/>]
-        <xsl:for-each select="ancestor::app[1]/rdg">
             <xsl:apply-templates select="." mode="apparatus"/>
             <span style="padding-left: 3px">:</span>
             <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>

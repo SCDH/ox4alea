@@ -17,7 +17,7 @@
 
     <xsl:include href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
-    <xsl:include href="libnumbering.xsl"/>
+    <xsl:include href="libcommon.xsl"/>
     
     <xsl:template match="/">
         <html>
