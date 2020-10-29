@@ -143,7 +143,17 @@
     </xsl:template>
     
     <xsl:template match="choice" mode="synopsis">
-        <xsl:apply-templates select="corr" mode="synopsis"/>
+        <xsl:param name="wit" tunnel="yes"/>
+        <xsl:choose>
+            <xsl:when test="$wit eq 'lemma'">
+                    <xsl:apply-templates select="corr" mode="synopsis"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="sic" mode="synopsis">
+                    <xsl:with-param name="class" select="'variant'" tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="gap" mode="synopsis">
