@@ -10,7 +10,9 @@
     <xsl:function name="scdh:line-number" as="xs:string">
         <xsl:param name="el" as="element()"/>
         <!-- TODO: verses in parallel readings have to be counted as one -->
-        <xsl:value-of select="string(count($el/preceding::l) + 1)"/>
+        <xsl:value-of select="string(count($el/preceding::l union
+                                           $el/preceding::head[empty(descendant::l)])
+                                     + 1)"/>
     </xsl:function>
 
     <!-- shorten a string of N words to w1 … wN, but returned it as is when N<=3
