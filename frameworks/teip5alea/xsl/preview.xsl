@@ -268,9 +268,11 @@
              If it is the start of the line to present a special character and
              else to present a one-word prefix! If and only if it is not the start of the line. -->
         <xsl:choose>
-            <xsl:when test="(normalize-space(string-join(parent::app/preceding-sibling::node(), ' ')) eq '') or
-                (parent::app/preceding-sibling::l) or
-                (parent::app/following-sibling::l)">
+            <xsl:when test="(parent::app/preceding-sibling::l) or (parent::app/following-sibling::l)">
+                <!--xsl:value-of select="scdh:translate(scdh:language(.), 'extra verse', '&lre;extra verse&pdf;')"/-->
+                <xsl:text>^ </xsl:text>
+            </xsl:when>
+            <xsl:when test="(normalize-space(string-join(parent::app/preceding-sibling::node(), ' ')) eq '')">
                 <xsl:text>^ </xsl:text>
             </xsl:when>
             <xsl:otherwise>
