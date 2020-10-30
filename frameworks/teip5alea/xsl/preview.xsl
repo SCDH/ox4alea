@@ -271,6 +271,10 @@
         <span style="color: gray"><xsl:value-of select="scdh:translate(scdh:ui-language(.), 'reading', '&lre;reading&pdf;')"/></span>
     </xsl:template>
 
+    <xsl:template match="caesura[ancestor::rdg]" mode="apparatus">
+        <span>||</span>
+    </xsl:template>
+
 
     <!-- MODE: apparatus-lemma
         These templates are generate the text repeated as the lemma in the apparatus.-->
