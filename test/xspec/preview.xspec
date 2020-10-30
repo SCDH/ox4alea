@@ -114,6 +114,40 @@
     </x:scenario>
 
     <x:scenario
+	label="Line with ceasura nested in app element, but not the whole verse in app ...">
+	<x:context>
+	    <tei:body>
+		<tei:lg>
+		    <tei:head>Titel</tei:head>
+		    <tei:lg>
+			<tei:l>Aa Bb <tei:app>
+				<tei:lem wit="a">Cc <tei:caesura/>Dd Ee</tei:lem>
+				<tei:rdg wit="b">Ccc</tei:rdg>
+			    </tei:app> Ff</tei:l>
+		    </tei:lg>
+		</tei:lg>
+	    </tei:body>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 2+1+3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Titel2Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+	    <ht:table>
+		<ht:tr>...</ht:tr>
+		<ht:tr>...</ht:tr>
+		<ht:tr>
+		    <ht:td style="...">2</ht:td>
+		    <ht:td style="...">Aa Bb Cc </ht:td>
+		    <ht:td>Dd Ee Ff</ht:td>
+		</ht:tr>
+	    </ht:table>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario
 	label="Line with ceasura nested in app element, but no caesura in lem ...">
 	<x:context>
 	    <tei:body>
