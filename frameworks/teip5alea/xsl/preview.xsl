@@ -157,12 +157,20 @@
                     <td><xsl:apply-templates select="child::caesura/following-sibling::node()"/></td>
                 </tr>
             </xsl:when>
-            <xsl:when test="descendant::lem/descendant-or-self::caesura">
+            <xsl:when test="descendant::lem//caesura">
 		<!-- Fall: caesura teilt lem wie in #1 -->
                 <tr xmlns="http://www.w3.org/1999/xhtml">
                     <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-                    <td style="padding-left: 40px"><xsl:apply-templates select="descendant::lem/descendant-or-self::caesura/preceding-sibling::node()"/></td>
-                    <td><xsl:apply-templates select="descendant::lem/descendant-or-self::caesura/following-sibling::node()"/></td>
+                    <td style="padding-left: 40px">
+                        <xsl:apply-templates
+                            select="descendant::lem//caesura/preceding::node() intersect descendant::node()
+                                    except scdh:non-lemma-nodes(.)"/>
+                    </td>
+                    <td>
+                        <xsl:apply-templates
+                            select="(descendant::lem//caesura/following::node() intersect descendant::node())
+                                    except scdh:non-lemma-nodes(.)"/>
+                    </td>
                 </tr>
             </xsl:when>
             <xsl:when test="descendant::caesura and not(descendant::lem/descendant-or-self::caesura)">
@@ -182,6 +190,11 @@
         </xsl:choose>
     </xsl:template>
     
+    <xsl:function name="scdh:non-lemma-nodes" as="node()*">
+        <xsl:param name="element" as="node()"/>
+        <xsl:sequence select="$element/descendant-or-self::rdg/descendant-or-self::node()"/>
+    </xsl:function>
+
     <xsl:template match="(l|app//l)" mode="apparatus-number">
         <tr>
             <td><xsl:value-of select="scdh:line-number(.)"/></td>
