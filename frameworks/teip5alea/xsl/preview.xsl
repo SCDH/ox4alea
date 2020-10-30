@@ -280,7 +280,7 @@
                     <!-- we use the apparatus-lemma mode because we do not want the line numbers -->
                     <xsl:apply-templates select="parent::app/preceding-sibling::node()" mode="apparatus-lemma"/>
                 </xsl:variable>
-                <xsl:value-of select="tokenize(normalize-space(string($predecessors)), '\s+')[1]"/>
+                <xsl:value-of select="tokenize(normalize-space(string($predecessors)), '\s+')[last()]"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
