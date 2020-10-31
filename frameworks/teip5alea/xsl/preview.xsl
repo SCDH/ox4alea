@@ -199,7 +199,10 @@
         <tr>
             <td><xsl:value-of select="scdh:line-number(.)"/></td>
             <td>
-                <xsl:for-each select="app|gap|unclear|choice|app/lem/(gap|unclear|choice)|ancestor::app">
+                <!-- we can't add simple ...|ancestor::app to the selector, because then we
+                    lose focus on the line when there are several in an <app>. See #12.
+                    We need app//l instead an some etra templates for handling app//l. -->
+                <xsl:for-each select="app|gap|unclear|choice|app/lem/(gap|unclear|choice)|self::l[ancestor::app]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span style="white-space:nowrap">&#8201;</span><xsl:text>|&#8195;</xsl:text>
@@ -225,6 +228,27 @@
             <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
             <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
         </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="app/lem/l" mode="apparatus">
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates select="parent::lem" mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>]
+        <xsl:for-each select="parent::lem/parent::app/rdg">
+            <xsl:apply-templates select="." mode="apparatus"/>
+            <span style="padding-left: 3px">:</span>
+            <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
+            <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="l[not(ancestor::app/lem/l)]" mode="apparatus">
+        <span style="color:gray;"><xsl:value-of select="scdh:translate(scdh:ui-language(.), 'extra verse', '&lre;extra verse&pdf;')"/></span>
+        <xsl:text> </xsl:text>
+        <xsl:apply-templates mode="apparatus"/>
+        <span style="padding-left: 3px">:</span>
+        <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, parent::rdg/@wit, ',')"/></span>
     </xsl:template>
 
     <xsl:template match="rdg[. eq '']" mode="apparatus">
