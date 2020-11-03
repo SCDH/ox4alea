@@ -25,6 +25,15 @@
         <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>
     </a:operation>
+    <a:operation id="InsertFragmentOperation">
+      <!-- for inside app/(lem|rdg) that wraps around a verse -->
+      <a:xpathCondition>parent::*:app[not(ancestor::*:l)]</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="fragment"><tei:l/></a:argument>
+        <a:argument name="insertLocation">.</a:argument>
+        <a:argument name="insertPosition">Inside as last child</a:argument>
+      </a:arguments>
+    </a:operation>
   </a:operations>
   <a:accelerator>ctrl shift L</a:accelerator>
   <a:accessKey>v</a:accessKey>

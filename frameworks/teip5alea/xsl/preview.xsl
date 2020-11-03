@@ -16,6 +16,7 @@
 
     <xsl:include href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
+    <xsl:include href="libcommon.xsl"/>
 
     <!-- ${pdu} oxygen editor variable: project root directory URI -->
     <xsl:param name="pdu" select="string('.')" as="xs:string"/>
@@ -99,8 +100,12 @@
                 <section class="variants">
                     <table>
                         <xsl:apply-templates
-                            select="//l[descendant::app or descendant::gap or descendant::unclear or descendant::choice]"
-                            mode="apparatus"/>
+                            select="//l[descendant::app or
+                                        descendant::gap or
+                                        descendant::unclear or
+                                        descendant::choice or
+                                        ancestor::app]"
+                            mode="apparatus-number"/>
                     </table>
                 </section>
                 <hr/>
@@ -137,10 +142,10 @@
     
     <xsl:template match="lg/lg">
         <tr xmlns="http://www.w3.org/1999/xhtml"><td colspan="3"></td></tr>
-        <xsl:apply-templates select="l"/>
+        <xsl:apply-templates select="l|app/lem/l"/>
     </xsl:template>
     
-    <xsl:template match="lg/lg/l">
+    <xsl:template match="lg/lg//l">
         <xsl:choose>
             <!-- todo: Annahme hier: es gibt nur ein caesura. Müsste vorher mit Schematron abgeprüft werden. -->
 	    <!-- Fallunterscheidung für Vorkommen und Positionen von caesura. -->
@@ -152,12 +157,20 @@
                     <td><xsl:apply-templates select="child::caesura/following-sibling::node()"/></td>
                 </tr>
             </xsl:when>
-            <xsl:when test="descendant::lem/descendant-or-self::caesura">
+            <xsl:when test="descendant::lem//caesura">
 		<!-- Fall: caesura teilt lem wie in #1 -->
                 <tr xmlns="http://www.w3.org/1999/xhtml">
                     <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-                    <td style="padding-left: 40px"><xsl:apply-templates select="descendant::lem/descendant-or-self::caesura/preceding-sibling::node()"/></td>
-                    <td><xsl:apply-templates select="descendant::lem/descendant-or-self::caesura/following-sibling::node()"/></td>
+                    <td style="padding-left: 40px">
+                        <xsl:apply-templates
+                            select="descendant::lem//caesura/preceding::node() intersect descendant::node()
+                                    except scdh:non-lemma-nodes(.)"/>
+                    </td>
+                    <td>
+                        <xsl:apply-templates
+                            select="(descendant::lem//caesura/following::node() intersect descendant::node())
+                                    except scdh:non-lemma-nodes(.)"/>
+                    </td>
                 </tr>
             </xsl:when>
             <xsl:when test="descendant::caesura and not(descendant::lem/descendant-or-self::caesura)">
@@ -177,20 +190,19 @@
         </xsl:choose>
     </xsl:template>
     
-    <!-- returns the line number of a given element as string -->
-    <xsl:function name="scdh:line-number" as="xs:string">
-        <xsl:param name="el" as="element()"/>
-        <xsl:value-of select="string(count($el/preceding-sibling::l union
-                                           $el/ancestor::*/preceding::*//l union
-                                           $el/ancestor::*/preceding::head[empty(descendant::l)] union
-                                           $el/ancestor::*/preceding::*//head[empty(descendant::l)]) + 1)"/>
+    <xsl:function name="scdh:non-lemma-nodes" as="node()*">
+        <xsl:param name="element" as="node()"/>
+        <xsl:sequence select="$element/descendant-or-self::rdg/descendant-or-self::node()"/>
     </xsl:function>
 
-    <xsl:template match="l" mode="apparatus">
+    <xsl:template match="(l|app//l)" mode="apparatus-number">
         <tr>
             <td><xsl:value-of select="scdh:line-number(.)"/></td>
             <td>
-                <xsl:for-each select="app|gap|unclear|choice|app/lem/(gap|unclear|choice)">
+                <!-- we can't add simple ...|ancestor::app to the selector, because then we
+                    lose focus on the line when there are several in an <app>. See #12.
+                    We need app//l instead an some etra templates for handling app//l. -->
+                <xsl:for-each select="app|gap|unclear|choice|app/lem/(gap|unclear|choice)|self::l[ancestor::app]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span style="white-space:nowrap">&#8201;</span><xsl:text>|&#8195;</xsl:text>
@@ -201,13 +213,56 @@
     </xsl:template>
 
     <xsl:template match="app" mode="apparatus">
-        <xsl:apply-templates select="lem"/>]
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates select="lem" mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>]
         <xsl:for-each select="rdg">
+            <!-- repeat prefix if necessary -->
+            <xsl:if test="parent::app/lem[. eq '']">
+                <xsl:apply-templates select="parent::app/lem" mode="apparatus-lemma"/>
+                <xsl:text>&#x20;</xsl:text>
+            </xsl:if>
             <xsl:apply-templates select="." mode="apparatus"/>
             <span style="padding-left: 3px">:</span>
             <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
             <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
         </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="app/lem/l" mode="apparatus">
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates select="parent::lem" mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>]
+        <xsl:for-each select="parent::lem/parent::app/rdg">
+            <xsl:apply-templates select="." mode="apparatus"/>
+            <span style="padding-left: 3px">:</span>
+            <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
+            <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="l[not(ancestor::app/lem/l)]" mode="apparatus">
+        <span style="color:gray;"><xsl:value-of select="scdh:translate(scdh:ui-language(.), 'extra verse', '&lre;extra verse&pdf;')"/></span>
+        <xsl:text> </xsl:text>
+        <xsl:apply-templates mode="apparatus"/>
+        <span style="padding-left: 3px">:</span>
+        <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, parent::rdg/@wit, ',')"/></span>
+    </xsl:template>
+
+    <xsl:template match="rdg[. eq '']" mode="apparatus">
+        <xsl:choose>
+            <xsl:when test="parent::app/lem/l|parent::app/rdg/l">
+                <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'verse missing', '&lre;verse missing&pdf;')"/>
+            </xsl:when>
+            <xsl:when test="parent::app/lem/p|parent::app/rdg/p">
+                <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'paragraph missing', '&lre;paragraph missing&pdf;')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'missing', '&lre;missing&pdf;')"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="unclear" mode="apparatus">
@@ -239,6 +294,54 @@
         <span style="padding-left: 3px">:</span>
         <span style="color: gray"><xsl:value-of select="scdh:translate(scdh:ui-language(.), 'reading', '&lre;reading&pdf;')"/></span>
     </xsl:template>
+
+    <xsl:template match="caesura[ancestor::rdg]" mode="apparatus">
+        <span>||</span>
+    </xsl:template>
+
+
+    <!-- MODE: apparatus-lemma
+        These templates are generate the text repeated as the lemma in the apparatus.-->
+
+    <xsl:template match="lem[. eq '']" mode="apparatus-lemma">
+        <!-- We have to present something, to mark the place where the variant adds something.
+             So we decide:
+             If it is the start of the line to present a special character and
+             else to present a one-word prefix! If and only if it is not the start of the line. -->
+        <xsl:choose>
+            <xsl:when test="(parent::app/preceding-sibling::l) or (parent::app/following-sibling::l)">
+                <!--xsl:value-of select="scdh:translate(scdh:language(.), 'extra verse', '&lre;extra verse&pdf;')"/-->
+                <xsl:text>^ </xsl:text>
+            </xsl:when>
+            <xsl:when test="(normalize-space(string-join(parent::app/preceding-sibling::node(), ' ')) eq '')">
+                <xsl:text>^ </xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="predecessors">
+                    <!-- we use the apparatus-lemma mode because we do not want the line numbers -->
+                    <xsl:apply-templates select="parent::app/preceding-sibling::node()" mode="apparatus-lemma"/>
+                </xsl:variable>
+                <xsl:value-of select="tokenize(normalize-space(string($predecessors)), '\s+')[last()]"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="lem" mode="apparatus-lemma">
+        <xsl:apply-templates mode="apparatus-lemma"/>
+    </xsl:template>
+
+    <xsl:template match="l" mode="apparatus-lemma">
+        <xsl:apply-templates mode="apparatus-lemma"/>
+    </xsl:template>
+
+    <xsl:template match="*" mode="apparatus-lemma">
+        <!-- We can pass it over to the default templates, now. -->
+        <xsl:apply-templates/>
+    </xsl:template>
+
+
+    <!-- MODE: default
+        These templates are used to generate the main text presented. -->
     
     <xsl:template match="l/note">
         <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
@@ -247,7 +350,11 @@
     <xsl:template match="app">
         <xsl:apply-templates select="lem"/>
     </xsl:template>
-    
+
+    <xsl:template match="(lem[not(/*|/text())]|rdg[not(/*|/text())])">
+        <xsl:text>[!!!]</xsl:text>
+    </xsl:template>
+
     <xsl:template match="gap">
         <xsl:text>[...]</xsl:text>
     </xsl:template>
