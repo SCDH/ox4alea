@@ -72,6 +72,9 @@
                     sup {
                         font-size: 6pt
                     }
+                    .static-text {
+                        color: gray;
+                    }
                     @font-face {
                     font-family:"Arabic Typesetting";
                     /*The location of the loaded TTF font must be relative to the CSS*/
@@ -244,7 +247,7 @@
     </xsl:template>
 
     <xsl:template match="l[not(ancestor::app/lem/l)]" mode="apparatus">
-        <span style="color:gray;"><xsl:value-of select="scdh:translate(scdh:ui-language(.), 'extra verse', '&lre;extra verse&pdf;')"/></span>
+        <span class="static-text" data-i18n-key="extra-verse">&lre;extra verse&pdf;</span>
         <xsl:text> </xsl:text>
         <xsl:apply-templates mode="apparatus"/>
         <span style="padding-left: 3px">:</span>
@@ -254,36 +257,36 @@
     <xsl:template match="rdg[. eq '']" mode="apparatus">
         <xsl:choose>
             <xsl:when test="parent::app/lem/l|parent::app/rdg/l">
-                <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'verse missing', '&lre;verse missing&pdf;')"/>
+                <span class="static-text" data-i18n-key="verse-missing">&lre;verse missing&pdf;</span>
             </xsl:when>
             <xsl:when test="parent::app/lem/p|parent::app/rdg/p">
-                <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'paragraph missing', '&lre;paragraph missing&pdf;')"/>
+                <span class="static-text" data-i18n-key="paragraph missing">&lre;paragraph missing&pdf;</span>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'missing', '&lre;missing&pdf;')"/>
+                <span class="static-text" data-i18n-key="missing">&lre;missing&pdf;</span>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
     <xsl:template match="unclear" mode="apparatus">
         <xsl:apply-templates select="."/>]
-        <xsl:value-of select="scdh:translate(scdh:ui-language(.), 'unclear', '&lre;unclear&pdf;')"/>
+        <span class="static-text" data-i18n-key="unclear">&lre;unclear&pdf;</span>
         <xsl:if test="@reason">
-            <xsl:value-of select="scdh:translate(scdh:ui-language(.), ', ', ', ')"/>
-            <xsl:value-of select="scdh:translate(scdh:ui-language(.), @reason, concat('&lre;', @reason, '&pdf;'))"/>
+            <span class="static-text" data-i18n-key="comma">, </span>
+            <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
         </xsl:if>
     </xsl:template>
     
     <xsl:template match="gap" mode="apparatus">
         <!--xsl:text>[...] </xsl:text-->
         <xsl:if test="@reason">
-            <xsl:value-of select="scdh:translate(scdh:ui-language(.), @reason, concat('&lre;', @reason, '&pdf;'))"/>
+            <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
         </xsl:if>
         <xsl:if test="@quantity and @unit">
-            <xsl:value-of select="scdh:translate(scdh:ui-language(.), ', ', ', ')"/>
-            <xsl:value-of select="scdh:translate(scdh:ui-language(.), @quantity, concat('&lre;', @quantity, '&pdf;'))"/>
+            <span class="static-text" data-i18n-key="comma">, </span>
+            <span class="static-text" data-i18n-key="{@quantity}">&lre;<xsl:value-of select="@quantity"/>&pdf;</span>
             <xsl:text>&#160;</xsl:text>
-            <xsl:value-of select="scdh:translate(scdh:ui-language(.), @unit, concat('&lre;', @unit, '&pdf;'))"/>
+            <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
         </xsl:if>
     </xsl:template>
     
@@ -292,7 +295,7 @@
         <xsl:text>] </xsl:text>
         <xsl:value-of select="sic"/>
         <span style="padding-left: 3px">:</span>
-        <span style="color: gray"><xsl:value-of select="scdh:translate(scdh:ui-language(.), 'reading', '&lre;reading&pdf;')"/></span>
+        <span class="static-text" data-i18n-key="reading">&lre;reading&pdf;</span>
     </xsl:template>
 
     <xsl:template match="caesura[ancestor::rdg]" mode="apparatus">
@@ -309,8 +312,8 @@
              If it is the start of the line to present a special character and
              else to present a one-word prefix! If and only if it is not the start of the line. -->
         <xsl:choose>
+            <!-- This branch should not be used anymore -->
             <xsl:when test="(parent::app/preceding-sibling::l) or (parent::app/following-sibling::l)">
-                <!--xsl:value-of select="scdh:translate(scdh:language(.), 'extra verse', '&lre;extra verse&pdf;')"/-->
                 <xsl:text>^ </xsl:text>
             </xsl:when>
             <xsl:when test="(normalize-space(string-join(parent::app/preceding-sibling::node(), ' ')) eq '')">
