@@ -94,4 +94,58 @@
         </style>
     </xsl:template>
 
+    <xsl:template name="i18n-language-chooser-html">
+        <section class="i18n-language-chooser">
+            <button onclick="i18next.changeLanguage('en')">
+                english
+            </button>
+            <button onclick="i18next.changeLanguage('de')">
+                german
+            </button>
+            <button onclick="i18next.changeLanguage('ar')">
+                arabic
+            </button>
+        </section>
+    </xsl:template>
+
+    <xsl:template name="i18n-language-resources">
+        <xsl:param name="locales-directory" as="xs:string" select="locales"/>
+        <xsl:text>
+            import translationEN from '</xsl:text><xsl:value-of select="$locales-directory"/>/en/translation.json<xsl:text>';
+            import translationDE from '</xsl:text><xsl:value-of select="$locales-directory"/>/de/translation.json<xsl:text>';
+            import translationAR from '</xsl:text><xsl:value-of select="$locales-directory"/>/ar/translation.json<xsl:text>';
+
+            // the translations JSON record
+            const resources = {
+                en: {
+                    translation: translationEN
+                },
+                de: {
+                    translation: translationDE
+                },
+                ar: {
+                    translation: translationAR
+                }
+            };
+        </xsl:text>
+    </xsl:template>
+
+    <xsl:template name="i18n-language-resources-inline">
+        <xsl:param name="locales-directory" as="xs:string" select="locales"/>
+        <xsl:text>
+            // the translations JSON record
+            resources = {
+                en: {
+                    translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/en/translation.json'))"/><xsl:text>
+                },
+                de: {
+                translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/de/translation.json'))"/><xsl:text>
+                },
+                ar: {
+                translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/ar/translation.json'))"/><xsl:text>
+                }
+            };
+        </xsl:text>
+    </xsl:template>
+
 </xsl:stylesheet>

@@ -23,7 +23,11 @@
 
     <!-- Filename of witness catalogue. -->
     <xsl:param name="witnessCat" select="'WitnessCatalogue.xml'" as="xs:string"/>
-    
+
+    <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
+    <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.js'" as="xs:string"/>
+    <xsl:param name="locales-directory" select="'./locales'" as="xs:string"/>
+
     <xsl:param name="debug" select="false()" as="xs:boolean"/>
 
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
@@ -46,6 +50,13 @@
         <html>
             <head>
                 <title>ALEA Vorschau</title>
+                <script src="{$i18next}"></script>
+                <script>
+                    <xsl:call-template name="i18n-language-resources-inline">
+                        <xsl:with-param name="locales-directory" select="$locales-directory"/>
+                    </xsl:call-template>
+                </script>
+                <script src="{$i18n}"></script>
                 <style>
                     .title {
                         color:red;
@@ -129,6 +140,7 @@
                         </xsl:if>
                     </xsl:for-each>
                 </section>
+                <xsl:call-template name="i18n-language-chooser-html"/>
             </body>
         </html>
     </xsl:template>
