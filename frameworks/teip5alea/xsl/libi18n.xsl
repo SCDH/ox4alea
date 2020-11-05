@@ -97,13 +97,13 @@
     <xsl:template name="i18n-language-chooser-html">
         <section class="i18n-language-chooser">
             <button onclick="i18next.changeLanguage('en')">
-                english
+                English
             </button>
             <button onclick="i18next.changeLanguage('de')">
-                german
+                German
             </button>
             <button onclick="i18next.changeLanguage('ar')">
-                arabic
+                Arabic
             </button>
         </section>
     </xsl:template>

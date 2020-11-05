@@ -25,7 +25,7 @@
     <xsl:param name="witnessCat" select="'WitnessCatalogue.xml'" as="xs:string"/>
 
     <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
-    <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.js'" as="xs:string"/>
+    <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
     <xsl:param name="locales-directory" select="'./locales'" as="xs:string"/>
 
     <xsl:param name="debug" select="false()" as="xs:boolean"/>
