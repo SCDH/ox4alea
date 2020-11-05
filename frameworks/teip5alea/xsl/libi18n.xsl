@@ -108,6 +108,10 @@
         </section>
     </xsl:template>
 
+    <xsl:template name="i18n-direction-indicator">
+        <span id="i18n-direction-indicator">initial</span>
+    </xsl:template>
+
     <xsl:template name="i18n-language-resources">
         <xsl:param name="locales-directory" as="xs:string" select="locales"/>
         <xsl:text>

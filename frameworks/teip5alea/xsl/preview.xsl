@@ -50,13 +50,6 @@
         <html>
             <head>
                 <title>ALEA Vorschau</title>
-                <script src="{$i18next}"></script>
-                <script>
-                    <xsl:call-template name="i18n-language-resources-inline">
-                        <xsl:with-param name="locales-directory" select="$locales-directory"/>
-                    </xsl:call-template>
-                </script>
-                <script src="{$i18n}"></script>
                 <style>
                     .title {
                         color:red;
@@ -140,7 +133,16 @@
                         </xsl:if>
                     </xsl:for-each>
                 </section>
+                <hr/>
                 <xsl:call-template name="i18n-language-chooser-html"/>
+                <!--xsl:call-template name="i18n-direction-indicator"/-->
+                <script src="{$i18next}"></script>
+                <script>
+                    <xsl:call-template name="i18n-language-resources-inline">
+                        <xsl:with-param name="locales-directory" select="$locales-directory"/>
+                    </xsl:call-template>
+                </script>
+                <script src="{$i18n}"></script>
             </body>
         </html>
     </xsl:template>
@@ -240,7 +242,11 @@
             </xsl:if>
             <xsl:apply-templates select="." mode="apparatus"/>
             <span style="padding-left: 3px">:</span>
-            <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
+            <xsl:call-template name="witness-siglum-html">
+                <xsl:with-param name="pdu" select="$pdu"/>
+                <xsl:with-param name="witnessCat" select="$witnessCat"/>
+                <xsl:with-param name="wit" select="@wit"/>
+            </xsl:call-template>
             <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
         </xsl:for-each>
     </xsl:template>
