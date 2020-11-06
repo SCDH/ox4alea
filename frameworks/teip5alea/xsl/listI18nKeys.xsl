@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This generates a JSON translation file.
     USAGE: saxon -xsl:listI18nKeys.xsl -it:main docs:SOME_XSL.xsl
+    
+    SOME_XSL.xsl may be several files separated by comma.
     -->
  <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
