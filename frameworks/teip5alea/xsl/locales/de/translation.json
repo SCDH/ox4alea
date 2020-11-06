@@ -1,6 +1,18 @@
 {
-    "illegible": "unlesbar",
-    "missing": "fehlt",
-    "missing-verse": "fehlender Vers",
-    "missing-paragraph": "fehlender Absatz"
+    "app-entry-sep": " | ",
+    "extra-verse": "‪zusätzlicher Vers‬",
+    "lem-rdg-sep": "] ",
+    "missing": "‪fehlt‬",
+    "paragraph-missing": "Absatz fehlt‬",
+    "rdg-sep": ":",
+    "rdg-siglum-sep": ": ",
+    "rdgs-sep": ":",
+    "reading": "‪handschriftliche Lesart‬",
+    "reason-quantity-sep": ", ",
+    "sic-reading-sep": ":",
+    "unclear": "‪unklar‬",
+    "verse-missing": "‪Vers fehlt‬",
+    "witness-sep": ", ",
+    "illegible": "‪‬unlesbar‬",
+    "words": "‪Worte‬"
 }

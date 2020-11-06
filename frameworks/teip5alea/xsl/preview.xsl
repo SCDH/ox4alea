@@ -3,6 +3,8 @@
     <!ENTITY lre "&#x202a;" >
     <!ENTITY rle "&#x202b;" >
     <!ENTITY pdf "&#x202c;" >
+    <!ENTITY nbsp "&#xa0;" >
+    <!ENTITY emsp "&#x2003;" >
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -222,7 +224,7 @@
                 <xsl:for-each select="app|gap|unclear|choice|app/lem/(gap|unclear|choice)|self::l[ancestor::app]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
-                        <span style="white-space:nowrap">&#8201;</span><xsl:text>|&#8195;</xsl:text>
+                        <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
                     </xsl:if>
                 </xsl:for-each>
             </td>
@@ -233,7 +235,8 @@
         <xsl:variable name="lemma-nodes">
             <xsl:apply-templates select="lem" mode="apparatus-lemma"/>
         </xsl:variable>
-        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>]
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
         <xsl:for-each select="rdg">
             <!-- repeat prefix if necessary -->
             <xsl:if test="parent::app/lem[. eq '']">
@@ -241,13 +244,13 @@
                 <xsl:text>&#x20;</xsl:text>
             </xsl:if>
             <xsl:apply-templates select="." mode="apparatus"/>
-            <span style="padding-left: 3px">:</span>
+            <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
                 <xsl:with-param name="pdu" select="$pdu"/>
                 <xsl:with-param name="witnessCat" select="$witnessCat"/>
                 <xsl:with-param name="wit" select="@wit"/>
             </xsl:call-template>
-            <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
+            <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdg-sep">:</span></xsl:if>
         </xsl:for-each>
     </xsl:template>
 
@@ -255,12 +258,17 @@
         <xsl:variable name="lemma-nodes">
             <xsl:apply-templates select="parent::lem" mode="apparatus-lemma"/>
         </xsl:variable>
-        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>]
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
         <xsl:for-each select="parent::lem/parent::app/rdg">
             <xsl:apply-templates select="." mode="apparatus"/>
-            <span style="padding-left: 3px">:</span>
-            <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, @wit, ',')"/></span>
-            <xsl:if test="position() ne last()"><span style="padding-left: 4px">؛</span></xsl:if>
+            <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
+            <xsl:call-template name="witness-siglum-html">
+                <xsl:with-param name="pdu" select="$pdu"/>
+                <xsl:with-param name="witnessCat" select="$witnessCat"/>
+                <xsl:with-param name="wit" select="@wit"/>
+            </xsl:call-template>
+            <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">:</span></xsl:if>
         </xsl:for-each>
     </xsl:template>
 
@@ -268,8 +276,12 @@
         <span class="static-text" data-i18n-key="extra-verse">&lre;extra verse&pdf;</span>
         <xsl:text> </xsl:text>
         <xsl:apply-templates mode="apparatus"/>
-        <span style="padding-left: 3px">:</span>
-        <span style="color: gray"><xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, parent::rdg/@wit, ',')"/></span>
+        <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
+        <xsl:call-template name="witness-siglum-html">
+            <xsl:with-param name="pdu" select="$pdu"/>
+            <xsl:with-param name="witnessCat" select="$witnessCat"/>
+            <xsl:with-param name="wit" select="parent::rdg/@wit"/>
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template match="rdg[. eq '']" mode="apparatus">
@@ -278,7 +290,7 @@
                 <span class="static-text" data-i18n-key="verse-missing">&lre;verse missing&pdf;</span>
             </xsl:when>
             <xsl:when test="parent::app/lem/p|parent::app/rdg/p">
-                <span class="static-text" data-i18n-key="paragraph missing">&lre;paragraph missing&pdf;</span>
+                <span class="static-text" data-i18n-key="paragraph-missing">&lre;paragraph missing&pdf;</span>
             </xsl:when>
             <xsl:otherwise>
                 <span class="static-text" data-i18n-key="missing">&lre;missing&pdf;</span>
@@ -287,12 +299,16 @@
     </xsl:template>
 
     <xsl:template match="unclear" mode="apparatus">
-        <xsl:apply-templates select="."/>]
-        <span class="static-text" data-i18n-key="unclear">&lre;unclear&pdf;</span>
-        <xsl:if test="@reason">
-            <span class="static-text" data-i18n-key="comma">, </span>
-            <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
-        </xsl:if>
+        <xsl:apply-templates select="."/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
+        <xsl:choose>
+            <xsl:when test="@reason">
+                <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
+            </xsl:when>
+            <xsl:otherwise>
+                <span class="static-text" data-i18n-key="unclear">&lre;unclear&pdf;</span>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="gap" mode="apparatus">
@@ -301,8 +317,8 @@
             <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
         </xsl:if>
         <xsl:if test="@quantity and @unit">
-            <span class="static-text" data-i18n-key="comma">, </span>
-            <span class="static-text" data-i18n-key="{@quantity}">&lre;<xsl:value-of select="@quantity"/>&pdf;</span>
+            <span class="apparatus-sep" data-i18n-key="reason-quantity-sep">, </span>
+            <span class="static-text"><xsl:value-of select="@quantity"/></span>
             <xsl:text>&#160;</xsl:text>
             <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
         </xsl:if>
@@ -310,9 +326,9 @@
     
     <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">
         <xsl:value-of select="corr"/>
-        <xsl:text>] </xsl:text>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <xsl:value-of select="sic"/>
-        <span style="padding-left: 3px">:</span>
+        <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="sic-reading-sep">:</span>
         <span class="static-text" data-i18n-key="reading">&lre;reading&pdf;</span>
     </xsl:template>
 
