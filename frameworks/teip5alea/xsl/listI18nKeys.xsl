@@ -23,7 +23,7 @@
             <xsl:text>    "</xsl:text>
             <xsl:value-of select="$key"/>
             <xsl:text>": "</xsl:text>
-            <xsl:value-of select="$parsed//*[@data-i18n-key eq $key][1]"/>
+            <xsl:value-of select="string-join(distinct-values($parsed//*[@data-i18n-key eq $key]), ' ')"/>
             <xsl:text>"</xsl:text>
             <xsl:if test="position() ne last()">
                 <xsl:text>,</xsl:text>
