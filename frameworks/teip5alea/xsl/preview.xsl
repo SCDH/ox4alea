@@ -78,7 +78,7 @@
                     sup {
                         font-size: 6pt
                     }
-                    .static-text {
+                    .static-text, .apparatus-sep, .siglum {
                         color: gray;
                     }
                     @font-face {

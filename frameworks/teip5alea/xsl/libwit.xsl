@@ -40,12 +40,14 @@
         <xsl:param name="pdu" as="xs:string"/>
         <xsl:param name="witnessCat" as="xs:string"/>
         <xsl:param name="wit" as="xs:string"/>
-        <xsl:for-each select="scdh:get-witness-siglum-seq($pdu, $witnessCat, $wit)">
-            <xsl:value-of select="."/>
-            <xsl:if test="position() ne last()">
-                <span data-i18n-key="witness-sep">, </span>
-            </xsl:if>
-        </xsl:for-each>
+        <span class="siglum">
+            <xsl:for-each select="scdh:get-witness-siglum-seq($pdu, $witnessCat, $wit)">
+                <xsl:value-of select="."/>
+                <xsl:if test="position() ne last()">
+                    <span data-i18n-key="witness-sep">, </span>
+                </xsl:if>
+            </xsl:for-each>
+        </span>
     </xsl:template>
 
     <xsl:function name="scdh:get-witness-id">
