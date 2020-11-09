@@ -1,5 +1,7 @@
 // import i18next from 'i18next';
 
+const unidir = /^[.,;:!?-|\[\]\(\)\{\}\s،۔؛]*$/;
+
 i18next
   .init({
     resources,
@@ -19,7 +21,12 @@ function updateContent() {
 	// translate non-interpolation phrases
 	var key = allElements[i].getAttribute('data-i18n-key');
 	if (key !== null) {
-	    allElements[i].innerHTML = "".concat(directionPrefix(), i18next.t(key), directionSuffix());
+	    transl = i18next.t(key);
+	    if (unidir.test(transl)) {
+		allElements[i].innerHTML = transl;
+	    } else {
+		allElements[i].innerHTML = "".concat(directionPrefix(), transl, directionSuffix());
+	    }
 	}
 	// TODO: translate interpolation and pluralization phrases
     }
