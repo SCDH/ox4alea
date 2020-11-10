@@ -4,15 +4,15 @@
     "lem-rdg-sep": "] ",
     "missing": "‪missing‬",
     "paragraph-missing": "‪paragraph missing‬",
-    "rdg-sep": ":",
+    "rdg-sep": "; ",
     "rdg-siglum-sep": ": ",
-    "rdgs-sep": ":",
+    "rdgs-sep": "; ",
     "reading": "‪reading‬",
     "reason-quantity-sep": ", ",
     "sic-reading-sep": ":",
     "unclear": "‪unclear‬",
     "verse-missing": "‪verse missing‬",
     "witness-sep": ", ",
-    "illegible": "‪‬illegile‪‬",
+    "illegible": "‪‬illegible‪‬",
     "words": "‪words‬"
 }

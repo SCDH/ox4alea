@@ -2,10 +2,12 @@
 
 const unidir = /^[.,;:!?-|\[\]\(\)\{\}\s،۔؛]*$/;
 
+// variables resources, defaultLanguage, initialLanguage must be initialized before!
+
 i18next
   .init({
     resources,
-    fallbackLng: 'en',
+    fallbackLng: defaultLanguage,
     debug: true,
   }, function(err, t) {
     // init set content
@@ -52,3 +54,6 @@ function changeLng(lng) {
 i18next.on('languageChanged', () => {
   updateContent();
 });
+
+// set initial language
+i18next.changeLanguage(initialLanguage);

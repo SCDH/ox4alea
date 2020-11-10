@@ -136,7 +136,9 @@
                     </xsl:for-each>
                 </section>
                 <hr/>
-                <xsl:call-template name="i18n-language-chooser-html"/>
+                <xsl:call-template name="i18n-language-chooser-html">
+                    <xsl:with-param name="debug" select="$debug"/>
+                </xsl:call-template>
                 <!--xsl:call-template name="i18n-direction-indicator"/-->
                 <script src="{$i18next}"></script>
                 <script>
@@ -250,7 +252,7 @@
                 <xsl:with-param name="witnessCat" select="$witnessCat"/>
                 <xsl:with-param name="wit" select="@wit"/>
             </xsl:call-template>
-            <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdg-sep">:</span></xsl:if>
+            <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span></xsl:if>
         </xsl:for-each>
     </xsl:template>
 
@@ -268,7 +270,7 @@
                 <xsl:with-param name="witnessCat" select="$witnessCat"/>
                 <xsl:with-param name="wit" select="@wit"/>
             </xsl:call-template>
-            <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">:</span></xsl:if>
+            <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span></xsl:if>
         </xsl:for-each>
     </xsl:template>
 

@@ -95,6 +95,7 @@
     </xsl:template>
 
     <xsl:template name="i18n-language-chooser-html">
+        <xsl:param name="debug" select="false()"/>
         <section class="i18n-language-chooser">
             <button onclick="i18next.changeLanguage('en')">
                 English
@@ -105,6 +106,11 @@
             <button onclick="i18next.changeLanguage('ar')">
                 Arabic
             </button>
+            <xsl:if test="$debug">
+                <button onclick="i18next.changeLanguage('dev')">
+                    Dev
+                </button>
+            </xsl:if>
         </section>
     </xsl:template>
 
@@ -129,7 +135,8 @@
                 },
                 ar: {
                     translation: translationAR
-                }
+                },
+                dev : {}
             };
         </xsl:text>
     </xsl:template>
@@ -138,7 +145,7 @@
         <xsl:param name="locales-directory" as="xs:string" select="locales"/>
         <xsl:text>
             // the translations JSON record
-            resources = {
+            const resources = {
                 en: {
                     translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/en/translation.json'))"/><xsl:text>
                 },
@@ -147,8 +154,11 @@
                 },
                 ar: {
                 translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/ar/translation.json'))"/><xsl:text>
-                }
+                },
+                dev: {}
             };
+            const defaultLanguage = 'dev';
+            const initialLanguage = 'ar'; // TODO: parse @xml:lang
         </xsl:text>
     </xsl:template>
 
