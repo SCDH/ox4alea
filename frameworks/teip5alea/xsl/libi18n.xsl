@@ -154,8 +154,7 @@
                 },
                 ar: {
                 translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/ar/translation.json'))"/><xsl:text>
-                },
-                dev: {}
+                }
             };
             const defaultLanguage = 'dev';
             const initialLanguage = 'ar'; // TODO: parse @xml:lang

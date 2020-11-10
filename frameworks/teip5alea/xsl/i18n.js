@@ -7,6 +7,7 @@ const unidir = /^[.,;:!?-|\[\]\(\)\{\}\s،۔؛]*$/;
 i18next
   .init({
     resources,
+    lng: initialLanguage,
     fallbackLng: defaultLanguage,
     debug: true,
   }, function(err, t) {
@@ -54,6 +55,3 @@ function changeLng(lng) {
 i18next.on('languageChanged', () => {
   updateContent();
 });
-
-// set initial language
-i18next.changeLanguage(initialLanguage);
