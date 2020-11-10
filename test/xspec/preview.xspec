@@ -9,6 +9,8 @@
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
     stylesheet="../../frameworks/teip5alea/xsl/preview.xsl">
 
+    <!--x:param name="i18n" select="'../../frameworks/teip5alea/xsl/i18n.js'"/>
+    <x:param name="locales-directory" select="'../../frameworks/teip5alea/xsl/locales'"/-->
 
     <!-- Tests for the processing of the CAESURA element -->
 
@@ -219,6 +221,7 @@
 	</x:expect>
     </x:scenario>
 
+    <!--
     <x:scenario
 	label="Line numbering">
 	<x:call function="scdh:line-number">
@@ -245,5 +248,6 @@
         </x:call>
         <x:expect select="'5'"/>
     </x:scenario>
+    -->
 
 </x:description>
