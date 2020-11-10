@@ -1,0 +1,18 @@
+{
+    "app-entry-sep": " | ",
+    "extra-verse": "زائد",
+    "lem-rdg-sep": "] ",
+    "missing": "ناقص",
+    "paragraph-missing": "ناقص",
+    "rdg-sep": "؛ ",
+    "rdg-siglum-sep": ": ",
+    "rdgs-sep": "؛ ",
+    "reading": "‪reading‬",
+    "reason-quantity-sep": "، ",
+    "sic-reading-sep": ":",
+    "unclear": "غير واضح",
+    "verse-missing": "ناقص",
+    "witness-sep": "، ",
+    "illegible": "‪illegible‬",
+    "words": "‪words‬"
+}

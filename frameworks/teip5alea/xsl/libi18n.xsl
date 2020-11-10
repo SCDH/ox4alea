@@ -94,4 +94,71 @@
         </style>
     </xsl:template>
 
+    <xsl:template name="i18n-language-chooser-html">
+        <xsl:param name="debug" select="false()"/>
+        <section class="i18n-language-chooser">
+            <button onclick="i18next.changeLanguage('en')">
+                English
+            </button>
+            <button onclick="i18next.changeLanguage('de')">
+                German
+            </button>
+            <button onclick="i18next.changeLanguage('ar')">
+                Arabic
+            </button>
+            <xsl:if test="$debug">
+                <button onclick="i18next.changeLanguage('dev')">
+                    Dev
+                </button>
+            </xsl:if>
+        </section>
+    </xsl:template>
+
+    <xsl:template name="i18n-direction-indicator">
+        <span id="i18n-direction-indicator">initial</span>
+    </xsl:template>
+
+    <xsl:template name="i18n-language-resources">
+        <xsl:param name="locales-directory" as="xs:string" select="locales"/>
+        <xsl:text>
+            import translationEN from '</xsl:text><xsl:value-of select="$locales-directory"/>/en/translation.json<xsl:text>';
+            import translationDE from '</xsl:text><xsl:value-of select="$locales-directory"/>/de/translation.json<xsl:text>';
+            import translationAR from '</xsl:text><xsl:value-of select="$locales-directory"/>/ar/translation.json<xsl:text>';
+
+            // the translations JSON record
+            const resources = {
+                en: {
+                    translation: translationEN
+                },
+                de: {
+                    translation: translationDE
+                },
+                ar: {
+                    translation: translationAR
+                },
+                dev : {}
+            };
+        </xsl:text>
+    </xsl:template>
+
+    <xsl:template name="i18n-language-resources-inline">
+        <xsl:param name="locales-directory" as="xs:string" select="locales"/>
+        <xsl:text>
+            // the translations JSON record
+            const resources = {
+                en: {
+                    translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/en/translation.json'))"/><xsl:text>
+                },
+                de: {
+                translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/de/translation.json'))"/><xsl:text>
+                },
+                ar: {
+                translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/ar/translation.json'))"/><xsl:text>
+                }
+            };
+            const defaultLanguage = 'dev';
+            const initialLanguage = 'ar'; // TODO: parse @xml:lang
+        </xsl:text>
+    </xsl:template>
+
 </xsl:stylesheet>

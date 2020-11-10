@@ -14,8 +14,6 @@
 	<xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, $id, ' ')"/>
     </xsl:function>
 
-    <!-- TODO: This function does not use sep yet, due to issue in
-         get-witness-siglum-seq. See tests. -->
     <xsl:function name="scdh:getWitnessSiglum">
         <xsl:param name="pdu" as="xs:string"/>
         <xsl:param name="witnessCat" as="xs:string"/>
@@ -24,7 +22,6 @@
         <xsl:value-of select="string-join(scdh:get-witness-siglum-seq($pdu, $witnessCat, $id), $sep)"/>
     </xsl:function>
 
-    <!-- TODO: make this function return a sequence of strings. See tests -->
     <xsl:function name="scdh:get-witness-siglum-seq" as="xs:string*">
         <xsl:param name="pdu" as="xs:string"/>
         <xsl:param name="witnessCat" as="xs:string"/>
@@ -38,6 +35,20 @@
 				       else $i
 			      else ($id)"/>
     </xsl:function>
+
+    <xsl:template name="witness-siglum-html">
+        <xsl:param name="pdu" as="xs:string"/>
+        <xsl:param name="witnessCat" as="xs:string"/>
+        <xsl:param name="wit" as="xs:string"/>
+        <span class="siglum">
+            <xsl:for-each select="scdh:get-witness-siglum-seq($pdu, $witnessCat, $wit)">
+                <xsl:value-of select="."/>
+                <xsl:if test="position() ne last()">
+                    <span data-i18n-key="witness-sep">, </span>
+                </xsl:if>
+            </xsl:for-each>
+        </span>
+    </xsl:template>
 
     <xsl:function name="scdh:get-witness-id">
         <xsl:param name="pdu" as="xs:string"/>

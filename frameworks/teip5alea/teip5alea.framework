@@ -1397,6 +1397,54 @@
 															<field name="paramDescription">
 																<paramDescriptor>
 																	<field name="localName">
+																		<String>i18n</String>
+																	</field>
+																	<field name="prefix">
+																		<null/>
+																	</field>
+																	<field name="namespace">
+																		<null/>
+																	</field>
+																</paramDescriptor>
+															</field>
+															<field name="value">
+																<String>${framework}/xsl/i18n.js</String>
+															</field>
+															<field name="hasXPathValue">
+																<Boolean>false</Boolean>
+															</field>
+															<field name="isStatic">
+																<Boolean>false</Boolean>
+															</field>
+														</transformationParameter>
+														<transformationParameter>
+															<field name="paramDescription">
+																<paramDescriptor>
+																	<field name="localName">
+																		<String>locales-directory</String>
+																	</field>
+																	<field name="prefix">
+																		<null/>
+																	</field>
+																	<field name="namespace">
+																		<null/>
+																	</field>
+																</paramDescriptor>
+															</field>
+															<field name="value">
+																<String>${framework}/xsl/locales</String>
+															</field>
+															<field name="hasXPathValue">
+																<Boolean>false</Boolean>
+															</field>
+															<field name="isStatic">
+																<Boolean>false</Boolean>
+															</field>
+														</transformationParameter>
+														<transformationParameter>
+															<field name="paramDescription">
+																<paramDescriptor>
+																	<field name="localName">
 																		<String>pdu</String>
 																	</field>
 																	<field name="prefix">
@@ -1408,10 +1456,10 @@
 																</paramDescriptor>
 															</field>
 															<field name="value">
-																<String>${xpath_eval("'${pdu}'")}</String>
+																<String>${pdu}</String>
 															</field>
 															<field name="hasXPathValue">
-																<Boolean>true</Boolean>
+																<Boolean>false</Boolean>
 															</field>
 															<field name="isStatic">
 																<Boolean>false</Boolean>
