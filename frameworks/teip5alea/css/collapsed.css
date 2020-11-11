@@ -86,6 +86,14 @@ unclear {
     -oxy-display-tags: none;
 }
 
+choice > unclear {
+    display: none;
+}
+
+choice > unclear:first-child {
+    display: inline;
+}
+
 gap {
     content: "[...]";
     -oxy-display-tags: none;
