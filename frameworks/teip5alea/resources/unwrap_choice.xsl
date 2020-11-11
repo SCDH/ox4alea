@@ -40,6 +40,20 @@
         </xsl:choose>
     </xsl:template>
 
+    <xsl:template match="choice[child::sic/app]">
+        <xsl:choose>
+            <xsl:when test="exists(sic/app/*[number($keep)])">
+                <app>
+                    <lem wit="{sic/app/*[number($keep)]/@wit}"><xsl:copy-of select="sic/app/*[number($keep)]/(*|text())"/></lem>
+                    <xsl:copy-of select="sic/app/*[position() ne number($keep)]"/>
+                </app>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message terminate="yes">ERROR: reading no <xsl:value-of select="$keep"/> does not exist. Aborting operation</xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:template match="*">
         <xsl:message terminate="yes">ERROR: Context: '<xsl:value-of select="local-name()"/>': No template found. Aborting operation</xsl:message>
         <xsl:copy-of select="."/>

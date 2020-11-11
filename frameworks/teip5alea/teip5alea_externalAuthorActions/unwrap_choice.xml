@@ -12,6 +12,19 @@
   <a:operations>
     <a:operation id="XSLTOperation">
       <a:xpathCondition>
+        ancestor::*:choice[1][*:sic/*:app]
+      </a:xpathCondition>
+      <a:arguments>
+        <!-- Note: We cannot use position() in the construction of the combobox values, so we count the preceding siblings. -->
+        <a:argument name="externalParams"><![CDATA[keep=${ask('Choose reading for lemma:', combobox, (${xpath_eval(string-join(for $el in ancestor::*:choice/*:sic/*:app/* return concat("'", count($el/preceding-sibling::*)+1, "':'", count($el/preceding-sibling::*)+1, ', ', $el/@wit, ': ', $el/text(), "'"), ';'))}), '1')}]]></a:argument>
+        <a:argument name="script">${framework}/resources/unwrap_choice.xsl</a:argument>
+        <a:argument name="sourceLocation">ancestor::*:choice[1]</a:argument>
+        <a:argument name="targetLocation">ancestor::*:choice[1]</a:argument>
+        <a:argument name="action">Replace</a:argument>
+      </a:arguments>
+    </a:operation>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>
         ancestor::*:choice[1][*:corr] |
         ancestor::*:choice[1][*:sic]
       </a:xpathCondition>
