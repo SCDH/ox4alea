@@ -880,7 +880,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>add-gap</String>
+													<String>wrap-choice</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -922,7 +922,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>edit_certainty</String>
+													<String>add-gap</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -943,7 +943,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>edit_evidence</String>
+													<String>edit_certainty</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -964,7 +964,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>edit_length</String>
+													<String>edit_evidence</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -981,6 +981,27 @@
 										</field>
 										<field name="index">
 											<Integer>19</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
+													<String>edit_length</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>20</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
