@@ -16,8 +16,20 @@
         ancestor::*:choice[1][*:sic]
       </a:xpathCondition>
       <a:arguments>
-        <!--a:argument name="externalParams"><![CDATA[keep=${ask('Choose text to keep:', combobox(${xpath_eval(concat('corr: ', ancestor::*:choice/*:corr/text()))}:'corr'; 'sic: ':'sic'), 'corr')}]]></a:argument-->
         <a:argument name="externalParams"><![CDATA[keep=${ask('Choose text to keep:', combobox, (${xpath_eval(concat("'corr':'corr: ", ancestor::*:choice/*:corr/text(), "'", ';', "'sic':'sic: ", ancestor::*:choice/*:sic/text(), "'"))}), 'corr')}]]></a:argument>
+        <a:argument name="script">${framework}/resources/unwrap_choice.xsl</a:argument>
+        <a:argument name="sourceLocation">ancestor::*:choice[1]</a:argument>
+        <a:argument name="targetLocation">ancestor::*:choice[1]</a:argument>
+        <a:argument name="action">Replace</a:argument>
+      </a:arguments>
+    </a:operation>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>
+        ancestor::*:choice[1][*:unclear]
+      </a:xpathCondition>
+      <a:arguments>
+        <!-- Note: We cannot use position() in the construction of the combobox values, so we count the preceding siblings. -->
+        <a:argument name="externalParams"><![CDATA[keep=${ask('Choose text to keep:', combobox, (${xpath_eval(string-join(for $el in ancestor::*:choice/*:unclear return concat("'", count($el/preceding-sibling::*)+1, "':'", count($el/preceding-sibling::*)+1, ': ', $el/text(), "'"), ';'))}), '1')}]]></a:argument>
         <a:argument name="script">${framework}/resources/unwrap_choice.xsl</a:argument>
         <a:argument name="sourceLocation">ancestor::*:choice[1]</a:argument>
         <a:argument name="targetLocation">ancestor::*:choice[1]</a:argument>

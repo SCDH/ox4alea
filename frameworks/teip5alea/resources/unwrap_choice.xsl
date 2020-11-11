@@ -29,6 +29,17 @@
         </xsl:choose>
     </xsl:template>
 
+    <xsl:template match="choice[child::unclear]">
+        <xsl:choose>
+            <xsl:when test="exists(child::*[number($keep)])">
+                <xsl:copy-of select="child::*[number($keep)]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message terminate="yes">ERROR: element no <xsl:value-of select="$keep"/> does not exist. Aborting operation</xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:template match="*">
         <xsl:message terminate="yes">ERROR: Context: '<xsl:value-of select="local-name()"/>': No template found. Aborting operation</xsl:message>
         <xsl:copy-of select="."/>
