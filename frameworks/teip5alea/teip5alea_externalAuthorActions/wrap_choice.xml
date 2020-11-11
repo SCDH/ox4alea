@@ -16,7 +16,11 @@
   <a:largeIconPath href="${framework}/images/choice-24.png"/>
   <a:operations>
     <a:operation id="XSLTOperation">
-      <a:xpathCondition>self::*:corr|self::*:sic|self::*:unclear</a:xpathCondition>
+      <a:xpathCondition>
+        self::*:corr[not(parent::*:choice)]|
+        self::*:sic[not(parent::*:choice)]|
+        self::*:unclear[not(parent::*:choice)]
+      </a:xpathCondition>
       <a:arguments>
         <a:argument name="script">${framework}/resources/wrap_choice.xsl</a:argument>
         <a:argument name="targetLocation">self::*</a:argument>
@@ -24,7 +28,7 @@
       </a:arguments>
     </a:operation>
     <a:operation id="XSLTOperation">
-      <a:xpathCondition>ancestor::*:app</a:xpathCondition>
+      <a:xpathCondition>ancestor::*:app[not(parent::*:sic)]</a:xpathCondition>
       <a:arguments>
         <a:argument name="script">${framework}/resources/wrap_choice.xsl</a:argument>
         <a:argument name="sourceLocation">ancestor::*:TEI</a:argument>
