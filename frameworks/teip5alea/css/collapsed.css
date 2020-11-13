@@ -1,21 +1,9 @@
+@import "http://scdh.wwu.de/alea/resources/font.css";
+
 teiHeader { display: none }
 
 
-@font-face {
-    font-family:"Arabic Typesetting";
-    /*The location of the loaded TTF font must be relative to the CSS*/
-    src:url("arabt100.ttf");
-}
-
-
-@font-face {
-    font-family:"Doulos SIL";
-    /*The location of the loaded TTF font must be relative to the CSS*/
-    src:url("DoulosSIL-R.ttf");
-}
-
 body {
-    font-family:"Arabic Typesetting";
     direction: rtl;
 }
 
