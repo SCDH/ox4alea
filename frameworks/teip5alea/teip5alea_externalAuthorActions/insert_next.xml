@@ -34,7 +34,7 @@
       </a:arguments>
     </a:operation>
   </a:operations>
-  <a:accelerator>ENTER</a:accelerator>
+  <a:accelerator><![CDATA[${insert_next_key}]]></a:accelerator>
   <a:accessKey>v</a:accessKey>
   <a:enabledInReadOnlyContext>false</a:enabledInReadOnlyContext>
 </a:authorAction>
