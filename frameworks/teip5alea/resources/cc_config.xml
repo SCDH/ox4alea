@@ -26,28 +26,27 @@
         <xslt href="cc_witnessId.xsl" useCache="false" action="append"/>
     </match>
     
+    <!-- restrict contents of lg/lg/app/lem and lg/lg/app/rdg to l -->
+    <elementProposals
+        xmlns:t="http://www.tei-c.org/ns/1.0"
+        path="t:lg/t:lg/t:app/t:lem"
+        insertElements="t:l"
+        possibleElements="_INSERTED_"/>
+    <elementProposals
+        xmlns:t="http://www.tei-c.org/ns/1.0"
+        path="t:lg/t:lg/t:app/t:rdg"
+        insertElements="t:l"
+        possibleElements="_INSERTED_"/>
 
-    <!--
-        
-        
-        Customize/filter the proposals for an element (children elements and attributes).
-        
-        
-    -->
-    <!-- Each time the 'listitem' is inserted, insert also the a 'para' element. 
-        Keep in the content completion proposals just the 'para' and 'note' elements. -->
-    <elementProposals path="listitem" insertElements="para" possibleElements="para note"/>    
-    <!-- Each time the 'section' is inserted, insert also a sequence of a 'title' and 'para' elements. -->
-    <elementProposals path="section" insertElements="title para"/>
-    <!-- Remove the 'bold' and 'italic' from the child list of the para element. -->
-    <elementProposals path="para" rejectElements="bold italic"/>
-
-    <!-- Always insert the @href attribute when inserting the 'link' element. 
-        This will be the only possible attribute for the 'link' element. -->
-    <elementProposals path="link" insertAttributes="href" possibleAttributes="_INSERTED_"/>
-
-	<!-- Removes the @audience attribute across entire document  -->
-    <elementProposals rejectAttributes="audience"/>
+    <!-- delete l from proposals in context of l/app/lem and l/app/rdg -->
+    <elementProposals
+        xmlns:t="http://www.tei-c.org/ns/1.0"
+        path="t:l/t:app/t:lem"
+        rejectElements="t:l"/>
+    <elementProposals
+        xmlns:t="http://www.tei-c.org/ns/1.0"
+        path="t:l/t:app/t:rdg"
+        rejectElements="t:l"/>
     
     <!-- 
     
