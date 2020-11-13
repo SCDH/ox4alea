@@ -302,7 +302,7 @@
 
     <xsl:template match="unclear" mode="apparatus">
         <xsl:apply-templates select="."/>
-        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
+        <span class="apparatus-sep" data-i18n-key="rdg-static-sep"> </span>
         <xsl:choose>
             <xsl:when test="@reason">
                 <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
