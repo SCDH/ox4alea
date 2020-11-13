@@ -1315,6 +1315,23 @@
 									</poPatch>
 									<poPatch>
 										<field name="fieldPath">
+											<String>xmlCatalogs</String>
+										</field>
+										<field name="index">
+											<Integer>3</Integer>
+										</field>
+										<field name="value">
+											<String>${framework}/catalog.xml</String>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
 											<String>scenarios</String>
 										</field>
 										<field name="index">
