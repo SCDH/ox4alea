@@ -72,13 +72,26 @@ corr {
     direction:inherit !important;
 }
 
-sic {
+choice > sic {
     display: none;
+}
+
+sic {
+    -oxy-display-tags: none;
+    color:gray;
 }
 
 unclear {
     color: gray;
     -oxy-display-tags: none;
+}
+
+choice > unclear {
+    display: none;
+}
+
+choice > unclear:first-child {
+    display: inline;
 }
 
 gap {

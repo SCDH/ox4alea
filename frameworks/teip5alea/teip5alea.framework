@@ -399,7 +399,7 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
-													<String>add-gap</String>
+													<String>mark-unclear</String>
 												</field>
 											</menuItem>
 										</field>
@@ -420,7 +420,7 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
-													<String>mark-unclear</String>
+													<String>wrap-choice</String>
 												</field>
 											</menuItem>
 										</field>
@@ -441,7 +441,7 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
-													<String>edit_certainty</String>
+													<String>unwrap-choice</String>
 												</field>
 											</menuItem>
 										</field>
@@ -462,7 +462,7 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
-													<String>edit_evidence</String>
+													<String>add-gap</String>
 												</field>
 											</menuItem>
 										</field>
@@ -483,7 +483,7 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
-													<String>edit_length</String>
+													<String>edit_certainty</String>
 												</field>
 											</menuItem>
 										</field>
@@ -500,6 +500,48 @@
 										</field>
 										<field name="index">
 											<Integer>15</Integer>
+										</field>
+										<field name="value">
+											<menuItem>
+												<field name="actionID">
+													<String>edit_evidence</String>
+												</field>
+											</menuItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>16</Integer>
+										</field>
+										<field name="value">
+											<menuItem>
+												<field name="actionID">
+													<String>edit_length</String>
+												</field>
+											</menuItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>17</Integer>
 										</field>
 										<field name="value">
 											<menuItem>
@@ -880,7 +922,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>add-gap</String>
+													<String>wrap-choice</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -901,7 +943,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>mark-unclear</String>
+													<String>unwrap-choice</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -922,7 +964,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>edit_certainty</String>
+													<String>mark-unclear</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -943,49 +985,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>edit_evidence</String>
-												</field>
-											</toolbarItem>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>18</Integer>
-										</field>
-										<field name="value">
-											<toolbarItem>
-												<field name="actionID">
-													<String>edit_length</String>
-												</field>
-											</toolbarItem>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>19</Integer>
-										</field>
-										<field name="value">
-											<toolbarItem>
-												<field name="actionID">
-													<String>edit_reason</String>
+													<String>add-gap</String>
 												</field>
 											</toolbarItem>
 										</field>
