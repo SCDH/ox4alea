@@ -28,11 +28,11 @@
       </a:arguments>
     </a:operation>
     <a:operation id="XSLTOperation">
-      <a:xpathCondition>ancestor::*:app[not(parent::*:sic)]</a:xpathCondition>
+      <a:xpathCondition>ancestor-or-self::*:app[not(parent::*:sic)]</a:xpathCondition>
       <a:arguments>
         <a:argument name="script">${framework}/resources/wrap_choice.xsl</a:argument>
         <a:argument name="sourceLocation">ancestor::*:TEI</a:argument>
-        <a:argument name="targetLocation">ancestor::*:app</a:argument>
+        <a:argument name="targetLocation">ancestor-or-self::*:app[1]</a:argument>
         <a:argument name="action">Replace</a:argument>
       </a:arguments>
     </a:operation>

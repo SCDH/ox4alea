@@ -34,20 +34,24 @@
     </xsl:template>
 
     <xsl:template match="lem|rdg">
+        <xsl:apply-templates select="parent::app"/>
+    </xsl:template>
+
+    <xsl:template match="app">
         <xsl:variable name="witnesses" as="xs:string*"
             select="for $w in /TEI/teiHeader//witness/@xml:id return concat('#', $w)"/>
         <xsl:variable name="readings" as="xs:string*"
-            select="tokenize(string-join(parent::app/rdg/@wit, ' '), '\s+')"/>
+            select="tokenize(string-join(rdg/@wit, ' '), '\s+')"/>
         <xsl:variable name="lemWit"
-            select="if (parent::app/lem/@wit)
-                      then parent::app/lem/@wit
+            select="if (lem/@wit)
+                      then lem/@wit
                       else string-join($witnesses[every $w in $readings satisfies $w ne .], ' ')"/>
         <choice>
             <corr/>
             <sic>
                 <app>
-                    <rdg wit="{$lemWit}"><xsl:copy-of select="parent::app/lem/*|text()"/></rdg>
-                    <xsl:copy-of select="parent::app/rdg"/>
+                    <rdg wit="{$lemWit}"><xsl:copy-of select="lem/*|lem/text()"/></rdg>
+                    <xsl:copy-of select="rdg"/>
                 </app>
             </sic>
         </choice>
