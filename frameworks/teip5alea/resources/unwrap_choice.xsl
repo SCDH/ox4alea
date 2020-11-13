@@ -44,7 +44,7 @@
         <xsl:choose>
             <xsl:when test="exists(sic/app/*[number($keep)])">
                 <app>
-                    <lem wit="{sic/app/*[number($keep)]/@wit}"><xsl:copy-of select="sic/app/*[number($keep)]/(*|text())"/></lem>
+                    <lem><xsl:copy-of select="sic/app/*[number($keep)]/(*|text())"/></lem>
                     <xsl:copy-of select="sic/app/*[position() ne number($keep)]"/>
                 </app>
             </xsl:when>
