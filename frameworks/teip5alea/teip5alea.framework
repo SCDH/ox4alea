@@ -1341,6 +1341,350 @@
 									</poPatch>
 									<poPatch>
 										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>1</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>insert_caesura</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<String>caesura</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>true</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>2</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>add_variant</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<null/>
+												</field>
+												<field name="replacedElementNs">
+													<String></String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>3</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>append_variant</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<null/>
+												</field>
+												<field name="replacedElementNs">
+													<String></String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>4</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>add_wit</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<null/>
+												</field>
+												<field name="replacedElementNs">
+													<String></String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>5</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>add-sic</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<String>sic</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>true</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>add-corr</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<String>corr</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>true</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>7</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>add-gap</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<String>gap</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>true</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>8</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>mark-unclear</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<String>unclear</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>true</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
 											<String>templatesLocations</String>
 										</field>
 										<field name="index">
