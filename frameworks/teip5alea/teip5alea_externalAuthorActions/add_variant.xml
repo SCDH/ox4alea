@@ -11,7 +11,7 @@
     <a:operation id="SurroundWithFragmentOperation">
       <a:xpathCondition>self::*:l|self::*:lg|self::*:head|self::*:p</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><![CDATA[<app xmlns="http://www.tei-c.org/ns/1.0"><lem></lem><rdg wit="${ask('Sigel',combobox,(${xpath_eval(string-join(let $headWits := doc("${cf}")/*:TEI/*:teiHeader//*:witness/@xml:id, $catFile := "${pdu}/WitnessCatalogue.xml", $catWits := if (doc-available($catFile)) then doc($catFile)/*:TEI/*:text//*:witness else () return for $w in $headWits return concat("'#", $w, "':'#", $w, ' = ', $catWits[@xml:id eq $w]//*:abbr[@type eq 'siglum'][1], "'"), ';')  )}), '')}">${caret}</rdg></app>]]></a:argument>
+        <a:argument name="fragment"><![CDATA[<app xmlns="http://www.tei-c.org/ns/1.0"><lem></lem><rdg wit="${ask('Sigel',combobox,(${xpath_eval(string-join(let $headWits := doc("${cf}")/*:TEI/*:teiHeader//*:witness/@xml:id, $catFile := "${pdu}${ps}WitnessCatalogue.xml", $catWits := if (doc-available($catFile)) then doc($catFile)/*:TEI/*:text//*:witness else () return for $w in $headWits return concat("'#", $w, "':'#", $w, ' = ', $catWits[@xml:id eq $w]//*:abbr[@type eq 'siglum'][1], "'"), ';')  )}), '')}">${caret}</rdg></app>]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
