@@ -12,7 +12,7 @@
             <a:xpathCondition>self::*:div|self::*:p|self::*:l|self::*:lem|self::*:rdg|self::*:head</a:xpathCondition>
             <a:arguments>
                 <a:argument name="fragment">
-<![CDATA[<unclear xmlns="http://www.tei-c.org/ns/1.0" reason="${ask('Reason', editable_combobox, ('illegible':'illegible';'inaudible':'inaudible';'faded':'faded';'background noise':'background noise';'eccentric_ductus':'eccentric ductus'), 'illegible')}"/>]]>
+<![CDATA[<unclear xmlns="http://www.tei-c.org/ns/1.0"/>]]>
                 </a:argument>
             </a:arguments>
         </a:operation>
