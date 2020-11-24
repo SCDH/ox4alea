@@ -278,6 +278,8 @@
         <span class="static-text" data-i18n-key="extra-verse">&lre;extra verse&pdf;</span>
         <xsl:text> </xsl:text>
         <xsl:apply-templates mode="apparatus"/>
+        <xsl:text> </xsl:text>
+        <span class="static-text" data-i18n-key="extra-verse">&lre;extra verse&pdf;</span>
         <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
         <xsl:call-template name="witness-siglum-html">
             <xsl:with-param name="pdu" select="$pdu"/>
