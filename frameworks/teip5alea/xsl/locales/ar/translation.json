@@ -21,5 +21,8 @@
     "corr-rdgs": "(ولعل الصواب ما أثبتناه)",
     "gap": "‪omitted‬",
     "gap-rep": "[…]",
-    "gap-rdg": "(…)"
+    "gap-rdg": "(…)",
+    "rdg-annotation-pre": " (",
+    "rdg-annotation-post": ") ",
+    "rdg-annotation-sep": "، "
 }
