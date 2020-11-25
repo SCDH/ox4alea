@@ -302,7 +302,7 @@
 
     <xsl:template match="unclear" mode="apparatus">
         <xsl:apply-templates select="."/>
-        <span class="apparatus-sep" data-i18n-key="rdg-static-sep"> </span>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <xsl:choose>
             <xsl:when test="@reason">
                 <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
@@ -312,18 +312,32 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
+    <!-- needed for unclear in rdg for printing the reading -->
+    <xsl:template match="unclear[parent::rdg]" mode="apparatus">
+        <xsl:apply-templates/>
+    </xsl:template>
+
     <xsl:template match="gap" mode="apparatus">
-        <!--xsl:text>[...] </xsl:text-->
-        <xsl:if test="@reason">
-            <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
-        </xsl:if>
+        <span class="static-text" data-i18n-key="gap-rep">[...]</span>
+        <xsl:text> </xsl:text>
+        <xsl:choose>
+            <xsl:when test="@reason">
+                <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
+            </xsl:when>
+            <xsl:otherwise><span class="static-text" data-i18n-key="gap">&lre;omitted&pdf;</span></xsl:otherwise>
+        </xsl:choose>
         <xsl:if test="@quantity and @unit">
             <span class="apparatus-sep" data-i18n-key="reason-quantity-sep">, </span>
             <span class="static-text"><xsl:value-of select="@quantity"/></span>
             <xsl:text>&#160;</xsl:text>
             <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
         </xsl:if>
+    </xsl:template>
+
+    <!-- needed for gap in rdg for printing the reading -->
+    <xsl:template match="gap[parent::rdg]" mode="apparatus">
+        <span class="static-text" data-i18n-key="gap-rdg">(…)</span>
     </xsl:template>
 
     <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">

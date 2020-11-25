@@ -18,5 +18,8 @@
     "words": "‪words‬",
     "sic": "sic!",
     "corr": "corrected",
-    "corr-rdgs": "(corrected)"
+    "corr-rdgs": "(corrected)",
+    "gap": "omitted",
+    "gap-rep": "[…]",
+    "gap-rdg": "(…)"
 }

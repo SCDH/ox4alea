@@ -18,5 +18,8 @@
     "words": "‪Worte‬",
     "sic": "sic!",
     "corr": "emendiert",
-    "corr-rdgs": "(emendiert)"
+    "corr-rdgs": "(emendiert)",
+    "gap": "ausgelassen",
+    "gap-rep": "[…]",
+    "gap-rdg": "(…)"
 }
