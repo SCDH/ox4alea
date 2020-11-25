@@ -22,7 +22,7 @@
     "gap": "‪omitted‬",
     "gap-rep": "[…]",
     "gap-rdg": "(…)",
-    "rdg-annotation-pre": " (",
-    "rdg-annotation-post": ") ",
+    "rdg-annotation-pre": " ",
+    "rdg-annotation-post": "",
     "rdg-annotation-sep": "، "
 }
