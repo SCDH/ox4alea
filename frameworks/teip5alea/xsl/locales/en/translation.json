@@ -8,12 +8,15 @@
     "rdg-siglum-sep": ": ",
     "rdg-static-sep": " ",
     "rdgs-sep": "; ",
-    "reading": "‪reading‬",
+    "corr-sic": "(corrected)",
     "reason-quantity-sep": ", ",
-    "sic-reading-sep": ":",
+    "corr-sic-sep": " ",
     "unclear": "‪unclear‬",
     "verse-missing": "‪verse missing‬",
     "witness-sep": ", ",
     "illegible": "‪‬illegible‪‬",
-    "words": "‪words‬"
+    "words": "‪words‬",
+    "sic": "sic!",
+    "corr": "corrected",
+    "corr-rdgs": "(corrected)"
 }

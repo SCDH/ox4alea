@@ -223,7 +223,7 @@
                 <!-- we can't add simple ...|ancestor::app to the selector, because then we
                     lose focus on the line when there are several in an <app>. See #12.
                     We need app//l instead an some etra templates for handling app//l. -->
-                <xsl:for-each select="app|gap|unclear|choice|app/lem/(gap|unclear|choice)|self::l[ancestor::app]">
+                <xsl:for-each select="app|gap|unclear|sic|choice|app/lem/(gap|unclear|choice)|self::l[ancestor::app]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
@@ -325,13 +325,42 @@
             <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
         </xsl:if>
     </xsl:template>
-    
+
     <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">
-        <xsl:value-of select="corr"/>
+        <xsl:apply-templates select="corr"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
-        <xsl:value-of select="sic"/>
-        <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="sic-reading-sep">:</span>
-        <span class="static-text" data-i18n-key="reading">&lre;reading&pdf;</span>
+        <xsl:apply-templates select="sic"/>
+        <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="corr-sic-sep"> </span>
+        <span class="static-text" data-i18n-key="corr-sic">&lre;(corrected)&pdf;</span>
+    </xsl:template>
+
+    <xsl:template match="choice[child::sic/app and child::corr]" mode="apparatus">
+        <xsl:apply-templates select="corr"/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
+        <xsl:for-each select="sic/app/rdg">
+            <xsl:apply-templates select="." mode="apparatus"/>
+            <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
+            <xsl:call-template name="witness-siglum-html">
+                <xsl:with-param name="pdu" select="$pdu"/>
+                <xsl:with-param name="witnessCat" select="$witnessCat"/>
+                <xsl:with-param name="wit" select="@wit"/>
+            </xsl:call-template>
+            <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span></xsl:if>
+        </xsl:for-each>
+        <xsl:text> </xsl:text>
+        <span class="static-text" data-i18n-key="corr-rdgs">&lre;(corrected)&pdf;</span>
+    </xsl:template>
+
+    <xsl:template match="sic[not(parent::choice)]" mode="apparatus">
+        <xsl:apply-templates/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
+        <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
+    </xsl:template>
+
+    <xsl:template match="corr[not(parent::choice)]" mode="apparatus">
+        <xsl:apply-templates/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
+        <span class="static-text" data-i18n-key="corr">&lre;corrected&pdf;</span>
     </xsl:template>
 
     <xsl:template match="caesura[ancestor::rdg]" mode="apparatus">
@@ -407,7 +436,15 @@
     <xsl:template match="choice[child::sic and child::corr]">
         <xsl:apply-templates select="corr"/>
     </xsl:template>
-    
+
+    <xsl:template match="sic[not(parent::choice)]">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="corr[not(parent::choice)]">
+        <xsl:apply-templates/>
+    </xsl:template>
+
     <xsl:template name="variants">
         <xsl:param name="lg"/>
     </xsl:template>

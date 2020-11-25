@@ -8,12 +8,15 @@
     "rdg-siglum-sep": ": ",
     "rdg-static-sep": " ",
     "rdgs-sep": "؛ ",
-    "reading": "‪reading‬",
+    "corr-sic": "(ولعل الصواب ما أثبتناه)",
     "reason-quantity-sep": "، ",
-    "sic-reading-sep": ":",
+    "corr-sic-sep": " ",
     "unclear": "غير واضح",
     "verse-missing": "ناقص",
     "witness-sep": "، ",
-    "illegible": "‪illegible‬",
-    "words": "‪words‬"
+    "illegible": "‪لا يُقرأ",
+    "words": "‪words‬",
+    "sic": "كذا في كل المخطوطات",
+    "corr": "ولعل الصواب ما أثبتناه",
+    "corr-rdgs": "(ولعل الصواب ما أثبتناه)"
 }

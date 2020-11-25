@@ -14,7 +14,7 @@
 
     <xsl:template match="sic">
         <choice>
-            <corr/>
+            <corr>${caret}</corr>
             <xsl:copy-of select="self::sic"/>
         </choice>
     </xsl:template>
@@ -22,14 +22,14 @@
     <xsl:template match="corr">
         <choice>
             <xsl:copy-of select="self::corr"/>
-            <sic/>
+            <sic>${caret}</sic>
         </choice>
     </xsl:template>
 
     <xsl:template match="unclear">
         <choice>
             <xsl:copy-of select="self::unclear"/>
-            <unclear/>
+            <unclear>${caret}</unclear>
         </choice>
     </xsl:template>
 
@@ -47,7 +47,7 @@
                       then lem/@wit
                       else string-join($witnesses[every $w in $readings satisfies $w ne .], ' ')"/>
         <choice>
-            <corr/>
+            <corr>${caret}</corr>
             <sic>
                 <app>
                     <rdg wit="{$lemWit}"><xsl:copy-of select="lem/*|lem/text()"/></rdg>
