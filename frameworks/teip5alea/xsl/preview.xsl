@@ -329,15 +329,15 @@
     </xsl:template>
 
     <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">
-        <xsl:value-of select="corr"/>
+        <xsl:apply-templates select="corr"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
-        <xsl:value-of select="sic"/>
-        <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="sic-reading-sep">:</span>
-        <span class="static-text" data-i18n-key="reading">&lre;reading&pdf;</span>
+        <xsl:apply-templates select="sic"/>
+        <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="corr-sic-sep"> </span>
+        <span class="static-text" data-i18n-key="corr-sic">&lre;(corrected)&pdf;</span>
     </xsl:template>
 
     <xsl:template match="choice[child::sic/app and child::corr]" mode="apparatus">
-        <xsl:value-of select="corr"/>
+        <xsl:apply-templates select="corr"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <xsl:for-each select="sic/app/rdg">
             <xsl:apply-templates select="." mode="apparatus"/>
