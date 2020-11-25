@@ -275,8 +275,6 @@
     </xsl:template>
 
     <xsl:template match="l[not(ancestor::app/lem/l)]" mode="apparatus">
-        <span class="static-text" data-i18n-key="extra-verse">&lre;extra verse&pdf;</span>
-        <xsl:text> </xsl:text>
         <xsl:apply-templates mode="apparatus"/>
         <xsl:text> </xsl:text>
         <span class="static-text" data-i18n-key="extra-verse">&lre;extra verse&pdf;</span>
