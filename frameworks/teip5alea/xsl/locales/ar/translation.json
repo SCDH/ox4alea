@@ -14,6 +14,9 @@
     "unclear": "غير واضح",
     "verse-missing": "ناقص",
     "witness-sep": "، ",
-    "illegible": "‪illegible‬",
-    "words": "‪words‬"
+    "illegible": "‪لا يُقرأ",
+    "words": "‪words‬",
+    "sic": "كذا في كل المخطوطات",
+    "corr": "ولعل الصواب ما أثبتناه",
+    "corr-rdgs": "(ولعل الصواب ما أثبتناه)"
 }
