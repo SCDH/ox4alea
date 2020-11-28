@@ -3,17 +3,15 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
   id="add-gap">
-  <a:name>Add gap</a:name>
-  <a:description>Add gap</a:description>
+  <a:name>Add gap (illegible)</a:name>
+  <a:description>Add gap (illegible)</a:description>
   <a:smallIconPath href="${framework}/images/brackets-16.png"/>
   <a:largeIconPath href="${framework}/images/brackets-24.png"/>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>self::*:div|self::*:p|self::*:l|self::*:lem|self::*:rdg|self::*:head</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment">
-<![CDATA[<gap xmlns="http://www.tei-c.org/ns/1.0"/>]]>
-        </a:argument>
+        <a:argument name="fragment"><![CDATA[<gap xmlns="http://www.tei-c.org/ns/1.0" reason="illegible"/>]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>

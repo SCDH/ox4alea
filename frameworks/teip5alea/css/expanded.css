@@ -79,6 +79,6 @@ sic {
 }
 
 gap {
-    content: "‪[...(" attr(reason) ")...]‬ ";
+    content: "[...]";
     -oxy-display-tags: none;
 }

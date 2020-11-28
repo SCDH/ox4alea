@@ -18,5 +18,11 @@
     "words": "‪words‬",
     "sic": "كذا في كل المخطوطات",
     "corr": "ولعل الصواب ما أثبتناه",
-    "corr-rdgs": "(ولعل الصواب ما أثبتناه)"
+    "corr-rdgs": "(ولعل الصواب ما أثبتناه)",
+    "gap": "يُهذف",
+    "gap-rep": "[…]",
+    "gap-rdg": "(…)",
+    "rdg-annotation-pre": " ",
+    "rdg-annotation-post": "",
+    "rdg-annotation-sep": "، "
 }

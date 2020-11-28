@@ -246,6 +246,7 @@
                 <xsl:text>&#x20;</xsl:text>
             </xsl:if>
             <xsl:apply-templates select="." mode="apparatus"/>
+            <xsl:apply-templates select="." mode="apparatus-annotation"/>
             <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
                 <xsl:with-param name="pdu" select="$pdu"/>
@@ -302,7 +303,7 @@
 
     <xsl:template match="unclear" mode="apparatus">
         <xsl:apply-templates select="."/>
-        <span class="apparatus-sep" data-i18n-key="rdg-static-sep"> </span>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <xsl:choose>
             <xsl:when test="@reason">
                 <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
@@ -312,18 +313,32 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
+    <!-- needed for unclear in rdg for printing the reading -->
+    <xsl:template match="unclear[parent::rdg]" mode="apparatus">
+        <xsl:apply-templates/>
+    </xsl:template>
+
     <xsl:template match="gap" mode="apparatus">
-        <!--xsl:text>[...] </xsl:text-->
-        <xsl:if test="@reason">
-            <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
-        </xsl:if>
+        <span class="static-text" data-i18n-key="gap-rep">[...]</span>
+        <xsl:text> </xsl:text>
+        <xsl:choose>
+            <xsl:when test="@reason">
+                <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
+            </xsl:when>
+            <xsl:otherwise><span class="static-text" data-i18n-key="gap">&lre;omitted&pdf;</span></xsl:otherwise>
+        </xsl:choose>
         <xsl:if test="@quantity and @unit">
             <span class="apparatus-sep" data-i18n-key="reason-quantity-sep">, </span>
             <span class="static-text"><xsl:value-of select="@quantity"/></span>
             <xsl:text>&#160;</xsl:text>
             <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
         </xsl:if>
+    </xsl:template>
+
+    <!-- needed for gap in rdg for printing the reading -->
+    <xsl:template match="gap[parent::rdg]" mode="apparatus">
+        <span class="static-text" data-i18n-key="gap-rdg">(…)</span>
     </xsl:template>
 
     <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">
@@ -367,6 +382,50 @@
         <span>||</span>
     </xsl:template>
 
+
+    <!-- MODE: apparatus-annotation
+        When an rdg has nested unclear, gap or corr elements, we have to put that in the apparatus.
+        The templates in apparatus-annotation mode append annotations on a apparatus entry. -->
+
+    <!-- Append annotation to rdg. This is an entry point to be reused. -->
+    <xsl:template match="rdg" mode="apparatus-annotation">
+        <xsl:if test="unclear|gap|corr|sic">
+            <span class="apparatus-sep" data-i18n-key="rdg-annotation-pre"> (</span>
+            <xsl:for-each select="unclear|gap|corr|sic">
+                <xsl:apply-templates select="." mode="apparatus-annotation"/>
+                <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdg-annotation-sep">, </span></xsl:if>
+            </xsl:for-each>
+            <span class="apparatus-sep" data-i18n-key="rdg-annotation-post">) </span>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="gap" mode="apparatus-annotation">
+        <xsl:choose>
+            <xsl:when test="@reason">
+                <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
+            </xsl:when>
+            <xsl:otherwise><span class="static-text" data-i18n-key="gap">&lre;omitted&pdf;</span></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="unclear" mode="apparatus-annotation">
+        <xsl:choose>
+            <xsl:when test="@reason">
+                <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
+            </xsl:when>
+            <xsl:otherwise>
+                <span class="static-text" data-i18n-key="unclear">&lre;unclear&pdf;</span>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="sic" mode="apparatus-annotation">
+        <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
+    </xsl:template>
+
+    <xsl:template match="corr" mode="apparatus-annotation">
+        <span class="static-text" data-i18n-key="corr">&lre;corrected&pdf;</span>
+    </xsl:template>
 
     <!-- MODE: apparatus-lemma
         These templates are generate the text repeated as the lemma in the apparatus.-->
