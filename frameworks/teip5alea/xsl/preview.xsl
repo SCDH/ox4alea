@@ -113,6 +113,8 @@
                                         descendant::gap or
                                         descendant::unclear or
                                         descendant::choice or
+                                        descendant::sic or
+                                        descendant::corr or
                                         ancestor::app]"
                             mode="apparatus-number"/>
                     </table>
