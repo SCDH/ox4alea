@@ -2336,6 +2336,40 @@
 									</poPatch>
 									<poPatch>
 										<field name="fieldPath">
+											<String>useImposedInitialPage</String>
+										</field>
+										<field name="index">
+											<Integer>-1</Integer>
+										</field>
+										<field name="value">
+											<Boolean>true</Boolean>
+										</field>
+										<field name="patchHandling">
+											<String>set</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>imposedInitialPage</String>
+										</field>
+										<field name="index">
+											<Integer>-1</Integer>
+										</field>
+										<field name="value">
+											<String>Author</String>
+										</field>
+										<field name="patchHandling">
+											<String>set</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
 											<String>priority</String>
 										</field>
 										<field name="index">
@@ -2364,7 +2398,7 @@
 					<field name="schemaDescriptor">
 						<docTypeSchema>
 							<field name="type">
-								<Integer>4</Integer>
+								<Integer>6</Integer>
 							</field>
 							<field name="uri">
 								<String>${framework}/xml/tei/custom/schema/relaxng/tei_all.rng</String>
