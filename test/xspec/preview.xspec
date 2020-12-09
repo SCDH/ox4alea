@@ -250,4 +250,54 @@
     </x:scenario>
     -->
 
+    <x:scenario
+	label="line with sic">
+	<x:context>
+	    <tei:l>Aa Bb <tei:sic>Cc</tei:sic> Dd</tei:l>
+	</x:context>
+	<x:expect
+	    label="text of line"
+	    test="text() = 'Aa Bb Cc Dd'"/>
+    </x:scenario>
+
+    <x:scenario
+	label="line with corr">
+	<x:context>
+	    <tei:l>Aa Bb <tei:corr>Cc</tei:corr> Dd</tei:l>
+	</x:context>
+	<x:expect
+	    label="text of line"
+	    test="text() = 'Aa Bb Cc Dd'"/>
+    </x:scenario>
+
+    <x:scenario
+	label="line with choice/sic|corr">
+	<x:context>
+	    <tei:l>Aa Bb <tei:choice><tei:sic>Cc</tei:sic><tei:corr>Dd</tei:corr></tei:choice> Ee</tei:l>
+	</x:context>
+	<x:expect
+	    label="text of line"
+	    test="text() = 'Aa Bb Dd Ee'"/>
+    </x:scenario>
+
+    <x:scenario
+	label="line with app/lem|rdg">
+	<x:context>
+	    <tei:l>Aa Bb <tei:app><tei:lem>Cc</tei:lem><tei:rdg>Dd</tei:rdg></tei:app> Ee</tei:l>
+	</x:context>
+	<x:expect
+	    label="text of line"
+	    test="text() = 'Aa Bb Cc Ee'"/>
+    </x:scenario>
+
+    <x:scenario
+	label="line with choice/corr|(sic/app/(lem|rdg))">
+	<x:context>
+	    <tei:l>Aa Bb <tei:choice><tei:sic><tei:app><tei:lem>Cc</tei:lem><tei:rdg>Ccc</tei:rdg></tei:app></tei:sic><tei:corr>Dd</tei:corr></tei:choice> Ee</tei:l>
+	</x:context>
+	<x:expect
+	    label="text of line"
+	    test="text() = 'Aa Bb Dd Ee'"/>
+    </x:scenario>
+
 </x:description>
