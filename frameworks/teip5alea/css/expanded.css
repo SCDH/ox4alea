@@ -6,6 +6,10 @@ body {
     direction: rtl;
 }
 
+p {
+    padding: 0 1em ;
+}
+
 lg > head {
     color : red ;
     text-align: center;
