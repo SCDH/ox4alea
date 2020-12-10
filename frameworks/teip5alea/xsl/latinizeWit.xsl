@@ -8,26 +8,25 @@
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     exclude-result-prefixes="xs scdh"
     version="3.0">
-    
+
     <xsl:mode on-no-match="shallow-copy"/>
-    
+
     <xsl:output method="xml"/>
-    
-    <xsl:include href="libwit.xsl"/>
-    
-    <xsl:param name="pdu"/>
-    <xsl:param name="witnessCat" select="'WitnessCatalogue.xml'"/>
-   
+
+    <xsl:import href="libwit.xsl"/>
+
+    <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'"/>
+
     <xsl:template match="@wit">
-        <xsl:attribute name="wit" select="scdh:get-witness-id($pdu, $witnessCat, .)"/>    
+        <xsl:attribute name="wit" select="scdh:get-witness-id(.)"/>
     </xsl:template>
-    
+
     <xsl:template match="sourceDesc[not(descendant::listWit)]">
         <sourceDesc>
             <xsl:copy-of select="*[local-name(.) ne bible and empty(.)]"/>
             <listWit>
                 <xsl:for-each
-                    select="distinct-values(tokenize(replace(string-join(/descendant::*[@wit]/scdh:get-witness-id($pdu, $witnessCat, @wit), ' '), '#', ''), '\s+'))">
+                    select="distinct-values(tokenize(replace(string-join(/descendant::*[@wit]/scdh:get-witness-id(@wit), ' '), '#', ''), '\s+'))">
                     <witness>
                         <xsl:attribute name="xml:id" select="."/>
                     </witness>
@@ -41,7 +40,7 @@
             <xsl:copy-of select="*"/>
             <xsl:for-each
                 select="let $headWits := /TEI/teiHeader//witness/@xml:id,
-                            $usedWits := /descendant::*[@wit]/scdh:get-witness-id($pdu, $witnessCat, @wit) return
+                            $usedWits := /descendant::*[@wit]/scdh:get-witness-id(@wit) return
                         for $w in distinct-values(tokenize(replace(string-join($usedWits, ' '), '#', ''), '\s+')) return
                             if (exists(index-of($headWits, $w))) then () else $w">
                 <witness>

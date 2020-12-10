@@ -7,28 +7,24 @@
     exclude-result-prefixes="xs"
     version="3.0">
 
+    <!-- URI of witness catalogue. -->
+    <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
+
     <xsl:function name="scdh:getWitnessSiglum" as="xs:string">
-        <xsl:param name="pdu" as="xs:string"/>
-        <xsl:param name="witnessCat" as="xs:string"/>
         <xsl:param name="id" as="xs:string"/>
-	<xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, $id, ' ')"/>
+	<xsl:value-of select="scdh:getWitnessSiglum($id, ' ')"/>
     </xsl:function>
 
     <xsl:function name="scdh:getWitnessSiglum">
-        <xsl:param name="pdu" as="xs:string"/>
-        <xsl:param name="witnessCat" as="xs:string"/>
         <xsl:param name="id" as="xs:string"/>
-	<xsl:param name="sep" as="xs:string"/>
-        <xsl:value-of select="string-join(scdh:get-witness-siglum-seq($pdu, $witnessCat, $id), $sep)"/>
+        <xsl:param name="sep" as="xs:string"/>
+        <xsl:value-of select="string-join(scdh:get-witness-siglum-seq($id), $sep)"/>
     </xsl:function>
 
     <xsl:function name="scdh:get-witness-siglum-seq" as="xs:string*">
-        <xsl:param name="pdu" as="xs:string"/>
-        <xsl:param name="witnessCat" as="xs:string"/>
         <xsl:param name="id" as="xs:string"/>
-        <xsl:variable name="witnessFile" select="concat($pdu, '/', $witnessCat)"/>
-        <xsl:sequence select="if (doc-available($witnessFile))
-			      then let $witnesses := doc($witnessFile)/TEI/text//witness return
+        <xsl:sequence select="if (doc-available($witness-cat))
+			      then let $witnesses := doc($witness-cat)/TEI/text//witness return
 			           for $i in tokenize($id, '\s+') return 
 				       if (exists($witnesses[@xml:id=scdh:normalize-id($i)])) 
 				       then $witnesses[@xml:id=scdh:normalize-id($i)]//abbr[@type='siglum'][1]
@@ -37,11 +33,9 @@
     </xsl:function>
 
     <xsl:template name="witness-siglum-html">
-        <xsl:param name="pdu" as="xs:string"/>
-        <xsl:param name="witnessCat" as="xs:string"/>
         <xsl:param name="wit" as="xs:string"/>
         <span class="siglum">
-            <xsl:for-each select="scdh:get-witness-siglum-seq($pdu, $witnessCat, $wit)">
+            <xsl:for-each select="scdh:get-witness-siglum-seq($wit)">
                 <xsl:value-of select="."/>
                 <xsl:if test="position() ne last()">
                     <span data-i18n-key="witness-sep">, </span>
@@ -51,14 +45,11 @@
     </xsl:template>
 
     <xsl:function name="scdh:get-witness-id">
-        <xsl:param name="pdu" as="xs:string"/>
-        <xsl:param name="witnessCat" as="xs:string"/>
         <xsl:param name="siglum" as="xs:string"/>
-        <xsl:variable name="witnessFile" select="concat($pdu, '/', $witnessCat)"/>
-        <xsl:value-of select="if (doc-available($witnessFile)) 
+        <xsl:value-of select="if (doc-available($witness-cat))
             then (normalize-space(string-join((
             for $s in tokenize($siglum, '[,،\s]+') return
-                    let $sig := doc($witnessFile)/TEI/text//witness//abbr[@type='siglum' and . = $s]
+                    let $sig := doc($witness-cat)/TEI/text//witness//abbr[@type='siglum' and . = $s]
                         return
                             if ($sig)
                                 then ($sig/ancestor::witness/concat('#', @xml:id))

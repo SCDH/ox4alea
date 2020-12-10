@@ -1876,7 +1876,7 @@
 															<field name="paramDescription">
 																<paramDescriptor>
 																	<field name="localName">
-																		<String>pdu</String>
+																		<String>witness-cat</String>
 																	</field>
 																	<field name="prefix">
 																		<null/>
@@ -1887,7 +1887,7 @@
 																</paramDescriptor>
 															</field>
 															<field name="value">
-																<String>${pdu}</String>
+																<String>${pdu}/WitnessCatalogue.xml</String>
 															</field>
 															<field name="hasXPathValue">
 																<Boolean>false</Boolean>
@@ -2000,7 +2000,7 @@
 															<field name="paramDescription">
 																<paramDescriptor>
 																	<field name="localName">
-																		<String>pdu</String>
+																		<String>witness-cat</String>
 																	</field>
 																	<field name="prefix">
 																		<null/>
@@ -2011,7 +2011,7 @@
 																</paramDescriptor>
 															</field>
 															<field name="value">
-																<String>${xpath_eval("${pdu}")}</String>
+																<String>${pdu}/WitnessCatalogue.xml</String>
 															</field>
 															<field name="hasXPathValue">
 																<Boolean>false</Boolean>
@@ -2124,7 +2124,7 @@
 															<field name="paramDescription">
 																<paramDescriptor>
 																	<field name="localName">
-																		<String>pdu</String>
+																		<String>witness-cat</String>
 																	</field>
 																	<field name="prefix">
 																		<null/>
@@ -2135,7 +2135,7 @@
 																</paramDescriptor>
 															</field>
 															<field name="value">
-																<String>${pdu}</String>
+																<String>${pdu}/WitnessCatalogue.xml</String>
 															</field>
 															<field name="hasXPathValue">
 																<Boolean>false</Boolean>
