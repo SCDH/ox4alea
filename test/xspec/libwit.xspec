@@ -9,32 +9,12 @@
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
     stylesheet="../../frameworks/teip5alea/xsl/libwit.xsl">
 
-  <x:scenario label="catalogue file not present">
-    <x:call function="scdh:getWitnessSiglum">
-      <x:param select="'../samples'"/>
-      <x:param select="'not-present.xml'"/>
-      <x:param select="'#W'"/>
-    </x:call>
-    <x:expect
-	label="returns ID"
-	test="normalize-space(.) = '#W'"/>
-  </x:scenario>
-
-  <x:scenario label="directory not present">
-    <x:call function="scdh:getWitnessSiglum">
-      <x:param select="'../not-present'"/>
-      <x:param select="'not-present.xml'"/>
-      <x:param select="'#W'"/>
-    </x:call>
-    <x:expect
-	label="returns ID"
-	test="normalize-space(.) = '#W'"/>
-  </x:scenario>
-
+  <x:param
+      name="witness-cat"
+      select="'../samples/WitnessCatalogue.xml'"/>
+    
   <x:scenario label="getting siglum from witness catalogue">
     <x:call function="scdh:getWitnessSiglum">
-      <x:param select="'../samples'"/>
-      <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="'#W'"/>
     </x:call>
     <x:expect
@@ -45,8 +25,6 @@
 
   <x:scenario label="getting siglum for empty string ID from witness catalogue">
     <x:call function="scdh:getWitnessSiglum">
-      <x:param select="'../samples'"/>
-      <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="''"/>
     </x:call>
     <x:expect
@@ -56,8 +34,6 @@
 
   <x:scenario label="no separator for single siglum">
     <x:call function="scdh:getWitnessSiglum">
-      <x:param select="'../samples'"/>
-      <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="'#W'"/>
       <x:param select="'HAL'"/>
     </x:call>
@@ -69,8 +45,6 @@
   <x:scenario
       label="getting multiple sigla with separator">
     <x:call function="scdh:getWitnessSiglum">
-      <x:param select="'../samples'"/>
-      <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="'#W #S'"/>
       <x:param select="'HAL'"/>
     </x:call>
@@ -81,8 +55,6 @@
 
   <x:scenario label="getting multiple sigla without separator">
     <x:call function="scdh:getWitnessSiglum">
-      <x:param select="'../samples'"/>
-      <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="'#W #S'"/>
     </x:call>
     <x:expect
@@ -93,8 +65,6 @@
   <x:scenario
       label="getting siglum sequence from witness catalogue">
     <x:call function="scdh:get-witness-siglum-seq">
-      <x:param select="'../samples'"/>
-      <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="'#W  #S    HAL'"/>
     </x:call>
     <!-- TODO: make this test work! -->
@@ -108,8 +78,6 @@
 
   <x:scenario label="getting ID for siglum from witness catalogue">
     <x:call function="scdh:get-witness-id">
-      <x:param select="'../samples'"/>
-      <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="'ڤ'"/>
     </x:call>
     <x:expect
@@ -119,8 +87,6 @@
   
   <x:scenario label="getting IDs for multiple sigla from witness catalogue">
     <x:call function="scdh:get-witness-id">
-      <x:param select="'../samples'"/>
-      <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="'ڤ   س'"/>
     </x:call>
     <x:expect
@@ -130,8 +96,6 @@
   
   <x:scenario label="getting IDs for empty string siglum from witness catalogue">
     <x:call function="scdh:get-witness-id">
-      <x:param select="'../samples'"/>
-      <x:param select="'WitnessCatalogue.xml'"/>
       <x:param select="''"/>
     </x:call>
     <x:expect
