@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Unit tests (regression tests) for libwit.xsl -->
+
+<x:description
+    xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:ht="http://www.w3.org/1999/xhtml"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
+    stylesheet="../../frameworks/teip5alea/xsl/libwit.xsl">
+
+  <x:param
+      name="witness-cat"
+      select="'../samples/notpresent.xml'"/>
+
+  <x:scenario label="catalogue file not present">
+    <x:call function="scdh:getWitnessSiglum">
+      <x:param select="'#W'"/>
+    </x:call>
+    <x:expect
+	label="returns ID"
+	test="normalize-space(.) = '#W'"/>
+  </x:scenario>
+
+</x:description>
