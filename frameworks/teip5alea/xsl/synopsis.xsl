@@ -9,13 +9,10 @@
     
     <xsl:output media-type="html"/>
     
-    <!-- ${pdu} oxygen editor variable: project root directory URI -->
-    <xsl:param name="pdu" select="string('.')" as="xs:string"/>
-    
-    <!-- Filename of witness catalogue. -->
-    <xsl:param name="witnessCat" select="'WitnessCatalogue.xml'" as="xs:string"/>
+    <!-- URI of witness catalogue. -->
+    <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
 
-    <xsl:include href="libwit.xsl"/>
+    <xsl:import href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
     <xsl:include href="libcommon.xsl"/>
     
@@ -52,7 +49,7 @@
                             <xsl:for-each select="$witnesses">
                                 <th>
                                     <xsl:text>Handschrift </xsl:text>
-                                    <xsl:value-of select="scdh:getWitnessSiglum($pdu, $witnessCat, .)"/>
+                                    <xsl:value-of select="scdh:getWitnessSiglum(.)"/>
                                 </th>
                             </xsl:for-each>
                         </tr>

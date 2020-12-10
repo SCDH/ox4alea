@@ -16,15 +16,12 @@
     
     <xsl:output media-type="text/html"/>
 
-    <xsl:include href="libwit.xsl"/>
+    <xsl:import href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
     <xsl:include href="libcommon.xsl"/>
 
-    <!-- ${pdu} oxygen editor variable: project root directory URI -->
-    <xsl:param name="pdu" select="string('.')" as="xs:string"/>
-
-    <!-- Filename of witness catalogue. -->
-    <xsl:param name="witnessCat" select="'WitnessCatalogue.xml'" as="xs:string"/>
+    <!-- URI of witness catalogue. -->
+    <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
 
     <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
     <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
@@ -90,13 +87,10 @@
                 </style>
             </head>
             <body>
-                <xsl:if test="not(doc-available(concat($pdu, '/', $witnessCat))) or $debug">
+                <xsl:if test="not(doc-available($witness-cat)) or $debug">
                     <section>
-                        <xsl:text>Project Directory URL (PDU): </xsl:text>
-                        <xsl:value-of select="$pdu"/>
-                        <br/>
                         <xsl:text>Witness Catalogue: </xsl:text>
-                        <xsl:value-of select="$witnessCat"/>
+                        <xsl:value-of select="$witness-cat"/>
                         <br/>
                         <xsl:text>UI language: </xsl:text>
                         <xsl:value-of select="$ui-language"/>
@@ -251,8 +245,6 @@
             <xsl:apply-templates select="." mode="apparatus-annotation"/>
             <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
-                <xsl:with-param name="pdu" select="$pdu"/>
-                <xsl:with-param name="witnessCat" select="$witnessCat"/>
                 <xsl:with-param name="wit" select="@wit"/>
             </xsl:call-template>
             <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span></xsl:if>
@@ -269,8 +261,6 @@
             <xsl:apply-templates select="." mode="apparatus"/>
             <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
-                <xsl:with-param name="pdu" select="$pdu"/>
-                <xsl:with-param name="witnessCat" select="$witnessCat"/>
                 <xsl:with-param name="wit" select="@wit"/>
             </xsl:call-template>
             <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span></xsl:if>
@@ -283,8 +273,6 @@
         <span class="static-text" data-i18n-key="extra-verse">&lre;extra verse&pdf;</span>
         <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
         <xsl:call-template name="witness-siglum-html">
-            <xsl:with-param name="pdu" select="$pdu"/>
-            <xsl:with-param name="witnessCat" select="$witnessCat"/>
             <xsl:with-param name="wit" select="parent::rdg/@wit"/>
         </xsl:call-template>
     </xsl:template>
@@ -358,8 +346,6 @@
             <xsl:apply-templates select="." mode="apparatus"/>
             <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
-                <xsl:with-param name="pdu" select="$pdu"/>
-                <xsl:with-param name="witnessCat" select="$witnessCat"/>
                 <xsl:with-param name="wit" select="@wit"/>
             </xsl:call-template>
             <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span></xsl:if>
