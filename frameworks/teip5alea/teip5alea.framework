@@ -2011,7 +2011,7 @@
 																</paramDescriptor>
 															</field>
 															<field name="value">
-																<String>${pdu}/WitnessCatalogue.xml</String>
+																<String>${ask('Witness Catalogue', url, '${pdu}/WitnessCatalogue.xml')}</String>
 															</field>
 															<field name="hasXPathValue">
 																<Boolean>false</Boolean>
