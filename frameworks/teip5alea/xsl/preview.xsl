@@ -52,7 +52,6 @@
                 <style>
                     .title {
                         color:red;
-                        text-align: center;
                     }
                     body {
                         direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
@@ -146,23 +145,31 @@
             </body>
         </html>
     </xsl:template>
-    
-    <xsl:template match="lg[child::head and child::lg]">
+
+    <!-- verse with head -->
+    <xsl:template match="lg[not(parent::lg) and child::head]">
         <table xmlns="http://www.w3.org/1999/xhtml">
             <tr>
                 <td><xsl:value-of select="scdh:line-number(head)"/></td>
-                <td colspan="1" class="title"><xsl:apply-templates select="head"/></td>
+                <td colspan="2" class="title"><xsl:apply-templates select="head"/></td>
             </tr>
-            <xsl:apply-templates select="lg"/>
+            <xsl:apply-templates select="* except head"/>
         </table>
     </xsl:template>
-    
+
+    <!-- verse without head -->
+    <xsl:template match="lg[not(parent::lg) and not(child::head)]">
+        <table xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:apply-templates select="*"/>
+        </table>
+    </xsl:template>
+
     <xsl:template match="lg/lg">
         <tr xmlns="http://www.w3.org/1999/xhtml"><td colspan="3"></td></tr>
         <xsl:apply-templates select="l|app/lem/l"/>
     </xsl:template>
-    
-    <xsl:template match="lg/lg//l">
+
+    <xsl:template match="l[not(ancestor::head)]">
         <xsl:choose>
             <!-- todo: Annahme hier: es gibt nur ein caesura. Müsste vorher mit Schematron abgeprüft werden. -->
 	    <!-- Fallunterscheidung für Vorkommen und Positionen von caesura. -->
