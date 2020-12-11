@@ -18,206 +18,140 @@
 	<!-- Please note, that this also produces the title and the
 	     empty table row that separates line groups (lg) -->
 	<x:context>
-	    <tei:body>
-		<tei:lg>
-		    <tei:head>Titel</tei:head>
-		    <tei:lg>
-			<tei:l>Aa Bb Cc <tei:caesura/>Dd Ee Ff</tei:l>
-		    </tei:lg>
-		</tei:lg>
-	    </tei:body>
+	    <tei:l>Aa Bb Cc <tei:caesura/>Dd Ee Ff</tei:l>
 	</x:context>
 	<x:expect
 	    label="count of columns"
-	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 1+2+3"/>
+	    test="count(//*[local-name() = 'td']) = 3"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Titel2Aa Bb Cc Dd Ee Ff'"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-	    <ht:table>
-		<ht:tr>...</ht:tr>
-		<ht:tr>...</ht:tr>
 		<ht:tr>
-		    <ht:td style="...">2</ht:td>
+		    <ht:td style="...">1</ht:td>
 		    <ht:td style="...">Aa Bb Cc </ht:td>
 		    <ht:td>Dd Ee Ff</ht:td>
 		</ht:tr>
-	    </ht:table>
 	</x:expect>
     </x:scenario>
 
     <x:scenario label="Line with ceasura as direct child and app element ...">
 	<x:context>
-	    <tei:body>
-		<tei:lg>
-		    <tei:head>Titel</tei:head>
-		    <tei:lg>
-			<tei:l>
-			    <tei:app><tei:lem wit="a">Aa</tei:lem><tei:rdg wit="b">Aaa</tei:rdg>
-			    </tei:app> Bb Cc <tei:caesura
-			    />Dd Ee Ff</tei:l>
-		    </tei:lg>
-		</tei:lg>
-	    </tei:body>
+	    <tei:l>
+		<tei:app><tei:lem wit="a">Aa</tei:lem><tei:rdg wit="b">Aaa</tei:rdg>
+		</tei:app> Bb Cc <tei:caesura
+		/>Dd Ee Ff</tei:l>
 	</x:context>
 	<x:expect
 	    label="count of columns"
-	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 2+1+3"/>
+	    test="count(//*[local-name() = 'td']) = 3"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Titel2Aa Bb Cc Dd Ee Ff'"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-	    <ht:table>
-		<ht:tr>...</ht:tr>
-		<ht:tr>...</ht:tr>
 		<ht:tr>
-		    <ht:td style="...">2</ht:td>
+		    <ht:td style="...">1</ht:td>
 		    <ht:td style="...">Aa Bb Cc </ht:td>
 		    <ht:td>Dd Ee Ff</ht:td>
 		</ht:tr>
-	    </ht:table>
 	</x:expect>
     </x:scenario>
 
     <x:scenario
 	label="Line with ceasura nested in app element like in #1 ...">
 	<x:context>
-	    <tei:body>
-		<tei:lg>
-		    <tei:head>Titel</tei:head>
-		    <tei:lg>
-			<tei:l>
-			    <tei:app>
-				<tei:lem wit="a">Aa Bb Cc <tei:caesura/>Dd Ee Ff</tei:lem>
-				<tei:rdg wit="b">Aaa Bbb Ccc</tei:rdg>
-			    </tei:app>
-			</tei:l>
-		    </tei:lg>
-		</tei:lg>
-	    </tei:body>
+	    <tei:l>
+		<tei:app>
+		    <tei:lem wit="a">Aa Bb Cc <tei:caesura/>Dd Ee Ff</tei:lem>
+		    <tei:rdg wit="b">Aaa Bbb Ccc</tei:rdg>
+		</tei:app>
+	    </tei:l>
 	</x:context>
 	<x:expect
 	    label="count of columns"
-	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 2+1+3"/>
+	    test="count(//*[local-name()='td']) = 3"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Titel2Aa Bb Cc Dd Ee Ff'"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-	    <ht:table>
-		<ht:tr>...</ht:tr>
-		<ht:tr>...</ht:tr>
 		<ht:tr>
-		    <ht:td style="...">2</ht:td>
+		    <ht:td style="...">1</ht:td>
 		    <ht:td style="...">Aa Bb Cc </ht:td>
 		    <ht:td>Dd Ee Ff</ht:td>
 		</ht:tr>
-	    </ht:table>
 	</x:expect>
     </x:scenario>
 
     <x:scenario
 	label="Line with ceasura nested in app element, but not the whole verse in app ...">
 	<x:context>
-	    <tei:body>
-		<tei:lg>
-		    <tei:head>Titel</tei:head>
-		    <tei:lg>
 			<tei:l>Aa Bb <tei:app>
 				<tei:lem wit="a">Cc <tei:caesura/>Dd Ee</tei:lem>
 				<tei:rdg wit="b">Ccc</tei:rdg>
 			    </tei:app> Ff</tei:l>
-		    </tei:lg>
-		</tei:lg>
-	    </tei:body>
 	</x:context>
 	<x:expect
 	    label="count of columns"
-	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 2+1+3"/>
+	    test="count(//*[local-name()='td']) = 3"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Titel2Aa Bb Cc Dd Ee Ff'"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-	    <ht:table>
-		<ht:tr>...</ht:tr>
-		<ht:tr>...</ht:tr>
 		<ht:tr>
-		    <ht:td style="...">2</ht:td>
+		    <ht:td style="...">1</ht:td>
 		    <ht:td style="...">Aa Bb Cc </ht:td>
 		    <ht:td>Dd Ee Ff</ht:td>
 		</ht:tr>
-	    </ht:table>
 	</x:expect>
     </x:scenario>
 
     <x:scenario
 	label="Line with ceasura nested in app element, but no caesura in lem ...">
 	<x:context>
-	    <tei:body>
-		<tei:lg>
-			<tei:head>Titel</tei:head>
-		    <tei:lg>
 			<tei:l>
 			    <tei:app>
 				<tei:lem wit="a">Aa Bb Cc</tei:lem>
 				<tei:rdg wit="b">Aaa Bbb Ccc<tei:caesura/> Dd Ee Ff</tei:rdg>
 			    </tei:app>
 			</tei:l>
-		    </tei:lg>
-		</tei:lg>
-	    </tei:body>
 	</x:context>
 	<x:expect
 	    label="count of columns"
-	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 2+1+3"/>
+	    test="count(//*[local-name()='td']) = 3"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Titel2Aa Bb Cc'"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc'"/>
 	<x:expect label="results in 3 table columns">
-	    <ht:table>
-		<ht:tr>...</ht:tr>
-		<ht:tr>...</ht:tr>
 		<ht:tr>
-		    <ht:td style="...">2</ht:td>
+		    <ht:td style="...">1</ht:td>
 		    <ht:td style="...">Aa Bb Cc</ht:td>
 		    <ht:td></ht:td>
 		</ht:tr>
-	    </ht:table>
 	</x:expect>
     </x:scenario>
 
     <x:scenario
 	label="Line with two ceasura elements nested in lem and rdg ...">
 	<x:context>
-	    <tei:body>
-		<tei:lg>
-		    <tei:head>Titel</tei:head>
-		    <tei:lg>
 			<tei:l>
 			    <tei:app>
 				<tei:lem wit="a">Aa Bb Cc<tei:caesura/> Dd Ee Ff</tei:lem>
 				<tei:rdg wit="b">Aaa Bbb Ccc<tei:caesura/> Ddd Eee Fff</tei:rdg>
 			    </tei:app>
 			</tei:l>
-		    </tei:lg>
-		</tei:lg>
-	    </tei:body>
 	</x:context>
 	<x:expect
 	    label="count of columns"
-	    test="count(*[local-name()='table']/*[local-name()='tr']/*[local-name()='td']) = 2+1+3"/>
+	    test="count(//*[local-name()='td']) = 3"/>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Titel2Aa Bb Cc Dd Ee Ff'"/>
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-	    <ht:table>
-		<ht:tr>...</ht:tr>
-		<ht:tr>...</ht:tr>
 		<ht:tr>
-		    <ht:td style="...">2</ht:td>
+		    <ht:td style="...">1</ht:td>
 		    <ht:td style="...">Aa Bb Cc</ht:td>
 		    <ht:td> Dd Ee Ff</ht:td>
 		</ht:tr>
-	    </ht:table>
 	</x:expect>
     </x:scenario>
 
