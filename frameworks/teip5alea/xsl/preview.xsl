@@ -146,7 +146,7 @@
         </html>
     </xsl:template>
 
-    <!-- verse with head -->
+    <!-- verses with head -->
     <xsl:template match="lg[not(parent::lg) and child::head]">
         <table xmlns="http://www.w3.org/1999/xhtml">
             <tr>
@@ -157,7 +157,7 @@
         </table>
     </xsl:template>
 
-    <!-- verse without head -->
+    <!-- verses without head -->
     <xsl:template match="lg[not(parent::lg) and not(child::head)]">
         <table xmlns="http://www.w3.org/1999/xhtml">
             <xsl:apply-templates select="*"/>
