@@ -17,6 +17,10 @@ lg > head {
     display: block ;
 }
 
+lg > head > title, lg > head > title > l {
+    display: inline;
+}
+
 lg {
     padding: 1em;
 }
