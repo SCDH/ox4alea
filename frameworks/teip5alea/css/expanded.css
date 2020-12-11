@@ -6,11 +6,19 @@ body {
     direction: rtl;
 }
 
+p {
+    padding: 0 1em ;
+}
+
 lg > head {
     color : red ;
     text-align: center;
     font-weight: bold ;
     display: block ;
+}
+
+lg > head > title, lg > head > title > l {
+    display: inline;
 }
 
 lg {
