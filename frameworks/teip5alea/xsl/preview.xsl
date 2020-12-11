@@ -96,13 +96,14 @@
                     </section>
                 </xsl:if>
                 <section class="content">
-                    <xsl:apply-templates select="TEI/text/body"/>
+                    <xsl:apply-templates select="TEI/text"/>
                 </section>
                 <hr/>
                 <section class="variants">
                     <table>
                         <xsl:apply-templates
-                            select="//l[descendant::app or
+                            select="TEI/text//(l|p)
+                                       [descendant::app or
                                         descendant::gap or
                                         descendant::unclear or
                                         descendant::choice or
@@ -146,22 +147,37 @@
         </html>
     </xsl:template>
 
+    <xsl:template match="text">
+        <table>
+            <!-- this table has 3 columns: 1: line number,
+                2 and 3: hemispheres of a verse or something else with @colspan="2" -->
+            <xsl:apply-templates select="*"/>
+        </table>
+    </xsl:template>
+
+    <xsl:template match="p[not(ancestor::note)]">
+        <tr>
+            <td style="font-size: 8pt; padding-left: 10px" valign="top">
+                <xsl:value-of select="scdh:line-number(.)"/>
+            </td>
+            <td colspan="2">
+                <xsl:apply-templates/>
+            </td>
+        </tr>
+    </xsl:template>
+
     <!-- verses with head -->
     <xsl:template match="lg[not(parent::lg) and child::head]">
-        <table xmlns="http://www.w3.org/1999/xhtml">
-            <tr>
-                <td><xsl:value-of select="scdh:line-number(head)"/></td>
-                <td colspan="2" class="title"><xsl:apply-templates select="head"/></td>
-            </tr>
-            <xsl:apply-templates select="* except head"/>
-        </table>
+        <tr>
+            <td><xsl:value-of select="scdh:line-number(head)"/></td>
+            <td colspan="2" class="title"><xsl:apply-templates select="head"/></td>
+        </tr>
+        <xsl:apply-templates select="* except head"/>
     </xsl:template>
 
     <!-- verses without head -->
     <xsl:template match="lg[not(parent::lg) and not(child::head)]">
-        <table xmlns="http://www.w3.org/1999/xhtml">
-            <xsl:apply-templates select="*"/>
-        </table>
+        <xsl:apply-templates select="*"/>
     </xsl:template>
 
     <xsl:template match="lg/lg">
@@ -219,14 +235,14 @@
         <xsl:sequence select="$element/descendant-or-self::rdg/descendant-or-self::node()"/>
     </xsl:function>
 
-    <xsl:template match="(l|app//l)" mode="apparatus-number">
+    <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-number">
         <tr>
             <td><xsl:value-of select="scdh:line-number(.)"/></td>
             <td>
                 <!-- we can't add simple ...|ancestor::app to the selector, because then we
                     lose focus on the line when there are several in an <app>. See #12.
                     We need app//l instead an some etra templates for handling app//l. -->
-                <xsl:for-each select="app|gap|unclear|sic|choice|app/lem/(gap|unclear|choice)|self::l[ancestor::app]">
+                <xsl:for-each select="app|gap|unclear|sic|choice|app/lem/(gap|unclear|choice)|self::l[ancestor::app]|self::p[ancestor::app and not(ancestor::note)]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
@@ -258,7 +274,7 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="app/lem/l" mode="apparatus">
+    <xsl:template match="app/lem/l|app/lem/p[not(ancestor::note)]" mode="apparatus">
         <xsl:variable name="lemma-nodes">
             <xsl:apply-templates select="parent::lem" mode="apparatus-lemma"/>
         </xsl:variable>
@@ -274,7 +290,8 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="l[not(ancestor::app/lem/l)]" mode="apparatus">
+    <xsl:template match="l[not(ancestor::app/lem/l)]|p[not(ancestor::app/lem/p) and not(ancestor::note)]"
+        mode="apparatus">
         <xsl:apply-templates mode="apparatus"/>
         <xsl:text> </xsl:text>
         <span class="static-text" data-i18n-key="extra-verse">&lre;extra verse&pdf;</span>
@@ -435,6 +452,9 @@
             <xsl:when test="(parent::app/preceding-sibling::l) or (parent::app/following-sibling::l)">
                 <xsl:text>^ </xsl:text>
             </xsl:when>
+            <xsl:when test="(parent::app/preceding-sibling::p) or (parent::app/following-sibling::p)">
+                <xsl:text>^ </xsl:text>
+            </xsl:when>
             <xsl:when test="(normalize-space(string-join(parent::app/preceding-sibling::node(), ' ')) eq '')">
                 <xsl:text>^ </xsl:text>
             </xsl:when>
@@ -452,7 +472,7 @@
         <xsl:apply-templates mode="apparatus-lemma"/>
     </xsl:template>
 
-    <xsl:template match="l" mode="apparatus-lemma">
+    <xsl:template match="l|p[not(ancestor::note)]" mode="apparatus-lemma">
         <xsl:apply-templates mode="apparatus-lemma"/>
     </xsl:template>
 
