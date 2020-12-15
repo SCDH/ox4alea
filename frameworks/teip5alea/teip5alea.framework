@@ -291,7 +291,7 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
-													<String>register_witness</String>
+													<String>add_wit</String>
 												</field>
 											</menuItem>
 										</field>
@@ -312,7 +312,7 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
-													<String>add_wit</String>
+													<String>add_witdetail</String>
 												</field>
 											</menuItem>
 										</field>
@@ -329,6 +329,27 @@
 										</field>
 										<field name="index">
 											<Integer>15</Integer>
+										</field>
+										<field name="value">
+											<menuItem>
+												<field name="actionID">
+													<String>register_witness</String>
+												</field>
+											</menuItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>16</Integer>
 										</field>
 										<field name="value">
 											<menuSeparator/>
@@ -1147,6 +1168,27 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
+													<String>add_witdetail</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>12</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
 													<String>register_witness</String>
 												</field>
 											</toolbarItem>
@@ -1550,6 +1592,47 @@
 												<field name="targets">
 													<list>
 														<Integer>0</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>add_witdetail</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<null/>
+												</field>
+												<field name="replacedElementNs">
+													<String></String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
 														<Integer>2</Integer>
 														<Integer>1</Integer>
 													</list>
@@ -1586,7 +1669,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>6</Integer>
+											<Integer>7</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1629,7 +1712,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>7</Integer>
+											<Integer>8</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1672,7 +1755,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>8</Integer>
+											<Integer>9</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
