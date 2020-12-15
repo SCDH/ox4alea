@@ -7,6 +7,33 @@ body {
     direction: rtl;
 }
 
+
+text > * > listWit {
+    direction: ltr;
+}
+
+text > * > listWit > * > witness {
+    display: block
+}
+
+witness > abbr {
+    font-weight: bold;
+    -oxy-display-tags: none;
+}
+
+text > * > listWit > head {
+    display: block;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+text > * > listWit > listWit > head {
+    display: block;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+
 p {
     padding: 0 1em ;
 }
