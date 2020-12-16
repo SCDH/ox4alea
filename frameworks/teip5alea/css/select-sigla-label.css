@@ -5,7 +5,7 @@ lem:before, rdg:before {
     oxy_popup(
       edit, "@wit",
       values, oxy_xpath('let $witnesses := /TEI/teiHeader//witness/@xml:id ! concat("#", .) return string-join($witnesses, ",")'),
-      labels, oxy_xpath(oxy_concat('let $witcat := "', "${pdu}/WitnessCatalogue.xml", '", $sigla := (if (doc-available($witcat)) then doc($witcat)/TEI/text//witness else ()), $witnesses := (/TEI/teiHeader//witness/@xml:id ! (let $w := . return concat("#", $w, "=", $sigla[@xml:id eq $w]//abbr[1]))) return string-join($witnesses, ",")'))
+      labels, oxy_xpath(oxy_concat('let $witcat := "', oxy_url("${pdu}/", "WitnessCatalogue.xml"), '", $sigla := (if (doc-available($witcat)) then doc($witcat)/TEI/text//witness else ()), $witnesses := (/TEI/teiHeader//witness/@xml:id ! (let $w := . return concat("#", $w, "=", $sigla[@xml:id eq $w]//abbr[1] ))) return string-join($witnesses, ",")'))
       )
     "] ";
 }
