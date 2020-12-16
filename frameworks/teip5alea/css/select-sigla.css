@@ -1,0 +1,8 @@
+lem:before, rdg:before {
+  background-color: inherit;
+  color: inherit;
+  content:
+    "‪["
+    oxy_popup(edit, "@wit")
+    "]‬";
+}
