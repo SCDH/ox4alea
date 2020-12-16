@@ -144,6 +144,33 @@
 										<field name="value">
 											<cssFile>
 												<field name="href">
+													<String>${framework}/css/select-sigla-label.css</String>
+												</field>
+												<field name="title">
+													<String>+ select Sigla (experimental)</String>
+												</field>
+												<field name="alternate">
+													<Boolean>true</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>7</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
 													<String>${framework}/css/edit-sigla.css</String>
 												</field>
 												<field name="title">
@@ -166,7 +193,7 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
-											<Integer>7</Integer>
+											<Integer>8</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
@@ -193,7 +220,7 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
-											<Integer>8</Integer>
+											<Integer>9</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
@@ -220,7 +247,7 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
-											<Integer>9</Integer>
+											<Integer>10</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
