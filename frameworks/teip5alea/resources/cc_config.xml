@@ -18,7 +18,7 @@
     <match attributeName="wit" editable="true">
         <xslt href="cc_wit.xsl" useCache="false" action="replace"/>
     </match>
-    ⁻->
+    -->
 
     <!-- restrict the witness elements (in sourceDesc) -->
     <match
@@ -39,6 +39,10 @@
         path="t:lg/t:lg/t:app/t:rdg"
         insertElements="t:l"
         possibleElements="_INSERTED_"/>
+
+    <match attributeName="met" editable="true">
+        <xslt href="cc_met.xsl" useCache="false" action="replace"/>
+    </match>
 
     <!-- delete l from proposals in context of l/app/lem and l/app/rdg -->
     <elementProposals
