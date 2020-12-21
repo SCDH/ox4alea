@@ -16,9 +16,23 @@ text > * > listWit > * > witness {
     display: block
 }
 
+witness > choice > expan {
+    -oxy-display-tags: none;
+}
+
 witness > abbr {
     font-weight: bold;
     -oxy-display-tags: none;
+}
+
+witness > choice > abbr {
+    font-weight: bold;
+    -oxy-display-tags: none;
+}
+
+witness > choice > abbr:after {
+    font-weight: normal;
+    content: " = "
 }
 
 text > * > listWit > head {
@@ -88,6 +102,10 @@ note {
 choice {
     -oxy-display-tags: none;
     color: gray;
+}
+
+witness > choice {
+    color: black;
 }
 
 corr {
