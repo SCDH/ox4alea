@@ -14,11 +14,9 @@
 
     <!-- Restrict the value of @wit attributes to the IDs of the witnesses 
         given in the sourceDesc of the current file. -->
-    <!--
     <match attributeName="wit" editable="true">
         <xslt href="cc_wit.xsl" useCache="false" action="replace"/>
     </match>
-    -->
 
     <!-- restrict the witness elements (in sourceDesc) -->
     <match
