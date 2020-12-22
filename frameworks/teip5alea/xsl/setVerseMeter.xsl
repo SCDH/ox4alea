@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA" xmlns="http://www.tei-c.org/ns/1.0"
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs scdh"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs scdh xi"
     version="3.0">
 
     <xsl:mode on-no-match="shallow-copy"/>
