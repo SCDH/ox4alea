@@ -170,9 +170,22 @@
     <xsl:template match="lg[not(parent::lg) and child::head]">
         <tr>
             <td><xsl:value-of select="scdh:line-number(head)"/></td>
-            <td colspan="2" class="title"><xsl:apply-templates select="head"/></td>
+            <td colspan="2" class="title">
+                <xsl:apply-templates select="head"/>
+                <xsl:apply-templates select="@met" mode="head"/>
+            </td>
         </tr>
         <xsl:apply-templates select="* except head"/>
+    </xsl:template>
+
+    <!-- print verse meter -->
+    <xsl:template match="@met" mode="head">
+        <xsl:variable name="met" select="."/>
+        <span class="static-text">
+            <xsl:text> [</xsl:text>
+            <xsl:value-of select="/TEI/teiHeader//metSym[@value eq $met]//term[1]"/>
+            <xsl:text>] </xsl:text>
+        </span>
     </xsl:template>
 
     <!-- verses without head -->
