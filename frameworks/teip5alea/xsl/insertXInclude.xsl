@@ -27,6 +27,7 @@
             <xsl:attribute name="href" select="$uri"/>
             <xsl:attribute name="xpointer" select="$xpointer"/>
         </xsl:element>
+        <xsl:text>&#xa;   </xsl:text>
     </xsl:template>
 
 </xsl:stylesheet>
