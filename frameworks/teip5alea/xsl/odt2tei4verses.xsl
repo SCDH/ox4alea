@@ -26,6 +26,9 @@
                         <bibl/>
                     </sourceDesc>
                 </fileDesc>
+                <revisionDesc xml:lang="de">
+                    <change when="{$date}" who="{$authorname}">Konvertierung von Textverarbeitung nach TEI.</change>
+                </revisionDesc>
             </teiHeader>
             <text>
                 <body>
