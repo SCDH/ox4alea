@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="3.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xi="http://www.w3.org/2001/XInclude"
+    exclude-result-prefixes="xs xi" version="3.0"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0">
+
+    <xsl:include href="insertXInclude.xsl"/>
 
     <xsl:param name="reading" as="xs:string" select="'lemma'"/>
 
     <xsl:mode on-no-match="shallow-copy"/>
 
+    <xsl:template match="/">
+        <xsl:apply-templates/>
+        <xsl:message>Extracting text from <xsl:value-of select="$reading"/>.</xsl:message>
+    </xsl:template>
+
     <!-- drop listWit from source description -->
-    <xsl:template match="sourceDesc/listWit"/>
+    <xsl:template match="sourceDesc/listWit">
+        <p xml:lang="en">
+            <xsl:text>Text from </xsl:text>
+            <xsl:value-of select="base-uri()"/>
+            <xsl:text>, witness </xsl:text>
+            <xsl:value-of select="$reading"/>
+        </p>
+    </xsl:template>
 
     <!-- select reading depending on stylesheet parameter $reading -->
     <xsl:template
