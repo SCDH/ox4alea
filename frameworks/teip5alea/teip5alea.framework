@@ -2451,7 +2451,7 @@
 																</paramDescriptor>
 															</field>
 															<field name="value">
-																<String>${ask('Select reading', combobox, ('lemma':'lemma'; 'a': 'a'), 'lemma')}</String>
+																<String>${ask('Select reading', combobox, (${xpath_eval(string-join(let $headWits := /*:TEI/*:teiHeader//*:witness/@xml:id, $catFile := "${pdu}/WitnessCatalogue.xml", $catWits := if (doc-available($catFile)) then doc($catFile)/*:TEI/*:text//*:witness else () return for $w in $headWits return concat("'#", $w, "':'#", $w, ' : ', string-join($catWits[@xml:id eq $w]//(abbr|expan), ' = '), "'"), ';')  )}), 'lemma')}</String>
 															</field>
 															<field name="hasXPathValue">
 																<Boolean>false</Boolean>
