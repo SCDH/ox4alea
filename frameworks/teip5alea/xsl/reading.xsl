@@ -8,6 +8,8 @@
 
     <xsl:param name="reading" as="xs:string" select="'lemma'"/>
 
+    <xsl:param name="authorname" as="xs:string" select="'unknown'"/>
+
     <xsl:mode on-no-match="shallow-copy"/>
 
     <xsl:template match="/">
@@ -19,11 +21,26 @@
     <xsl:template match="sourceDesc/listWit">
         <p xml:lang="en">
             <xsl:text>Text from </xsl:text>
-            <xsl:value-of select="base-uri()"/>
-            <xsl:text>, witness </xsl:text>
+            <xsl:value-of select="string-join(tokenize(base-uri(), '/')[position() gt last()-5], '/')"/>
+            <xsl:text>, witness '</xsl:text>
             <xsl:value-of select="$reading"/>
+            <xsl:text>'.</xsl:text>
         </p>
     </xsl:template>
+
+    <xsl:template match="revisionDesc">
+        <revisionDesc xml:lang="de">
+            <change when="{format-date(current-date(), '[Y]-[M]-[D]')}" who="{$authorname}">
+                <xsl:text>Kopie des Textes ohne Apparat von </xsl:text>
+                <xsl:value-of select="string-join(tokenize(base-uri(), '/')[position() gt last()-5], '/')"/>
+                <xsl:text>, Textzeuge '</xsl:text>
+                <xsl:value-of select="$reading"/>
+                <xsl:text>'.</xsl:text>
+            </change>
+        </revisionDesc>
+    </xsl:template>
+
+
 
     <!-- select reading depending on stylesheet parameter $reading -->
     <xsl:template
