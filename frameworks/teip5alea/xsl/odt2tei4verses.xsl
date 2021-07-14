@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tei-c.org/ns/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
     exclude-result-prefixes="xs"
     xpath-default-namespace="urn:oasis:names:tc:opendocument:xmlns:text:1.0" version="2.0">
 
@@ -22,8 +23,10 @@
                         <bibl/>
                     </sourceDesc>
                 </fileDesc>
+                <xi:include href="https://zivgitlab.uni-muenster.de/ALEA/Vokabular.xml"
+                    xpointer="encodingDesc"/>
                 <revisionDesc xml:lang="de">
-                    <change when="{format-date(current-date(), '[Y]-[M]-[D]')}" who="{$authorname}"
+                    <change when="{format-date(current-date(), '[Y0001]-[M01]-[D01]')}" who="{$authorname}"
                         >Konvertierung von Textverarbeitung nach TEI.</change>
                 </revisionDesc>
             </teiHeader>

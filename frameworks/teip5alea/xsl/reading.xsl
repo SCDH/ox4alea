@@ -18,19 +18,11 @@
     </xsl:template>
 
     <!-- drop listWit from source description -->
-    <xsl:template match="sourceDesc/listWit">
-        <p xml:lang="en">
-            <xsl:text>Text from </xsl:text>
-            <xsl:value-of select="string-join(tokenize(base-uri(), '/')[position() gt last()-5], '/')"/>
-            <xsl:text>, witness '</xsl:text>
-            <xsl:value-of select="$reading"/>
-            <xsl:text>'.</xsl:text>
-        </p>
-    </xsl:template>
+    <xsl:template match="sourceDesc"/>
 
     <xsl:template match="revisionDesc">
         <revisionDesc xml:lang="de">
-            <change when="{format-date(current-date(), '[Y]-[M]-[D]')}" who="{$authorname}">
+            <change when="{format-date(current-date(), '[Y0001]-[M01]-[D01]')}" who="{$authorname}">
                 <xsl:text>Kopie des Textes ohne Apparat von </xsl:text>
                 <xsl:value-of select="string-join(tokenize(base-uri(), '/')[position() gt last()-5], '/')"/>
                 <xsl:text>, Textzeuge '</xsl:text>
