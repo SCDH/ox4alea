@@ -77,6 +77,9 @@
                     .static-text, .apparatus-sep, .siglum {
                         color: gray;
                     }
+                    abbr {
+                        text-decoration: none;
+                    }
                     @font-face {
                     font-family:"Arabic Typesetting";
                     /*The location of the loaded TTF font must be relative to the CSS*/
@@ -242,7 +245,14 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
+    <xsl:template match="name[@type]">
+        <xsl:variable name="cat" select="@type"/>
+        <abbr title="{/TEI/teiHeader/encodingDesc//category[@xml:id eq replace($cat, '#', '')]/catDesc[1]}">
+            <xsl:apply-templates/>
+        </abbr>
+    </xsl:template>
+
     <xsl:function name="scdh:non-lemma-nodes" as="node()*">
         <xsl:param name="element" as="node()"/>
         <xsl:sequence select="$element/descendant-or-self::rdg/descendant-or-self::node()"/>
