@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<!-- 
+   The following DTD is required for referencing by @xml:id through
+   XInclude and XPointer with 'bare names' e.g. in maven plugins and other XML implementations.
+   
+   See https://www.w3.org/TR/WD-xptr#bare-names
+   https://stackoverflow.com/questions/50294372/trying-to-use-xinclude-with-java-and-resolving-the-fragment-with-xmlid/50332840#50332840
+   https://github.com/mojohaus/xml-maven-plugin/issues/61
+   
+   oXygen does it right without!
+-->
+<!DOCTYPE TEI [
+   <!ATTLIST encodingDesc xml:id ID #IMPLIED>
+   <!ATTLIST metDecl xml:id ID #IMPLIED>
+]>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Annotationsvocabulary</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Publication Information</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p/>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc xml:id="encodingDesc">
+         <variantEncoding method="parallel-segmentation" location="internal"/>
+         <!-- metrum declaration (taken from the TEI guidelines) -->
+         <metDecl pattern="[DTIS3A]+">
+            <metSym n="dactyl" value="D" terminal="false">-oo</metSym>
+            <metSym n="trochee" value="T" terminal="false">-o</metSym>
+            <metSym n="iamb" value="I" terminal="false">o-</metSym>
+            <metSym n="spondee" value="S" terminal="false">--</metSym>
+            <metSym n="tribrach" value="3" terminal="false">ooo</metSym>
+            <metSym n="anapaest" value="A" terminal="false">oo-</metSym>
+            <metSym value="o">short syllable</metSym>
+            <metSym value="-">long syllable</metSym>
+         </metDecl>
+         <!-- taxonomies -->
+         <classDecl>
+            <!-- Taxonomy used for name/@type -->
+            <taxonomy xml:id="object">
+               <category xml:id="animal">
+                  <catDesc xml:lang="de">Tier</catDesc>
+                  <catDesc xml:lang="en">animal</catDesc>
+                  <category xml:id="animal.wild">
+                     <catDesc xml:lang="de">Wildtier</catDesc>
+                     <catDesc xml:lang="en">wild animal</catDesc>
+                  </category>
+                  <category xml:id="animal.domestic">
+                     <catDesc xml:lang="de">Haustier</catDesc>
+                     <catDesc xml:lang="en">domestic animal</catDesc>
+                  </category>
+               </category>
+               <category xml:id="plant">
+                  <catDesc xml:lang="de">Pflanze</catDesc>
+                  <catDesc xml:lang="en">plant</catDesc>
+               </category>
+            </taxonomy>
+         </classDecl>
+      </encodingDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <p>The body of this file is empty.</p>
+      </body>
+   </text>
+</TEI>
