@@ -7,8 +7,8 @@
   id="del_app">
   <a:name>Delete variants</a:name>
   <a:description>Choose which text to keep and delete all variants (alternatives) at point.</a:description>
-  <a:smallIconPath href="${framework}/images/sheetsminus-16.png"/>
-  <a:largeIconPath href="${framework}/images/sheetsminus-24.png"/>
+  <a:smallIconPath href="${framework}/images/sheetsX-16.png"/>
+  <a:largeIconPath href="${framework}/images/sheetsX-24.png"/>
   <a:operations>
     <a:operation id="XSLTOperation">
       <a:xpathCondition>self::*:app</a:xpathCondition>
