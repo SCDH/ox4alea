@@ -13,6 +13,7 @@
       </a:arguments>
     </a:operation>
     <a:operation id="ChangeAttributeOperation">
+      <a:xpathCondition>self::bibl[not(parent::listBibl)]</a:xpathCondition>
       <a:arguments>
         <a:argument name="elementLocation">self::bibl</a:argument>
         <a:argument name="name">corresp</a:argument>
