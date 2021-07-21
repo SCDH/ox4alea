@@ -420,6 +420,27 @@
 											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
 										</field>
 										<field name="index">
+											<Integer>17</Integer>
+										</field>
+										<field name="value">
+											<menuItem>
+												<field name="actionID">
+													<String>edit_bibref</String>
+												</field>
+											</menuItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
 											<Integer>9</Integer>
 										</field>
 										<field name="value">
