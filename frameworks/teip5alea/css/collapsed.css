@@ -1,5 +1,7 @@
 @import "http://scdh.wwu.de/alea/resources/font.css";
 
+@import "common.css";
+
 teiHeader { display: none }
 
 
