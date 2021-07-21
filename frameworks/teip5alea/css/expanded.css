@@ -137,3 +137,9 @@ gap {
     content: "[...]";
     -oxy-display-tags: none;
 }
+
+listBibl > bibl:before {
+    content: concat("#", oxy_xpath("@xml:id"), ": ");
+    text-decoration: underline;
+    font-weight: 400;
+}
