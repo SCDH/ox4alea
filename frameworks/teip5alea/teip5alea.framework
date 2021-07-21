@@ -1847,6 +1847,47 @@
 									</poPatch>
 									<poPatch>
 										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>10</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>edit_bibref</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<null/>
+												</field>
+												<field name="replacedElementNs">
+													<String></String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
 											<String>templatesLocations</String>
 										</field>
 										<field name="index">
