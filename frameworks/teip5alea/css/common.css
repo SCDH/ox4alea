@@ -1,0 +1,17 @@
+listBibl {
+    display: block;
+    direction: ltr;
+}
+
+listBibl > * {
+    display: block;
+}
+
+listBibl > head {
+    font-size: xx-large;
+    font-weight: 900;
+}
+
+listBibl > listBibl > head {
+    font-size: larger;
+}
