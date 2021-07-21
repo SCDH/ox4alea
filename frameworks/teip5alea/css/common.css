@@ -15,3 +15,10 @@ listBibl > head {
 listBibl > listBibl > head {
     font-size: larger;
 }
+
+bibl[corresp]:before {
+    -oxy-link: oxy_url("../samples/biblio.xml") attr(corresp);
+    content: "‪" attr(corresp) ": " "‬";
+    text-decoration: underline;
+    font-weight: 400;
+}
