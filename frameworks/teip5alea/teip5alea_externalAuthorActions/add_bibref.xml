@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="edit_bibref">
+  <a:name>Edit bibliographic reference</a:name>
+  <a:description>Inserts or changes a bibliographic reference.</a:description>
+  <a:operations>
+    <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>self::note</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="fragment"><![CDATA[<bibl xmlns="http://www.tei-c.org/ns/1.0" corresp="${ask('Choose entry from bibliography', combobox, (${xpath_eval(let $biblio := doc('${framework}/samples/biblio.xml') return string-join(for $entry in $biblio//*:body//*:listBibl//*:bibl return concat("'", '#', $entry/@xml:id, "':'", normalize-space($entry), "'"), ';'))}), '')}"/>]]></a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
