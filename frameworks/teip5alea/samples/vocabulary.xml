@@ -63,6 +63,21 @@
                   <catDesc xml:lang="en">plant</catDesc>
                </category>
             </taxonomy>
+            <!-- Taxonmie used for seg/@type -->
+            <taxonomy xml:id="segment">
+               <category xml:id="verbatim">
+                  <catDesc xml:lang="de">Wortgetreues Zitat</catDesc>
+                  <catDesc xml:lang="en">Verbatim quotation</catDesc>
+                  <category xml:id="verbatim-holy">
+                     <catDesc xml:lang="de">Wortgetreues Zitat aus dem heiligen Text</catDesc>
+                     <catDesc xml:lang="en">Verbatim quotation from the holy text</catDesc>
+                  </category>
+               </category>
+               <category xml:id="analogous">
+                  <catDesc xml:lang="de">Sinngemäßes Zitat</catDesc>
+                  <catDesc xml:lang="en">Analogous quotation</catDesc>
+               </category>
+            </taxonomy>
          </classDecl>
       </encodingDesc>
    </teiHeader>

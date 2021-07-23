@@ -57,6 +57,11 @@
         <xslt href="cc_taxonomy_type.xsl" useCache="false" action="replace"/>
     </match>
 
+    <!-- proposals for seg/@type -->
+    <match attributeName="type" editable="true" elementName="seg" elementNS="http://www.tei-c.org/ns/1.0">
+        <xslt href="cc_seg_type.xsl" useCache="false" action="replace"/>
+    </match>
+
     <!-- bibliographic references -->
     <match attributeName="corresp" editable="false" elementName="bibl" elementNS="http://www.tei-c.org/ns/1.0">
         <xslt href="cc_bibref.xsl" useCache="false" action="replace"/>
