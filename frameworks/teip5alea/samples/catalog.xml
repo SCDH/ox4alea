@@ -6,10 +6,10 @@
     <!-- RelaxNG Schema -->
     <!-- We override oXygen's default schema for TEI files with our own customized schema -->
     <uri name="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
-        uri="schema/teip5alea.rng"/>
-    <systemSuffix systemIdSuffix="tei_all.rng" uri="schema/teip5alea.rng"/>
+        uri="schema/myschema.rng"/>
+    <systemSuffix systemIdSuffix="tei_all.rng" uri="schema/myschema.rng"/>
 
-    <!-- we can simply override the path suffix `teip5alea/.../...` -->
+    <!-- we can simply redirect by the path suffix `teip5alea/.../...` which is distinct enough -->
 
     <!-- override CSS font definitions of ALEA framework -->
     <uriSuffix uriSuffix="teip5alea/css/font.css" uri="css/font.css"/>

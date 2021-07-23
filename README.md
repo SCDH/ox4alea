@@ -84,12 +84,20 @@ The test result is in `test/xspec/xspec/*-review.html`.
 The framework can and should be adapted to your project's needs by
 customization. Customization includes:
 
-- redirect to a bibliography through an XML catalog
+- redirect to a bibliography through an [XML
+  catalog](https://www.oxygenxml.com/doc/versions/23.1/ug-editor/topics/using-XML-Catalogs.html#using-XML-Catalogs)
 - redirect to a catalog of witnesses through an XML catalog 
-- redirect to local CSS with font definitions etc. through an XML catalog
+- redirect to local CSS with font definitions etc. through an XML
+  catalog
+- register the [XML
+  catalog](https://www.oxygenxml.com/doc/versions/23.1/ug-editor/topics/preferences-xml-catalog.html#preferences-xml-catalog),
+  e.g. put the catalog file into `resources/catalog.xml` and add
+  `${pdu}/resources/catalog.xml` to the list of catalogs for your
+  project (check "Project Options")
 - insert a taxonomy of named objects (plants, animals, etc.) into the
   `<encodingDesc>` of each TEI documents header (by means of XInclude)
 - also insert a taxonomy of segment types in there
+
 
 Take a look at the folder
 [`frameworks/teip5alea/samples`](frameworks/teip5alea/samples) for
