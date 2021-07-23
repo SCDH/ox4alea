@@ -19,4 +19,8 @@
     <systemSuffix systemIdSuffix="teip5alea/samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
     <uriSuffix uriSuffix="teip5alea/samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
 
+    <!-- override witness catalogue of ALEA framework -->
+    <systemSuffix systemIdSuffix="teip5alea/samples/witnesses.xml" uri="../Handschriftenverzeichnis.xml"/>
+    <uriSuffix uriSuffix="teip5alea/samples/witnesses.xml" uri="../Handschriftenverzeichnis.xml"/>
+
 </catalog>
