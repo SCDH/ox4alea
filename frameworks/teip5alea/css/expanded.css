@@ -1,4 +1,5 @@
-@import "http://scdh.wwu.de/alea/resources/font.css";
+@import "font.css";
+@import "common.css";
 
 teiHeader { display: none }
 
@@ -134,4 +135,10 @@ sic {
 gap {
     content: "[...]";
     -oxy-display-tags: none;
+}
+
+listBibl > bibl:before {
+    content: concat("#", oxy_xpath("@xml:id"), ": ");
+    text-decoration: underline;
+    font-weight: 400;
 }
