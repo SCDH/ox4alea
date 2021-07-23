@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="ar">
    <teiHeader>
       <fileDesc>
          <titleStmt>
@@ -12,6 +12,7 @@
             <listWit><witness xml:id="W"/><witness xml:id="S"/><witness xml:id="A"/></listWit>
          </sourceDesc>
       </fileDesc>
+      <include xmlns="http://www.w3.org/2001/XInclude" href="vocabulary.xml" xpointer="encodingDesc"/>
    </teiHeader>
    <text>
       <body>

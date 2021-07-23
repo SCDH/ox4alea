@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sample XML catalog file for a TEI project -->
+<!DOCTYPE catalog PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.1//EN" "http://www.oasis-open.org/committees/entity/release/1.1/catalog.dtd">
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+
+    <!-- RelaxNG Schema -->
+    <!-- We override oXygen's default schema for TEI files with our own customized schema -->
+    <uri name="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng"
+        uri="schema/myschema.rng"/>
+    <systemSuffix systemIdSuffix="tei_all.rng" uri="schema/myschema.rng"/>
+
+    <!-- we can simply redirect by the path suffix `teip5alea/.../...` which is distinct enough -->
+
+    <!-- override CSS font definitions of ALEA framework -->
+    <uriSuffix uriSuffix="teip5alea/css/font.css" uri="css/font.css"/>
+    <systemSuffix systemIdSuffix="teip5alea/css/font.css" uri="css/font.css"/>
+
+    <!-- override bibliography of ALEA framework -->
+    <systemSuffix systemIdSuffix="teip5alea/samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
+    <uriSuffix uriSuffix="teip5alea/samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
+
+    <!-- override witness catalogue of ALEA framework -->
+    <systemSuffix systemIdSuffix="teip5alea/samples/witnesses.xml" uri="../Handschriftenverzeichnis.xml"/>
+    <uriSuffix uriSuffix="teip5alea/samples/witnesses.xml" uri="../Handschriftenverzeichnis.xml"/>
+
+</catalog>

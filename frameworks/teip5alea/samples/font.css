@@ -1,0 +1,45 @@
+@font-face {
+    font-family:"Arabic Typesetting";
+    /*The location of the loaded TTF font must be relative to the CSS*/
+    src:url('arabt100.ttf');
+}
+
+@font-face {
+    font-family:"Amiri Regular";
+    src:url("Amiri-Regular.ttf");
+}
+
+@font-face {
+    font-family:"Coranica";
+    src:url("coranica_1164.ttf");
+}
+
+body {
+    font-family:"Amiri Regular";
+}
+
+
+lg > head:after {
+    background-color: inherit;
+    content:
+      " ["
+      oxy_xpath("let $met := parent::*/@met, $metres := /TEI/teiHeader//metSym return if (exists($metres)) then $metres[@value = $met]//term[@xml:lang='ar']/text() else $met")
+      "] ";
+}
+
+seg[type='#verbatim-holy']:before {
+    content: "﴿"
+}
+
+seg[type='#verbatim-holy']:after {
+    content: "﴾"
+}
+
+seg[type='#verbatim-holy'] {
+    -oxy-display-tags: none;
+}
+
+seg {
+    margin: 0;
+    padding: 0;
+}
