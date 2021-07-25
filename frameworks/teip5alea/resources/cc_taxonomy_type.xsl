@@ -20,7 +20,7 @@
 
     <xsl:template match="category">
         <item>
-            <xsl:attribute name="value" select="@xml:id"/>
+            <xsl:attribute name="value" select="concat('#', @xml:id)"/>
         </item>
     </xsl:template>
 
