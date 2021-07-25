@@ -9,8 +9,8 @@
 
     <xsl:template name="start">
         <items>
-            <!-- TODO/FIXME: does not get replaced when written in xml-catalog -->
-            <xsl:apply-templates select="doc('../samples/biblio.xml')//body"/>
+            <!-- Note: ../../teip5alea/... is for unifrom rewriting through an xml-catalog -->
+            <xsl:apply-templates select="doc('../../teip5alea/samples/biblio.xml')//body"/>
         </items>
     </xsl:template>
 
