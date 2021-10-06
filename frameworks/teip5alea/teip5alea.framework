@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="22.1" xml:space="preserve">
+<serialized xml:space="preserve">
 	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
 			<documentTypeDescriptor-array>
 				<documentTypeDescriptor>
+					<field name="webResources">
+						<null/>
+					</field>
 					<field name="extensionPatch">
 						<documentTypeDescriptorPatch>
 							<field name="patchList">
@@ -385,7 +388,11 @@
 											<Integer>15</Integer>
 										</field>
 										<field name="value">
-											<menuSeparator/>
+											<menuItem>
+												<field name="actionID">
+													<String>add_witdetail</String>
+												</field>
+											</menuItem>
 										</field>
 										<field name="patchHandling">
 											<String>addIndex</String>
@@ -404,7 +411,7 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
-													<String>insert_taxonomic_tag</String>
+													<String>register_witness</String>
 												</field>
 											</menuItem>
 										</field>
@@ -442,7 +449,7 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
-													<String>insert_seg</String>
+													<String>insert_taxonomic_tag</String>
 												</field>
 											</menuItem>
 										</field>
@@ -461,11 +468,66 @@
 											<Integer>19</Integer>
 										</field>
 										<field name="value">
+											<menuSeparator/>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>20</Integer>
+										</field>
+										<field name="value">
+											<menuItem>
+												<field name="actionID">
+													<String>insert_seg</String>
+												</field>
+											</menuItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>21</Integer>
+										</field>
+										<field name="value">
 											<menuItem>
 												<field name="actionID">
 													<String>edit_bibref</String>
 												</field>
 											</menuItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>22</Integer>
+										</field>
+										<field name="value">
+											<menuSeparator/>
 										</field>
 										<field name="patchHandling">
 											<String>addIndex</String>
@@ -1281,6 +1343,27 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
+													<String>add_witdetail</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>12</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
 													<String>register_witness</String>
 												</field>
 											</toolbarItem>
@@ -1682,6 +1765,47 @@
 												<field name="targets">
 													<list>
 														<Integer>0</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>add_witdetail</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<null/>
+												</field>
+												<field name="replacedElementNs">
+													<String></String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
 														<Integer>2</Integer>
 														<Integer>1</Integer>
 													</list>
@@ -1718,7 +1842,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>6</Integer>
+											<Integer>7</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1761,7 +1885,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>7</Integer>
+											<Integer>8</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1780,49 +1904,6 @@
 												</field>
 												<field name="replacementFor">
 													<String>gap</String>
-												</field>
-												<field name="replacedElementNs">
-													<String>http://www.tei-c.org/ns/1.0</String>
-												</field>
-												<field name="displayOnlyWhenElementAllowed">
-													<Boolean>true</Boolean>
-												</field>
-												<field name="useReplaceElementName">
-													<Boolean>true</Boolean>
-												</field>
-											</contextItem>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/contextualItems/items</String>
-										</field>
-										<field name="index">
-											<Integer>8</Integer>
-										</field>
-										<field name="value">
-											<contextItem>
-												<field name="targets">
-													<list>
-														<Integer>0</Integer>
-														<Integer>2</Integer>
-														<Integer>1</Integer>
-													</list>
-												</field>
-												<field name="actionID">
-													<String>mark-unclear</String>
-												</field>
-												<field name="alias">
-													<null/>
-												</field>
-												<field name="replacementFor">
-													<String>unclear</String>
 												</field>
 												<field name="replacedElementNs">
 													<String>http://www.tei-c.org/ns/1.0</String>
@@ -1955,6 +2036,49 @@
 												</field>
 												<field name="useReplaceElementName">
 													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>12</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>mark-unclear</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<String>unclear</String>
+												</field>
+												<field name="replacedElementNs">
+													<String>http://www.tei-c.org/ns/1.0</String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>true</Boolean>
 												</field>
 											</contextItem>
 										</field>
@@ -3221,7 +3345,7 @@
 					<field name="schemaDescriptor">
 						<docTypeSchema>
 							<field name="type">
-								<Integer>6</Integer>
+								<Integer>4</Integer>
 							</field>
 							<field name="uri">
 								<String>${framework}/xml/tei/custom/schema/relaxng/tei_all.rng</String>
