@@ -1,11 +1,6 @@
-note {
-    display: inline-block;
+note, witDetail {
+    display: block;
     background-color: yellow;
     -oxy-display-tags: default;
-}
-
-witDetail {
-    display: inline-block;
-    background-color: yellow;
-    -oxy-display-tags: default;
+    direction: ltr;
 }
