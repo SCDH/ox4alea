@@ -95,11 +95,6 @@ app > rdg {
     display: none ;
 }
 
-
-note {
-    display: none ;
-}
-
 choice {
     -oxy-display-tags: none;
     color: gray;
