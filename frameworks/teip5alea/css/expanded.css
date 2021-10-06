@@ -84,11 +84,6 @@ caesura {
     visibility: hidden ;
 }
 
-note {
-    background-color: yellow;
-    -oxy-display-tags: none;
-}
-
 app {
     display: inline ;
 }

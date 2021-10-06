@@ -22,3 +22,11 @@ bibl[corresp]:before {
     text-decoration: underline;
     font-weight: 400;
 }
+
+note {
+        display: none;
+}
+
+witDetail {
+    display: none;
+}

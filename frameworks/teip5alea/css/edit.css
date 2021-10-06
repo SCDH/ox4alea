@@ -9,3 +9,12 @@ listBibl > bibl:before {
     oxy_textfield(edit, "@xml:id")
     ": "
 }
+
+lem:before, rdg:before, witDetail:before {
+  background-color: inherit;
+  color: inherit;
+  content:
+    " ["
+    oxy_popup(edit, "@wit")
+    "] ";
+}
