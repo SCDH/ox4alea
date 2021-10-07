@@ -23,7 +23,7 @@
 
     <xsl:template match="sourceDesc[not(descendant::listWit)]">
         <sourceDesc>
-            <xsl:copy-of select="*[local-name(.) ne bible and empty(.)]"/>
+            <xsl:copy-of select="*[not(self::bible or self::p or empty(.))]"/>
             <listWit>
                 <xsl:for-each
                     select="distinct-values(tokenize(replace(string-join(/descendant::*[@wit]/scdh:get-witness-id(@wit), ' '), '#', ''), '\s+'))">
