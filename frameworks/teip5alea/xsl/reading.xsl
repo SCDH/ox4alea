@@ -68,7 +68,4 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    <!-- drop notes -->
-    <xsl:template match="note"/>
-
 </xsl:stylesheet>
