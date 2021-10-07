@@ -918,6 +918,44 @@
 										<field name="value">
 											<menuItem>
 												<field name="actionID">
+													<String>sel-language</String>
+												</field>
+											</menuItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>5</Integer>
+										</field>
+										<field name="value">
+											<menuSeparator/>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<menuItem>
+												<field name="actionID">
 													<String>insert_next</String>
 												</field>
 											</menuItem>
@@ -968,13 +1006,17 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>20</Integer>
+											<Integer>21</Integer>
 										</field>
 										<field name="value">
-											<null/>
+											<toolbarItem>
+												<field name="actionID">
+													<String>add_note</String>
+												</field>
+											</toolbarItem>
 										</field>
 										<field name="patchHandling">
-											<String>removeIndex</String>
+											<String>addIndex</String>
 										</field>
 										<field name="anchor">
 											<null/>
@@ -1092,87 +1134,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>add_note</String>
-												</field>
-											</toolbarItem>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>12</Integer>
-										</field>
-										<field name="value">
-											<null/>
-										</field>
-										<field name="patchHandling">
-											<String>removeIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>12</Integer>
-										</field>
-										<field name="value">
-											<toolbarItem>
-												<field name="actionID">
 													<String>add-corr</String>
-												</field>
-											</toolbarItem>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>13</Integer>
-										</field>
-										<field name="value">
-											<toolbarItem>
-												<field name="actionID">
-													<String>add-sic</String>
-												</field>
-											</toolbarItem>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>14</Integer>
-										</field>
-										<field name="value">
-											<toolbarItem>
-												<field name="actionID">
-													<String>wrap-choice</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -1193,7 +1155,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>unwrap-choice</String>
+													<String>add-sic</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -1214,7 +1176,7 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
-													<String>mark-unclear</String>
+													<String>wrap-choice</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -1235,6 +1197,48 @@
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
+													<String>unwrap-choice</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>18</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
+													<String>mark-unclear</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>19</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
 													<String>add-gap</String>
 												</field>
 											</toolbarItem>
@@ -1251,7 +1255,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>10</Integer>
+											<Integer>12</Integer>
 										</field>
 										<field name="value">
 											<null/>
@@ -1268,41 +1272,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>9</Integer>
-										</field>
-										<field name="value">
-											<null/>
-										</field>
-										<field name="patchHandling">
-											<String>removeIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>8</Integer>
-										</field>
-										<field name="value">
-											<null/>
-										</field>
-										<field name="patchHandling">
-											<String>removeIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
-										</field>
-										<field name="index">
-											<Integer>8</Integer>
+											<Integer>12</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
@@ -1323,7 +1293,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>9</Integer>
+											<Integer>13</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
@@ -1344,7 +1314,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>10</Integer>
+											<Integer>14</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
@@ -1365,7 +1335,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>11</Integer>
+											<Integer>15</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
@@ -1386,7 +1356,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>12</Integer>
+											<Integer>16</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
@@ -1407,7 +1377,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>6</Integer>
+											<Integer>10</Integer>
 										</field>
 										<field name="value">
 											<null/>
@@ -1424,7 +1394,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>5</Integer>
+											<Integer>9</Integer>
 										</field>
 										<field name="value">
 											<null/>
@@ -1441,7 +1411,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>4</Integer>
+											<Integer>8</Integer>
 										</field>
 										<field name="value">
 											<null/>
@@ -1458,7 +1428,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>4</Integer>
+											<Integer>8</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
@@ -1479,7 +1449,7 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>5</Integer>
+											<Integer>9</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
@@ -1500,12 +1470,84 @@
 											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
 										</field>
 										<field name="index">
-											<Integer>6</Integer>
+											<Integer>10</Integer>
 										</field>
 										<field name="value">
 											<toolbarItem>
 												<field name="actionID">
 													<String>instert_stanza</String>
+												</field>
+											</toolbarItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<null/>
+										</field>
+										<field name="patchHandling">
+											<String>removeIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>5</Integer>
+										</field>
+										<field name="value">
+											<null/>
+										</field>
+										<field name="patchHandling">
+											<String>removeIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>4</Integer>
+										</field>
+										<field name="value">
+											<null/>
+										</field>
+										<field name="patchHandling">
+											<String>removeIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/toolbarDescriptor/toolbarEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>4</Integer>
+										</field>
+										<field name="value">
+											<toolbarItem>
+												<field name="actionID">
+													<String>sel-language</String>
 												</field>
 											</toolbarItem>
 										</field>
@@ -1579,6 +1621,47 @@
 												<field name="targets">
 													<list>
 														<Integer>0</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>sel-language</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<null/>
+												</field>
+												<field name="replacedElementNs">
+													<String></String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>false</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>1</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
 														<Integer>2</Integer>
 														<Integer>1</Integer>
 													</list>
@@ -1615,7 +1698,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>1</Integer>
+											<Integer>2</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1658,7 +1741,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>2</Integer>
+											<Integer>3</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1701,7 +1784,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>3</Integer>
+											<Integer>4</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1744,7 +1827,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>4</Integer>
+											<Integer>5</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1785,7 +1868,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>5</Integer>
+											<Integer>6</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1826,7 +1909,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>6</Integer>
+											<Integer>7</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1869,7 +1952,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>7</Integer>
+											<Integer>8</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1912,7 +1995,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>8</Integer>
+											<Integer>9</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1955,7 +2038,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>9</Integer>
+											<Integer>10</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1996,7 +2079,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>10</Integer>
+											<Integer>11</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -2037,7 +2120,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>11</Integer>
+											<Integer>12</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -2078,7 +2161,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>12</Integer>
+											<Integer>13</Integer>
 										</field>
 										<field name="value">
 											<contextItem>

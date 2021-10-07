@@ -1,4 +1,4 @@
-# ALEA &lt;oXygen/> Framework
+# ALEA &lt;oXygen/> Framework #
 
 An &lt;oXygen/> extension for the edition of the works of Ibn Nubata
 al Misri.
@@ -103,3 +103,91 @@ Take a look at the folder
 [`frameworks/teip5alea/samples`](frameworks/teip5alea/samples) for
 sample resources, especially at the XML catalog. Without
 customization, the files from this folder are used.
+
+# Features and Usage #
+
+## Project specific files ##
+
+The framework does not make assumptions about your project's file
+names and paths. But for some functions, it needs access to central
+project files. An
+[XML-catalog](https://www.oxygenxml.com/doc/versions/23.1/ug-editor/topics/using-XML-Catalogs.html?hl=xml%2Ccatalog)
+can be used for redirecting from some dummy sample files, that ship
+with the framework, to your project files.
+
+You should add an XML-catalog to your project. The catalog could
+e.g. live in `resources/catalog.xml`. The you should
+[register](https://www.oxygenxml.com/doc/versions/23.1/ug-editor/topics/preferences-xml-catalog.html#preferences-xml-catalog)
+the catalog in `${pdu}/resources/catalog.xml` in &lt;oXygen>.
+
+### Project specific CSS ###
+
+You can redirect to an CSS file by redirecting the frameworkfile
+`samples/css/font.css` as you need. Here's a catalog entry to redirect
+to `resources/css/font.css` in your project:
+
+```{xml}
+<!-- override CSS (font) definitions of framework -->
+<uriSuffix uriSuffix="teip5alea/css/font.css" uri="css/font.css"/>
+<systemSuffix systemIdSuffix="teip5alea/css/font.css" uri="css/font.css"/>
+```
+
+
+## Language and script direction ##
+
+According to the [TEI
+guidelines](https://www.tei-c.org/release/doc/tei-p5-doc/de/html/WD.html#WDWM),
+the writing direction of a script should be encoded by the `@xml:lang`
+attribute. Moreover, the languages, that used in a TEI encoded
+document, should be listed in `teiHeader/profileDesc/langUsage`.
+
+Here is an example header:
+
+```{xml}
+  <profileDesc xml:id="profileDesc">
+	 <langUsage xml:id="langUsage">
+		<language ident="ar">Arabisch</language>
+		<language ident="ar-DE">Arabisch in Umschrift nach Brockelmann/Wehr</language>
+		<language ident="de">Deutsch</language>
+		<language ident="en">English</language>
+	 </langUsage>
+  </profileDesc>
+```
+
+The framework offers a functions for setting the `@xml:lang` attribute
+by selecting a language from the list of languages in the header.
+
+- `Change language` author mode action 
+  - is available in the Toolbar:
+	![languageicon](frameworks/teip5alea/images/lang-24.png) (Note:
+	The icon was desigend by Onur Mustak Cobanli an is distributed on
+	[http://languageicon.org/](http://languageicon.org/) by under a CC
+	licence with Relax-Attribution term.)
+  - is available through content completion (Return)
+  - is available in the `TEI P5` menu
+- content completion is active in text mode
+
+In order to get nice rendering in author mode, you should provide CSS
+for the used languages through the project specific CSS file. Here is
+an example:
+
+```{css}
+@namespace xml "http://www.w3.org/XML/1998/namespace";
+
+[xml|lang="ar"] {
+    direction: rtl !important;
+}
+
+[xml|lang="de"] {
+    direction: ltr !important;
+}
+
+[xml|lang="en"] {
+    direction: ltr !important;
+}
+
+[xml|lang="ar-DE"] {
+    direction: ltr !important;
+}
+```
+
