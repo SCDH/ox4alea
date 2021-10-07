@@ -15,7 +15,7 @@
       <a:arguments>
         <a:argument name="name">lang</a:argument>
         <a:argument name="namespace">http://www.w3.org/XML/1998/namespace</a:argument>
-        <a:argument name="value"><![CDATA[${ask('Select language', combobox, (${xpath_eval(string-join(for $lang in //*:teiHeader/*:profileDesc/*:langUsage/*:language return concat("'", $lang/@ident, "':'", normalize-space($lang), "'"), ';'))}), '')}]]></a:argument>
+        <a:argument name="value"><![CDATA[${ask('Select language', combobox, (${xpath_eval(concat(string-join(for $lang in //*:teiHeader/*:profileDesc/*:langUsage/*:language return concat("'", $lang/@ident, "':'", normalize-space($lang), "'"), ';'), ";'':''"))}), '${xpath_eval(@xml:lang)}')}]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
