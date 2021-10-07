@@ -32,7 +32,6 @@
       <profileDesc xml:id="profileDesc">
          <langUsage xml:id="langUsage">
             <language ident="ar">Arabic</language>
-            <language ident="ar-DE">Arabisch rewritten in Latin characters</language>
             <language ident="de">German</language>
             <language ident="en">English</language>
          </langUsage>
