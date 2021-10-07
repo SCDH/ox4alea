@@ -107,6 +107,7 @@
                         <xsl:apply-templates
                             select="TEI/text//(l|p)
                                        [descendant::app or
+                                        descendant::witDetail or
                                         descendant::gap or
                                         descendant::unclear or
                                         descendant::choice or
@@ -265,7 +266,7 @@
                 <!-- we can't add simple ...|ancestor::app to the selector, because then we
                     lose focus on the line when there are several in an <app>. See #12.
                     We need app//l instead an some etra templates for handling app//l. -->
-                <xsl:for-each select="app|gap|unclear|sic|choice|app/lem/(gap|unclear|choice)|self::l[ancestor::app]|self::p[ancestor::app and not(ancestor::note)]">
+                <xsl:for-each select="app|gap|unclear|sic|choice|witDetail|app/lem/(gap|unclear|choice)|self::l[ancestor::app]|self::p[ancestor::app and not(ancestor::note)]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
@@ -281,14 +282,14 @@
         </xsl:variable>
         <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
-        <xsl:for-each select="rdg">
+        <xsl:for-each select="rdg|witDetail">
             <!-- repeat prefix if necessary -->
             <xsl:if test="parent::app/lem[. eq '']">
                 <xsl:apply-templates select="parent::app/lem" mode="apparatus-lemma"/>
                 <xsl:text>&#x20;</xsl:text>
             </xsl:if>
             <xsl:apply-templates select="." mode="apparatus"/>
-            <xsl:apply-templates select="." mode="apparatus-annotation"/>
+            <xsl:apply-templates select=".[not(self::witDetail)]" mode="apparatus-annotation"/>
             <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
                 <xsl:with-param name="wit" select="@wit"/>
@@ -336,6 +337,17 @@
                 <span class="static-text" data-i18n-key="missing">&lre;missing&pdf;</span>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="witDetail" mode="apparatus">
+        <!-- FIXME: output reference text -->
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
+        <xsl:apply-templates select="*|text()" mode="apparatus"/>
+        <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
+        <xsl:call-template name="witness-siglum-html">
+            <xsl:with-param name="wit" select="@wit"/>
+        </xsl:call-template>
+        <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span></xsl:if>
     </xsl:template>
 
     <xsl:template match="unclear" mode="apparatus">
@@ -389,7 +401,7 @@
     <xsl:template match="choice[child::sic/app and child::corr]" mode="apparatus">
         <xsl:apply-templates select="corr"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
-        <xsl:for-each select="sic/app/rdg">
+        <xsl:for-each select="sic/app/rdg|sic/app/witDetail">
             <xsl:apply-templates select="." mode="apparatus"/>
             <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
@@ -511,7 +523,9 @@
     <xsl:template match="l/note">
         <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
     </xsl:template>
-      
+
+    <xsl:template match="witDetail"/>
+
     <xsl:template match="app">
         <xsl:apply-templates select="lem"/>
     </xsl:template>
