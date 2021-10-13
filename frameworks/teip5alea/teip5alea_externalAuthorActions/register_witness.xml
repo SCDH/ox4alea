@@ -16,7 +16,7 @@
         <a:argument name="fragment"><![CDATA[<witness xmlns="http://www.tei-c.org/ns/1.0" xml:id="${ask('Textzeuge',combobox, (${xpath_eval(
           let $catFile := "${pdu}/WitnessCatalogue.xml" return
           if (doc-available($catFile))
-              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';'))
+              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', normalize-space($w/*:choice), "'"), ';'))
               else ("'error':'no witness catalogue found'") )}),
 '')}"
           facs="${ask('Blatt', generic, '')}"/>]]>
@@ -31,7 +31,7 @@
         <a:argument name="fragment"><![CDATA[<listWit xmlns="http://www.tei-c.org/ns/1.0"><witness xml:id="${ask('Textzeuge',combobox, (${xpath_eval(
           let $catFile := "${pdu}/WitnessCatalogue.xml" return
           if (doc-available($catFile))
-              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';'))
+              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', normalize-space($w/*:choice), "'"), ';'))
               else ("'error':'no witness catalogue found'") )}),
 '')}"
           facs="${ask('Blatt', generic, '')}"/></listWit>]]>
@@ -45,7 +45,7 @@
         <a:argument name="fragment"><![CDATA[<witness xmlns="http://www.tei-c.org/ns/1.0" xml:id="${ask('Textzeuge',combobox, (${xpath_eval(
           let $catFile := "${pdu}/WitnessCatalogue.xml" return
           if (doc-available($catFile))
-              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';'))
+              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', normalize-space($w/*:choice), "'"), ';'))
               else ("'error':'no witness catalogue found'") )}),
 '')}"
           facs="${ask('Blatt', generic, '')}"/>]]>
