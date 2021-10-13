@@ -93,10 +93,10 @@
 										<field name="value">
 											<cssFile>
 												<field name="href">
-													<String>${framework}/css/add-sigla.css</String>
+													<String>${framework}/css/header.css</String>
 												</field>
 												<field name="title">
-													<String>+ Sigla</String>
+													<String>+ header</String>
 												</field>
 												<field name="alternate">
 													<Boolean>true</Boolean>
@@ -120,10 +120,10 @@
 										<field name="value">
 											<cssFile>
 												<field name="href">
-													<String>${framework}/css/select-sigla.css</String>
+													<String>${framework}/css/add-sigla.css</String>
 												</field>
 												<field name="title">
-													<String>+ select Sigla</String>
+													<String>+ Sigla</String>
 												</field>
 												<field name="alternate">
 													<Boolean>true</Boolean>
@@ -143,114 +143,6 @@
 										</field>
 										<field name="index">
 											<Integer>6</Integer>
-										</field>
-										<field name="value">
-											<cssFile>
-												<field name="href">
-													<String>${framework}/css/tags.css</String>
-												</field>
-												<field name="title">
-													<String>+ tags</String>
-												</field>
-												<field name="alternate">
-													<Boolean>true</Boolean>
-												</field>
-											</cssFile>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/cssDescriptors</String>
-										</field>
-										<field name="index">
-											<Integer>7</Integer>
-										</field>
-										<field name="value">
-											<cssFile>
-												<field name="href">
-													<String>${framework}/css/ltr.css</String>
-												</field>
-												<field name="title">
-													<String>+ Left-to-right script</String>
-												</field>
-												<field name="alternate">
-													<Boolean>true</Boolean>
-												</field>
-											</cssFile>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/cssDescriptors</String>
-										</field>
-										<field name="index">
-											<Integer>8</Integer>
-										</field>
-										<field name="value">
-											<cssFile>
-												<field name="href">
-													<String>${baseFramework}/xml/tei/css/tei_oxygen.css</String>
-												</field>
-												<field name="title">
-													<String>Basic</String>
-												</field>
-												<field name="alternate">
-													<Boolean>false</Boolean>
-												</field>
-											</cssFile>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/cssDescriptors</String>
-										</field>
-										<field name="index">
-											<Integer>9</Integer>
-										</field>
-										<field name="value">
-											<cssFile>
-												<field name="href">
-													<String>${framework}/css/edit.css</String>
-												</field>
-												<field name="title">
-													<String>+ edit</String>
-												</field>
-												<field name="alternate">
-													<Boolean>true</Boolean>
-												</field>
-											</cssFile>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/cssDescriptors</String>
-										</field>
-										<field name="index">
-											<Integer>10</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
@@ -277,15 +169,123 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
+											<Integer>7</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
+													<String>${framework}/css/select-sigla.css</String>
+												</field>
+												<field name="title">
+													<String>+ select Sigla</String>
+												</field>
+												<field name="alternate">
+													<Boolean>true</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>8</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
+													<String>${framework}/css/tags.css</String>
+												</field>
+												<field name="title">
+													<String>+ tags</String>
+												</field>
+												<field name="alternate">
+													<Boolean>true</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>9</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
+													<String>${framework}/css/ltr.css</String>
+												</field>
+												<field name="title">
+													<String>+ Left-to-right script</String>
+												</field>
+												<field name="alternate">
+													<Boolean>true</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>10</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
+													<String>${baseFramework}/xml/tei/css/tei_oxygen.css</String>
+												</field>
+												<field name="title">
+													<String>Basic</String>
+												</field>
+												<field name="alternate">
+													<Boolean>false</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
 											<Integer>11</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
 												<field name="href">
-													<String>${framework}/css/header.css</String>
+													<String>${framework}/css/edit.css</String>
 												</field>
 												<field name="title">
-													<String>+ header</String>
+													<String>+ edit</String>
 												</field>
 												<field name="alternate">
 													<Boolean>true</Boolean>
