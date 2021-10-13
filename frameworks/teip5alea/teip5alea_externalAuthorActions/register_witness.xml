@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:tei="http://www.tei-c.org/ns/1.0"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
   id="register_witness">
   <a:name>Register Witness</a:name>
@@ -9,22 +10,7 @@
   <a:largeIconPath href="${framework}/images/sheetswrench-24.png"/>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
-      <a:xpathCondition>local-name() = 'sourceDesc' and not(./*:listWit)</a:xpathCondition>
-      <a:arguments>
-        <a:argument name="fragment"><![CDATA[
-<listWit xmlns="http://www.tei-c.org/ns/1.0">
-    <witness xmlns="http://www.tei-c.org/ns/1.0" xml:id="${ask('Textzeuge',combobox,(${xpath_eval(
-          let $catFile := "${pdu}/WitnessCatalogue.xml" return
-          if (doc-available($catFile))
-              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';'))
-              else ("'error':'no witness catalogue found'") )}),
-'')}"/>
-</listWit>]]>
-        </a:argument>
-      </a:arguments>
-    </a:operation>
-    <a:operation id="InsertFragmentOperation">
-      <a:xpathCondition>local-name() = 'listWit'</a:xpathCondition>
+      <a:xpathCondition>self::*:listWit[ancestor::*:sourceDesc]</a:xpathCondition>
       <a:arguments>
         <!-- TODO: don't allow duplicates! -->
         <a:argument name="fragment"><![CDATA[<witness xmlns="http://www.tei-c.org/ns/1.0" xml:id="${ask('Textzeuge',combobox, (${xpath_eval(
@@ -32,8 +18,40 @@
           if (doc-available($catFile))
               then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';'))
               else ("'error':'no witness catalogue found'") )}),
-'')}"/>]]>
+'')}"
+          facs="${ask('Blatt', generic, '')}"/>]]>
         </a:argument>
+        <a:argument name="insertPosition">Inside as last child</a:argument>
+      </a:arguments>
+    </a:operation>
+    <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>self::*:sourceDesc[not(exists(*:listWit))]</a:xpathCondition>
+      <a:arguments>
+        <!-- TODO: don't allow duplicates! -->
+        <a:argument name="fragment"><![CDATA[<listWit xmlns="http://www.tei-c.org/ns/1.0"><witness xml:id="${ask('Textzeuge',combobox, (${xpath_eval(
+          let $catFile := "${pdu}/WitnessCatalogue.xml" return
+          if (doc-available($catFile))
+              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';'))
+              else ("'error':'no witness catalogue found'") )}),
+'')}"
+          facs="${ask('Blatt', generic, '')}"/></listWit>]]>
+        </a:argument>
+      </a:arguments>
+    </a:operation>
+    <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>self::*:witness[ancestor::*:sourceDesc]</a:xpathCondition>
+      <a:arguments>
+        <!-- TODO: don't allow duplicates! -->
+        <a:argument name="fragment"><![CDATA[<witness xmlns="http://www.tei-c.org/ns/1.0" xml:id="${ask('Textzeuge',combobox, (${xpath_eval(
+          let $catFile := "${pdu}/WitnessCatalogue.xml" return
+          if (doc-available($catFile))
+              then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', $w/*:abbr[@type='siglum'][1], "'"), ';'))
+              else ("'error':'no witness catalogue found'") )}),
+'')}"
+          facs="${ask('Blatt', generic, '')}"/>]]>
+        </a:argument>
+        <a:argument name="insertLocation">ancestor::*:listWit</a:argument>
+        <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
