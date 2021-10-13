@@ -11,15 +11,12 @@ teiHeader > * {
 
 fileDesc > * {
     display: block;
+    margin: 1ex 0;
 }
 
 fileDesc > titleStmt > title {
     display: block;
     font-size:x-large;
-}
-
-fileDesc > publicationStmt {
-    display: none;
 }
 
 sourceDesc > listWit:before {
@@ -28,13 +25,13 @@ sourceDesc > listWit:before {
 
 sourceDesc > listWit > witness {
     display:block;
-    direction: ltr;
 }
 
 sourceDesc > listWit > witness:before {
-    content: attr(xml|id) ": " attr(facs) " ";
+    content: attr(xml|id) ": " attr(facs);
     text-decoration: underline;
     font-weight: 400;
+    margin-right: 0.5em;
 }
 
 fileDesc > sourceDesc {
@@ -47,9 +44,12 @@ teiHeader > xi|include {
 
 revisionDesc > change {
     display: block;
+    margin: 1ex 0;
 }
 
 revisionDesc > change:before {
-    content: "Change on " attr(when) " by " attr(who) ": ";
+    content: "Change on " attr(when) " by " attr(who) ":";
     text-decoration: underline;
+    direction: ltr;
+    margin-right: 0.5em;
 }
