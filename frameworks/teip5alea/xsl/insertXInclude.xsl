@@ -18,7 +18,7 @@
     <xsl:template match="teiHeader[not(encodingDesc) or not(profileDesc)]">
         <teiHeader xml:space="default">
             <xsl:text>&#xa;&tab2;</xsl:text>
-            <xsl:copy-of select="fileDesc"/>
+            <xsl:apply-templates select="fileDesc"/>
             <xsl:text>&#xa;&tab2;</xsl:text>
             <xsl:element name="include" namespace="http://www.w3.org/2001/XInclude">
                 <xsl:attribute name="href" select="$uri"/>
@@ -30,7 +30,7 @@
                 <xsl:attribute name="xpointer" select="$encodingDesc-id"/>
             </xsl:element>
             <xsl:text>&#xa;&tab2;</xsl:text>
-            <xsl:copy-of select="revisionDesc"/>
+            <xsl:apply-templates select="revisionDesc"/>
             <xsl:text>&#xa;&tab;</xsl:text>
         </teiHeader>
     </xsl:template>
