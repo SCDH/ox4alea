@@ -277,6 +277,33 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
+											<Integer>11</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
+													<String>${framework}/css/header.css</String>
+												</field>
+												<field name="title">
+													<String>+ header</String>
+												</field>
+												<field name="alternate">
+													<Boolean>true</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
 											<Integer>0</Integer>
 										</field>
 										<field name="value">
