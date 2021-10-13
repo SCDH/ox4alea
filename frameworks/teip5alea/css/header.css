@@ -1,0 +1,55 @@
+@namespace xi "http://www.w3.org/2001/XInclude";
+@namespace xml "http://www.w3.org/XML/1998/namespace";
+
+teiHeader {
+    display: block;
+}
+
+teiHeader > * {
+    display: block;
+}
+
+fileDesc > * {
+    display: block;
+}
+
+fileDesc > titleStmt > title {
+    display: block;
+    font-size:x-large;
+}
+
+fileDesc > publicationStmt {
+    display: none;
+}
+
+sourceDesc > listWit:before {
+    content: "Textzeugen:";
+}
+
+sourceDesc > listWit > witness {
+    display:block;
+    direction: ltr;
+}
+
+sourceDesc > listWit > witness:before {
+    content: attr(xml|id) ": " attr(facs) " ";
+    text-decoration: underline;
+    font-weight: 400;
+}
+
+fileDesc > sourceDesc {
+    display: block;
+}
+
+teiHeader > xi|include {
+    display:none !important;
+}
+
+revisionDesc > change {
+    display: block;
+}
+
+revisionDesc > change:before {
+    content: "Change on " attr(when) " by " attr(who) ": ";
+    text-decoration: underline;
+}
