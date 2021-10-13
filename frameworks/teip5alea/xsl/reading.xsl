@@ -18,7 +18,9 @@
     </xsl:template>
 
     <!-- drop listWit from source description -->
-    <xsl:template match="sourceDesc"/>
+    <xsl:template match="sourceDesc">
+        <sourceDesc/>
+    </xsl:template>
 
     <xsl:template match="revisionDesc">
         <revisionDesc xml:lang="de">
