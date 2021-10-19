@@ -93,6 +93,33 @@
 										<field name="value">
 											<cssFile>
 												<field name="href">
+													<String>${framework}/css/header.css</String>
+												</field>
+												<field name="title">
+													<String>+ header</String>
+												</field>
+												<field name="alternate">
+													<Boolean>true</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>5</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
 													<String>${framework}/css/add-sigla.css</String>
 												</field>
 												<field name="title">
@@ -115,7 +142,34 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
-											<Integer>5</Integer>
+											<Integer>6</Integer>
+										</field>
+										<field name="value">
+											<cssFile>
+												<field name="href">
+													<String>${framework}/css/note.css</String>
+												</field>
+												<field name="title">
+													<String>+ Kommentare</String>
+												</field>
+												<field name="alternate">
+													<Boolean>true</Boolean>
+												</field>
+											</cssFile>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/cssDescriptors</String>
+										</field>
+										<field name="index">
+											<Integer>7</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
@@ -142,7 +196,7 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
-											<Integer>6</Integer>
+											<Integer>8</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
@@ -169,7 +223,7 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
-											<Integer>7</Integer>
+											<Integer>9</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
@@ -196,7 +250,7 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
-											<Integer>8</Integer>
+											<Integer>10</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
@@ -223,7 +277,7 @@
 											<String>authorExtensionDescriptor/cssDescriptors</String>
 										</field>
 										<field name="index">
-											<Integer>9</Integer>
+											<Integer>11</Integer>
 										</field>
 										<field name="value">
 											<cssFile>
@@ -232,33 +286,6 @@
 												</field>
 												<field name="title">
 													<String>+ edit</String>
-												</field>
-												<field name="alternate">
-													<Boolean>true</Boolean>
-												</field>
-											</cssFile>
-										</field>
-										<field name="patchHandling">
-											<String>addIndex</String>
-										</field>
-										<field name="anchor">
-											<null/>
-										</field>
-									</poPatch>
-									<poPatch>
-										<field name="fieldPath">
-											<String>authorExtensionDescriptor/cssDescriptors</String>
-										</field>
-										<field name="index">
-											<Integer>10</Integer>
-										</field>
-										<field name="value">
-											<cssFile>
-												<field name="href">
-													<String>${framework}/css/note.css</String>
-												</field>
-												<field name="title">
-													<String>+ Kommentare</String>
 												</field>
 												<field name="alternate">
 													<Boolean>true</Boolean>
@@ -555,6 +582,27 @@
 										</field>
 										<field name="value">
 											<menuSeparator/>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/menubarDescriptor/menuEntriesDescriptorList</String>
+										</field>
+										<field name="index">
+											<Integer>23</Integer>
+										</field>
+										<field name="value">
+											<menuItem>
+												<field name="actionID">
+													<String>report_changes</String>
+												</field>
+											</menuItem>
 										</field>
 										<field name="patchHandling">
 											<String>addIndex</String>
@@ -1748,12 +1796,10 @@
 												<field name="targets">
 													<list>
 														<Integer>0</Integer>
-														<Integer>2</Integer>
-														<Integer>1</Integer>
 													</list>
 												</field>
 												<field name="actionID">
-													<String>add_variant</String>
+													<String>register_witness</String>
 												</field>
 												<field name="alias">
 													<null/>
@@ -1796,7 +1842,7 @@
 													</list>
 												</field>
 												<field name="actionID">
-													<String>append_variant</String>
+													<String>add_variant</String>
 												</field>
 												<field name="alias">
 													<null/>
@@ -1828,6 +1874,49 @@
 										</field>
 										<field name="index">
 											<Integer>5</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>append_variant</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<null/>
+												</field>
+												<field name="replacedElementNs">
+													<String></String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>6</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1868,7 +1957,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>6</Integer>
+											<Integer>7</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1909,7 +1998,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>7</Integer>
+											<Integer>8</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1952,7 +2041,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>8</Integer>
+											<Integer>9</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -1995,7 +2084,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>9</Integer>
+											<Integer>10</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -2038,7 +2127,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>10</Integer>
+											<Integer>11</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -2079,7 +2168,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>11</Integer>
+											<Integer>12</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -2120,7 +2209,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>12</Integer>
+											<Integer>13</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -2161,7 +2250,7 @@
 											<String>authorExtensionDescriptor/contextualItems/items</String>
 										</field>
 										<field name="index">
-											<Integer>13</Integer>
+											<Integer>14</Integer>
 										</field>
 										<field name="value">
 											<contextItem>
@@ -2194,6 +2283,77 @@
 										</field>
 										<field name="patchHandling">
 											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/items</String>
+										</field>
+										<field name="index">
+											<Integer>15</Integer>
+										</field>
+										<field name="value">
+											<contextItem>
+												<field name="targets">
+													<list>
+														<Integer>0</Integer>
+														<Integer>2</Integer>
+														<Integer>1</Integer>
+													</list>
+												</field>
+												<field name="actionID">
+													<String>report_changes</String>
+												</field>
+												<field name="alias">
+													<null/>
+												</field>
+												<field name="replacementFor">
+													<null/>
+												</field>
+												<field name="replacedElementNs">
+													<String></String>
+												</field>
+												<field name="displayOnlyWhenElementAllowed">
+													<Boolean>true</Boolean>
+												</field>
+												<field name="useReplaceElementName">
+													<Boolean>false</Boolean>
+												</field>
+											</contextItem>
+										</field>
+										<field name="patchHandling">
+											<String>addIndex</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/removeItems</String>
+										</field>
+										<field name="index">
+											<Integer>-1</Integer>
+										</field>
+										<field name="value">
+											<contextRemoveItem-array>
+												<contextRemoveItem>
+													<field name="targets">
+														<list>
+															<Integer>0</Integer>
+														</list>
+													</field>
+													<field name="renderName">
+														<String>witDetail</String>
+													</field>
+												</contextRemoveItem>
+											</contextRemoveItem-array>
+										</field>
+										<field name="patchHandling">
+											<String>set</String>
 										</field>
 										<field name="anchor">
 											<null/>
