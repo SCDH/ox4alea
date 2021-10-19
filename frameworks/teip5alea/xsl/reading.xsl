@@ -50,6 +50,9 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
+    <!-- drop witDetail, which is specific to a certain reading. -->
+    <xsl:template match="witDetail"/>
+
     <!-- select the correction of a choice between orig and corr -->
     <xsl:template match="choice[corr and sic]">
         <xsl:apply-templates select="corr"/>
