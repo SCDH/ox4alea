@@ -117,6 +117,7 @@
                             mode="apparatus-number"/>
                     </table>
                 </section>
+                <!--
                 <hr/>
                 <section class="comments">
                     <xsl:for-each select="TEI/text/body/lg/(head|lg/l)">
@@ -135,6 +136,7 @@
                         </xsl:if>
                     </xsl:for-each>
                 </section>
+                -->
                 <hr/>
                 <xsl:call-template name="i18n-language-chooser-html">
                     <xsl:with-param name="debug" select="$debug"/>
