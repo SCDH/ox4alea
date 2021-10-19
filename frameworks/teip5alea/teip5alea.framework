@@ -2333,6 +2333,34 @@
 									</poPatch>
 									<poPatch>
 										<field name="fieldPath">
+											<String>authorExtensionDescriptor/contextualItems/removeItems</String>
+										</field>
+										<field name="index">
+											<Integer>-1</Integer>
+										</field>
+										<field name="value">
+											<contextRemoveItem-array>
+												<contextRemoveItem>
+													<field name="targets">
+														<list>
+															<Integer>0</Integer>
+														</list>
+													</field>
+													<field name="renderName">
+														<String>witDetail</String>
+													</field>
+												</contextRemoveItem>
+											</contextRemoveItem-array>
+										</field>
+										<field name="patchHandling">
+											<String>set</String>
+										</field>
+										<field name="anchor">
+											<null/>
+										</field>
+									</poPatch>
+									<poPatch>
+										<field name="fieldPath">
 											<String>templatesLocations</String>
 										</field>
 										<field name="index">
