@@ -11,7 +11,7 @@
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>ancestor-or-self::*:app</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><![CDATA[<witDetail xmlns="http://www.tei-c.org/ns/1.0" wit="${ask('Sigel',combobox,(${xpath_eval(string-join(let $headWits := /*:TEI/*:teiHeader//*:witness/@xml:id, $catFile := "${pdu}/WitnessCatalogue.xml", $catWits := if (doc-available($catFile)) then doc($catFile)/*:TEI/*:text//*:witness else () return for $w in $headWits return concat("'#", $w, "':'#", $w, ' = ', $catWits[@xml:id eq $w]//*:abbr[@type eq 'siglum'][1], "'"), ';')  )}), '')}">${caret}</witDetail>]]></a:argument>
+        <a:argument name="fragment"><![CDATA[<witDetail xmlns="http://www.tei-c.org/ns/1.0" wit="${ask('Sigel',combobox,(${xpath_eval(string-join(let $headWits := /*:TEI/*:teiHeader//*:witness/@xml:id, $catFile := "${pdu}/WitnessCatalogue.xml", $catWits := if (doc-available($catFile)) then doc($catFile)/*:TEI/*:text//*:witness else () return for $w in $headWits return concat("'#", $w, "':'#", $w, ' = ', normalize-space($catWits[@xml:id eq $w]//*:choice[1]), "'"), ';')  )}), '')}">${caret}</witDetail>]]></a:argument>
         <a:argument name="insertLocation">ancestor-or-self::*:app</a:argument>
         <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>
@@ -19,7 +19,7 @@
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>self::*:l|self::*:lg|self::*:p</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><![CDATA[<witDetail xmlns="http://www.tei-c.org/ns/1.0" wit="${ask('Sigel',combobox,(${xpath_eval(string-join(let $headWits := /*:TEI/*:teiHeader//*:witness/@xml:id, $catFile := "${pdu}/WitnessCatalogue.xml", $catWits := if (doc-available($catFile)) then doc($catFile)/*:TEI/*:text//*:witness else () return for $w in $headWits return concat("'#", $w, "':'#", $w, ' = ', $catWits[@xml:id eq $w]//*:abbr[@type eq 'siglum'][1], "'"), ';')  )}), '')}">${caret}</witDetail>]]></a:argument>
+        <a:argument name="fragment"><![CDATA[<witDetail xmlns="http://www.tei-c.org/ns/1.0" wit="${ask('Sigel',combobox,(${xpath_eval(string-join(let $headWits := /*:TEI/*:teiHeader//*:witness/@xml:id, $catFile := "${pdu}/WitnessCatalogue.xml", $catWits := if (doc-available($catFile)) then doc($catFile)/*:TEI/*:text//*:witness else () return for $w in $headWits return concat("'#", $w, "':'#", $w, ' = ', normalize-space($catWits[@xml:id eq $w]//*:choice[1]), "'"), ';')  )}), '')}">${caret}</witDetail>]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
