@@ -28,7 +28,7 @@ sourceDesc > listWit > witness {
 }
 
 sourceDesc > listWit > witness:before {
-    content: attr(xml|id) ": " attr(facs);
+    content: attr(xml|id) ": " attr(facs) ", " attr(n);
     text-decoration: underline;
     font-weight: 400;
     margin-right: 0.5em;
