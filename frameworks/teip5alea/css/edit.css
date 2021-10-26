@@ -22,7 +22,7 @@ lem:before, rdg:before, witDetail:before {
 }
 
 witness:before {
-    content: attr(xml|id) ": " oxy_textfield(edit, "@facs") !important;
+    content: attr(xml|id) ", facs: " oxy_textfield(edit, "@facs") ", n: " oxy_textfield(edit, "@n") !important;
     text-decoration: underline;
     font-weight: 400;
     margin-right: 0.5em;
