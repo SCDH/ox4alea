@@ -20,7 +20,7 @@ fileDesc > titleStmt > title {
 }
 
 sourceDesc > listWit:before {
-    content: "Textzeugen:";
+    content: "Textzeugen für " attr(corresp) ", lauf. Nr. " attr(n) ":";
 }
 
 sourceDesc > listWit > witness {
