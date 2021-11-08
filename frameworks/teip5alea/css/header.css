@@ -42,6 +42,14 @@ teiHeader > xi|include {
     display:none !important;
 }
 
+teiHeader > * > xi|include {
+    display:none !important;
+}
+
+teiHeader > profileDesc {
+    display:none;
+}
+
 revisionDesc > change {
     display: block;
     margin: 1ex 0;
