@@ -538,9 +538,11 @@
     <!-- MODE: default
         These templates are used to generate the main text presented. -->
     
-    <xsl:template match="l/note">
+    <!--xsl:template match="l/note">
         <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
-    </xsl:template>
+    </xsl:template-->
+
+    <xsl:template match="note"/>
 
     <xsl:template match="witDetail"/>
 
