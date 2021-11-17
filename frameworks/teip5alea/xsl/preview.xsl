@@ -201,13 +201,6 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
-    <!--
-    <xsl:template match="lg/lg">
-        <tr xmlns="http://www.w3.org/1999/xhtml"><td colspan="3"></td></tr>
-        <xsl:apply-templates select="l|app/lem/l"/>
-    </xsl:template>
-    -->
-
     <xsl:template match="l[not(ancestor::head) and descendant::caesura]">
         <tr>
             <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
@@ -258,67 +251,6 @@
             </td>
             <td></td>
         </tr>
-    </xsl:template>
-
-    <xsl:template match="l[not(ancestor::head) and false()]">
-        <xsl:choose>
-            <!-- todo: Annahme hier: es gibt nur ein caesura. Müsste vorher mit Schematron abgeprüft werden. -->
-	    <!-- Fallunterscheidung für Vorkommen und Positionen von caesura. -->
-            <xsl:when test="child::caesura">
-		<!-- Fall: caesura directes Kind von line -->
-                <tr xmlns="http://www.w3.org/1999/xhtml">
-                    <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-                    <td style="padding-left: 40px"><xsl:apply-templates select="child::caesura/preceding-sibling::node()"/></td>
-                    <td><xsl:apply-templates select="child::caesura/following-sibling::node()"/></td>
-                </tr>
-            </xsl:when>
-            <xsl:when test="descendant::lem//caesura">
-		<!-- Fall: caesura teilt lem wie in #1 -->
-                <tr xmlns="http://www.w3.org/1999/xhtml">
-                    <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-                    <td style="padding-left: 40px">
-                        <xsl:apply-templates
-                            select="descendant::lem//caesura/preceding::node() intersect descendant::node()
-                                    except scdh:non-lemma-nodes(.)"/>
-                    </td>
-                    <td>
-                        <xsl:apply-templates
-                            select="(descendant::lem//caesura/following::node() intersect descendant::node())
-                                    except scdh:non-lemma-nodes(.)"/>
-                    </td>
-                </tr>
-            </xsl:when>
-            <xsl:when test="descendant::*[self::persName or self::placeName or self::seg]//caesura">
-                <!-- Fall: caesura teilt anderes Element wie in #1 -->
-                <tr xmlns="http://www.w3.org/1999/xhtml">
-                    <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-                    <td style="padding-left: 40px">
-                        <xsl:apply-templates
-                            select="descendant::*[self::persName or self::placeName or self::seg]//caesura/preceding::node() intersect descendant::node()
-                            except scdh:non-lemma-nodes(.)"/>
-                    </td>
-                    <td>
-                        <xsl:apply-templates
-                            select="(descendant::*[self::persName or self::placeName or self::seg]//caesura/following::node() intersect descendant::node())
-                            except scdh:non-lemma-nodes(.)"/>
-                    </td>
-                </tr>
-            </xsl:when>
-            <xsl:when test="descendant::caesura and not(descendant::lem/descendant-or-self::caesura)">
-		<!-- Fall: kein caesura in lem, aber in rdg -->
-                <tr xmlns="http://www.w3.org/1999/xhtml">
-                    <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-                    <td style="padding-left: 40px"><xsl:apply-templates select="*[not(ancestor-or-self::rdg)]"/></td>
-                    <td></td>
-                </tr>
-            </xsl:when>
-            <xsl:otherwise>
-                <tr>
-                    <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-                    <td colspan="2"><xsl:apply-templates/></td>
-                </tr>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="name[@type]">
