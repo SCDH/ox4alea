@@ -164,14 +164,9 @@
     </xsl:template>
 
     <xsl:template match="p[not(ancestor::note)]">
-        <tr>
-            <td style="font-size: 8pt; padding-left: 10px" valign="top">
-                <xsl:value-of select="scdh:line-number(.)"/>
-            </td>
-            <td colspan="2">
-                <xsl:apply-templates/>
-            </td>
-        </tr>
+        <p>
+            <xsl:apply-templates/>
+        </p>
     </xsl:template>
 
     <!-- verses with head -->
