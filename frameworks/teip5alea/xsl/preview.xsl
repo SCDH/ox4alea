@@ -208,7 +208,37 @@
     </xsl:template>
     -->
 
-    <xsl:template match="l[not(ancestor::head)]">
+    <xsl:template match="l[not(ancestor::head) and descendant::caesura]">
+        <tr>
+            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td style="padding-left: 40px">
+                <!--xsl:apply-templates select="descendant::caesura/preceding-sibling::node()"/-->
+                <xsl:apply-templates select="node() intersect descendant::caesura/preceding::node()"/>
+                <xsl:apply-templates select="*[descendant::caesura]" mode="before-caesura"/>
+            </td>
+            <td>
+                <xsl:apply-templates select="*[descendant::caesura]" mode="after-caesura"/>
+                <xsl:apply-templates select="node() intersect descendant::caesura/following::node()"/>
+            </td>
+        </tr>
+    </xsl:template>
+
+    <xsl:template match="*[descendant::caesura]" mode="before-caesura">
+        <xsl:message>Entered before-caesura mode</xsl:message>
+        <xsl:apply-templates select="node() intersect descendant::caesura/preceding::node()"/>
+        <xsl:apply-templates select="*[descendant::caesura]" mode="before-caesura"/>
+    </xsl:template>
+
+    <xsl:template match="*[descendant::caesura]" mode="after-caesura">
+        <xsl:apply-templates select="*[descendant::caesura]" mode="after-caesura"/>
+        <xsl:apply-templates select="node() intersect descendant::caesura/following::node()"/>
+    </xsl:template>
+
+    <xsl:template match="rdg"/>
+    <xsl:template match="rdg" mode="before-caesura"/>
+    <xsl:template match="rdg" mode="after-caesura"/>
+
+    <xsl:template match="l[not(ancestor::head) and false()]">
         <xsl:choose>
             <!-- todo: Annahme hier: es gibt nur ein caesura. Müsste vorher mit Schematron abgeprüft werden. -->
 	    <!-- Fallunterscheidung für Vorkommen und Positionen von caesura. -->
