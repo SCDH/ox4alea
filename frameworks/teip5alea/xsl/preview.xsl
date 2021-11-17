@@ -213,30 +213,42 @@
             <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
             <td style="padding-left: 40px">
                 <!--xsl:apply-templates select="descendant::caesura/preceding-sibling::node()"/-->
-                <xsl:apply-templates select="node() intersect descendant::caesura/preceding::node()"/>
+                <xsl:apply-templates select="node() intersect descendant::caesura[not(ancestor::rdg)]/preceding::node() except scdh:non-lemma-nodes(.)"/>
                 <xsl:apply-templates select="*[descendant::caesura]" mode="before-caesura"/>
             </td>
             <td>
                 <xsl:apply-templates select="*[descendant::caesura]" mode="after-caesura"/>
-                <xsl:apply-templates select="node() intersect descendant::caesura/following::node()"/>
+                <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
             </td>
         </tr>
     </xsl:template>
 
     <xsl:template match="*[descendant::caesura]" mode="before-caesura">
-        <xsl:message>Entered before-caesura mode</xsl:message>
-        <xsl:apply-templates select="node() intersect descendant::caesura/preceding::node()"/>
+        <xsl:message>Entered before-caesura mode: <xsl:value-of select="local-name()"/></xsl:message>
+        <xsl:apply-templates select="node() intersect descendant::caesura[not(ancestor::rdg)]/preceding::node() except scdh:non-lemma-nodes(.)"/>
         <xsl:apply-templates select="*[descendant::caesura]" mode="before-caesura"/>
     </xsl:template>
 
     <xsl:template match="*[descendant::caesura]" mode="after-caesura">
+        <xsl:message>Entered after-caesura mode: <xsl:value-of select="local-name()"/></xsl:message>
         <xsl:apply-templates select="*[descendant::caesura]" mode="after-caesura"/>
-        <xsl:apply-templates select="node() intersect descendant::caesura/following::node()"/>
+        <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
     </xsl:template>
 
     <xsl:template match="rdg"/>
     <xsl:template match="rdg" mode="before-caesura"/>
     <xsl:template match="rdg" mode="after-caesura"/>
+
+    <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ]and not(descendant::caesura[ancestor::lem])]">
+        <tr>
+            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td style="padding-left: 40px">
+                <!--xsl:apply-templates select="descendant::caesura/preceding-sibling::node()"/-->
+                <xsl:apply-templates select="node() except scdh:non-lemma-nodes(.)"/>
+            </td>
+            <td></td>
+        </tr>
+    </xsl:template>
 
     <xsl:template match="l[not(ancestor::head) and false()]">
         <xsl:choose>
