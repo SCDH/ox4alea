@@ -153,7 +153,9 @@
         </html>
     </xsl:template>
 
-    <xsl:template match="text">
+    <xsl:template match="lg[descendant::l/descendant::caesura]">
+        <xsl:message>Found poem with caesura</xsl:message>
+        <!-- This kind of poem goes into a table of columns -->
         <table>
             <!-- this table has 3 columns: 1: line number,
                 2 and 3: hemispheres of a verse or something else with @colspan="2" -->
@@ -199,10 +201,12 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
+    <!--
     <xsl:template match="lg/lg">
         <tr xmlns="http://www.w3.org/1999/xhtml"><td colspan="3"></td></tr>
         <xsl:apply-templates select="l|app/lem/l"/>
     </xsl:template>
+    -->
 
     <xsl:template match="l[not(ancestor::head)]">
         <xsl:choose>
