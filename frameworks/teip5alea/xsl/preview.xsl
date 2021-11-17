@@ -239,7 +239,7 @@
     <xsl:template match="rdg" mode="before-caesura"/>
     <xsl:template match="rdg" mode="after-caesura"/>
 
-    <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ]and not(descendant::caesura[ancestor::lem])]">
+    <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ] and not(descendant::caesura[ancestor::lem])]">
         <tr>
             <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
             <td style="padding-left: 40px">
