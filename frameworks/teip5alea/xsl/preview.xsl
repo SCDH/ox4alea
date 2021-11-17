@@ -250,6 +250,16 @@
         </tr>
     </xsl:template>
 
+    <xsl:template match="l[not(ancestor::head) and not(descendant::caesura) and ancestor::lg[descendant::l/descendant::caesura]]">
+        <tr>
+            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td style="padding-left: 40px">
+                <xsl:apply-templates select="node() except scdh:non-lemma-nodes(.)"/>
+            </td>
+            <td></td>
+        </tr>
+    </xsl:template>
+
     <xsl:template match="l[not(ancestor::head) and false()]">
         <xsl:choose>
             <!-- todo: Annahme hier: es gibt nur ein caesura. Müsste vorher mit Schematron abgeprüft werden. -->
