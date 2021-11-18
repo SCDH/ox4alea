@@ -261,8 +261,8 @@
         </tr>
     </xsl:template>
 
-    <!-- verse without caesura, but in poem with caesura: the whole verse spans the two text columns -->
-    <xsl:template match="l[not(ancestor::head) and not(descendant::caesura) and ancestor::lg[descendant::l/descendant::caesura]]">
+    <!-- verse without caesura, but within group of verses: the whole verse spans the two text columns -->
+    <xsl:template match="l[not(ancestor::head) and not(descendant::caesura) and ancestor::lg]">
         <tr>
             <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
             <td colspan="2" style="padding-left: 40px">
