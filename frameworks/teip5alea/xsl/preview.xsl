@@ -244,11 +244,6 @@
         <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
     </xsl:template>
 
-    <!-- rdg: Do not output reading (variant) in all modes generating edited text. -->
-    <xsl:template match="rdg"/>
-    <xsl:template match="rdg" mode="before-caesura"/>
-    <xsl:template match="rdg" mode="after-caesura"/>
-
     <!-- verse without caesura in lemma: the verse goes into the first text column -->
     <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ] and not(descendant::caesura[ancestor::lem])]">
         <tr>
@@ -291,6 +286,11 @@
             <xsl:apply-templates/>
         </abbr>
     </xsl:template>
+
+    <!-- rdg: Do not output reading (variant) in all modes generating edited text. -->
+    <xsl:template match="rdg"/>
+    <xsl:template match="rdg" mode="before-caesura"/>
+    <xsl:template match="rdg" mode="after-caesura"/>
 
     <xsl:function name="scdh:non-lemma-nodes" as="node()*">
         <xsl:param name="element" as="node()"/>
