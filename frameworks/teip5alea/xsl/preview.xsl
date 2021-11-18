@@ -174,6 +174,11 @@
         </table>
     </xsl:template>
 
+    <!-- nested group of verses, i.e. a stanza -->
+    <xsl:template match="lg[parent::lg]">
+        <xsl:apply-templates select="*"/>
+    </xsl:template>
+
     <!-- header of a poem -->
     <xsl:template match="head[ancestor::lg]">
         <tr>
@@ -195,11 +200,6 @@
                 </xsl:if>
             </td>
         </tr>
-    </xsl:template>
-
-    <!-- nested group of verses, i.e. a stanza -->
-    <xsl:template match="lg[parent::lg]">
-        <xsl:apply-templates select="*"/>
     </xsl:template>
 
     <!-- single verse with caesura: The hemistichion must be split by caesura and distributed
