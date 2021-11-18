@@ -153,6 +153,9 @@
         </html>
     </xsl:template>
 
+
+    <!-- # Edited text (main text) # -->
+
     <!-- Prose -->
     <xsl:template match="p[not(ancestor::note)]">
         <p>
@@ -298,6 +301,9 @@
         <xsl:param name="element" as="node()"/>
         <xsl:sequence select="$element/descendant-or-self::rdg/descendant-or-self::node()"/>
     </xsl:function>
+
+
+    <!-- # Apparatus # -->
 
     <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-number">
         <tr>
