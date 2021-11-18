@@ -337,6 +337,16 @@
         <xsl:apply-templates select="corr"/>
     </xsl:template>
 
+    <xsl:template match="choice[child::sic and child::corr]" mode="before-caesura" priority="1">
+        <xsl:message>entered choice in before-caesura mode</xsl:message>
+        <xsl:apply-templates select="corr" mode="before-caesura"/>
+    </xsl:template>
+
+    <xsl:template match="choice[child::sic and child::corr]" mode="after-caesura" priority="1">
+        <xsl:message>entered choice in after-caesura mode</xsl:message>
+        <xsl:apply-templates select="corr" mode="after-caesura"/>
+    </xsl:template>
+
     <xsl:template match="sic[not(parent::choice)]">
         <xsl:apply-templates/>
     </xsl:template>
