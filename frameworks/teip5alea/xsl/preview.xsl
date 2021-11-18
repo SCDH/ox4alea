@@ -153,6 +153,17 @@
         </html>
     </xsl:template>
 
+    <!-- Prose -->
+    <xsl:template match="p[not(ancestor::note)]">
+        <p>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+
+    <!-- Verse: This matches a group of verses which have a caesura.
+        In the output, a table is generated and the hemistichion's hemispheres
+        are put on the left and right textcolumns.
+        Also, a column for line numbers is needed. -->
     <xsl:template match="lg[descendant::l/descendant::caesura]">
         <xsl:message>Found poem with caesura</xsl:message>
         <!-- This kind of poem goes into a table of columns -->
@@ -163,25 +174,21 @@
         </table>
     </xsl:template>
 
-    <xsl:template match="p[not(ancestor::note)]">
-        <p>
-            <xsl:apply-templates/>
-        </p>
-    </xsl:template>
-
-    <!-- verses with head -->
+    <!-- header of a poem -->
     <xsl:template match="lg[not(parent::lg) and child::head]">
         <tr>
             <td><xsl:value-of select="scdh:line-number(head)"/></td>
             <td colspan="2" class="title">
                 <xsl:apply-templates select="head"/>
+                <!-- verse meter (metrum) is printed along with the poems header -->
                 <xsl:apply-templates select="@met" mode="head"/>
             </td>
         </tr>
         <xsl:apply-templates select="* except head"/>
     </xsl:template>
 
-    <!-- print verse meter -->
+    <!-- verse meter (metrum): the meters name is pulled from the metDecl
+        in the encodingDesc in the document header -->
     <xsl:template match="@met" mode="head">
         <xsl:variable name="met" select="."/>
         <span class="static-text">
@@ -196,37 +203,54 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
+    <!-- single verse with caesura: The hemistichion must be split by caesura and distributed
+        into text columns.
+        Since the caesura may be deeply nested in other elements, we enter a recursive distribution
+        of the two hemispheres.
+        Implementation note: xsl:for-each-group may seem as an alternative, but isn't well-suited
+        for handling nested structures and we only have 2 target groups. -->
     <xsl:template match="l[not(ancestor::head) and descendant::caesura]">
         <tr>
             <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
             <td style="padding-left: 40px">
-                <!--xsl:apply-templates select="descendant::caesura/preceding-sibling::node()"/-->
+                <!-- output of nodes that preced caesura -->
                 <xsl:apply-templates select="node() intersect descendant::caesura[not(ancestor::rdg)]/preceding::node() except scdh:non-lemma-nodes(.)"/>
+                <!-- recursively handle nodes, that contain caesura -->
                 <xsl:apply-templates select="*[descendant::caesura]" mode="before-caesura"/>
             </td>
             <td>
+                <!-- recursively handle nodes, that contain caesura -->
                 <xsl:apply-templates select="*[descendant::caesura]" mode="after-caesura"/>
+                <!-- output nodes that follow caesura -->
                 <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
             </td>
         </tr>
     </xsl:template>
 
+    <!-- nodes that contain caesura: recursively output everything preceding caesura -->
     <xsl:template match="*[descendant::caesura]" mode="before-caesura">
         <xsl:message>Entered before-caesura mode: <xsl:value-of select="local-name()"/></xsl:message>
+        <!-- output of nodes that preced caesura -->
         <xsl:apply-templates select="node() intersect descendant::caesura[not(ancestor::rdg)]/preceding::node() except scdh:non-lemma-nodes(.)"/>
+        <!-- recursively handle nodes, that contain caesura -->
         <xsl:apply-templates select="*[descendant::caesura]" mode="before-caesura"/>
     </xsl:template>
 
+    <!-- nodes that contain caesura: recursively output everything following caesura -->
     <xsl:template match="*[descendant::caesura]" mode="after-caesura">
         <xsl:message>Entered after-caesura mode: <xsl:value-of select="local-name()"/></xsl:message>
+        <!-- recursively handle nodes, that contain caesura -->
         <xsl:apply-templates select="*[descendant::caesura]" mode="after-caesura"/>
+        <!-- output nodes that follow caesura -->
         <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
     </xsl:template>
 
+    <!-- rdg: Do not output reading (variant) in all modes generating edited text. -->
     <xsl:template match="rdg"/>
     <xsl:template match="rdg" mode="before-caesura"/>
     <xsl:template match="rdg" mode="after-caesura"/>
 
+    <!-- verse without caesura in lemma: the verse goes into the first text column -->
     <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ] and not(descendant::caesura[ancestor::lem])]">
         <tr>
             <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
@@ -238,6 +262,7 @@
         </tr>
     </xsl:template>
 
+    <!-- verse without caesura, but in poem with caesura: the whole verse spans the two text columns -->
     <xsl:template match="l[not(ancestor::head) and not(descendant::caesura) and ancestor::lg[descendant::l/descendant::caesura]]">
         <tr>
             <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
