@@ -175,31 +175,30 @@
     </xsl:template>
 
     <!-- header of a poem -->
-    <xsl:template match="lg[not(parent::lg) and child::head]">
+    <xsl:template match="head[ancestor::lg]">
         <tr>
-            <td><xsl:value-of select="scdh:line-number(head)"/></td>
+            <td><xsl:value-of select="scdh:line-number(.)"/></td>
             <td colspan="2" class="title">
-                <xsl:apply-templates select="head"/>
+                <!-- Note: The head should not contain a verse, because that would result in
+                    a table row nested in a tabel row. -->
+                <xsl:apply-templates/>
                 <!-- verse meter (metrum) is printed along with the poems header -->
-                <xsl:apply-templates select="@met" mode="head"/>
+                <xsl:if test="ancestor::*/@met">
+                    <xsl:variable name="met" select="ancestor::*/@met[1]"/>
+                    <span class="static-text">
+                        <xsl:text> [</xsl:text>
+                        <!-- The meters name is pulled from the metDecl
+                            in the encodingDesc in the document header -->
+                        <xsl:value-of select="/TEI/teiHeader//metSym[@value eq $met]//term[1]"/>
+                        <xsl:text>] </xsl:text>
+                    </span>
+                </xsl:if>
             </td>
         </tr>
-        <xsl:apply-templates select="* except head"/>
     </xsl:template>
 
-    <!-- verse meter (metrum): the meters name is pulled from the metDecl
-        in the encodingDesc in the document header -->
-    <xsl:template match="@met" mode="head">
-        <xsl:variable name="met" select="."/>
-        <span class="static-text">
-            <xsl:text> [</xsl:text>
-            <xsl:value-of select="/TEI/teiHeader//metSym[@value eq $met]//term[1]"/>
-            <xsl:text>] </xsl:text>
-        </span>
-    </xsl:template>
-
-    <!-- verses without head -->
-    <xsl:template match="lg[not(parent::lg) and not(child::head)]">
+    <!-- nested group of verses, i.e. a stanza -->
+    <xsl:template match="lg[parent::lg]">
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
