@@ -160,12 +160,12 @@
         </p>
     </xsl:template>
 
-    <!-- Verse: This matches a group of verses which have a caesura.
-        In the output, a table is generated and the hemistichion's hemispheres
-        are put on the left and right textcolumns.
-        Also, a column for line numbers is needed. -->
-    <xsl:template match="lg[descendant::l/descendant::caesura]">
-        <xsl:message>Found poem with caesura</xsl:message>
+    <!-- Verse: This matches a group of verses, i.e. a poem.
+        In the output, a table is created. The verse number goes
+        into the first column, verses go into the other column(s).
+        If there is a caesura (if the verse is a hemistichion)
+        there must be left and right text columns. -->
+    <xsl:template match="lg">
         <!-- This kind of poem goes into a table of columns -->
         <table>
             <!-- this table has 3 columns: 1: line number,
