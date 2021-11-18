@@ -249,6 +249,13 @@
         <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
     </xsl:template>
 
+    <!-- When the caesura is not present in the nested node, then output the node only once and warn the user.  -->
+    <xsl:template match="*" mode="before-caesura">
+        <xsl:message>WARNING: broken document? caesura missing</xsl:message>
+        <xsl:apply-templates/>
+    </xsl:template>
+    <xsl:template match="*" mode="after-caesura"/>
+
     <!-- verse without caesura in lemma: the verse goes into the first text column
         NOTE: This must override the one for simple verses with caesura by setting its priority! -->
     <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ] and not(descendant::caesura[ancestor::lem])]"
