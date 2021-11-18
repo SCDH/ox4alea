@@ -249,8 +249,10 @@
         <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
     </xsl:template>
 
-    <!-- verse without caesura in lemma: the verse goes into the first text column -->
-    <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ] and not(descendant::caesura[ancestor::lem])]">
+    <!-- verse without caesura in lemma: the verse goes into the first text column
+        NOTE: This must override the one for simple verses with caesura by setting its priority! -->
+    <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ] and not(descendant::caesura[ancestor::lem])]"
+        priority="1">
         <tr>
             <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
             <td style="padding-left: 40px">
