@@ -278,7 +278,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()]|text())) = 'Aa Bb Cc Dd'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Cc Dd'"/>
     </x:scenario>
 
     <x:scenario
@@ -288,7 +288,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()]|text())) = 'Aa Bb Cc Dd'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Cc Dd'"/>
     </x:scenario>
 
     <x:scenario
@@ -298,7 +298,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()]|text())) = 'Aa Bb Dd Ee'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Dd Ee'"/>
     </x:scenario>
 
     <x:scenario
@@ -308,7 +308,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()]|text())) = 'Aa Bb Cc Ee'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Cc Ee'"/>
     </x:scenario>
 
     <x:scenario
@@ -318,7 +318,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()]|text())) = 'Aa Bb Dd Ee'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Dd Ee'"/>
     </x:scenario>
 
 </x:description>

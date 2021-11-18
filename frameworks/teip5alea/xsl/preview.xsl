@@ -271,6 +271,20 @@
         </tr>
     </xsl:template>
 
+    <!-- verses nested in head -->
+    <xsl:template match="l[ancestor::head]">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <!-- all other verses, i.e. verses outside of lg (and not in head) -->
+    <xsl:template match="l">
+        <p>
+            <span class="line-number verse-number"><xsl:value-of select="scdh:line-number(.)"/> </span>
+            <xsl:text> </xsl:text>
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+
     <xsl:template match="name[@type]">
         <xsl:variable name="cat" select="@type"/>
         <abbr title="{/TEI/teiHeader/encodingDesc//category[@xml:id eq replace($cat, '#', '')]/catDesc[1]}">
