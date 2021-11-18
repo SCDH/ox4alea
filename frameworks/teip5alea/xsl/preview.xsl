@@ -303,6 +303,52 @@
     </xsl:function>
 
 
+    <!-- ## inline elements ## -->
+
+    <!--xsl:template match="l/note">
+        <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
+    </xsl:template-->
+
+    <xsl:template match="note"/>
+
+    <xsl:template match="witDetail"/>
+
+    <xsl:template match="app">
+        <xsl:apply-templates select="lem"/>
+    </xsl:template>
+
+    <xsl:template match="(lem[not(/*|/text())]|rdg[not(/*|/text())])">
+        <xsl:text>[!!!]</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="gap">
+        <xsl:text>[...]</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="unclear">
+        <!--xsl:text>[? </xsl:text-->
+        <xsl:apply-templates />
+        <!--xsl:text> ?]</xsl:text-->
+    </xsl:template>
+
+    <xsl:template match="choice[child::sic and child::corr]">
+        <xsl:apply-templates select="corr"/>
+    </xsl:template>
+
+    <xsl:template match="sic[not(parent::choice)]">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="corr[not(parent::choice)]">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <!-- DEPRECATED -->
+    <xsl:template name="variants">
+        <xsl:param name="lg"/>
+    </xsl:template>
+
+
     <!-- # Apparatus # -->
 
     <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-number">
@@ -562,50 +608,4 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-
-    <!-- MODE: default
-        These templates are used to generate the main text presented. -->
-    
-    <!--xsl:template match="l/note">
-        <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
-    </xsl:template-->
-
-    <xsl:template match="note"/>
-
-    <xsl:template match="witDetail"/>
-
-    <xsl:template match="app">
-        <xsl:apply-templates select="lem"/>
-    </xsl:template>
-
-    <xsl:template match="(lem[not(/*|/text())]|rdg[not(/*|/text())])">
-        <xsl:text>[!!!]</xsl:text>
-    </xsl:template>
-
-    <xsl:template match="gap">
-        <xsl:text>[...]</xsl:text>
-    </xsl:template>
-    
-    <xsl:template match="unclear">
-        <!--xsl:text>[? </xsl:text-->
-        <xsl:apply-templates />
-        <!--xsl:text> ?]</xsl:text-->
-    </xsl:template>
-    
-    <xsl:template match="choice[child::sic and child::corr]">
-        <xsl:apply-templates select="corr"/>
-    </xsl:template>
-
-    <xsl:template match="sic[not(parent::choice)]">
-        <xsl:apply-templates/>
-    </xsl:template>
-
-    <xsl:template match="corr[not(parent::choice)]">
-        <xsl:apply-templates/>
-    </xsl:template>
-
-    <xsl:template name="variants">
-        <xsl:param name="lg"/>
-    </xsl:template>
-    
 </xsl:stylesheet>
