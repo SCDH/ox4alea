@@ -156,6 +156,8 @@
     <!-- Prose -->
     <xsl:template match="p[not(ancestor::note)]">
         <p>
+            <span class="line-number paragraph-number"><xsl:value-of select="scdh:line-number(.)"/></span>
+            <xsl:text> </xsl:text>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
