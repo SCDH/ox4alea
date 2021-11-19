@@ -420,6 +420,8 @@
 
     <!-- # Apparatus # -->
 
+    <!-- ## Apparatus line ## -->
+
     <!-- make an apparatus line and hand over to templates that do the apparatus entries -->
     <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-line">
         <tr>
@@ -428,7 +430,16 @@
                 <!-- we can't add simple ...|ancestor::app to the selector, because then we
                     lose focus on the line when there are several in an <app>. See #12.
                     We need app//l instead an some etra templates for handling app//l. -->
-                <xsl:for-each select="app|gap|unclear|sic|choice|witDetail|app/lem/(gap|unclear|choice)|self::l[ancestor::app]|self::p[ancestor::app and not(ancestor::note)]">
+                <xsl:for-each select="descendant::app[not(parent::sic)] |
+                                      descendant::gap[not(parent::lem)] |
+                                      descendant::unclear[not(parent::lem)] |
+                                      descendant::sic[not(parent::choice)] |
+                                      descendant::corr[not(parent::choice)] |
+                                      descendant::choice |
+                                      descendant::witDetail[not(parent::app)] |
+                                      descendant::app/lem/(gap|unclear|choice) |
+                                      self::l[ancestor::app] |
+                                      self::p[ancestor::app and not(ancestor::note)]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
@@ -437,6 +448,8 @@
             </td>
         </tr>
     </xsl:template>
+
+    <!-- ## Apparatus entries ## -->
 
     <xsl:template match="app" mode="apparatus">
         <xsl:variable name="lemma-nodes">
@@ -502,7 +515,10 @@
     </xsl:template>
 
     <xsl:template match="witDetail" mode="apparatus">
-        <!-- FIXME: output reference text -->
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates select="parent::*" mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
         <xsl:apply-templates select="*|text()" mode="apparatus"/>
         <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
@@ -513,7 +529,10 @@
     </xsl:template>
 
     <xsl:template match="unclear" mode="apparatus">
-        <xsl:apply-templates select="."/>
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <xsl:choose>
             <xsl:when test="@reason">
@@ -553,15 +572,22 @@
     </xsl:template>
 
     <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">
-        <xsl:apply-templates select="corr"/>
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates select="corr" mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <xsl:apply-templates select="sic"/>
         <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="corr-sic-sep"> </span>
         <span class="static-text" data-i18n-key="corr-sic">&lre;(corrected)&pdf;</span>
     </xsl:template>
 
+    <!-- apparatus entry for choice/sic/app -->
     <xsl:template match="choice[child::sic/app and child::corr]" mode="apparatus">
-        <xsl:apply-templates select="corr"/>
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates select="corr" mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <xsl:for-each select="sic/app/rdg|sic/app/witDetail">
             <xsl:apply-templates select="." mode="apparatus"/>
@@ -575,14 +601,41 @@
         <span class="static-text" data-i18n-key="corr-rdgs">&lre;(corrected)&pdf;</span>
     </xsl:template>
 
-    <xsl:template match="sic[not(parent::choice)]" mode="apparatus">
-        <xsl:apply-templates/>
+    <!-- apparatus entry for sic/app -->
+    <xsl:template match="sic[not(parent::choice) and child::app]" mode="apparatus">
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates select="app/lem" mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
+        <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
+        <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span>
+        <xsl:for-each select="app/rdg|app/witDetail">
+            <xsl:apply-templates select="." mode="apparatus"/>
+            <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
+            <xsl:call-template name="witness-siglum-html">
+                <xsl:with-param name="wit" select="@wit"/>
+            </xsl:call-template>
+            <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span></xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
+    <!-- apparatus entry for simple sic -->
+    <xsl:template match="sic[not(parent::choice) and not(child::app)]" mode="apparatus">
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
     </xsl:template>
 
+    <!-- apparatus entry for simple corr -->
     <xsl:template match="corr[not(parent::choice)]" mode="apparatus">
-        <xsl:apply-templates/>
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <span class="static-text" data-i18n-key="corr">&lre;corrected&pdf;</span>
     </xsl:template>
@@ -671,6 +724,13 @@
 
     <xsl:template match="l|p[not(ancestor::note)]" mode="apparatus-lemma">
         <xsl:apply-templates mode="apparatus-lemma"/>
+    </xsl:template>
+
+    <xsl:template match="witDetail" mode="apparatus-lemma"/>
+
+    <!-- this fixes issue #38 on the surface -->
+    <xsl:template match="caesura" mode="apparatus-lemma #default">
+        <xsl:text> </xsl:text>
     </xsl:template>
 
     <xsl:template match="*" mode="apparatus-lemma">
