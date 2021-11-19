@@ -573,6 +573,7 @@
         <span class="static-text" data-i18n-key="corr-sic">&lre;(corrected)&pdf;</span>
     </xsl:template>
 
+    <!-- apparatus entry for choice/sic/app -->
     <xsl:template match="choice[child::sic/app and child::corr]" mode="apparatus">
         <xsl:apply-templates select="corr"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
@@ -588,12 +589,30 @@
         <span class="static-text" data-i18n-key="corr-rdgs">&lre;(corrected)&pdf;</span>
     </xsl:template>
 
-    <xsl:template match="sic[not(parent::choice)]" mode="apparatus">
+    <!-- apparatus entry for sic/app -->
+    <xsl:template match="sic[not(parent::choice) and child::app]" mode="apparatus">
+        <xsl:apply-templates select="app/lem"/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
+        <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
+        <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span>
+        <xsl:for-each select="app/rdg|app/witDetail">
+            <xsl:apply-templates select="." mode="apparatus"/>
+            <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
+            <xsl:call-template name="witness-siglum-html">
+                <xsl:with-param name="wit" select="@wit"/>
+            </xsl:call-template>
+            <xsl:if test="position() ne last()"><span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span></xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
+    <!-- apparatus entry for simple sic -->
+    <xsl:template match="sic[not(parent::choice) and not(child::app)]" mode="apparatus">
         <xsl:apply-templates/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
         <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
     </xsl:template>
 
+    <!-- apparatus entry for simple corr -->
     <xsl:template match="corr[not(parent::choice)]" mode="apparatus">
         <xsl:apply-templates/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
