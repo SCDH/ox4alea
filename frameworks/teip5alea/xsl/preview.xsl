@@ -57,6 +57,9 @@
                         direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
                         font-family:"Arabic Typesetting";                    
                     }
+                    .metadata {
+                        direction: ltr;
+                    }
                     .variants {
                         direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
                     }
@@ -98,6 +101,10 @@
                         <xsl:value-of select="$ui-language"/>
                     </section>
                 </xsl:if>
+                <section class="metadata">
+                    <xsl:apply-templates select="TEI/teiHeader" mode="metadata"/>
+                </section>
+                <hr/>
                 <section class="content">
                     <xsl:apply-templates select="TEI/text"/>
                 </section>
@@ -675,6 +682,40 @@
     <xsl:template match="*" mode="apparatus-lemma">
         <!-- We can pass it over to the default templates, now. -->
         <xsl:apply-templates/>
+    </xsl:template>
+
+
+    <!-- # Metadata # -->
+
+    <xsl:template match="/ | TEI | teiHeader" mode="metadata">
+        <xsl:apply-templates select="//sourceDesc" mode="metadata"/>
+    </xsl:template>
+
+    <xsl:template match="sourceDesc" mode="metadata">
+        <p>
+            <span xml:lang="de">
+                <xsl:value-of select="tokenize(base-uri(), '/')[last()] => replace('\.[a-zA-Z]+', '')"/>
+                <xsl:text>: </xsl:text>
+            </span>
+            <xsl:apply-templates select="listWit/witness" mode="metadata"/>
+        </p>
+    </xsl:template>
+
+    <xsl:template match="witness" mode="metadata">
+        <span>
+            <!--xsl:value-of select="@xml:id"/-->
+            <xsl:text>&lre;</xsl:text>
+            <span class="siglum">
+            <xsl:call-template name="witness-siglum-html">
+                <xsl:with-param name="wit" select="@xml:id"/>
+            </xsl:call-template>
+            </span>
+            <xsl:text>&pdf;: </xsl:text>
+            <xsl:value-of select="replace(@facs, '^[a-zA-Z]+', '')"/>
+        </span>
+        <xsl:if test="position() ne last()">
+            <span>; </span>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
