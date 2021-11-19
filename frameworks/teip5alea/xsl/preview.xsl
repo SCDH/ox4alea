@@ -436,7 +436,7 @@
                                       descendant::sic[not(parent::choice)] |
                                       descendant::corr[not(parent::choice)] |
                                       descendant::choice |
-                                      descendant::witDetail |
+                                      descendant::witDetail[not(parent::app)] |
                                       descendant::app/lem/(gap|unclear|choice) |
                                       self::l[ancestor::app] |
                                       self::p[ancestor::app and not(ancestor::note)]">
