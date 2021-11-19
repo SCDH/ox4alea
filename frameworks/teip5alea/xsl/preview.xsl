@@ -655,7 +655,7 @@
     </xsl:template>
 
     <xsl:template match="caesura[ancestor::rdg]" mode="apparatus">
-        <span>||</span>
+        <span> || </span>
     </xsl:template>
 
 
