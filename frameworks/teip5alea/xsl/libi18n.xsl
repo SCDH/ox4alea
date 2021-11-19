@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE stylesheet [
+    <!ENTITY lre "&#x202a;" >
+    <!ENTITY rle "&#x202b;" >
+    <!ENTITY pdf "&#x202c;" >
+]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
@@ -40,6 +45,16 @@
         <xsl:param name="context" as="node()"/>
         <!-- TODO: replace 'ar' with 'en' after @xml:lang is provided throughout ALEA -->
         <xsl:value-of select="scdh:language-direction($context, 'ar')"/>
+    </xsl:function>
+
+    <xsl:function name="scdh:direction-embedding">
+        <xsl:param name="context" as="node()"/>
+        <xsl:choose>
+            <xsl:when test="scdh:language-direction($context) eq 'rtl'">
+                <xsl:value-of select="'&rle;'"/>
+            </xsl:when>
+            <xsl:otherwise><xsl:value-of select="'&lre;'"/></xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
 
     <xsl:function name="scdh:language-align">
