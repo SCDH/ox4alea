@@ -463,7 +463,7 @@
                 <xsl:apply-templates select="parent::app/lem" mode="apparatus-lemma"/>
                 <xsl:text>&#x20;</xsl:text>
             </xsl:if>
-            <xsl:apply-templates select="." mode="apparatus"/>
+            <xsl:apply-templates select="." mode="apparatus-rdg"/>
             <xsl:apply-templates select=".[not(self::witDetail)]" mode="apparatus-annotation"/>
             <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
@@ -480,7 +480,7 @@
         <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
         <xsl:for-each select="parent::lem/parent::app/rdg">
-            <xsl:apply-templates select="." mode="apparatus"/>
+            <xsl:apply-templates select="." mode="apparatus-rdg"/>
             <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
                 <xsl:with-param name="wit" select="@wit"/>
@@ -500,7 +500,7 @@
         </xsl:call-template>
     </xsl:template>
 
-    <xsl:template match="rdg[. eq '']" mode="apparatus">
+    <xsl:template match="rdg[. eq '']" mode="apparatus-rdg">
         <xsl:choose>
             <xsl:when test="parent::app/lem/l|parent::app/rdg/l">
                 <span class="static-text" data-i18n-key="verse-missing">&lre;verse missing&pdf;</span>
@@ -514,13 +514,27 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="witDetail" mode="apparatus">
+    <xsl:template match="witDetail" mode="apparatus-rdg">
+        <span class="note-text witDetail"
+            xml:lang="{scdh:language(.)}"
+            style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
+            <xsl:value-of select="scdh:direction-embedding(.)"/>
+            <xsl:apply-templates mode="editorial-note"/>
+            <xsl:text>&pdf;</xsl:text>
+            <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+                <xsl:text> </xsl:text>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
+    <!-- apparatus entry for standanlone witDetail -->
+    <xsl:template match="witDetail[not(parent::app)]" mode="apparatus">
         <xsl:variable name="lemma-nodes">
             <xsl:apply-templates select="parent::*" mode="apparatus-lemma"/>
         </xsl:variable>
         <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
-        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
-        <xsl:apply-templates select="*|text()" mode="apparatus"/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
+        <xsl:apply-templates select="self::witDetail" mode="apparatus-rdg"/>
         <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
         <xsl:call-template name="witness-siglum-html">
             <xsl:with-param name="wit" select="@wit"/>
