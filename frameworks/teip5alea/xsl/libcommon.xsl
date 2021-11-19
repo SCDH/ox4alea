@@ -15,6 +15,12 @@
                                      + 1)"/>
     </xsl:function>
 
+    <!-- returns the number of the editorial note in context -->
+    <xsl:function name="scdh:note-number" as="xs:string">
+        <xsl:param name="context" as="element()"/>
+        <xsl:value-of select="string(count($context/preceding-sibling::note) + 1)"/>
+    </xsl:function>
+
     <!-- shorten a string of N words to w1 … wN, but returned it as is when N<=3
         USAGE: see preview.xsl -->
     <xsl:function name="scdh:shorten-string" as="xs:normalizedString">
