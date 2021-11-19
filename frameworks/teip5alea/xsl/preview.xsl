@@ -515,7 +515,10 @@
     </xsl:template>
 
     <xsl:template match="witDetail" mode="apparatus">
-        <!-- FIXME: output reference text -->
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates select="parent::*" mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
         <xsl:apply-templates select="*|text()" mode="apparatus"/>
         <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
@@ -704,6 +707,8 @@
     <xsl:template match="l|p[not(ancestor::note)]" mode="apparatus-lemma">
         <xsl:apply-templates mode="apparatus-lemma"/>
     </xsl:template>
+
+    <xsl:template match="witDetail" mode="apparatus-lemma"/>
 
     <xsl:template match="*" mode="apparatus-lemma">
         <!-- We can pass it over to the default templates, now. -->
