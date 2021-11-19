@@ -420,6 +420,8 @@
 
     <!-- # Apparatus # -->
 
+    <!-- ## Apparatus line ## -->
+
     <!-- make an apparatus line and hand over to templates that do the apparatus entries -->
     <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-line">
         <tr>
@@ -428,7 +430,16 @@
                 <!-- we can't add simple ...|ancestor::app to the selector, because then we
                     lose focus on the line when there are several in an <app>. See #12.
                     We need app//l instead an some etra templates for handling app//l. -->
-                <xsl:for-each select="app|gap|unclear|sic|choice|witDetail|app/lem/(gap|unclear|choice)|self::l[ancestor::app]|self::p[ancestor::app and not(ancestor::note)]">
+                <xsl:for-each select="descendant::app |
+                                      descendant::gap |
+                                      descendant::unclear |
+                                      descendant::sic[not(parent::choice)] |
+                                      descendant::corr[not(parent::choice)] |
+                                      descendant::choice |
+                                      descendant::witDetail |
+                                      descendant::app/lem/(gap|unclear|choice) |
+                                      self::l[ancestor::app] |
+                                      self::p[ancestor::app and not(ancestor::note)]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
@@ -437,6 +448,8 @@
             </td>
         </tr>
     </xsl:template>
+
+    <!-- ## Apparatus entries ## -->
 
     <xsl:template match="app" mode="apparatus">
         <xsl:variable name="lemma-nodes">
