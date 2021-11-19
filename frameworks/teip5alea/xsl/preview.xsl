@@ -457,7 +457,7 @@
         </xsl:variable>
         <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
-        <xsl:for-each select="rdg|witDetail">
+        <xsl:for-each select="rdg | witDetail">
             <!-- repeat prefix if necessary -->
             <xsl:if test="parent::app/lem[. eq '']">
                 <xsl:apply-templates select="parent::app/lem" mode="apparatus-lemma"/>
@@ -479,7 +479,7 @@
         </xsl:variable>
         <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
-        <xsl:for-each select="parent::lem/parent::app/rdg">
+        <xsl:for-each select="parent::lem/parent::app/rdg | parent::lem/parent::app/witDetail">
             <xsl:apply-templates select="." mode="apparatus-rdg"/>
             <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep">:</span>
             <xsl:call-template name="witness-siglum-html">
