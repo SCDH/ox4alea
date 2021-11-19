@@ -500,6 +500,12 @@
         </xsl:call-template>
     </xsl:template>
 
+    <!-- the apparatus-rdg mode is needed to avoid loopings -->
+
+    <xsl:template match="rdg[. ne '']" mode="apparatus-rdg">
+        <xsl:apply-templates select="self::rdg" mode="apparatus"/>
+    </xsl:template>
+
     <xsl:template match="rdg[. eq '']" mode="apparatus-rdg">
         <xsl:choose>
             <xsl:when test="parent::app/lem/l|parent::app/rdg/l">
