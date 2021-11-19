@@ -226,7 +226,7 @@
                 <!-- recursively handle nodes, that contain caesura -->
                 <xsl:apply-templates select="*[descendant::caesura]" mode="after-caesura"/>
                 <!-- output nodes that follow caesura -->
-                <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
+                <xsl:apply-templates select="node() intersect descendant::caesura[not(ancestor::rdg)]/following::node() except scdh:non-lemma-nodes(.)"/>
             </td>
         </tr>
     </xsl:template>
@@ -246,7 +246,7 @@
         <!-- recursively handle nodes, that contain caesura -->
         <xsl:apply-templates select="*[descendant::caesura]" mode="after-caesura"/>
         <!-- output nodes that follow caesura -->
-        <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
+        <xsl:apply-templates select="node() intersect descendant::caesura[not(ancestor::rdg)]/following::node() except scdh:non-lemma-nodes(.)"/>
     </xsl:template>
 
     <!-- When the caesura is not present in the nested node, then output the node only once and warn the user.  -->
