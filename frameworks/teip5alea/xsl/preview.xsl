@@ -114,7 +114,7 @@
                                         descendant::sic or
                                         descendant::corr or
                                         ancestor::app]"
-                            mode="apparatus-number"/>
+                            mode="apparatus-line"/>
                     </table>
                 </section>
                 <!--
@@ -420,7 +420,8 @@
 
     <!-- # Apparatus # -->
 
-    <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-number">
+    <!-- make an apparatus line and hand over to templates that do the apparatus entries -->
+    <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-line">
         <tr>
             <td><xsl:value-of select="scdh:line-number(.)"/></td>
             <td>
