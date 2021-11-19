@@ -362,6 +362,56 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+    <!-- for segmentation, a prefix or suffix may be needed -->
+    <xsl:template match="seg">
+        <xsl:call-template name="tag-start-end">
+            <xsl:with-param name="node" as="node()" select="."/>
+            <xsl:with-param name="type" select="'start'"/>
+        </xsl:call-template>
+        <xsl:apply-templates/>
+        <xsl:call-template name="tag-start-end">
+            <xsl:with-param name="node" as="node()" select="."/>
+            <xsl:with-param name="type" select="'end'"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template match="seg" mode="before-caesura" priority="1">
+        <xsl:call-template name="tag-start-end">
+            <xsl:with-param name="node" select="."/>
+            <xsl:with-param name="type" select="'start'"/>
+        </xsl:call-template>
+        <!-- output of nodes that preced caesura -->
+        <xsl:apply-templates select="node() intersect descendant::caesura[not(ancestor::rdg)]/preceding::node() except scdh:non-lemma-nodes(.)"/>
+        <!-- recursively handle nodes, that contain caesura -->
+        <xsl:apply-templates select="*[descendant::caesura]" mode="before-caesura"/>
+    </xsl:template>
+
+    <xsl:template match="seg" mode="after-caesura" priority="1">
+        <!-- recursively handle nodes, that contain caesura -->
+        <xsl:apply-templates select="*[descendant::caesura]" mode="after-caesura"/>
+        <!-- output nodes that follow caesura -->
+        <xsl:apply-templates select="node() intersect descendant::caesura/following::node() except scdh:non-lemma-nodes(.)"/>
+        <xsl:call-template name="tag-start-end">
+            <xsl:with-param name="node" select="."/>
+            <xsl:with-param name="type" select="'end'"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- named template for inserting prefixes and suffixes of tagged content -->
+    <xsl:template name="tag-start-end">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="type" as="xs:string"/>
+        <xsl:choose>
+            <xsl:when test="name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'start'">
+                <xsl:text>&#xfd3f;</xsl:text>
+            </xsl:when>
+            <xsl:when test="name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'end'">
+                <xsl:text>&#xfd3e;</xsl:text>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
+    </xsl:template>
+
     <!-- DEPRECATED -->
     <xsl:template name="variants">
         <xsl:param name="lg"/>
