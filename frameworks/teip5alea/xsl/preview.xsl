@@ -303,8 +303,8 @@
 
     <!-- rdg: Do not output reading (variant) in all modes generating edited text. -->
     <xsl:template match="rdg"/>
-    <xsl:template match="rdg" mode="before-caesura"/>
-    <xsl:template match="rdg" mode="after-caesura"/>
+    <xsl:template match="rdg" mode="before-caesura" priority="2"/>
+    <xsl:template match="rdg" mode="after-caesura" priority="2"/>
 
     <xsl:function name="scdh:non-lemma-nodes" as="node()*">
         <xsl:param name="element" as="node()"/>
