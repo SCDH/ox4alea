@@ -178,6 +178,59 @@
 	</x:expect>
     </x:scenario>
 
+    <x:scenario
+	label="Line with two ceasura elements deeply nested in lem and rdg ...">
+	<x:context>
+	    <tei:l>
+		<tei:seg>
+			    <tei:app>
+				<tei:lem wit="a">Aa Bb Cc<tei:caesura/> Dd Ee Ff</tei:lem>
+				<tei:rdg wit="b">Aaa <tei:seg>Bbb Ccc<tei:caesura/> Ddd</tei:seg> Eee Fff</tei:rdg>
+			    </tei:app>
+		</tei:seg>
+	    </tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name()='td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<ht:tr>
+		    <ht:td style="...">1</ht:td>
+		    <ht:td style="...">Aa Bb Cc</ht:td>
+		    <ht:td> Dd Ee Ff</ht:td>
+		</ht:tr>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario
+	label="Line with two ceasura elements deeply nested in rdg and lem (flipped) ...">
+	<x:context>
+	    <tei:l>
+		<tei:seg>
+			    <tei:app>
+				<tei:rdg wit="b">Aaa <tei:seg>Bbb Ccc<tei:caesura/> Ddd</tei:seg> Eee Fff</tei:rdg>
+				<tei:lem wit="a">Aa Bb Cc<tei:caesura/> Dd Ee Ff</tei:lem>
+			    </tei:app>
+		</tei:seg>
+	    </tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name()='td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<ht:tr>
+		    <ht:td style="...">1</ht:td>
+		    <ht:td style="...">Aa Bb Cc</ht:td>
+		    <ht:td> Dd Ee Ff</ht:td>
+		</ht:tr>
+	</x:expect>
+    </x:scenario>
 
     <x:scenario label="Line with ceasura as nested in placeName tag ...">
 	<!-- Please note, that this also produces the title and the
