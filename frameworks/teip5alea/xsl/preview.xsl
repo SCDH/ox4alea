@@ -430,9 +430,9 @@
                 <!-- we can't add simple ...|ancestor::app to the selector, because then we
                     lose focus on the line when there are several in an <app>. See #12.
                     We need app//l instead an some etra templates for handling app//l. -->
-                <xsl:for-each select="descendant::app |
-                                      descendant::gap |
-                                      descendant::unclear |
+                <xsl:for-each select="descendant::app[not(parent::sic)] |
+                                      descendant::gap[not(parent::lem)] |
+                                      descendant::unclear[not(parent::lem)] |
                                       descendant::sic[not(parent::choice)] |
                                       descendant::corr[not(parent::choice)] |
                                       descendant::choice |
