@@ -14,7 +14,7 @@
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="2.0">
     
-    <xsl:output media-type="text/html" method="html"/>
+    <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
     <xsl:import href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
@@ -47,7 +47,7 @@
 
     <xsl:template match="/">
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;&lb;</xsl:text>
-        <html>
+        <html lang="{scdh:language(TEI)}">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -547,7 +547,7 @@
 
     <xsl:template match="witDetail" mode="apparatus-rdg">
         <span class="note-text witDetail"
-            xml:lang="{scdh:language(.)}"
+            lang="{scdh:language(.)}"
             style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
             <xsl:value-of select="scdh:direction-embedding(.)"/>
             <xsl:apply-templates mode="editorial-note"/>
@@ -805,7 +805,7 @@
                     <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
                 </span>
                 <span class="note-text"
-                    xml:lang="{scdh:language(.)}"
+                    lang="{scdh:language(.)}"
                     style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
                     <!-- This must be paired with pdf character entity,
                         because directional embeddings are an embedded CFG! -->
@@ -855,7 +855,7 @@
 
     <xsl:template match="sourceDesc" mode="metadata">
         <p>
-            <span xml:lang="de">
+            <span lang="de">
                 <xsl:value-of select="tokenize(base-uri(), '/')[last()] => replace('\.[a-zA-Z]+', '')"/>
                 <xsl:text>: </xsl:text>
             </span>
