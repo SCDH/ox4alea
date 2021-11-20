@@ -137,6 +137,7 @@
                                         descendant::choice or
                                         descendant::sic or
                                         descendant::corr or
+                                        descendant::supplied or
                                         ancestor::app]"
                             mode="apparatus-line"/>
                     </table>
@@ -467,6 +468,7 @@
                                       descendant::sic[not(parent::choice)] |
                                       descendant::corr[not(parent::choice)] |
                                       descendant::choice |
+                                      descendant::supplied[not(parent::rdg)] |
                                       descendant::witDetail[not(parent::app)] |
                                       descendant::app/lem/(gap|unclear|choice) |
                                       self::l[ancestor::app] |
@@ -620,6 +622,28 @@
     <!-- needed for gap in rdg for printing the reading -->
     <xsl:template match="gap[parent::rdg]" mode="apparatus">
         <span class="static-text" data-i18n-key="gap-rdg">(…)</span>
+    </xsl:template>
+
+    <!-- apparatus entry for supplied -->
+    <xsl:template match="supplied" mode="apparatus">
+        <xsl:variable name="lemma-nodes">
+            <xsl:apply-templates mode="apparatus-lemma"/>
+        </xsl:variable>
+        <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
+        <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
+        <xsl:choose>
+            <xsl:when test="@reason">
+                <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of select="@reason"/>&pdf;</span>
+            </xsl:when>
+            <xsl:otherwise><span class="static-text" data-i18n-key="supplied">&lre;supplied&pdf;</span></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- needed for supplied text in rdg -->
+    <xsl:template match="supplied[ancestor::rdg]" mode="apparatus">
+        <span class="static-text">[</span>
+        <xsl:apply-templates mode="apparatus"/>
+        <span class="static-text">]</span>
     </xsl:template>
 
     <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">
