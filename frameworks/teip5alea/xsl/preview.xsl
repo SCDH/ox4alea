@@ -754,6 +754,8 @@
 
     <xsl:template match="witDetail" mode="apparatus-lemma"/>
 
+    <xsl:template match="note" mode="apparatus-lemma"/>
+
     <!-- this fixes issue #38 on the surface -->
     <xsl:template match="caesura" mode="apparatus-lemma #default">
         <xsl:text> </xsl:text>
