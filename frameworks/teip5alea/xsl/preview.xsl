@@ -98,9 +98,12 @@
                         text-decoration: none;
                     }
                     @font-face {
-                    font-family:"Arabic Typesetting";
-                    /*The location of the loaded TTF font must be relative to the CSS*/
-                    src:url("arabt100.ttf");
+                        font-family:"Arabic Typesetting";
+                        src:url("../../../arabt100.ttf");
+                    }
+                    @font-face {
+                        font-family:"Amiri Regular";
+                        src:url("../../../resources/css/Amiri-Regular.ttf");
                     }
                     
                 </style>
