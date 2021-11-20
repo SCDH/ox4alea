@@ -117,9 +117,12 @@
                             mode="apparatus-line"/>
                     </table>
                 </section>
-                <!--
                 <hr/>
                 <section class="comments">
+                    <table>
+                        <xsl:apply-templates select="TEI/text//note" mode="editiorial-note-entry"/>
+                    </table>
+                    <!--
                     <xsl:for-each select="TEI/text/body/lg/(head|lg/l)">
                         <xsl:variable name="linenr" select="if (/TEI/text/body/lg/head) then position() - 1 else position()"/>
                         <xsl:if test="note">
@@ -135,8 +138,8 @@
                             </div>
                         </xsl:if>
                     </xsl:for-each>
+                    -->
                 </section>
-                -->
                 <hr/>
                 <xsl:call-template name="i18n-language-chooser-html">
                     <xsl:with-param name="debug" select="$debug"/>
@@ -314,11 +317,11 @@
 
     <!-- ## inline elements ## -->
 
-    <!--xsl:template match="l/note">
-        <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
-    </xsl:template-->
+    <xsl:template match="note">
+        <sup><xsl:value-of select="scdh:note-number(.)"/></sup>
+    </xsl:template>
 
-    <xsl:template match="note"/>
+    <!--xsl:template match="note"/-->
 
     <xsl:template match="witDetail"/>
 
@@ -756,6 +759,21 @@
     <xsl:template match="*" mode="apparatus-lemma">
         <!-- We can pass it over to the default templates, now. -->
         <xsl:apply-templates/>
+    </xsl:template>
+
+    <!-- # Mode editorial-note -->
+    <!-- This mode is used for the content of all kinds of editorial notes, be in <note>, be in <witDetail> -->
+
+    <!-- the entry point for an editorial note -->
+    <xsl:template match="note" mode="editiorial-note-entry">
+        <tr>
+            <td>
+                <xsl:value-of select="scdh:note-number(.)"/>
+            </td>
+            <td>
+                <xsl:apply-templates/>
+            </td>
+        </tr>
     </xsl:template>
 
 </xsl:stylesheet>
