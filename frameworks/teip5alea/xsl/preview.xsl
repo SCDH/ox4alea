@@ -320,11 +320,13 @@
 
     <!-- ## inline elements ## -->
 
+    <!--
     <xsl:template match="note">
         <sup><xsl:value-of select="scdh:note-number(.)"/></sup>
     </xsl:template>
+    -->
 
-    <!--xsl:template match="note"/-->
+    <xsl:template match="note"/>
 
     <xsl:template match="witDetail"/>
 
@@ -773,7 +775,7 @@
     <xsl:template match="note" mode="editiorial-note-entry">
         <tr>
             <td class="editorial-note-number">
-                <xsl:value-of select="scdh:note-number(.)"/>
+                <xsl:value-of select="scdh:line-number(./ancestor::*[self::p or self::l])"/>
             </td>
             <td class="editorial-note-text">
                 <span class="note-lemma">
