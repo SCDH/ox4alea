@@ -785,4 +785,18 @@
         </tr>
     </xsl:template>
 
+    <xsl:template match="bibl" mode="editorial-note">
+        <span class="bibliographic-reference">
+            <xsl:value-of select="@corresp"/>
+            <xsl:choose>
+                <xsl:when test="biblScope">
+                    <xsl:text>,</xsl:text>
+                    <span class="bibl-scope">
+                        <xsl:value-of select="biblScope"/>
+                    </span>
+                </xsl:when>
+            </xsl:choose>
+        </span>
+    </xsl:template>
+
 </xsl:stylesheet>
