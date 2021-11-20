@@ -71,6 +71,9 @@
                         justify-content: space-between;
                         justify-self: stretch;
                     }
+                    td.editorial-note-number {
+                        vertical-align:top;
+                    }
                     sup {
                         font-size: 6pt
                     }
@@ -767,10 +770,10 @@
     <!-- the entry point for an editorial note -->
     <xsl:template match="note" mode="editiorial-note-entry">
         <tr>
-            <td>
+            <td class="editorial-note-number">
                 <xsl:value-of select="scdh:note-number(.)"/>
             </td>
-            <td>
+            <td class="editorial-note-text">
                 <span class="note-lemma">
                     <xsl:variable name="lemma-nodes">
                         <!-- we use the same mode as in the apparatus -->
