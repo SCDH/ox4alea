@@ -59,6 +59,8 @@
                     }
                     .metadata {
                         direction: ltr;
+                        text-align: right;
+                        margin-right: 2em;
                     }
                     .variants {
                         direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
@@ -74,8 +76,11 @@
                         justify-content: space-between;
                         justify-self: stretch;
                     }
-                    td.editorial-note-number {
+                    td.apparatus-line-number, td.editorial-note-number {
                         vertical-align:top;
+                        font-size: 0.7em;
+                        padding-top: 0.3em;
+                        padding-left: 10px;
                     }
                     sup {
                         font-size: 6pt
@@ -200,7 +205,7 @@
     <!-- header of a poem -->
     <xsl:template match="head[ancestor::lg]">
         <tr>
-            <td><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
             <td colspan="2" class="title">
                 <!-- Note: The head should not contain a verse, because that would result in
                     a table row nested in a tabel row. -->
@@ -440,7 +445,9 @@
     <!-- make an apparatus line and hand over to templates that do the apparatus entries -->
     <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-line">
         <tr>
-            <td><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td class="apparatus-line-number">
+                <xsl:value-of select="scdh:line-number(.)"/>
+            </td>
             <td>
                 <!-- we can't add simple ...|ancestor::app to the selector, because then we
                     lose focus on the line when there are several in an <app>. See #12.
