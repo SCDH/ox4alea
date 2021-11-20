@@ -23,6 +23,9 @@
     <!-- URI of witness catalogue. -->
     <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
 
+    <!-- URI of bibliography -->
+    <xsl:param name="biblio" as="xs:string" required="yes"/>
+
     <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
     <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
     <xsl:param name="locales-directory" select="'./locales'" as="xs:string"/>
@@ -908,6 +911,76 @@
         <xsl:if test="position() ne last()">
             <span>; </span>
         </xsl:if>
+    </xsl:template>
+
+
+    <!-- # Bibliography # -->
+
+    <xsl:template match="bibl[@corresp]" mode="#all">
+        <xsl:variable name="ref-id" as="xs:string" select="replace(@corresp, '^#', '')"/>
+        <xsl:variable name="bibliography" select="doc($biblio)"/>
+        <xsl:variable name="ref" select="$bibliography//*[@xml:id eq $ref-id]"/>
+        <xsl:variable name="ref-lang" select="scdh:language($ref)"/>
+        <xsl:if test="exists($bibliography)">
+            <xsl:message>Bibliography present</xsl:message>
+        </xsl:if>
+        <xsl:if test="not($ref)">
+            <xsl:message>Bibliographic entry '<xsl:value-of select="$ref-id"/>' not found in '<xsl:value-of select="$biblio"/>'</xsl:message>
+            (reference not found!)
+        </xsl:if>
+        <span class="bibliographic-reference"
+            lang="scdh:language($ref)">
+            <!-- This must be paired with pdf character entity,
+                        because directional embeddings are an embedded CFG! -->
+            <xsl:value-of select="scdh:direction-embedding(.)"/>
+            <xsl:choose>
+                <xsl:when test="$ref">
+                    <xsl:apply-templates select="$ref" mode="biblio"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="replace(@corresp, '#', '')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates mode="biblio"/>
+            <xsl:text>&pdf;</xsl:text>
+            <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+                <xsl:text> </xsl:text>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="bibl" mode="biblio">
+        <xsl:apply-templates mode="biblio"/>
+    </xsl:template>
+
+    <xsl:template match="choice[child::abbr and child::expan]" mode="biblio">
+        <xsl:apply-templates select="expan" mode="biblio"/>
+    </xsl:template>
+
+    <xsl:template match="biblScope[@unit][@from and @to]" mode="biblio">
+        <xsl:text>, </xsl:text>
+        <span class="bibl-scope">
+            <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="@from"/>
+            <xsl:text>-</xsl:text>
+            <xsl:value-of select="@to"/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="biblScope[@unit]" mode="biblio">
+        <xsl:text>, </xsl:text>
+        <span class="bibl-scope">
+            <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
+            <xsl:apply-templates mode="biblio"/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="biblScope" mode="biblio">
+        <xsl:text>, </xsl:text>
+        <span class="bibl-scope">
+            <xsl:apply-templates mode="biblio"/>
+        </span>
     </xsl:template>
 
 </xsl:stylesheet>
