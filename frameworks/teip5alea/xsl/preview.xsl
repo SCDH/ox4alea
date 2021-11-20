@@ -71,6 +71,9 @@
                         justify-content: space-between;
                         justify-self: stretch;
                     }
+                    td.editorial-note-number {
+                        vertical-align:top;
+                    }
                     sup {
                         font-size: 6pt
                     }
@@ -117,9 +120,12 @@
                             mode="apparatus-line"/>
                     </table>
                 </section>
-                <!--
                 <hr/>
                 <section class="comments">
+                    <table>
+                        <xsl:apply-templates select="TEI/text//note" mode="editiorial-note-entry"/>
+                    </table>
+                    <!--
                     <xsl:for-each select="TEI/text/body/lg/(head|lg/l)">
                         <xsl:variable name="linenr" select="if (/TEI/text/body/lg/head) then position() - 1 else position()"/>
                         <xsl:if test="note">
@@ -135,8 +141,8 @@
                             </div>
                         </xsl:if>
                     </xsl:for-each>
+                    -->
                 </section>
-                -->
                 <hr/>
                 <xsl:call-template name="i18n-language-chooser-html">
                     <xsl:with-param name="debug" select="$debug"/>
@@ -314,9 +320,11 @@
 
     <!-- ## inline elements ## -->
 
-    <!--xsl:template match="l/note">
-        <sup><xsl:value-of select="count(preceding-sibling::note) + 1"/></sup>
-    </xsl:template-->
+    <!--
+    <xsl:template match="note">
+        <sup><xsl:value-of select="scdh:note-number(.)"/></sup>
+    </xsl:template>
+    -->
 
     <xsl:template match="note"/>
 
@@ -748,6 +756,8 @@
 
     <xsl:template match="witDetail" mode="apparatus-lemma"/>
 
+    <xsl:template match="note" mode="apparatus-lemma"/>
+
     <!-- this fixes issue #38 on the surface -->
     <xsl:template match="caesura" mode="apparatus-lemma #default">
         <xsl:text> </xsl:text>
@@ -756,6 +766,66 @@
     <xsl:template match="*" mode="apparatus-lemma">
         <!-- We can pass it over to the default templates, now. -->
         <xsl:apply-templates/>
+    </xsl:template>
+
+    <!-- # Mode editorial-note -->
+    <!-- This mode is used for the content of all kinds of editorial notes, be in <note>, be in <witDetail> -->
+
+    <!-- the entry point for an editorial note -->
+    <xsl:template match="note" mode="editiorial-note-entry">
+        <tr>
+            <td class="editorial-note-number">
+                <xsl:value-of select="scdh:line-number(./ancestor::*[self::p or self::l])"/>
+            </td>
+            <td class="editorial-note-text">
+                <span class="note-lemma">
+                    <xsl:variable name="lemma-nodes">
+                        <!-- we use the same mode as in the apparatus -->
+                        <xsl:apply-templates select="parent::*/child::node() except ." mode="apparatus-lemma"/>
+                    </xsl:variable>
+                    <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
+                    <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
+                </span>
+                <span class="note-text"
+                    xml:lang="{scdh:language(.)}"
+                    style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
+                    <!-- This must be paired with pdf character entity,
+                        because directional embeddings are an embedded CFG! -->
+                    <xsl:value-of select="scdh:direction-embedding(.)"/>
+                    <xsl:apply-templates mode="editorial-note"/>
+                    <xsl:text>&pdf;</xsl:text>
+                    <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                </span>
+            </td>
+        </tr>
+    </xsl:template>
+
+    <!-- change language if necessary -->
+    <xsl:template match="*[@xml:lang]" mode="editorial-note">
+        <!-- This must be paired with pdf character entity,
+                        because directional embeddings are an embedded CFG! -->
+        <xsl:value-of select="scdh:direction-embedding(.)"/>
+        <xsl:apply-templates mode="editorial-note"/>
+        <xsl:text>&pdf;</xsl:text>
+        <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="bibl" mode="editorial-note">
+        <span class="bibliographic-reference">
+            <xsl:value-of select="replace(@corresp, '#', '')"/>
+            <xsl:choose>
+                <xsl:when test="biblScope">
+                    <xsl:text>,</xsl:text>
+                    <span class="bibl-scope">
+                        <xsl:value-of select="biblScope"/>
+                    </span>
+                </xsl:when>
+            </xsl:choose>
+        </span>
     </xsl:template>
 
 </xsl:stylesheet>
