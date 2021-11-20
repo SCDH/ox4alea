@@ -770,8 +770,17 @@
             <td>
                 <xsl:value-of select="scdh:note-number(.)"/>
             </td>
-            <td>
-                <xsl:apply-templates/>
+            <td class="note-text"
+                xml:lang="{scdh:language(.)}"
+                style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
+                <!-- This must be paired with pdf character entity,
+                    because directional embeddings are an embedded CFG! -->
+                <xsl:value-of select="scdh:direction-embedding(.)"/>
+                <xsl:apply-templates mode="editorial-note"/>
+                <xsl:text>&pdf;</xsl:text>
+                <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+                    <xsl:text> </xsl:text>
+                </xsl:if>
             </td>
         </tr>
     </xsl:template>
