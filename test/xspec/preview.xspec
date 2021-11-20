@@ -337,6 +337,27 @@
 	</x:expect>
     </x:scenario>
 
+    <x:scenario label="Line with ceasura as nested deeply in choice/(sic|corr) ...">
+	<!-- Please note, that this also produces the title and the
+	     empty table row that separates line groups (lg) -->
+	<x:context>
+	    <tei:l>Aa <tei:seg>Bb <tei:choice><tei:corr>Cc <tei:caesura/>Dd</tei:corr><tei:sic>Ccc <tei:caesura/>Ddd</tei:sic></tei:choice></tei:seg> Ee Ff</tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name() = 'td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
+	</x:expect>
+    </x:scenario>
+
     <x:scenario label="Line with ceasura as nested in choice/sic but not present in choice/corr ...">
 	<!-- This is a failure in the source document. Isn't it? -->
 	<x:context>
