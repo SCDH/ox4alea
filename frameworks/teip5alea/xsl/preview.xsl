@@ -5,16 +5,16 @@
     <!ENTITY pdf "&#x202c;" >
     <!ENTITY nbsp "&#xa0;" >
     <!ENTITY emsp "&#x2003;" >
+    <!ENTITY lb "&#xa;" >
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
     exclude-result-prefixes="xs scdh"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    xmlns="http://www.w3.org/1999/xhtml"
     version="2.0">
     
-    <xsl:output media-type="text/html"/>
+    <xsl:output media-type="text/html" method="html"/>
 
     <xsl:import href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
@@ -46,8 +46,11 @@
     </xsl:function>
 
     <xsl:template match="/">
+        <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;&lb;</xsl:text>
         <html>
             <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <title>ALEA Vorschau</title>
                 <style>
                     .title {
