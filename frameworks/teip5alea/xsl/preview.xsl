@@ -804,7 +804,7 @@
 
     <xsl:template match="bibl" mode="editorial-note">
         <span class="bibliographic-reference">
-            <xsl:value-of select="@corresp"/>
+            <xsl:value-of select="replace(@corresp, '#', '')"/>
             <xsl:choose>
                 <xsl:when test="biblScope">
                     <xsl:text>,</xsl:text>
