@@ -52,3 +52,8 @@ note {
 witDetail {
     display: none;
 }
+
+supplied {
+    -oxy-display-tags: none;
+    color:gray;
+}
