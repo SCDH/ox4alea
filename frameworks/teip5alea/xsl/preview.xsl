@@ -865,7 +865,8 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="bibl" mode="editorial-note">
+    <!-- DEPRECATED -->
+    <xsl:template match="bibl" mode="OFF">
         <span class="bibliographic-reference">
             <xsl:value-of select="replace(@corresp, '#', '')"/>
             <xsl:choose>
