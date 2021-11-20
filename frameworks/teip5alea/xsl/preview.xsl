@@ -802,6 +802,18 @@
         </tr>
     </xsl:template>
 
+    <!-- change language if necessary -->
+    <xsl:template match="*[@xml:lang]" mode="editorial-note">
+        <!-- This must be paired with pdf character entity,
+                        because directional embeddings are an embedded CFG! -->
+        <xsl:value-of select="scdh:direction-embedding(.)"/>
+        <xsl:apply-templates mode="editorial-note"/>
+        <xsl:text>&pdf;</xsl:text>
+        <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template match="bibl" mode="editorial-note">
         <span class="bibliographic-reference">
             <xsl:value-of select="replace(@corresp, '#', '')"/>
