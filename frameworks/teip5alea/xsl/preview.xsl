@@ -5,16 +5,16 @@
     <!ENTITY pdf "&#x202c;" >
     <!ENTITY nbsp "&#xa0;" >
     <!ENTITY emsp "&#x2003;" >
+    <!ENTITY lb "&#xa;" >
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
     exclude-result-prefixes="xs scdh"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    xmlns="http://www.w3.org/1999/xhtml"
     version="2.0">
     
-    <xsl:output media-type="text/html"/>
+    <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
     <xsl:import href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
@@ -46,8 +46,11 @@
     </xsl:function>
 
     <xsl:template match="/">
-        <html>
+        <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;&lb;</xsl:text>
+        <html lang="{scdh:language(TEI)}">
             <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <title>ALEA Vorschau</title>
                 <style>
                     .title {
@@ -59,6 +62,8 @@
                     }
                     .metadata {
                         direction: ltr;
+                        text-align: right;
+                        margin: 0 2em;
                     }
                     .variants {
                         direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
@@ -67,15 +72,21 @@
                         direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
                     }
                     hr {
-                        margin: 20px
-                    }
+                        margin: 1em 2em;                    }
                     td {
                         text-align: <xsl:value-of select="scdh:language-align(TEI/text)"/>;
                         justify-content: space-between;
                         justify-self: stretch;
                     }
-                    td.editorial-note-number {
+                    td.line-number, td.apparatus-line-number, td.editorial-note-number {
                         vertical-align:top;
+                        text-align:right;
+                        font-size: 0.7em;
+                        padding-top: 0.3em;
+                        padding-left: 10px;
+                    }
+                    td.text-col1 {
+                        padding-left: 40px;
                     }
                     sup {
                         font-size: 6pt
@@ -87,9 +98,12 @@
                         text-decoration: none;
                     }
                     @font-face {
-                    font-family:"Arabic Typesetting";
-                    /*The location of the loaded TTF font must be relative to the CSS*/
-                    src:url("arabt100.ttf");
+                        font-family:"Arabic Typesetting";
+                        src:url("../../../arabt100.ttf");
+                    }
+                    @font-face {
+                        font-family:"Amiri Regular";
+                        src:url("../../../resources/css/Amiri-Regular.ttf");
                     }
                     
                 </style>
@@ -200,8 +214,8 @@
     <!-- header of a poem -->
     <xsl:template match="head[ancestor::lg]">
         <tr>
-            <td><xsl:value-of select="scdh:line-number(.)"/></td>
-            <td colspan="2" class="title">
+            <td class="line-number"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td colspan="2" class="title text-col1">
                 <!-- Note: The head should not contain a verse, because that would result in
                     a table row nested in a tabel row. -->
                 <xsl:apply-templates/>
@@ -228,8 +242,8 @@
         for handling nested structures and we only have 2 target groups. -->
     <xsl:template match="l[not(ancestor::head) and descendant::caesura]">
         <tr>
-            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-            <td style="padding-left: 40px">
+            <td class="line-number"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td class="text-col1">
                 <!-- output of nodes that preced caesura -->
                 <xsl:apply-templates select="node() intersect descendant::caesura[not(ancestor::rdg)]/preceding::node() except scdh:non-lemma-nodes(.)"/>
                 <!-- recursively handle nodes, that contain caesura -->
@@ -274,8 +288,8 @@
     <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ] and not(descendant::caesura[ancestor::lem])]"
         priority="1">
         <tr>
-            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-            <td style="padding-left: 40px">
+            <td class="line-number"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td class="text-col1">
                 <!--xsl:apply-templates select="descendant::caesura/preceding-sibling::node()"/-->
                 <xsl:apply-templates select="node() except scdh:non-lemma-nodes(.)"/>
             </td>
@@ -286,8 +300,8 @@
     <!-- verse without caesura, but within group of verses: the whole verse spans the two text columns -->
     <xsl:template match="l[not(ancestor::head) and not(descendant::caesura) and ancestor::lg]">
         <tr>
-            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-            <td colspan="2" style="padding-left: 40px">
+            <td class="apparatus-line-number"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td colspan="2" class="text-col1">
                 <xsl:apply-templates select="node() except scdh:non-lemma-nodes(.)"/>
             </td>
         </tr>
@@ -440,7 +454,9 @@
     <!-- make an apparatus line and hand over to templates that do the apparatus entries -->
     <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-line">
         <tr>
-            <td><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td class="apparatus-line-number">
+                <xsl:value-of select="scdh:line-number(.)"/>
+            </td>
             <td>
                 <!-- we can't add simple ...|ancestor::app to the selector, because then we
                     lose focus on the line when there are several in an <app>. See #12.
@@ -537,7 +553,7 @@
 
     <xsl:template match="witDetail" mode="apparatus-rdg">
         <span class="note-text witDetail"
-            xml:lang="{scdh:language(.)}"
+            lang="{scdh:language(.)}"
             style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
             <xsl:value-of select="scdh:direction-embedding(.)"/>
             <xsl:apply-templates mode="editorial-note"/>
@@ -795,7 +811,7 @@
                     <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
                 </span>
                 <span class="note-text"
-                    xml:lang="{scdh:language(.)}"
+                    lang="{scdh:language(.)}"
                     style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
                     <!-- This must be paired with pdf character entity,
                         because directional embeddings are an embedded CFG! -->
@@ -845,7 +861,7 @@
 
     <xsl:template match="sourceDesc" mode="metadata">
         <p>
-            <span xml:lang="de">
+            <span lang="de">
                 <xsl:value-of select="tokenize(base-uri(), '/')[last()] => replace('\.[a-zA-Z]+', '')"/>
                 <xsl:text>: </xsl:text>
             </span>

@@ -27,11 +27,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -49,11 +49,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -74,11 +74,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -97,11 +97,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -122,11 +122,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc</ht:td>
-		    <ht:td></ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc</td>
+		    <td></td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -147,11 +147,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc</ht:td>
-		    <ht:td> Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc</td>
+		    <td> Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -170,11 +170,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -197,11 +197,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc</ht:td>
-		    <ht:td> Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc</td>
+		    <td> Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -224,11 +224,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc</ht:td>
-		    <ht:td> Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc</td>
+		    <td> Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -245,11 +245,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -266,11 +266,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -287,11 +287,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -308,11 +308,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -329,11 +329,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -349,11 +349,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc Dd</ht:td>
-		    <ht:td> Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc Dd</td>
+		    <td> Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
