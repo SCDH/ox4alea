@@ -24,7 +24,7 @@
     <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
 
     <!-- URI of bibliography -->
-    <xsl:param name="biblio" as="xs:string" required="yes"/>
+    <xsl:param name="biblio" as="xs:string" select="'../samples/biblio.xml'"/>
 
     <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
     <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
