@@ -770,17 +770,27 @@
             <td>
                 <xsl:value-of select="scdh:note-number(.)"/>
             </td>
-            <td class="note-text"
-                xml:lang="{scdh:language(.)}"
-                style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
-                <!-- This must be paired with pdf character entity,
-                    because directional embeddings are an embedded CFG! -->
-                <xsl:value-of select="scdh:direction-embedding(.)"/>
-                <xsl:apply-templates mode="editorial-note"/>
-                <xsl:text>&pdf;</xsl:text>
-                <xsl:if test="scdh:language-direction(.) eq 'ltr'">
-                    <xsl:text> </xsl:text>
-                </xsl:if>
+            <td>
+                <span class="note-lemma">
+                    <xsl:variable name="lemma-nodes">
+                        <!-- we use the same mode as in the apparatus -->
+                        <xsl:apply-templates select="parent::*/child::node() except ." mode="apparatus-lemma"/>
+                    </xsl:variable>
+                    <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
+                    <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
+                </span>
+                <span class="note-text"
+                    xml:lang="{scdh:language(.)}"
+                    style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
+                    <!-- This must be paired with pdf character entity,
+                        because directional embeddings are an embedded CFG! -->
+                    <xsl:value-of select="scdh:direction-embedding(.)"/>
+                    <xsl:apply-templates mode="editorial-note"/>
+                    <xsl:text>&pdf;</xsl:text>
+                    <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                </span>
             </td>
         </tr>
     </xsl:template>
