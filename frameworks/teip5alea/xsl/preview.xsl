@@ -63,7 +63,7 @@
                     .metadata {
                         direction: ltr;
                         text-align: right;
-                        margin-right: 2em;
+                        margin: 0 2em;
                     }
                     .variants {
                         direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
@@ -72,18 +72,21 @@
                         direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
                     }
                     hr {
-                        margin: 20px
-                    }
+                        margin: 1em 2em;                    }
                     td {
                         text-align: <xsl:value-of select="scdh:language-align(TEI/text)"/>;
                         justify-content: space-between;
                         justify-self: stretch;
                     }
-                    td.apparatus-line-number, td.editorial-note-number {
+                    td.line-number, td.apparatus-line-number, td.editorial-note-number {
                         vertical-align:top;
+                        text-align:right;
                         font-size: 0.7em;
                         padding-top: 0.3em;
                         padding-left: 10px;
+                    }
+                    td.text-col1 {
+                        padding-left: 40px;
                     }
                     sup {
                         font-size: 6pt
@@ -208,8 +211,8 @@
     <!-- header of a poem -->
     <xsl:template match="head[ancestor::lg]">
         <tr>
-            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-            <td colspan="2" class="title">
+            <td class="line-number"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td colspan="2" class="title text-col1">
                 <!-- Note: The head should not contain a verse, because that would result in
                     a table row nested in a tabel row. -->
                 <xsl:apply-templates/>
@@ -236,8 +239,8 @@
         for handling nested structures and we only have 2 target groups. -->
     <xsl:template match="l[not(ancestor::head) and descendant::caesura]">
         <tr>
-            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-            <td style="padding-left: 40px">
+            <td class="line-number"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td class="text-col1">
                 <!-- output of nodes that preced caesura -->
                 <xsl:apply-templates select="node() intersect descendant::caesura[not(ancestor::rdg)]/preceding::node() except scdh:non-lemma-nodes(.)"/>
                 <!-- recursively handle nodes, that contain caesura -->
@@ -282,8 +285,8 @@
     <xsl:template match="l[not(ancestor::head) and descendant::caesura[ancestor::rdg ] and not(descendant::caesura[ancestor::lem])]"
         priority="1">
         <tr>
-            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-            <td style="padding-left: 40px">
+            <td class="line-number"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td class="text-col1">
                 <!--xsl:apply-templates select="descendant::caesura/preceding-sibling::node()"/-->
                 <xsl:apply-templates select="node() except scdh:non-lemma-nodes(.)"/>
             </td>
@@ -294,8 +297,8 @@
     <!-- verse without caesura, but within group of verses: the whole verse spans the two text columns -->
     <xsl:template match="l[not(ancestor::head) and not(descendant::caesura) and ancestor::lg]">
         <tr>
-            <td style="font-size: 8pt; padding-left: 10px"><xsl:value-of select="scdh:line-number(.)"/></td>
-            <td colspan="2" style="padding-left: 40px">
+            <td class="apparatus-line-number"><xsl:value-of select="scdh:line-number(.)"/></td>
+            <td colspan="2" class="text-col1">
                 <xsl:apply-templates select="node() except scdh:non-lemma-nodes(.)"/>
             </td>
         </tr>
