@@ -2488,7 +2488,7 @@
 																</paramDescriptor>
 															</field>
 															<field name="value">
-																<String>${pdu}/Literaturverzeichnis.xml</String>
+																<String>${framework}/samples/biblio.xml</String>
 															</field>
 															<field name="hasXPathValue">
 																<Boolean>false</Boolean>
