@@ -9,18 +9,20 @@
         uri="schema/myschema.rng"/>
     <systemSuffix systemIdSuffix="tei_all.rng" uri="schema/myschema.rng"/>
 
-    <!-- we can simply redirect by the path suffix `teip5alea/.../...` which is distinct enough -->
+    <!-- It would be nice, to simply redirect by the path suffix `teip5alea/.../...`, which would make everything distinct.
+        But that does not work for frameworks installed by oXygen's installer, because the directory name then is
+        a combination of the framework's name and version number. -->
 
     <!-- override CSS font definitions of ALEA framework -->
-    <uriSuffix uriSuffix="teip5alea/css/font.css" uri="css/font.css"/>
-    <systemSuffix systemIdSuffix="teip5alea/css/font.css" uri="css/font.css"/>
+    <uriSuffix uriSuffix="css/font.css" uri="css/font.css"/>
+    <systemSuffix systemIdSuffix="css/font.css" uri="css/font.css"/>
 
     <!-- override bibliography of ALEA framework -->
-    <systemSuffix systemIdSuffix="teip5alea/samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
-    <uriSuffix uriSuffix="teip5alea/samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
+    <systemSuffix systemIdSuffix="samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
+    <uriSuffix uriSuffix="samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
 
     <!-- override witness catalogue of ALEA framework -->
-    <systemSuffix systemIdSuffix="teip5alea/samples/witnesses.xml" uri="../Handschriftenverzeichnis.xml"/>
-    <uriSuffix uriSuffix="teip5alea/samples/witnesses.xml" uri="../Handschriftenverzeichnis.xml"/>
+    <systemSuffix systemIdSuffix="samples/witnesses.xml" uri="../Handschriftenverzeichnis.xml"/>
+    <uriSuffix uriSuffix="samples/witnesses.xml" uri="../Handschriftenverzeichnis.xml"/>
 
 </catalog>
