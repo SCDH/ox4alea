@@ -115,8 +115,8 @@ project files. An
 can be used for redirecting from some dummy sample files, that ship
 with the framework, to your project files.
 
-You should add an XML-catalog to your project. The catalog could
-e.g. live in `resources/catalog.xml`. The you should
+You should add an XML-catalog to your project. If the catalog would
+e.g. live in `resources/catalog.xml` of your project, then you should
 [register](https://www.oxygenxml.com/doc/versions/23.1/ug-editor/topics/preferences-xml-catalog.html#preferences-xml-catalog)
 the catalog in `${pdu}/resources/catalog.xml` in &lt;oXygen>. Please,
 have a look at
@@ -127,7 +127,8 @@ Please note: All the framework files are included in subdirectories of
 the framework `teip5alea`. But when the framework is installed, the
 directory name changes to a combination of its name and version. So we
 cannot simply use paths like `teip5alea/css/font.css` in the URI or
-system suffix, but need to use the less distinct `css/font.css`.
+system suffix, but have to use the less distinct path suffix
+`css/font.css`.
 
 ### Project specific CSS ###
 
