@@ -126,8 +126,8 @@ sample catalog file.
 Please note: All the framework files are included in subdirectories of
 the framework `teip5alea`. But when the framework is installed, the
 directory name changes to a combination of its name and version. So we
-cannot simply use paths `teip5alea/css/font.css` in the URI or system
-suffix.
+cannot simply use paths like `teip5alea/css/font.css` in the URI or
+system suffix, but need to use the less distinct `css/font.css`.
 
 ### Project specific CSS ###
 
