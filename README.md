@@ -115,23 +115,46 @@ project files. An
 can be used for redirecting from some dummy sample files, that ship
 with the framework, to your project files.
 
-You should add an XML-catalog to your project. The catalog could
-e.g. live in `resources/catalog.xml`. The you should
+You should add an XML-catalog to your project. If the catalog would
+e.g. live in `resources/catalog.xml` of your project, then you should
 [register](https://www.oxygenxml.com/doc/versions/23.1/ug-editor/topics/preferences-xml-catalog.html#preferences-xml-catalog)
-the catalog in `${pdu}/resources/catalog.xml` in &lt;oXygen>.
+the catalog in `${pdu}/resources/catalog.xml` in &lt;oXygen>. Please,
+have a look at
+[`samples/catalog.xml`](framework/teip5alea/samples/catalog.xml) for a
+sample catalog file.
+
+Please note: All the framework files are included in subdirectories of
+the framework `teip5alea`. But when the framework is installed, the
+directory name changes to a combination of its name and version. So we
+cannot simply use paths like `teip5alea/css/font.css` in the URI or
+system suffix, but have to use the less distinct path suffix
+`css/font.css`.
 
 ### Project specific CSS ###
 
 You can redirect to an CSS file by redirecting the frameworkfile
-`samples/css/font.css` as you need. Here's a catalog entry to redirect
-to `resources/css/font.css` in your project:
+`css/font.css` as you need. Here's a catalog entry to redirect to
+`resources/css/font.css` in your project:
 
 ```{xml}
 <!-- override CSS (font) definitions of framework -->
-<uriSuffix uriSuffix="teip5alea/css/font.css" uri="css/font.css"/>
-<systemSuffix systemIdSuffix="teip5alea/css/font.css" uri="css/font.css"/>
+<uriSuffix uriSuffix="css/font.css" uri="css/font.css"/>
+<systemSuffix systemIdSuffix="css/font.css" uri="css/font.css"/>
 ```
 
+### Project specific bibliography ###
+
+You can redirect to a TEI document containing the project's
+bibliography. It will be used for producing and resolving
+bibliographic references with some functions of this framework. The
+framework ships with a dummy bibliography in
+`samples/biblio.xml`. Here's a catalog entry to redirect to
+`Literaturverzeichnis.xml` in your project's root directory:
+
+```{xml}
+<systemSuffix systemIdSuffix="samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
+<uriSuffix uriSuffix="samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
+```
 
 ## Language and script direction ##
 

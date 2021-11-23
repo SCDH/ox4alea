@@ -27,11 +27,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -49,11 +49,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -74,11 +74,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -97,11 +97,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -122,11 +122,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc</ht:td>
-		    <ht:td></ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc</td>
+		    <td></td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -147,11 +147,88 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc</ht:td>
-		    <ht:td> Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc</td>
+		    <td> Dd Ee Ff</td>
+		</tr>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario
+	label="Line with ceasura nested in app element which is nested in seg ...">
+	<x:context>
+			<tei:l>Aa <tei:seg>Bb <tei:app>
+				<tei:lem wit="a">Cc <tei:caesura/>Dd Ee</tei:lem>
+				<tei:rdg wit="b">Ccc</tei:rdg>
+			    </tei:app></tei:seg> Ff</tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name()='td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario
+	label="Line with two ceasura elements deeply nested in lem and rdg ...">
+	<x:context>
+	    <tei:l>
+		<tei:seg>
+			    <tei:app>
+				<tei:lem wit="a">Aa Bb Cc<tei:caesura/> Dd Ee Ff</tei:lem>
+				<tei:rdg wit="b">Aaa <tei:seg>Bbb Ccc<tei:caesura/> Ddd</tei:seg> Eee Fff</tei:rdg>
+			    </tei:app>
+		</tei:seg>
+	    </tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name()='td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc</td>
+		    <td> Dd Ee Ff</td>
+		</tr>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario
+	label="Line with two ceasura elements deeply nested in rdg and lem (flipped) ...">
+	<x:context>
+	    <tei:l>
+		<tei:seg>
+			    <tei:app>
+				<tei:rdg wit="b">Aaa <tei:seg>Bbb Ccc<tei:caesura/> Ddd</tei:seg> Eee Fff</tei:rdg>
+				<tei:lem wit="a">Aa Bb Cc<tei:caesura/> Dd Ee Ff</tei:lem>
+			    </tei:app>
+		</tei:seg>
+	    </tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name()='td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc</td>
+		    <td> Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -168,11 +245,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -189,11 +266,11 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -210,11 +287,94 @@
 	    label="text of line"
 	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
 	<x:expect label="results in 3 table columns">
-		<ht:tr>
-		    <ht:td style="...">1</ht:td>
-		    <ht:td style="...">Aa Bb Cc </ht:td>
-		    <ht:td>Dd Ee Ff</ht:td>
-		</ht:tr>
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario label="Line with ceasura as nested in sic ...">
+	<!-- Please note, that this also produces the title and the
+	     empty table row that separates line groups (lg) -->
+	<x:context>
+	    <tei:l>Aa Bb <tei:sic>Cc <tei:caesura/>Dd</tei:sic> Ee Ff</tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name() = 'td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario label="Line with ceasura as nested in choice/(sic|corr) ...">
+	<!-- Please note, that this also produces the title and the
+	     empty table row that separates line groups (lg) -->
+	<x:context>
+	    <tei:l>Aa Bb <tei:choice><tei:corr>Cc <tei:caesura/>Dd</tei:corr><tei:sic>Ccc <tei:caesura/>Ddd</tei:sic></tei:choice> Ee Ff</tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name() = 'td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario label="Line with ceasura as nested deeply in choice/(sic|corr) ...">
+	<!-- Please note, that this also produces the title and the
+	     empty table row that separates line groups (lg) -->
+	<x:context>
+	    <tei:l>Aa <tei:seg>Bb <tei:choice><tei:corr>Cc <tei:caesura/>Dd</tei:corr><tei:sic>Ccc <tei:caesura/>Ddd</tei:sic></tei:choice></tei:seg> Ee Ff</tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name() = 'td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc </td>
+		    <td>Dd Ee Ff</td>
+		</tr>
+	</x:expect>
+    </x:scenario>
+
+    <x:scenario label="Line with ceasura as nested in choice/sic but not present in choice/corr ...">
+	<!-- This is a failure in the source document. Isn't it? -->
+	<x:context>
+	    <tei:l>Aa Bb <tei:choice><tei:corr>Cc Dd</tei:corr><tei:sic>Ccc <tei:caesura/>Ddd</tei:sic></tei:choice> Ee Ff</tei:l>
+	</x:context>
+	<x:expect
+	    label="count of columns"
+	    test="count(//*[local-name() = 'td']) = 3"/>
+	<x:expect
+	    label="text of line"
+	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd Ee Ff'"/>
+	<x:expect label="results in 3 table columns">
+		<tr>
+		    <td class="...">1</td>
+		    <td class="...">Aa Bb Cc Dd</td>
+		    <td> Ee Ff</td>
+		</tr>
 	</x:expect>
     </x:scenario>
 
@@ -254,7 +414,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Cc Dd'"/>
     </x:scenario>
 
     <x:scenario
@@ -264,7 +424,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Dd'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Cc Dd'"/>
     </x:scenario>
 
     <x:scenario
@@ -274,7 +434,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Dd Ee'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Dd Ee'"/>
     </x:scenario>
 
     <x:scenario
@@ -284,7 +444,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Cc Ee'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Cc Ee'"/>
     </x:scenario>
 
     <x:scenario
@@ -294,7 +454,7 @@
 	</x:context>
 	<x:expect
 	    label="text of line"
-	    test="normalize-space(string-join(descendant::*[text()])) = '1Aa Bb Dd Ee'"/>
+	    test="normalize-space(string-join(descendant::text())) = '1 Aa Bb Dd Ee'"/>
     </x:scenario>
 
 </x:description>
