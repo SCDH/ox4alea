@@ -930,7 +930,7 @@
             (reference not found!)
         </xsl:if>
         <span class="bibliographic-reference"
-            lang="scdh:language($ref)">
+            lang="{scdh:language($ref)}">
             <!-- This must be paired with pdf character entity,
                         because directional embeddings are an embedded CFG! -->
             <xsl:value-of select="scdh:direction-embedding(.)"/>
