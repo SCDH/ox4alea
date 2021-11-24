@@ -955,8 +955,15 @@
     </xsl:template>
 
     <xsl:template match="choice[child::abbr and child::expan]" mode="biblio">
-        <xsl:apply-templates select="expan" mode="biblio"/>
+        <xsl:apply-templates select="abbr" mode="biblio"/>
     </xsl:template>
+
+    <xsl:template match="am[parent::abbr/parent::choice[child::expan]]" mode="biblio"/>
+
+    <!-- Exclude whitespace nodes from the bibliographic reference,
+        because they break the interpunctation at the end.
+        This may lead to unwanted effects with some bibliographies. -->
+    <xsl:template match="text()[ancestor::listBibl and matches(., '^\s+$')]" mode="biblio"/>
 
     <xsl:template match="biblScope[@unit][@from and @to]" mode="biblio">
         <xsl:text>, </xsl:text>
