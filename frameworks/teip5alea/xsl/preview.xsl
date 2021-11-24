@@ -435,10 +435,13 @@
         <xsl:param name="node" as="node()"/>
         <xsl:param name="type" as="xs:string"/>
         <xsl:choose>
-            <xsl:when test="name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'start'">
+            <!-- ornamented parenthesis around verbatim citation from holy text:
+                not in verses (poems) -->
+            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'start'">
                 <xsl:text>&#xfd3f;</xsl:text>
             </xsl:when>
-            <xsl:when test="name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'end'">
+            <!-- closing ornamented parenthesis -->
+            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'end'">
                 <xsl:text>&#xfd3e;</xsl:text>
             </xsl:when>
             <xsl:otherwise/>
