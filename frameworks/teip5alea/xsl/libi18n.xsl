@@ -20,8 +20,8 @@
     <xsl:function name="scdh:language">
         <xsl:param name="context" as="node()"/>
         <xsl:param name="default" as="xs:string"/>
-        <xsl:variable name="lang" select="$context/ancestor-or-self::*/@xml:lang[1]"/>
-        <xsl:value-of select="if (exists($lang)) then $lang else $default"/>
+        <xsl:variable name="lang" select="$context/ancestor-or-self::*/@xml:lang"/>
+        <xsl:value-of select="if (exists($lang)) then $lang[last()] else $default"/>
     </xsl:function>
 
     <xsl:function name="scdh:language">
