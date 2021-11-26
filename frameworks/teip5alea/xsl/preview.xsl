@@ -35,6 +35,9 @@
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
     <xsl:param name="ui-language" as="xs:string" select="''"/>
 
+    <!-- If true, this an extra space is added on the end of an ltr-to-rtl changeover. -->
+    <xsl:param name="ltr-to-rtl-extra-space" as="xs:boolean" select="true()" required="no"/>
+
     <xsl:function name="scdh:ui-language">
         <xsl:param name="context" as="node()"/>
         <xsl:param name="default" as="xs:string"/>
@@ -566,7 +569,7 @@
             <xsl:value-of select="scdh:direction-embedding(.)"/>
             <xsl:apply-templates mode="editorial-note"/>
             <xsl:text>&pdf;</xsl:text>
-            <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+            <xsl:if test="scdh:language-direction(.) eq 'ltr' and scdh:language-direction(parent::*) ne 'ltr' and $ltr-to-rtl-extra-space">
                 <xsl:text> </xsl:text>
             </xsl:if>
         </span>
@@ -848,7 +851,7 @@
                     <xsl:value-of select="scdh:direction-embedding(.)"/>
                     <xsl:apply-templates mode="editorial-note"/>
                     <xsl:text>&pdf;</xsl:text>
-                    <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+                    <xsl:if test="scdh:language-direction(.) eq 'ltr' and scdh:language-direction(parent::*) ne 'ltr' and $ltr-to-rtl-extra-space">
                         <xsl:text> </xsl:text>
                     </xsl:if>
                 </span>
@@ -863,7 +866,7 @@
         <xsl:value-of select="scdh:direction-embedding(.)"/>
         <xsl:apply-templates mode="editorial-note"/>
         <xsl:text>&pdf;</xsl:text>
-        <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+        <xsl:if test="scdh:language-direction(.) eq 'ltr' and scdh:language-direction(parent::*) ne 'ltr' and $ltr-to-rtl-extra-space">
             <xsl:text> </xsl:text>
         </xsl:if>
     </xsl:template>
@@ -925,7 +928,7 @@
         <xsl:variable name="bibliography" select="doc($biblio)"/>
         <xsl:variable name="ref" select="$bibliography//*[@xml:id eq $ref-id]"/>
         <xsl:variable name="ref-lang" select="scdh:language($ref)"/>
-        <xsl:if test="exists($bibliography)">
+        <xsl:if test="exists($bibliography) and $debug">
             <xsl:message>Bibliography present</xsl:message>
         </xsl:if>
         <xsl:if test="not($ref)">
@@ -933,10 +936,11 @@
             (reference not found!)
         </xsl:if>
         <span class="bibliographic-reference"
-            lang="{scdh:language($ref)}">
+            lang="{scdh:language($ref)}"
+            style="direction:{scdh:language-direction($ref)};">
             <!-- This must be paired with pdf character entity,
                         because directional embeddings are an embedded CFG! -->
-            <xsl:value-of select="scdh:direction-embedding(.)"/>
+            <xsl:value-of select="scdh:direction-embedding($ref)"/>
             <xsl:choose>
                 <xsl:when test="$ref">
                     <xsl:apply-templates select="$ref" mode="biblio"/>
@@ -947,7 +951,7 @@
             </xsl:choose>
             <xsl:apply-templates mode="biblio"/>
             <xsl:text>&pdf;</xsl:text>
-            <xsl:if test="scdh:language-direction(.) eq 'ltr'">
+            <xsl:if test="scdh:language-direction($ref) eq 'ltr' and scdh:language-direction(.) ne 'ltr' and $ltr-to-rtl-extra-space">
                 <xsl:text> </xsl:text>
             </xsl:if>
         </span>
