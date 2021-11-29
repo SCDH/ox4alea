@@ -15,10 +15,6 @@ l {
     display: block ;
 }
 
-l > seg {
-    margin-right: 2em
-}
-
 caesura {
     visibility: hidden ;
     margin-right: 1em; 
