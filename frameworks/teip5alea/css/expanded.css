@@ -76,10 +76,6 @@ app > lem > l, app > rdg > l {
     -oxy-display-tags: none;
 }
 
-l > seg {
-    margin-right: 2em
-}
-
 caesura {
     visibility: hidden ;
 }
