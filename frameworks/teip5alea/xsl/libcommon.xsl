@@ -5,7 +5,7 @@
     version="2.0">
 
     <!-- Whether to use line (block-element) counting, or verse (typed) counting. -->
-    <xsl:param name="typed-line-numbering" as="xs:boolean" select="false()"/>
+    <xsl:param name="typed-line-numbering" as="xs:boolean" select="true()"/>
 
     <!-- returns the line or verse number, depending on the value of $typed-line-numbering -->
     <xsl:function name="scdh:line-number" as="xs:string">
