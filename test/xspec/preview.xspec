@@ -12,6 +12,8 @@
     <!--x:param name="i18n" select="'../../frameworks/teip5alea/xsl/i18n.js'"/>
     <x:param name="locales-directory" select="'../../frameworks/teip5alea/xsl/locales'"/-->
 
+    <x:param name="typed-line-numbering" select="false()"/>
+
     <!-- Tests for the processing of the CAESURA element -->
 
     <x:scenario label="Simple line with ceasura as direct child ...">
