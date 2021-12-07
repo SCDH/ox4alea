@@ -135,7 +135,7 @@
                 <section class="variants">
                     <table>
                         <xsl:apply-templates
-                            select="TEI/text//(l|p)
+                            select="TEI/text//(l[not(ancestor::head)]|p|head)
                                        [descendant::app or
                                         descendant::witDetail or
                                         descendant::gap or
@@ -462,7 +462,7 @@
     <!-- ## Apparatus line ## -->
 
     <!-- make an apparatus line and hand over to templates that do the apparatus entries -->
-    <xsl:template match="l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-line">
+    <xsl:template match="head|app//head|l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-line">
         <tr>
             <td class="apparatus-line-number">
                 <xsl:value-of select="scdh:line-number(.)"/>
@@ -481,6 +481,7 @@
                                       descendant::witDetail[not(parent::app)] |
                                       descendant::app/lem/(gap|unclear|choice) |
                                       self::l[ancestor::app] |
+                                      self::head[ancestor::app] |
                                       self::p[ancestor::app and not(ancestor::note)]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
