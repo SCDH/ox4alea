@@ -833,7 +833,7 @@
     <xsl:template match="note" mode="editiorial-note-entry">
         <tr>
             <td class="editorial-note-number">
-                <xsl:value-of select="scdh:line-number(./ancestor::*[self::p or self::l])"/>
+                <xsl:value-of select="scdh:line-number(./ancestor::*[self::p or self::l or self::head])"/>
             </td>
             <td class="editorial-note-text">
                 <span class="note-lemma">
