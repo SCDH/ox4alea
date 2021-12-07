@@ -925,6 +925,11 @@
     <!-- # Bibliography # -->
 
     <xsl:template match="bibl[@corresp]" mode="#all">
+        <xsl:variable name="biblnode" select="."/>
+        <xsl:variable name="autotext" as="xs:boolean"
+            select="exists(parent::note[normalize-space(string-join((text()|*) except bibl, '')) eq ''])"/>
+        <xsl:variable name="analogous" as="xs:boolean"
+            select="exists(parent::note/parent::seg[matches(@type, '^#analogous')])"/>
         <xsl:variable name="ref-id" as="xs:string" select="replace(@corresp, '^#', '')"/>
         <xsl:variable name="bibliography" select="doc($biblio)"/>
         <xsl:variable name="ref" select="$bibliography//*[@xml:id eq $ref-id]"/>
@@ -942,6 +947,11 @@
             <!-- This must be paired with pdf character entity,
                         because directional embeddings are an embedded CFG! -->
             <xsl:value-of select="scdh:direction-embedding($ref)"/>
+            <!-- [normalize-space((text()|*) except bibl) eq ''] -->
+            <xsl:if test="$autotext and $analogous">
+                <span class="static-text" data-i18n-key="Cf.">&lre;Cf.&pdf;</span>
+                <xsl:text> </xsl:text>
+            </xsl:if>
             <xsl:choose>
                 <xsl:when test="$ref">
                     <xsl:apply-templates select="$ref" mode="biblio"/>
@@ -951,6 +961,9 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:apply-templates mode="biblio"/>
+            <xsl:if test="$autotext">
+                <xsl:text>.</xsl:text>
+            </xsl:if>
             <xsl:text>&pdf;</xsl:text>
             <xsl:if test="scdh:language-direction($ref) eq 'ltr' and scdh:language-direction(.) ne 'ltr' and $ltr-to-rtl-extra-space">
                 <xsl:text> </xsl:text>
