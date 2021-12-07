@@ -135,7 +135,7 @@
                 <section class="variants">
                     <table>
                         <xsl:apply-templates
-                            select="TEI/text//(l|p|head)
+                            select="TEI/text//(l[not(ancestor::head)]|p|head)
                                        [descendant::app or
                                         descendant::witDetail or
                                         descendant::gap or
