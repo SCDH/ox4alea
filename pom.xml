@@ -12,6 +12,7 @@
 
     <properties>
 	<distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</distribution.url>
+	<oxbytei.version>0.6.1</oxbytei.version>
 	<!--distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/2415/packages/maven</distribution.url-->
     </properties>
 
