@@ -6,7 +6,7 @@
     <sch:ns uri="http://www.tei-c.org/ns/1.0" prefix="t"/>
     
     <sch:pattern>
-        <sch:rule context="*[@wit]">
+        <sch:rule context="t:rdg[@wit] | t:lem[@wit]">
             <sch:let name="sep" value="'\s+'"/>
             <sch:let name="wits" value="tokenize(normalize-space(@wit), $sep)"/>
             <sch:let name="registered-wits" value="./ancestor::t:TEI/t:teiHeader//t:witness/@xml:id"/>
@@ -21,7 +21,7 @@
                  We append a space to make the IDs a prefix-free language.
                  To also test this on following-sibling would double errors. -->
             <sch:report
-                test="some $w in $wits satisfies not(empty(preceding-sibling::t:*[contains(concat(@wit, ' '), concat($w, ' '))]))"
+                test="some $w in $wits satisfies not(empty(preceding-sibling::t:*[not(self::t:witDetail)][contains(concat(@wit, ' '), concat($w, ' '))]))"
                 >witness <sch:value-of select="@wit"/> (at least one of them) used in parallel</sch:report>
 
         </sch:rule>
