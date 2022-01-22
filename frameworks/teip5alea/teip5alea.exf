@@ -3,7 +3,7 @@
 <script xmlns="http://www.oxygenxml.com/ns/framework/extend"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/framework/extend http://www.oxygenxml.com/ns/framework/extend/frameworkExtensionScript.xsd"
-  base="oXbytei">
+  base="oXbytao">
   <name>TEI P5 - ALEA-Extension NG</name>
   <description>An customisation for the edition of the works of Ibn Nubatah</description>
   <priority>High</priority>
@@ -23,9 +23,6 @@
     <addScenarios href="validation.scenarios"/>
   </validationScenarios>
 
-  <classpath>
-    <addEntry path="${framework}/resources/"/>
-  </classpath>
 
   <author>
     <!-- 
@@ -35,7 +32,7 @@
       
       https://www.oxygenxml.com/doc/versions/22.1/ug-editor/topics/dg-create-custom-actions.html#dg-create-custom-actions__section_2
     -->
-<!--
+    <!--
     <toolbars>
       <toolbar>
         <separator/>
@@ -44,46 +41,52 @@
 
     </toolbars>
 -->
-    
+
+
     <menu>
-      <separator anchor="insert image"/>
       <addAction anchor="insert image" position="after" id="insert_next"/>
       <addAction anchor="insert image" id="insert_lyrics"/>
       <addAction anchor="insert image" id="insert_verse"/>
       <addAction anchor="insert image" id="insert_stanza"/>
       <addAction anchor="insert image" id="insert_caesura"/>
-      <separator anchor="insert image"/>
-      <addAction anchor="insert image" id="add-corr"/>
-      <addAction anchor="insert image" id="add-sic"/>
-      <addAction anchor="insert image" id="wrap-choice"/>
-      <addAction anchor="insert image" id="unwrap-choice"/>
-      <addAction anchor="insert image" id="mark-unclear"/>
-      <addAction anchor="insert image" id="add-gap"/>
-      <addAction anchor="insert image" id="edit_certainty"/>
-      <addAction anchor="insert image" id="edit_evidence"/>
-      <addAction anchor="insert image" id="edit_length"/>
-      <addAction anchor="insert image" id="edit_reason"/>
-      <separator anchor="insert image"/>
-      <addAction anchor="insert image" id="add_variant"/><!-- use oXbytei instead -->
-      <addAction anchor="insert image" id="append_variant"/>
-      <addAction anchor="insert image" id="del_app"/>
-      <addAction anchor="insert image" id="add_witdetail"/>
-      <addAction anchor="insert image" id="register_witness"/>
-      <separator anchor="insert image"/>
-      <addAction anchor="insert image" id="insert_seg"/>
-      <addAction anchor="insert image" id="insert_taxonomic_tag"/>
-      <addAction anchor="insert image" id="edit_bibref"/><!-- oXbytei -->
-      <addAction anchor="insert image" id="link.person"/>
-      <addAction anchor="insert image" id="link.place"/>
+      <addAction anchor="del.app" id="add_witdetail"/>
+      <addAction anchor="del.app" id="register_witness"/>
+      <separator anchor="del.app"/>
+      <addAction anchor="note" id="mark-unclear"/>
+      <addAction anchor="note" id="add-gap"/>
+      <addAction anchor="note" id="edit_certainty"/>
+      <addAction anchor="note" id="edit_evidence"/>
+      <addAction anchor="note" id="edit_length"/>
+      <addAction anchor="note" id="edit_reason"/>
+      <separator anchor="note"/>
+      <addAction anchor="annotate" id="insert_taxonomic_tag"/>
     </menu>
 
-  <toolbars>
-    <toolbar>
-      <addAction id="link.person"/>
-      <addAction id="insert_seg"/>
-    </toolbar>
-  </toolbars>
-    
+    <toolbars>
+      <toolbar>
+        <removeAction id="item"/>
+        <removeAction id="itemizedlist"/>
+        <removeAction id="sort"/>
+        <removeAction id="insert.table"/>
+        <removeAction id="insert.table.row.below"/>
+        <removeAction id="delete.table.row"/>
+        <removeAction id="insert.table.column.after"/>
+        <removeAction id="delete.table.column"/>
+        <removeAction id="insert.table.cell"/>
+        <removeAction id="table.join"/>
+        <removeAction id="table.split"/>
+        <addAction anchor="del.app" id="add_witdetail"/>
+        <addAction anchor="del.app" id="register_witness"/>
+        <addAction anchor="note" id="register_witness"/>
+        <addAction anchor="note" id="mark-unclear"/>
+        <addAction anchor="note" id="add-gap"/>
+        <separator anchor="note"/>
+        <!-- 
+      
+      -->
+      </toolbar>
+    </toolbars>
+
 
   </author>
 
