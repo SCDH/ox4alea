@@ -1,9 +1,16 @@
 *~
 *.html
 
+*.xpr
+
 target
 test/xspec/xspec
 default-oxygen-frameworks
+
+/frameworks/oxbytei
+/frameworks/oxbytao
+oxbytei_externalAuthorActions
+oxbytao_externalAuthorActions
 
 # ignore maven settings
 settings.xml
