@@ -1,5 +1,9 @@
 # change log #
 
+## 1.0.60 ##
+
+- make templates work again
+
 ## 1.0.59 ##
 
 - make oXbytei new base framework
