@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- See https://www.oxygenxml.com/doc/versions/24.0/ug-editor/topics/framework-customization-script-usecases.html -->
+<script xmlns="http://www.oxygenxml.com/ns/framework/extend"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/framework/extend http://www.oxygenxml.com/ns/framework/extend/frameworkExtensionScript.xsd"
+  base="oXbytao">
+  <name>ALEA NG</name>
+  <description>An oXygen framework for the edition of the works of Ibn Nubatah</description>
+  <priority>High</priority>
+
+  <!--
+  <documentTemplates>
+    <addEntry path="${pdu}/templates"/>
+  </documentTemplates>
+  -->
+
+  <transformationScenarios>
+    <addScenarios href="transformation.scenarios"/>
+    <defaultScenarios>
+      <name>ALEA Preview</name>
+    </defaultScenarios>
+  </transformationScenarios>
+
+  <validationScenarios>
+    <addScenarios href="validation.scenarios"/>
+  </validationScenarios>
+
+
+  <author>
+    <!-- 
+      Author Actions are loaded from these directories:
+      {framework_directory}/externalAuthorActions
+      framework_directory}/{framework_file_name}_externalAuthorActions
+      
+      https://www.oxygenxml.com/doc/versions/22.1/ug-editor/topics/dg-create-custom-actions.html#dg-create-custom-actions__section_2
+    -->
+    <!--
+    <toolbars>
+      <toolbar>
+        <separator/>
+        <addAction id="insert.note"/>
+      </toolbar>
+
+    </toolbars>
+-->
+
+    <css>
+      <addCss path="${framework}/css/select-sigla.css" alternate="true" title="+ Select Sigla"/>
+      <addCss path="${framework}/css/note.css" alternate="true" title="+ Kommentare"/>
+      <addCss path="${framework}/css/tags.css" alternate="true" title="+ tags"/>
+    </css>
+
+    <menu>
+      <removeAction id="link.bibref"/>
+      <addAction anchor="insert image" position="after" id="insert_next"/>
+      <addAction anchor="insert image" id="insert_lyrics"/>
+      <addAction anchor="insert image" id="insert_verse"/>
+      <addAction anchor="insert image" id="insert_stanza"/>
+      <addAction anchor="insert image" id="insert_caesura"/>
+      <addAction anchor="del.app" id="add_witdetail"/>
+      <addAction anchor="del.app" id="register_witness"/>
+      <separator anchor="del.app"/>
+      <addAction anchor="note" id="mark-unclear"/>
+      <addAction anchor="note" id="add-gap"/>
+      <addAction anchor="note" id="edit_certainty"/>
+      <addAction anchor="note" id="edit_evidence"/>
+      <addAction anchor="note" id="edit_length"/>
+      <addAction anchor="note" id="edit_reason"/>
+      <separator anchor="note"/>
+      <addAction anchor="annotate" id="insert_taxonomic_tag"/>
+      <separator anchor="annotate"/>
+      <addAction anchor="annotate" id="insert_seg"/>
+      <addAction anchor="annotate" id="edit_bibref"/>
+    </menu>
+
+    <toolbars>
+      <toolbar>
+        <removeAction id="item"/>
+        <removeAction id="itemizedlist"/>
+        <removeAction id="sort"/>
+        <removeAction id="insert.table"/>
+        <removeAction id="insert.table.row.below"/>
+        <removeAction id="delete.table.row"/>
+        <removeAction id="insert.table.column.after"/>
+        <removeAction id="delete.table.column"/>
+        <removeAction id="insert.table.cell"/>
+        <removeAction id="table.join"/>
+        <removeAction id="table.split"/>
+        <removeAction id="link.bibref"/>
+        <addAction anchor="del.app" id="add_witdetail"/>
+        <addAction anchor="del.app" id="register_witness"/>
+        <addAction anchor="note" id="register_witness"/>
+        <addAction anchor="note" id="mark-unclear"/>
+        <addAction anchor="note" id="add-gap"/>
+        <separator anchor="note"/>
+        <!-- 
+      
+      -->
+      </toolbar>
+    </toolbars>
+
+    <contentCompletion>
+      <authorActions>
+        <addAction id="insert_seg" inElementsView="true" inCCWindow="true"/>
+        <addAction id="edit_bibref" inElementsView="true" inCCWindow="true"/>
+        <addAction id="insert_verse" inElementsView="true" inCCWindow="true"/>
+        <addAction id="insert_caesura" inElementsView="true" inCCWindow="true"/>
+      </authorActions>
+    </contentCompletion>
+
+  </author>
+
+
+</script>

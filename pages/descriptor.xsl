@@ -9,11 +9,13 @@
     <xsl:output method="xml" indent="yes"/>
 
     <xsl:template match="/">
-	<xt:extensions 
+    	<xsl:variable name="oxbytei-version" select="/project/properties/oxbytei.version"/>
+    	<xsl:variable name="teip5alea-version" select="/project/version"/>
+    	<xt:extensions
 	    xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
 	    <xt:extension id="{/project/artifactId}">
-		<xt:location href="https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/{/project/artifactId}-{/project/version}-package.zip"/>
-		<xt:version><xsl:value-of select="/project/version"/></xt:version>
+		<xt:location href="https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/{/project/artifactId}-{$teip5alea-version}-package.zip"/>
+		<xt:version><xsl:value-of select="$teip5alea-version"/></xt:version>
 		<xt:oxy_version>15.1+</xt:oxy_version>
 		<xt:type>framework</xt:type>
 		<xt:author>Christian Lück, Immanuel Normann</xt:author>
