@@ -4,13 +4,15 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/framework/extend http://www.oxygenxml.com/ns/framework/extend/frameworkExtensionScript.xsd"
   base="oXbytao">
-  <name>TEI P5 - ALEA-Extension NG</name>
-  <description>An customisation for the edition of the works of Ibn Nubatah</description>
+  <name>ALEA NG</name>
+  <description>An oXygen framework for the edition of the works of Ibn Nubatah</description>
   <priority>High</priority>
 
+  <!--
   <documentTemplates>
     <addEntry path="${pdu}/templates"/>
   </documentTemplates>
+  -->
 
   <transformationScenarios>
     <addScenarios href="transformation.scenarios"/>
@@ -44,6 +46,7 @@
 
 
     <menu>
+      <removeAction id="link.bibref"/>
       <addAction anchor="insert image" position="after" id="insert_next"/>
       <addAction anchor="insert image" id="insert_lyrics"/>
       <addAction anchor="insert image" id="insert_verse"/>
@@ -60,6 +63,9 @@
       <addAction anchor="note" id="edit_reason"/>
       <separator anchor="note"/>
       <addAction anchor="annotate" id="insert_taxonomic_tag"/>
+      <separator anchor="annotate"/>
+      <addAction anchor="annotate" id="insert_seg"/>
+      <addAction anchor="annotate" id="edit_bibref"/>
     </menu>
 
     <toolbars>
@@ -75,6 +81,7 @@
         <removeAction id="insert.table.cell"/>
         <removeAction id="table.join"/>
         <removeAction id="table.split"/>
+        <removeAction id="link.bibref"/>
         <addAction anchor="del.app" id="add_witdetail"/>
         <addAction anchor="del.app" id="register_witness"/>
         <addAction anchor="note" id="register_witness"/>
@@ -87,6 +94,14 @@
       </toolbar>
     </toolbars>
 
+    <contentCompletion>
+      <authorActions>
+        <addAction id="insert_seg" inElementsView="true" inCCWindow="true"/>
+        <addAction id="edit_bibref" inElementsView="true" inCCWindow="true"/>
+        <addAction id="insert_verse" inElementsView="true" inCCWindow="true"/>
+        <addAction id="insert_caesura" inElementsView="true" inCCWindow="true"/>
+      </authorActions>
+    </contentCompletion>
 
   </author>
 
