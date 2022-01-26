@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
     <id>package</id>
     <includeBaseDirectory>true</includeBaseDirectory>
-    <baseDirectory>teip5alea/oxbytei</baseDirectory>
+    <baseDirectory>teip5alea</baseDirectory>
 
     <formats>
 	<format>zip</format>
@@ -14,27 +14,15 @@
     <fileSets>
 	<fileSet>
 	    <directory>frameworks/teip5alea</directory>
-	    <outputDirectory>/teip5alea</outputDirectory>
-	    <includes>
-		<include>**/*</include>
-	    </includes>
-	    <excludes>
-		<exclude>**/*.xcf</exclude>
-		<exclude>**/mk-icons.sh</exclude>
-	    </excludes>
-	</fileSet>
-	<fileSet>
-	    <directory>frameworks/oxbytei</directory>
 	    <outputDirectory>/</outputDirectory>
 	    <includes>
 		<include>**/*</include>
 	    </includes>
 	    <excludes>
-		<exclude>teip5alea</exclude>
 		<exclude>**/*.xcf</exclude>
 		<exclude>**/mk-icons.sh</exclude>
 	    </excludes>
 	</fileSet>
     </fileSets>
-    
+
 </assembly>
