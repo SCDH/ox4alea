@@ -1,5 +1,9 @@
 # change log #
 
+## 1.0.59 ##
+
+- make oXbytei new base framework
+
 ## 1.0.58 ##
 
 - activate author mode action for `<witDetail>` everywhere
