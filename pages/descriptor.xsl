@@ -32,20 +32,6 @@
 		    <xsl:value-of select="unparsed-text('../LICENSE')"/>
 		</xt:license>
 	    </xt:extension>
-		<xt:extension id="oxbytei">
-			<xt:location href="https://github.com/SCDH/oxbytei/releases/download/{$oxbytei-version}/oxbytei-{$oxbytei-version}-package.zip"/>
-			<xt:version><xsl:value-of select="$oxbytei-version"/></xt:version>
-			<xt:oxy_version>23.1+</xt:oxy_version>
-			<xt:type>framework</xt:type>
-			<xt:author>Christian Lück</xt:author>
-			<xt:name>oXbytei</xt:name>
-			<xt:description>oXbytei is required by the ALEA Extension. Please install both frameworks!</xt:description>
-			<xt:license>
-				<xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
-				<xsl:value-of select="unparsed-text('https://raw.githubusercontent.com/SCDH/oxbytei/main/LICENSE')"/>
-				<xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
-			</xt:license>
-		</xt:extension>
 	</xt:extensions>
     </xsl:template>
 
