@@ -176,4 +176,11 @@
         </xsl:text>
     </xsl:template>
 
+    <xsl:template name="lang-attributes">
+        <xsl:param name="context" as="node()"/>
+        <xsl:variable name="lang" select="scdh:language($context)"/>
+        <xsl:attribute name="lang" select="$lang"/>
+        <xsl:attribute name="xml:lang" select="$lang"/>
+    </xsl:template>
+
 </xsl:stylesheet>
