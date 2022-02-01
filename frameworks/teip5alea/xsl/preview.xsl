@@ -131,7 +131,7 @@
                 </section>
                 <hr/>
                 <section class="content">
-                    <xsl:apply-templates select="TEI/text"/>
+                    <xsl:apply-templates select="TEI/text/body"/>
                 </section>
                 <hr/>
                 <section class="variants">
