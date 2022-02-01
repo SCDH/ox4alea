@@ -8,11 +8,9 @@
   <description>An oXygen framework for the edition of the works of Ibn Nubatah</description>
   <priority>High</priority>
 
-  <!--
   <documentTemplates>
-    <addEntry path="${pdu}/templates"/>
+    <addEntry path="${pd}/templates" position="before"/>
   </documentTemplates>
-  -->
 
   <transformationScenarios>
     <addScenarios href="transformation.scenarios"/>
