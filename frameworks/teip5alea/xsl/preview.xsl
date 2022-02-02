@@ -922,10 +922,12 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- pass over to tei-ld.xsl -->
-    <xsl:template match="persName | orgName | placeName | geoName" mode="editorial-note">
+    <!-- pass over to tei-ld.xsl, if not in note context -->
+    <xsl:template match="(persName | orgName | placeName | geoName)[not(ancestor::note)]" mode="editorial-note">
         <xsl:apply-templates select="." mode="tei-ld"/>
     </xsl:template>
+
+
 
     <!-- DEPRECATED -->
     <xsl:template match="bibl" mode="OFF">

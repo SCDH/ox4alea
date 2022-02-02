@@ -1,5 +1,9 @@
 # change log #
 
+## 1.0.64 ##
+
+- Preview: keine Personen-Infos für `<persName>` in `<note>`
+
 ## 1.0.63 ##
 
 - Preview: Anker-basierte Annotationen herausgenommen. Es sollen nur
