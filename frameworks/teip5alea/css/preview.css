@@ -1,0 +1,60 @@
+@font-face {
+    font-family: "Arabic Typesetting";
+    src: url("../../../arabt100.ttf");
+}
+@font-face {
+    font-family: "Amiri Regular";
+    src: url("../../../resources/css/Amiri-Regular.ttf");
+}
+
+
+body {
+    font-family: "Arabic Typesetting";
+}
+
+.title {
+    color: red;
+}
+
+.metadata {
+    direction: ltr;
+    text-align: right;
+    margin: 0 2em;
+}
+
+hr {
+    margin: 1em 2em;
+}
+
+td {
+    justify-content: space-between;
+    justify-self: stretch;
+}
+
+td.line-number,
+td.apparatus-line-number,
+td.editorial-note-number {
+    vertical-align: top;
+    text-align: right;
+    font-size: 0.7em;
+    padding-top: 0.3em;
+    padding-left: 10px;
+}
+
+td.text-col1 {
+    padding-left: 40px;
+}
+
+sup {
+    font-size: 6pt
+}
+
+.static-text,
+.apparatus-sep,
+.siglum {
+    color: gray;
+}
+
+abbr {
+    text-decoration: none;
+}

@@ -19,6 +19,8 @@
     <xsl:import href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
     <xsl:include href="libcommon.xsl"/>
+    <xsl:include href="libanchors.xsl"/>
+    <xsl:import href="libld.xsl"/>
 
     <!-- URI of witness catalogue. -->
     <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
@@ -129,7 +131,7 @@
                 </section>
                 <hr/>
                 <section class="content">
-                    <xsl:apply-templates select="TEI/text"/>
+                    <xsl:apply-templates select="TEI/text/body"/>
                 </section>
                 <hr/>
                 <section class="variants">
@@ -151,7 +153,10 @@
                 <hr/>
                 <section class="comments">
                     <table>
-                        <xsl:apply-templates select="TEI/text//note" mode="editiorial-note-entry"/>
+                        <xsl:apply-templates
+                            select="TEI/text//note |
+                                    TEI/text//anchor[exists(let $id := @xml:id return //span[@from eq concat('#', $id)])]"
+                            mode="editorial-note-entry"/>
                     </table>
                     <!--
                     <xsl:for-each select="TEI/text/body/lg/(head|lg/l)">
@@ -830,7 +835,7 @@
     <!-- This mode is used for the content of all kinds of editorial notes, be in <note>, be in <witDetail> -->
 
     <!-- the entry point for an editorial note -->
-    <xsl:template match="note" mode="editiorial-note-entry">
+    <xsl:template match="note" mode="editorial-note-entry">
         <tr>
             <td class="editorial-note-number">
                 <xsl:value-of select="scdh:line-number(./ancestor::*[self::p or self::l[not(ancestor::head)] or self::head])"/>
@@ -860,6 +865,50 @@
         </tr>
     </xsl:template>
 
+    <xsl:template match="anchor" mode="editorial-note-entry">
+        <xsl:variable name="idref" select="concat('#', @xml:id)"/>
+        <xsl:variable name="referering-node" as="node()" select="(//*[@from eq $idref], //*[@to eq $idref])[1]"/>
+        <xsl:variable name="fromId" select="substring($referering-node/@from, 2)"/>
+        <xsl:variable name="toId" select="substring($referering-node/@to, 2)"/>
+        <xsl:message>Anchor of <xsl:value-of select="name($referering-node)"/></xsl:message>
+        <tr>
+            <td class="editorial-note-number">
+                <xsl:value-of select="scdh:line-number(./ancestor::*[self::p or self::l[not(ancestor::head)] or self::head])"/>
+            </td>
+            <td class="editorial-note-text">
+                <span class="note-lemma">
+                    <xsl:variable name="lemma-nodes">
+                        <xsl:apply-templates
+                            mode="extract"
+                            select="//*[@xml:id eq $fromId]/following::node() intersect //*[@xml:id eq $toId]/preceding::node()"/>
+                    </xsl:variable>
+                    <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
+                    <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
+                </span>
+                <!--
+                <span class="note-text"
+                    lang="{scdh:language(.)}"
+                    style="direction:{scdh:language-direction(.)}; text-align:{scdh:language-align(.)};">
+                    <!-/- This must be paired with pdf character entity,
+                        because directional embeddings are an embedded CFG! -/->
+                    <xsl:value-of select="scdh:direction-embedding(.)"/>
+                    <xsl:apply-templates mode="editorial-note" select="$referering-node"/>
+                    <xsl:text>&pdf;</xsl:text>
+                    <xsl:if test="scdh:language-direction(.) eq 'ltr' and scdh:language-direction(parent::*) ne 'ltr' and $ltr-to-rtl-extra-space">
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                </span>
+                -->
+                <span class="note-text">
+                    <xsl:call-template name="lang-attributes">
+                        <xsl:with-param name="context" select="$referering-node"/>
+                    </xsl:call-template>
+                    <xsl:apply-templates mode="editorial-note" select="$referering-node"/>
+                </span>
+            </td>
+        </tr>
+    </xsl:template>
+
     <!-- change language if necessary -->
     <xsl:template match="*[@xml:lang]" mode="editorial-note">
         <!-- This must be paired with pdf character entity,
@@ -870,6 +919,11 @@
         <xsl:if test="scdh:language-direction(.) eq 'ltr' and scdh:language-direction(parent::*) ne 'ltr' and $ltr-to-rtl-extra-space">
             <xsl:text> </xsl:text>
         </xsl:if>
+    </xsl:template>
+
+    <!-- pass over to tei-ld.xsl -->
+    <xsl:template match="persName | orgName | placeName | geoName" mode="editorial-note">
+        <xsl:apply-templates select="." mode="tei-ld"/>
     </xsl:template>
 
     <!-- DEPRECATED -->
