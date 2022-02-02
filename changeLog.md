@@ -1,5 +1,12 @@
 # change log #
 
+## 1.0.62 ##
+
+- Versnummerierung bei zusätzlichen Versen korrigiert:
+  - Es soll die Zahl des vorhergehenden Verses verwendet werden
+  - Falls das Gedicht mit einem zusätzlichen Vers beginnt, steht dann
+    da eine 0.
+
 ## 1.0.61 ##
 
 - Preview kann Anker-basiertes Markup für Personen und Orte.
