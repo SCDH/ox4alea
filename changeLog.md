@@ -1,5 +1,9 @@
 # change log #
 
+## 1.0.61 ##
+
+- Preview kann Anker-basiertes Markup für Personen und Orte.
+
 ## 1.0.60 ##
 
 - make templates work again
