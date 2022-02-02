@@ -1,5 +1,10 @@
 # change log #
 
+## 1.0.63 ##
+
+- Preview: Anker-basierte Annotationen herausgenommen. Es sollen nur
+  die Fußnoten-Kommentare angezeigt werden.
+
 ## 1.0.62 ##
 
 - Versnummerierung bei zusätzlichen Versen korrigiert:

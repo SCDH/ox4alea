@@ -153,9 +153,10 @@
                 <hr/>
                 <section class="comments">
                     <table>
+                        <!-- add the following to get anchor-based things to comments:
+                            | TEI/text//anchor[exists(let $id := @xml:id return //span[@from eq concat('#', $id)])] -->
                         <xsl:apply-templates
-                            select="TEI/text//note |
-                                    TEI/text//anchor[exists(let $id := @xml:id return //span[@from eq concat('#', $id)])]"
+                            select="TEI/text//note"
                             mode="editorial-note-entry"/>
                     </table>
                     <!--
