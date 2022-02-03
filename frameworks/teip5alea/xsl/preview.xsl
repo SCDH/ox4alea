@@ -153,9 +153,10 @@
                 <hr/>
                 <section class="comments">
                     <table>
+                        <!-- add the following to get anchor-based things to comments:
+                            | TEI/text//anchor[exists(let $id := @xml:id return //span[@from eq concat('#', $id)])] -->
                         <xsl:apply-templates
-                            select="TEI/text//note |
-                                    TEI/text//anchor[exists(let $id := @xml:id return //span[@from eq concat('#', $id)])]"
+                            select="TEI/text//note"
                             mode="editorial-note-entry"/>
                     </table>
                     <!--
@@ -922,10 +923,12 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- pass over to tei-ld.xsl -->
-    <xsl:template match="persName | orgName | placeName | geoName" mode="editorial-note">
+    <!-- pass over to tei-ld.xsl, if not in note context -->
+    <xsl:template match="(persName | orgName | placeName | geoName)[not(ancestor::note)]" mode="editorial-note">
         <xsl:apply-templates select="." mode="tei-ld"/>
     </xsl:template>
+
+
 
     <!-- DEPRECATED -->
     <xsl:template match="bibl" mode="OFF">

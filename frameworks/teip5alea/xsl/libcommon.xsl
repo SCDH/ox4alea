@@ -47,8 +47,14 @@
                     select="concat('P', count($el/preceding::p[not(ancestor::rdg)]) + 1, $suffix)"/>
             </xsl:when>
             <xsl:when test="$el/self::l">
+                <xsl:variable name="inc" select="
+                        if ($el/ancestor::rdg) then
+                            0
+                        else
+                            1" as="xs:integer"/>
                 <xsl:value-of
-                    select="concat('V', count($el/preceding::l[not(ancestor::rdg)]) + 1, $suffix)"/>
+                    select="concat('V', count($el/preceding::l[not(ancestor::rdg)]) + $inc, $suffix)"
+                />
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="concat('?', $suffix)"/>
