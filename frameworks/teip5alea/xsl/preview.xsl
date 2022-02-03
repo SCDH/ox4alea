@@ -878,9 +878,10 @@
             <td class="editorial-note-text">
                 <span class="note-lemma">
                     <xsl:variable name="lemma-nodes">
-                        <xsl:apply-templates
-                            mode="extract"
-                            select="//*[@xml:id eq $fromId]/following::node() intersect //*[@xml:id eq $toId]/preceding::node()"/>
+                        <xsl:call-template name="nodes-between">
+                            <xsl:with-param name="startId" select="$fromId"/>
+                            <xsl:with-param name="endId" select="$toId"/>
+                        </xsl:call-template>
                     </xsl:variable>
                     <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
                     <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
