@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="atom.move.caret.end">
+  <a:name>Section</a:name>
+  <a:description>Inserts a new section.</a:description>
+  <a:operations>
+    <a:operation id="MoveCaretOperation">
+      <a:xpathCondition>true()</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="position">Inside, Inside, at the end</a:argument>
+        <a:argument name="xpathLocation">self::*</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
