@@ -95,6 +95,10 @@
       
       -->
       </toolbar>
+      <toolbar name="ALEA shortcuts">
+        <addAction id="short.seg.note"/>
+        <addAction id="short.koran"/>
+      </toolbar>
     </toolbars>
 
     <contentCompletion>
