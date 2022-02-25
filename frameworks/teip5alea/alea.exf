@@ -87,7 +87,6 @@
         <removeAction id="link.bibref"/>
         <addAction anchor="del.app" id="add_witdetail"/>
         <addAction anchor="del.app" id="register_witness"/>
-        <addAction anchor="note" id="register_witness"/>
         <addAction anchor="note" id="mark-unclear"/>
         <addAction anchor="note" id="add-gap"/>
         <separator anchor="note"/>
