@@ -20,6 +20,14 @@
         <a:argument name="value"><![CDATA[${ask('Choose entry from bibliography', combobox, (${xpath_eval(let $biblio := doc('${framework}/samples/biblio.xml') return string-join(for $entry in $biblio//*:body//*:listBibl//*:bibl return concat("'", '#', $entry/@xml:id, "':'", replace(normalize-space(if (exists($entry//*:abbr)) then ($entry//*:abbr) else $entry), "'", ' '), "'"), ';'))}), '${xpath_eval(@corresp)}')}]]></a:argument>
       </a:arguments>
     </a:operation>
+    <a:operation id="ChangeAttributeOperation">
+      <a:xpathCondition>self::biblScope[parent::bibl and not(ancestor::listBibl)]</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="elementLocation">parent::bibl</a:argument>
+        <a:argument name="name">corresp</a:argument>
+        <a:argument name="value"><![CDATA[${ask('Choose entry from bibliography', combobox, (${xpath_eval(let $biblio := doc('${framework}/samples/biblio.xml') return string-join(for $entry in $biblio//*:body//*:listBibl//*:bibl return concat("'", '#', $entry/@xml:id, "':'", replace(normalize-space(if (exists($entry//*:abbr)) then ($entry//*:abbr) else $entry), "'", ' '), "'"), ';'))}), '${xpath_eval(parent::bibl/@corresp)}')}]]></a:argument>
+      </a:arguments>
+    </a:operation>
   </a:operations>
   <a:accessKey/>
 </a:authorAction>

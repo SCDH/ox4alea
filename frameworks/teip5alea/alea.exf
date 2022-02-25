@@ -21,6 +21,11 @@
 
   <validationScenarios>
     <addScenarios href="validation.scenarios"/>
+    <defaultScenarios>
+      <name>ALEA - assert consistent witnesses</name>
+      <name>ALEA - verse metres</name>
+      <name>ALEA - oXygen default validation</name>
+    </defaultScenarios>
   </validationScenarios>
 
 
@@ -87,13 +92,17 @@
         <removeAction id="link.bibref"/>
         <addAction anchor="del.app" id="add_witdetail"/>
         <addAction anchor="del.app" id="register_witness"/>
-        <addAction anchor="note" id="register_witness"/>
         <addAction anchor="note" id="mark-unclear"/>
         <addAction anchor="note" id="add-gap"/>
         <separator anchor="note"/>
         <!-- 
       
       -->
+      </toolbar>
+      <toolbar name="ALEA shortcuts">
+        <addAction id="short.seg.note"/>
+        <addAction id="short.cite.ref"/>
+        <addAction id="short.koran"/>
       </toolbar>
     </toolbars>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Extract the referenced text
+<!-- Templates for extracting the referenced text enclosed by anchors.
 
 You can override the processing of the referenced text by replacing this file
 with an XML catalog.
@@ -16,14 +16,37 @@ It is called after the transformation in 'extract' mode.
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs" version="3.0"
     default-mode="extract">
     <!-- Note, that the default mode is 'extract'! -->
-    
-    <!-- A template named 'finalize-extracted' is expected to be here! -->
+
+    <!-- a named template for getting the nodes between a start and an end node -->
+    <xsl:template name="nodes-between" as="node()*">
+        <xsl:param name="startId" as="xs:string"/>
+        <xsl:param name="endId" as="xs:string"/>
+        <xsl:apply-templates mode="extract"
+            select="//*[@xml:id eq $startId]/following::node() intersect //*[@xml:id eq $endId]/preceding::node()"
+        />
+    </xsl:template>
+
+    <!-- A template named 'finalize-extracted' is expected to be present! -->
     <xsl:template name="finalize-extracted">
         <xsl:param name="extracted" as="node()*"/>
         <xsl:value-of select="normalize-space($extracted)"/>
     </xsl:template>
 
     <xsl:mode name="extract" on-no-match="shallow-copy"/>
+
+    <!-- do not reproduce processing instructions -->
+    <xsl:template match="processing-instruction()"/>
+
+    <!-- do not reproduce apparatus entries if using an other variant encoding than parallel segementation -->
+    <xsl:template match="app[//variantEncoding/@method ne 'parallel-segmentation']"/>
+
+    <!-- do not reproduce variant readings (in parallel segmentation) -->
+    <xsl:template match="rdg"/>
+
+    <!-- do not reproduce both of choice/(sic|corr) -->
+    <xsl:template match="choice[child::sic and child::corr]">
+        <xsl:apply-templates select="corr"/>
+    </xsl:template>
 
     <!-- do not reproduce notes -->
     <xsl:template match="note"/>

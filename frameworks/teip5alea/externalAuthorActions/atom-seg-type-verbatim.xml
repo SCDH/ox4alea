@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="atom.seg.type.verbatim">
+  <a:name>verbatim</a:name>
+  <a:description>Set @type to verbatim.</a:description>
+  <a:operations>
+    <a:operation id="ChangeAttributeOperation">
+      <a:xpathCondition>self::seg</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="name">type</a:argument>
+        <a:argument name="elementLocation">self::seg</a:argument>
+        <!-- FIXME: @type is of type tei.enumerated, so no fragment identifier! -->
+        <a:argument name="value">#verbatim</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
