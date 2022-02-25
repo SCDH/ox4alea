@@ -21,6 +21,10 @@
 	    <excludes>
 		<exclude>**/*.xcf</exclude>
 		<exclude>**/mk-icons.sh</exclude>
+		<exclude>**/oxbytao_externalAuthorActions/*</exclude>
+		<exclude>**/oxbytei_externalAuthorActions/*</exclude>
+		<exclude>**/oxbytao_externalAuthorActions</exclude>
+		<exclude>**/oxbytei_externalAuthorActions</exclude>
 	    </excludes>
 	</fileSet>
     </fileSets>
