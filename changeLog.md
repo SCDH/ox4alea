@@ -6,6 +6,8 @@
   - citation from Koran
   - citation with bibliographic reference
   - note on user selection
+- open file after transforming with `extract reading`
+
 
 ## 1.0.64 ##
 
