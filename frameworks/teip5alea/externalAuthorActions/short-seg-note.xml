@@ -5,6 +5,8 @@
   id="short.seg.note">
   <a:name>Note in &lt;seg&gt;</a:name>
   <a:description>Surround the user selection with &lt;seg&gt; and insert a note in it.</a:description>
+  <a:smallIconPath href="${framework}/images/short-seg-note-16.png"/>
+  <a:largeIconPath href="${framework}/images/short-seg-note-24.png"/>
   <a:operations>
     <a:operation id="ExecuteMultipleActionsOperation">
       <a:xpathCondition>true()</a:xpathCondition>

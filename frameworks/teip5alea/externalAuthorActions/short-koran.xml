@@ -7,6 +7,8 @@
   id="short.koran">
   <a:name>Koran</a:name>
   <a:description>Annotatie the user selection as a citation from Koran.</a:description>
+  <a:smallIconPath href="${framework}/images/koran-16.png"/>
+  <a:largeIconPath href="${framework}/images/koran-24.png"/>
   <a:operations>
     <a:operation id="ExecuteMultipleActionsOperation">
       <a:xpathCondition>true()</a:xpathCondition>
