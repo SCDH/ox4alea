@@ -1,14 +1,16 @@
 # change log #
 
-## dev ##
+## 2.0.0 ##
 
 - shortcut actions for
   - citation from Koran
   - citation with bibliographic reference
   - note on user selection
 - open file after transforming with `extract reading`
-- use all validation scenorios for automativ validation
+- use all validation scenorios for automatic validation
 
+- version step to 2.x.x because using oXbytei/oXbytao as base
+  frameworks seems to be stable now
 
 ## 1.0.64 ##
 
