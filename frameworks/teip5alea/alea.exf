@@ -97,6 +97,7 @@
       </toolbar>
       <toolbar name="ALEA shortcuts">
         <addAction id="short.seg.note"/>
+        <addAction id="short.cite.ref"/>
         <addAction id="short.koran"/>
       </toolbar>
     </toolbars>
