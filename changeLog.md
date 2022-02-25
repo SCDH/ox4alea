@@ -7,6 +7,7 @@
   - citation with bibliographic reference
   - note on user selection
 - open file after transforming with `extract reading`
+- use all validation scenorios for automativ validation
 
 
 ## 1.0.64 ##

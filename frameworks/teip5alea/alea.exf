@@ -21,6 +21,11 @@
 
   <validationScenarios>
     <addScenarios href="validation.scenarios"/>
+    <defaultScenarios>
+      <name>ALEA - assert consistent witnesses</name>
+      <name>ALEA - verse metres</name>
+      <name>ALEA - oXygen default validation</name>
+    </defaultScenarios>
   </validationScenarios>
 
 
