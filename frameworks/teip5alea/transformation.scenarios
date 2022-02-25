@@ -644,7 +644,7 @@
 						<null/>
 					</field>
 					<field name="openInEditor">
-						<Boolean>false</Boolean>
+						<Boolean>true</Boolean>
 					</field>
 					<field name="showInHTMLPane">
 						<Boolean>false</Boolean>
