@@ -1,5 +1,12 @@
 # change log #
 
+## dev ##
+
+- shortcut actions for
+  - citation from Koran
+  - citation with bibliographic reference
+  - note on user selection
+
 ## 1.0.64 ##
 
 - Preview: keine Personen-Infos für `<persName>` in `<note>`
