@@ -1,9 +1,10 @@
 # change log #
 
-## 2.1.0 ##
+## dev ##
 
 - added shortcut action for inserting a reference to an encyclopedia
-
+- font features italic etc. in preview
+- do not fail on local URIs in `bibl/@corresp`
 
 ## 2.0.0 ##
 
