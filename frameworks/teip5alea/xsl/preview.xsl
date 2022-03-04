@@ -1043,7 +1043,7 @@
 
     <!-- # Bibliography # -->
 
-    <xsl:template match="bibl[@corresp]" mode="#all">
+    <xsl:template match="bibl[matches(@corresp, '^#')]" mode="#all">
         <xsl:variable name="biblnode" select="."/>
         <xsl:variable name="autotext" as="xs:boolean"
             select="exists(parent::note[normalize-space(string-join((text()|*) except bibl, '')) eq ''])"/>
