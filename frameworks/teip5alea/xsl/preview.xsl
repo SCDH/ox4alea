@@ -457,6 +457,67 @@
         </xsl:choose>
     </xsl:template>
 
+
+    <!-- simple font changes -->
+
+    <xsl:template mode="#all" match="hi[@rend eq 'bold']" priority="2">
+        <b>
+            <xsl:call-template name="lang-attributes">
+                <xsl:with-param name="context" select="."/>
+            </xsl:call-template>
+            <xsl:apply-templates mode="#current"/>
+        </b>
+    </xsl:template>
+
+    <xsl:template mode="#all" match="hi[@rend eq 'italic']" priority="2">
+        <i>
+            <xsl:call-template name="lang-attributes">
+                <xsl:with-param name="context" select="."/>
+            </xsl:call-template>
+            <xsl:apply-templates mode="#current"/>
+        </i>
+    </xsl:template>
+
+    <xsl:template mode="#all" match="hi[@rend eq 'underline']" priority="2">
+        <span style="text-decoration: underline;">
+            <xsl:call-template name="lang-attributes">
+                <xsl:with-param name="context" select="."/>
+            </xsl:call-template>
+            <xsl:apply-templates mode="#current"/>
+        </span>
+    </xsl:template>
+
+    <xsl:template mode="#all" match="hi[@rend eq 'superscript']" priority="2">
+        <sup>
+            <xsl:call-template name="lang-attributes">
+                <xsl:with-param name="context" select="."/>
+            </xsl:call-template>
+            <xsl:apply-templates mode="#current"/>
+        </sup>
+    </xsl:template>
+
+    <xsl:template mode="#all" match="title[@type eq 'lemma']" priority="2">
+        <xsl:variable name="content">
+            <xsl:apply-templates mode="#current"/>
+        </xsl:variable>
+        <span>
+            <xsl:call-template name="lang-attributes">
+                <xsl:with-param name="context" select="."/>
+            </xsl:call-template>
+            <xsl:value-of select="concat('“', normalize-space($content), '”')"/>
+        </span>
+    </xsl:template>
+
+    <xsl:template mode="#all" match="seg[matches(@type, 'booktitle')] | title">
+        <i>
+            <xsl:call-template name="lang-attributes">
+                <xsl:with-param name="context" select="."/>
+            </xsl:call-template>
+            <xsl:apply-templates mode="#current"/>
+        </i>
+    </xsl:template>
+
+
     <!-- DEPRECATED -->
     <xsl:template name="variants">
         <xsl:param name="lg"/>
