@@ -1,5 +1,10 @@
 # change log #
 
+## 2.1.0 ##
+
+- added shortcut action for inserting a reference to an encyclopedia
+
+
 ## 2.0.0 ##
 
 - shortcut actions for
