@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- editing atom -->
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="atom.bibref.update.siglum">
+  <a:name>Update siglum</a:name>
+  <a:description>Update the siglum of an encyclopedia lemma.</a:description>
+  <a:operations>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>self::bibl[@corresp]</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="script">${framework}/xsl/biblUpdateSiglum.xsl</a:argument>
+        <!-- we need the whole document in order to evaluate the <prefixDef> -->
+        <a:argument name="sourceLocation">/*</a:argument>
+        <a:argument name="targetLocation">child::abbr[@type eq 'siglum']</a:argument>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="caretPosition">After</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
