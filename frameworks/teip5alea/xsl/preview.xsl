@@ -496,7 +496,7 @@
         </sup>
     </xsl:template>
 
-    <xsl:template mode="#all" match="title[@type eq 'lemma']" priority="2">
+    <xsl:template mode="#all" match="title[@type eq 'lemma'] | q | quote" priority="2">
         <xsl:variable name="content">
             <xsl:apply-templates mode="#current"/>
         </xsl:variable>
