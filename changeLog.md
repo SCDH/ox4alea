@@ -1,6 +1,6 @@
 # change log #
 
-## dev ##
+## 2.1.0 ##
 
 - added shortcut action for inserting a reference to an encyclopedia
 - font features italic etc. in preview
