@@ -1,5 +1,11 @@
 # change log #
 
+## dev ##
+
+- multiple recension documents
+  - CSS for selecting and unselecting parts to display
+  - action for inserting markup and selecting `@source`
+
 ## 2.2.0 ##
 
 - new shortcut action for setting the language of the text selected by
