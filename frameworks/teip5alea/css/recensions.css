@@ -1,0 +1,13 @@
+@import "recensions-project.css";
+/* This sets the visibility of a recension depending on ${pdu}/visibility.xml */
+
+/* Please note, that the set of recension names must be a prefix-free language! */
+
+choice > seg[source] {
+    display: oxy_xpath("if (matches(@source, unparsed-text('${pdu}/visible.txt'))) then 'inline' else 'none'");
+}
+
+lg > choice > seg[source],
+div > choice > seg[source] {
+    display: oxy_xpath("if (matches(@source, unparsed-text('${pdu}/visible.txt'))) then 'block' else 'none'");
+}
