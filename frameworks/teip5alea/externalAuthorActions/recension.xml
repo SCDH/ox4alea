@@ -6,6 +6,8 @@
   id="recension">
   <a:name>Recension</a:name>
   <a:description>Add an alternative passage in a multi-recension document.</a:description>
+  <a:smallIconPath href="${framework}/images/recensions-16.png"/>
+  <a:largeIconPath href="${framework}/images/recensions-24.png"/>
   <a:operations>
     <a:operation id="ExecuteMultipleActionsOperation">
       <a:xpathCondition>true()</a:xpathCondition>
