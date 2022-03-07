@@ -1,6 +1,6 @@
 # change log #
 
-## dev ##
+## 2.2.0 ##
 
 - new shortcut action for setting the language of the text selected by
   the user. This inserts a `<seg>` and sets `@xml:lang` on it.
