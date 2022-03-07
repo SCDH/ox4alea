@@ -104,6 +104,7 @@
         <addAction id="short.cite.ref"/>
         <addAction id="short.koran"/>
         <addAction id="short.encyclopedia"/>
+        <addAction id="short.seg.lang"/>
       </toolbar>
     </toolbars>
 

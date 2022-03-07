@@ -1,5 +1,10 @@
 # change log #
 
+## dev ##
+
+- new shortcut action for setting the language of the text selected by
+  the user. This inserts a `<seg>` and sets `@xml:lang` on it.
+
 ## 2.1.0 ##
 
 - added shortcut action for inserting a reference to an encyclopedia
