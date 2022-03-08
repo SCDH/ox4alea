@@ -1,6 +1,6 @@
 # change log #
 
-## dev ##
+## 2.3.0 ##
 
 - multiple recension documents
   - CSS for selecting and unselecting parts to display
