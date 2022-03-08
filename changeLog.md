@@ -1,5 +1,10 @@
 # change log #
 
+## 2.3.1 ##
+
+- preview for double end-point attachment apparatus encodings
+  - still not perfect, but ok for demonstration
+
 ## 2.3.0 ##
 
 - multiple recension documents
