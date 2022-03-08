@@ -4,13 +4,16 @@ XSL transfromation for extracting a single recension from a multiple-recension d
 
 Recensions and the witnesses belonging to them are expected to be encoded
 as a sourceDesc//listWit with an @xml:id.
+
+We define a default mode in order to make stylesheet composition simpler.
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="xs math"
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.1">
-
-    <xsl:mode on-no-match="shallow-copy"/>
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0"
+    default-mode="extract-recension">
+    
+    <xsl:mode name="extract-recension" on-no-match="shallow-copy"/>
     <xsl:mode name="single-recension" on-no-match="shallow-copy"/>
 
     <xsl:param name="source" as="xs:string" required="true"/>
