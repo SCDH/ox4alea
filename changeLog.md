@@ -5,6 +5,9 @@
 - multiple recension documents
   - CSS for selecting and unselecting parts to display
   - action for inserting markup and selecting `@source`
+  - XSLT for extracting a single recension and the according variants
+	from a multiple recension document
+  - XSLT for HTML preview of a multiple recension documents
 
 ## 2.2.0 ##
 
