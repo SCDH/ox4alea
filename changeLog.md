@@ -8,6 +8,9 @@
   - XSLT for extracting a single recension and the according variants
 	from a multiple recension document
   - XSLT for HTML preview of a multiple recension documents
+- removed redundant CSS styles:
+  - "+ edit sigla"
+  - "+ tags"
 
 ## 2.2.0 ##
 
