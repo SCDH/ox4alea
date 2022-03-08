@@ -19,7 +19,7 @@
     <x:scenario label="Simple line with ceasura as direct child ...">
 	<!-- Please note, that this also produces the title and the
 	     empty table row that separates line groups (lg) -->
-	<x:context>
+	<x:context mode="preview">
 	    <tei:l>Aa Bb Cc <tei:caesura/>Dd Ee Ff</tei:l>
 	</x:context>
 	<x:expect
@@ -38,7 +38,7 @@
     </x:scenario>
 
     <x:scenario label="Line with ceasura as direct child and app element ...">
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>
 		<tei:app><tei:lem wit="a">Aa</tei:lem><tei:rdg wit="b">Aaa</tei:rdg>
 		</tei:app> Bb Cc <tei:caesura
@@ -61,7 +61,7 @@
 
     <x:scenario
 	label="Line with ceasura nested in app element like in #1 ...">
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>
 		<tei:app>
 		    <tei:lem wit="a">Aa Bb Cc <tei:caesura/>Dd Ee Ff</tei:lem>
@@ -86,7 +86,7 @@
 
     <x:scenario
 	label="Line with ceasura nested in app element, but not the whole verse in app ...">
-	<x:context>
+    <x:context  mode="preview">
 			<tei:l>Aa Bb <tei:app>
 				<tei:lem wit="a">Cc <tei:caesura/>Dd Ee</tei:lem>
 				<tei:rdg wit="b">Ccc</tei:rdg>
@@ -109,7 +109,7 @@
 
     <x:scenario
 	label="Line with ceasura nested in app element, but no caesura in lem ...">
-	<x:context>
+    <x:context  mode="preview">
 			<tei:l>
 			    <tei:app>
 				<tei:lem wit="a">Aa Bb Cc</tei:lem>
@@ -134,7 +134,7 @@
 
     <x:scenario
 	label="Line with two ceasura elements nested in lem and rdg ...">
-	<x:context>
+    <x:context mode="preview">
 			<tei:l>
 			    <tei:app>
 				<tei:lem wit="a">Aa Bb Cc<tei:caesura/> Dd Ee Ff</tei:lem>
@@ -159,7 +159,7 @@
 
     <x:scenario
 	label="Line with ceasura nested in app element which is nested in seg ...">
-	<x:context>
+    <x:context mode="preview">
 			<tei:l>Aa <tei:seg>Bb <tei:app>
 				<tei:lem wit="a">Cc <tei:caesura/>Dd Ee</tei:lem>
 				<tei:rdg wit="b">Ccc</tei:rdg>
@@ -182,7 +182,7 @@
 
     <x:scenario
 	label="Line with two ceasura elements deeply nested in lem and rdg ...">
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>
 		<tei:seg>
 			    <tei:app>
@@ -209,7 +209,7 @@
 
     <x:scenario
 	label="Line with two ceasura elements deeply nested in rdg and lem (flipped) ...">
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>
 		<tei:seg>
 			    <tei:app>
@@ -237,7 +237,7 @@
     <x:scenario label="Line with ceasura as nested in placeName tag ...">
 	<!-- Please note, that this also produces the title and the
 	     empty table row that separates line groups (lg) -->
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:placeName>Cc <tei:caesura/>Dd</tei:placeName> Ee Ff</tei:l>
 	</x:context>
 	<x:expect
@@ -258,7 +258,7 @@
     <x:scenario label="Line with ceasura as nested in persName tag ...">
 	<!-- Please note, that this also produces the title and the
 	     empty table row that separates line groups (lg) -->
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:persName>Cc <tei:caesura/>Dd</tei:persName> Ee Ff</tei:l>
 	</x:context>
 	<x:expect
@@ -279,7 +279,7 @@
     <x:scenario label="Line with ceasura as nested in seg tag ...">
 	<!-- Please note, that this also produces the title and the
 	     empty table row that separates line groups (lg) -->
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:seg>Cc <tei:caesura/>Dd</tei:seg> Ee Ff</tei:l>
 	</x:context>
 	<x:expect
@@ -300,7 +300,7 @@
     <x:scenario label="Line with ceasura as nested in sic ...">
 	<!-- Please note, that this also produces the title and the
 	     empty table row that separates line groups (lg) -->
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:sic>Cc <tei:caesura/>Dd</tei:sic> Ee Ff</tei:l>
 	</x:context>
 	<x:expect
@@ -321,7 +321,7 @@
     <x:scenario label="Line with ceasura as nested in choice/(sic|corr) ...">
 	<!-- Please note, that this also produces the title and the
 	     empty table row that separates line groups (lg) -->
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:choice><tei:corr>Cc <tei:caesura/>Dd</tei:corr><tei:sic>Ccc <tei:caesura/>Ddd</tei:sic></tei:choice> Ee Ff</tei:l>
 	</x:context>
 	<x:expect
@@ -342,7 +342,7 @@
     <x:scenario label="Line with ceasura as nested deeply in choice/(sic|corr) ...">
 	<!-- Please note, that this also produces the title and the
 	     empty table row that separates line groups (lg) -->
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa <tei:seg>Bb <tei:choice><tei:corr>Cc <tei:caesura/>Dd</tei:corr><tei:sic>Ccc <tei:caesura/>Ddd</tei:sic></tei:choice></tei:seg> Ee Ff</tei:l>
 	</x:context>
 	<x:expect
@@ -362,7 +362,7 @@
 
     <x:scenario label="Line with ceasura as nested in choice/sic but not present in choice/corr ...">
 	<!-- This is a failure in the source document. Isn't it? -->
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:choice><tei:corr>Cc Dd</tei:corr><tei:sic>Ccc <tei:caesura/>Ddd</tei:sic></tei:choice> Ee Ff</tei:l>
 	</x:context>
 	<x:expect
@@ -411,7 +411,7 @@
 
     <x:scenario
 	label="line with sic">
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:sic>Cc</tei:sic> Dd</tei:l>
 	</x:context>
 	<x:expect
@@ -421,7 +421,7 @@
 
     <x:scenario
 	label="line with corr">
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:corr>Cc</tei:corr> Dd</tei:l>
 	</x:context>
 	<x:expect
@@ -431,7 +431,7 @@
 
     <x:scenario
 	label="line with choice/sic|corr">
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:choice><tei:sic>Cc</tei:sic><tei:corr>Dd</tei:corr></tei:choice> Ee</tei:l>
 	</x:context>
 	<x:expect
@@ -441,7 +441,7 @@
 
     <x:scenario
 	label="line with app/lem|rdg">
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:app><tei:lem>Cc</tei:lem><tei:rdg>Dd</tei:rdg></tei:app> Ee</tei:l>
 	</x:context>
 	<x:expect
@@ -451,7 +451,7 @@
 
     <x:scenario
 	label="line with choice/corr|(sic/app/(lem|rdg))">
-	<x:context>
+    <x:context mode="preview">
 	    <tei:l>Aa Bb <tei:choice><tei:sic><tei:app><tei:lem>Cc</tei:lem><tei:rdg>Ccc</tei:rdg></tei:app></tei:sic><tei:corr>Dd</tei:corr></tei:choice> Ee</tei:l>
 	</x:context>
 	<x:expect

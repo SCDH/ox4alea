@@ -1,5 +1,17 @@
 # change log #
 
+## dev ##
+
+- multiple recension documents
+  - CSS for selecting and unselecting parts to display
+  - action for inserting markup and selecting `@source`
+  - XSLT for extracting a single recension and the according variants
+	from a multiple recension document
+  - XSLT for HTML preview of a multiple recension documents
+- removed redundant CSS styles:
+  - "+ edit sigla"
+  - "+ tags"
+
 ## 2.2.0 ##
 
 - new shortcut action for setting the language of the text selected by
