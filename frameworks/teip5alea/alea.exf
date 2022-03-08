@@ -48,9 +48,7 @@
 -->
 
     <css>
-      <addCss path="${framework}/css/select-sigla.css" alternate="true" title="+ Select Sigla"/>
       <addCss path="${framework}/css/note.css" alternate="true" title="+ Kommentare"/>
-      <addCss path="${framework}/css/tags.css" alternate="true" title="+ tags"/>
       <addCss path="${framework}/css/recensions.css" alternate="true" title="+ Multiple Recensions"/>
     </css>
 
