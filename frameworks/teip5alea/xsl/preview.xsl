@@ -12,7 +12,8 @@
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
     exclude-result-prefixes="xs scdh"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    version="2.0">
+    version="3.0"
+    default-mode="preview">
     
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
@@ -53,9 +54,9 @@
             select="if ($ui-language eq '') then scdh:language($context, 'ar') else $ui-language"/>
     </xsl:function>
 
-    <xsl:template match="/">
+    <xsl:template match="/ | TEI">
         <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html&gt;&lb;</xsl:text>
-        <html lang="{scdh:language(TEI)}">
+        <html lang="{scdh:language(/*)}">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -65,7 +66,7 @@
                         color:red;
                     }
                     body {
-                        direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
+                        direction: <xsl:value-of select="scdh:language-direction(/TEI/text)"/>;
                         font-family:"Arabic Typesetting";                    
                     }
                     .metadata {
@@ -74,15 +75,15 @@
                         margin: 0 2em;
                     }
                     .variants {
-                        direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
+                        direction: <xsl:value-of select="scdh:language-direction(/TEI/text)"/>;
                     }
                     .comments {
-                        direction: <xsl:value-of select="scdh:language-direction(TEI/text)"/>;
+                        direction: <xsl:value-of select="scdh:language-direction(/TEI/text)"/>;
                     }
                     hr {
                         margin: 1em 2em;                    }
                     td {
-                        text-align: <xsl:value-of select="scdh:language-align(TEI/text)"/>;
+                        text-align: <xsl:value-of select="scdh:language-align(/TEI/text)"/>;
                         justify-content: space-between;
                         justify-self: stretch;
                     }
@@ -127,17 +128,17 @@
                     </section>
                 </xsl:if>
                 <section class="metadata">
-                    <xsl:apply-templates select="TEI/teiHeader" mode="metadata"/>
+                    <xsl:apply-templates select="/TEI/teiHeader" mode="metadata"/>
                 </section>
                 <hr/>
                 <section class="content">
-                    <xsl:apply-templates select="TEI/text/body"/>
+                    <xsl:apply-templates select="/TEI/text/body"/>
                 </section>
                 <hr/>
                 <section class="variants">
                     <table>
                         <xsl:apply-templates
-                            select="TEI/text//(l[not(ancestor::head)]|p|head)
+                            select="/TEI/text//(l[not(ancestor::head)]|p|head)
                                        [descendant::app or
                                         descendant::witDetail or
                                         descendant::gap or
@@ -156,7 +157,7 @@
                         <!-- add the following to get anchor-based things to comments:
                             | TEI/text//anchor[exists(let $id := @xml:id return //span[@from eq concat('#', $id)])] -->
                         <xsl:apply-templates
-                            select="TEI/text//note"
+                            select="/TEI/text//note"
                             mode="editorial-note-entry"/>
                     </table>
                     <!--
