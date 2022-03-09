@@ -1,5 +1,10 @@
 # change log #
 
+## 2.3.2 ##
+
+- Changed "Insert/Change Segmentation" to "Insert Segmentation",
+  because it prevents nested segmentations 
+
 ## 2.3.1 ##
 
 - preview for double end-point attachment apparatus encodings
