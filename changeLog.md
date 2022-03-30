@@ -1,5 +1,13 @@
 # change log #
 
+## 2.3.2 ##
+
+- collate verses in TEI by adding `@corresp` to verses when extracting
+  a reading
+  - the transformation will quit with an error if there is a verse
+    without an ID
+- improved CSS for multiple recensions
+
 ## 2.3.1 ##
 
 - preview for double end-point attachment apparatus encodings

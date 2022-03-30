@@ -26,7 +26,8 @@
         <revisionDesc xml:lang="de">
             <change when="{format-date(current-date(), '[Y0001]-[M01]-[D01]')}" who="{$authorname}">
                 <xsl:text>Kopie des Textes ohne Apparat von </xsl:text>
-                <xsl:value-of select="string-join(tokenize(base-uri(), '/')[position() gt last()-5], '/')"/>
+                <xsl:value-of
+                    select="string-join(tokenize(base-uri(), '/')[position() gt last() - 5], '/')"/>
                 <xsl:text>, Textzeuge '</xsl:text>
                 <xsl:value-of select="$reading"/>
                 <xsl:text>'.</xsl:text>
@@ -37,8 +38,7 @@
 
 
     <!-- select reading depending on stylesheet parameter $reading -->
-    <xsl:template
-        match="
+    <xsl:template match="
             lem[$reading eq 'lemma'] | *[@wit][some $w in tokenize(@wit) ! replace(., '#', '')
                 satisfies $w eq $reading]">
         <xsl:apply-templates/>
@@ -71,6 +71,21 @@
     <!-- unwrap elements -->
     <xsl:template match="corr | sic | unclear | orig">
         <xsl:apply-templates/>
+    </xsl:template>
+
+
+    <!-- Collate verses -->
+
+    <!-- assert that each verse has an ID -->
+    <xsl:template match="l[not(@xml:id)]">
+        <xsl:message terminate="yes">Error: There are verses without IDs. Please assign IDs to the
+            verses before extracting a reading. The presence of IDs is inevitable for collating
+            verses.</xsl:message>
+    </xsl:template>
+
+    <!-- put the old ID into @corresp -->
+    <xsl:template match="l/@xml:id">
+        <xsl:attribute name="corresp" select="concat('cs:', .)"/>
     </xsl:template>
 
 </xsl:stylesheet>
