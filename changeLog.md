@@ -1,12 +1,17 @@
 # change log #
 
-## 2.3.2 ##
+## 2.3.3 ##
 
 - collate verses in TEI by adding `@corresp` to verses when extracting
   a reading
   - the transformation will quit with an error if there is a verse
     without an ID
 - improved CSS for multiple recensions
+
+## 2.3.2 ##
+
+- Changed "Insert/Change Segmentation" to "Insert Segmentation",
+  because it prevents nested segmentations 
 
 ## 2.3.1 ##
 
