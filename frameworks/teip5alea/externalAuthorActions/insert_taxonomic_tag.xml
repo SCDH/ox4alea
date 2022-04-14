@@ -9,14 +9,14 @@
     <a:operation id="SurroundWithFragmentOperation">
       <a:xpathCondition>not(self::*:name)</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><![CDATA[<name xmlns="http://www.tei-c.org/ns/1.0" type="${ask('Select tag', combobox, (${xpath_eval(string-join(for $cat in //taxonomy[@xml:id eq 'object']//category return concat("'#", $cat/@xml:id, "':'", $cat/*:catDesc[1], "'"), ';'))}), '')}"/>]]></a:argument>
+        <a:argument name="fragment"><![CDATA[<name xmlns="http://www.tei-c.org/ns/1.0" type="${ask('Select tag', combobox, (${xpath_eval(string-join(for $cat in //taxonomy[@xml:id eq 'object']//category return concat("'", $cat/@xml:id, "':'", $cat/*:catDesc[1], "'"), ';'))}), '')}"/>]]></a:argument>
       </a:arguments>
     </a:operation>
     <a:operation id="ChangeAttributeOperation">
       <a:xpathCondition>self::*:name</a:xpathCondition>
       <a:arguments>
         <a:argument name="name">type</a:argument>
-        <a:argument name="value"><![CDATA[${ask('Select tag', combobox, (${xpath_eval(string-join(for $cat in //taxonomy[@xml:id eq 'object']//category return concat("'#", $cat/@xml:id, "':'", $cat/*:catDesc[1], "'"), ';'))}), '')}]]></a:argument>
+        <a:argument name="value"><![CDATA[${ask('Select tag', combobox, (${xpath_eval(string-join(for $cat in //taxonomy[@xml:id eq 'object']//category return concat("'", $cat/@xml:id, "':'", $cat/*:catDesc[1], "'"), ';'))}), '')}]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
