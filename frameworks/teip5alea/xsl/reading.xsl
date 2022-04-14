@@ -4,8 +4,6 @@
     xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs xi" version="3.0"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0">
 
-    <xsl:include href="insertXInclude.xsl"/>
-
     <xsl:param name="reading" as="xs:string" select="'lemma'"/>
 
     <xsl:param name="authorname" as="xs:string" select="'unknown'"/>

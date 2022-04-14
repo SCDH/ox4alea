@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DEPRECATED -->
+<!-- added use-when="false" everywhere to prevent descrution -->
 <!DOCTYPE stylesheet [
   <!ENTITY tab "   ">
   <!ENTITY tab2 "      ">
@@ -6,7 +8,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns="http://www.tei-c.org/ns/1.0" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    exclude-result-prefixes="xs xi" version="3.0">
+    exclude-result-prefixes="xs xi" version="3.0" use-when="false()">
 
     <xsl:param name="encodingDesc-id" as="xs:string" select="'encodingDesc'"/>
     <xsl:param name="profileDesc-id" as="xs:string" select="'profileDesc'"/>
@@ -15,8 +17,10 @@
     <xsl:param name="uri" as="xs:string"
         select="'https://zivgitlab.uni-muenster.de/ALEA/Vocabulary.xml'"/>
 
+
+
     <!-- insert new xinclude -->
-    <xsl:template match="teiHeader[not(encodingDesc) or not(profileDesc)]" expand-text="yes">
+    <xsl:template match="teiHeader[not(encodingDesc) or not(profileDesc)]" expand-text="yes" use-when="false()">
         <xsl:if test="not(preceding-sibling::text())">
             <xsl:text>&#xa;&tab;</xsl:text>
         </xsl:if>
@@ -46,7 +50,7 @@
     </xsl:template>
 
     <!-- include is expanded, so replace profileDesc with xinclude -->
-    <xsl:template match="langUsage" expand-text="yes">
+    <xsl:template match="langUsage" expand-text="yes" use-when="false()">
         <xsl:message>found profileDesc, replacing</xsl:message>
         &tab;<xsl:element name="include" namespace="http://www.w3.org/2001/XInclude">
             <xsl:attribute name="href" select="$uri"/>
@@ -56,7 +60,7 @@
     </xsl:template>
 
     <!-- include is expanded, so replace encodingDesc with xinclude -->
-    <xsl:template match="encodingDesc">
+    <xsl:template match="encodingDesc" use-when="false()">
         <xsl:message>found encodingDesc, replacing</xsl:message>
         <xsl:element name="include" namespace="http://www.w3.org/2001/XInclude">
             <xsl:attribute name="href" select="$uri"/>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DEPRECATED -->
 <!-- This performs the identity transformation but replaces 
      literal Sigla by witness IDs from the witness catalogue. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
