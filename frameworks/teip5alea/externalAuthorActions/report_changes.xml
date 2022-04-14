@@ -9,7 +9,7 @@
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>self::*:revisionDesc | self::*:change</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><![CDATA[<change xmlns="http://www.tei-c.org/ns/1.0" when="${date(yyyy-MM-dd)}" who="${author.name}"/>]]></a:argument>
+        <a:argument name="fragment"><![CDATA[<change xmlns="http://www.tei-c.org/ns/1.0" when="${date(yyyy-MM-dd)}" who="#${author.name}"/>]]></a:argument>
         <a:argument name="insertLocation">ancestor-or-self::*:revisionDesc</a:argument>
         <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>
