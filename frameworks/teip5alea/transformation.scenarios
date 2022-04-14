@@ -9,7 +9,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA Preview</String>
+						<String>ALEA :: Preview</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -189,7 +189,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA Synopse</String>
+						<String>ALEA :: Synopse</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -297,7 +297,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA - plain text</String>
+						<String>ALEA :: plain text</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -380,7 +380,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA - extract reading</String>
+						<String>ALEA :: extract reading</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
