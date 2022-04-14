@@ -4,11 +4,42 @@
     xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs xi" version="3.0"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0">
 
+    <xsl:output method="xml" indent="true"/>
+
+    <!-- ID of the reading to be extracted or 'lemma' -->
     <xsl:param name="reading" as="xs:string" select="'lemma'"/>
 
+    <!-- URL of the project root folder -->
+    <xsl:param name="pdu" as="xs:string" required="true"/>
+
+    <!-- internal ID of the author -->
     <xsl:param name="authorname" as="xs:string" select="'unknown'"/>
 
+    <!-- We make a project-relative URI to the source.
+        We will be able to fix this using xml:baseurl in the right place. -->
+    <xsl:variable name="source" select="
+            let $l := string-length($pdu) + 2
+            return
+                substring(base-uri(), $l)"/>
+
     <xsl:mode on-no-match="shallow-copy"/>
+
+    <xsl:template match="respStmt[@n eq 'transcribed']">
+        <respStmt>
+            <xsl:copy-of select="@*"/>
+            <xsl:copy-of select="resp"/>
+            <persName sameAs="#{$authorname}">
+                <xsl:choose>
+                    <xsl:when test="//*[@xml:id eq $authorname]">
+                        <xsl:value-of select="//*[@xml:id eq $authorname] => normalize-space()"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>???</xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </persName>
+        </respStmt>
+    </xsl:template>
 
     <xsl:template match="/">
         <xsl:apply-templates/>
@@ -20,19 +51,77 @@
         <sourceDesc/>
     </xsl:template>
 
-    <xsl:template match="revisionDesc">
-        <revisionDesc xml:lang="de">
-            <change when="{format-date(current-date(), '[Y0001]-[M01]-[D01]')}" who="{$authorname}">
-                <xsl:text>Kopie des Textes ohne Apparat von </xsl:text>
-                <xsl:value-of
-                    select="string-join(tokenize(base-uri(), '/')[position() gt last() - 5], '/')"/>
-                <xsl:text>, Textzeuge '</xsl:text>
+    <!-- add prefix definition for extracted source -->
+
+    <xsl:template match="encodingDesc[@n ne 'common']/listPrefixDef">
+        <listPrefixDef>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+            <xsl:call-template name="collactionSourcePrefixDef"/>
+        </listPrefixDef>
+    </xsl:template>
+
+    <xsl:template match="encodingDesc[@n ne 'common'][not(listPrefixDef)]">
+        <encodingDesc>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+            <listPrefixDef>
+                <xsl:call-template name="collactionSourcePrefixDef"/>
+            </listPrefixDef>
+        </encodingDesc>
+    </xsl:template>
+
+    <xsl:template name="collactionSourcePrefixDef">
+        <!-- this creates a project-relative URI to the extraction source.
+            We can fix this using xml:baseurl in the right place. -->
+        <prefixDef ident="cs">
+            <xsl:attribute name="replacementPattern" select="concat($source, '#$1')"/>
+            <xsl:attribute name="matchPattern" select="'[a-zA-Z_][a-zA-Z0-9_]*'"/>
+            <xsl:comment>
+                <xsl:text>extracted witness '</xsl:text>
                 <xsl:value-of select="$reading"/>
-                <xsl:text>'.</xsl:text>
-            </change>
+                <xsl:text>' from </xsl:text>
+                <xsl:value-of select="$source"/>
+            </xsl:comment>
+        </prefixDef>
+    </xsl:template>
+
+    <!-- drop prefix definition to older extraction source -->
+    <xsl:template match="prefixDef[@ident eq 'cs']"/>
+
+
+    <!-- start a new revision description -->
+
+    <xsl:template match="revisionDesc">
+        <revisionDesc xml:lang="en">
+            <xsl:call-template name="report"/>
         </revisionDesc>
     </xsl:template>
 
+    <!-- add revisionDesc if not present -->
+    <xsl:template match="teiHeader[not(child::revisionDesc)]">
+        <teiHeader>
+            <xsl:apply-templates select="@*"/>
+            <xsl:apply-templates/>
+            <revisionDesc xml:lang="en">
+                <xsl:call-template name="report"/>
+            </revisionDesc>
+        </teiHeader>
+    </xsl:template>
+
+    <xsl:template name="report">
+        <change when="{format-date(current-date(), '[Y0001]-[M01]-[D01]')}" who="#{$authorname}"
+            type="derived">
+            <xsl:text>Extracted reading '</xsl:text>
+            <xsl:value-of select="$reading"/>
+            <xsl:text>' of </xsl:text>
+            <ref target="cs:{replace($reading, '^#', '')}">
+                <xsl:value-of
+                    select="//teiHeader/fileDesc/titleStmt[1]/title[1] => normalize-space()"/>
+            </ref>
+            <xsl:text>.</xsl:text>
+        </change>
+    </xsl:template>
 
 
     <!-- select reading depending on stylesheet parameter $reading -->
