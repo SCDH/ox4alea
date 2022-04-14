@@ -147,7 +147,9 @@
                                         descendant::sic or
                                         descendant::corr or
                                         descendant::supplied or
-                                        ancestor::app]"
+                                        descendant::anchor[let $id := @xml:id return //app[@from eq concat('#', $id)]] or
+                                        ancestor::app] |
+                                        /TEI/text//lg/anchor[let $id := @xml:id return //app[@from eq concat('#', $id)]]"
                             mode="apparatus-line"/>
                     </table>
                 </section>
@@ -530,7 +532,7 @@
     <!-- ## Apparatus line ## -->
 
     <!-- make an apparatus line and hand over to templates that do the apparatus entries -->
-    <xsl:template match="head|app//head|l|app//l|p|app//p[not(ancestor::note)]" mode="apparatus-line">
+    <xsl:template match="head|app//head|l|app//l|p|app//p[not(ancestor::note)]|lg/anchor" mode="apparatus-line">
         <tr>
             <td class="apparatus-line-number">
                 <xsl:value-of select="scdh:line-number(.)"/>
@@ -540,6 +542,7 @@
                     lose focus on the line when there are several in an <app>. See #12.
                     We need app//l instead an some etra templates for handling app//l. -->
                 <xsl:for-each select="descendant::app[not(parent::sic)] |
+                                      descendant::anchor[let $id := @xml:id return exists(//app[@from eq concat('#', $id)])] |
                                       descendant::gap[not(parent::lem)] |
                                       descendant::unclear[not(parent::lem)] |
                                       descendant::sic[not(parent::choice)] |
@@ -550,7 +553,8 @@
                                       descendant::app/lem/(gap|unclear|choice) |
                                       self::l[ancestor::app] |
                                       self::head[ancestor::app] |
-                                      self::p[ancestor::app and not(ancestor::note)]">
+                                      self::p[ancestor::app and not(ancestor::note)] |
+                                      self::anchor[let $id := @xml:id return exists(//app[@from eq concat('#', $id)])]">
                     <xsl:apply-templates select="." mode="apparatus"/>
                     <xsl:if test="position() != last()">
                         <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
@@ -561,6 +565,11 @@
     </xsl:template>
 
     <!-- ## Apparatus entries ## -->
+
+    <xsl:template match="anchor[let $id := @xml:id return //app[@from eq concat('#', $id)]]" mode="apparatus">
+        <xsl:variable name="id" select="@xml:id"/>
+        <xsl:apply-templates mode="apparatus" select="//app[@from eq concat('#', $id)]"/>
+    </xsl:template>
 
     <xsl:template match="app" mode="apparatus">
         <xsl:variable name="lemma-nodes">
@@ -845,7 +854,7 @@
     <!-- MODE: apparatus-lemma
         These templates are generate the text repeated as the lemma in the apparatus.-->
 
-    <xsl:template match="lem[. eq '']" mode="apparatus-lemma">
+    <xsl:template match="lem[. eq ''][//variantEncoding[@method eq 'parallel-segmentation']]" mode="apparatus-lemma">
         <!-- We have to present something, to mark the place where the variant adds something.
              So we decide:
              If it is the start of the line to present a special character and
@@ -1020,7 +1029,7 @@
                 <xsl:value-of select="tokenize(base-uri(), '/')[last()] => replace('\.[a-zA-Z]+', '')"/>
                 <xsl:text>: </xsl:text>
             </span>
-            <xsl:apply-templates select="listWit/witness" mode="metadata"/>
+            <xsl:apply-templates select="listWit//witness" mode="metadata"/>
         </p>
     </xsl:template>
 

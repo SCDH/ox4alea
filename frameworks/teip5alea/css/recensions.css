@@ -1,13 +1,64 @@
 @import "recensions-project.css";
-/* This sets the visibility of a recension depending on ${pdu}/visibility.xml */
+@import "recensions-switch.css";
+@namespace xml "http://www.w3.org/XML/1998/namespace";
 
-/* Please note, that the set of recension names must be a prefix-free language! */
+/* This sets the visibility of a recension depending on listWit/@rend */
 
 choice > seg[source] {
-    display: oxy_xpath("if (matches(@source, unparsed-text('${pdu}/visible.txt'))) then 'inline' else 'none'");
+    display: oxy_xpath("if (some $s in //sourceDesc//listWit[@rend eq 'visible']/@xml:id satisfies matches(@source, concat('#', $s))) then 'inline' else 'none'");
 }
 
 lg > choice > seg[source],
 div > choice > seg[source] {
-    display: oxy_xpath("if (matches(@source, unparsed-text('${pdu}/visible.txt'))) then 'block' else 'none'");
+    display: oxy_xpath("if (some $s in //sourceDesc//listWit[@rend eq 'visible']/@xml:id satisfies matches(@source, concat('#', $s))) then 'block' else 'none'");
+}
+
+choice > seg[source]:after {
+    content: oxy_xpath("if (count(//sourceDesc//listWit[@rend eq 'visible']) > 1) then @source else ''");
+    color: var(--recensioncolor);
+}
+
+choice > seg[source] {
+    border: oxy_xpath("if (count(//sourceDesc//listWit[@rend eq 'visible']) > 1) then '1px solid magenta' else 'none'");
+}
+
+
+teiHeader > fileDesc > sourceDesc {
+    visibility: visible;
+    direction: ltr !important;
+    display: block !important;
+    position: fixed;
+    top: 0;
+    width: 3em !important;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+listWit {
+    -oxy-display-tags: none;
+    display: block;
+}
+
+sourceDesc > listWit {
+    direction: ltr !important;
+    font-weight: 900;
+    font-size: x-large;
+    width: 3em !important;
+    content: none;
+    margin: 0;
+}
+
+sourceDesc > listWit:before {
+    display: none;
+}
+
+sourceDesc > listWit > listWit[xml|id]:before {
+    content: oxy_xpath("@xml:id") oxy_checkbox(edit, "@rend", values, "visible", uncheckedValues, "invisible", labels, "");
+    direction: ltr !important;
+    color: var(--recensioncolor);
+}
+
+listWit > witness {
+    display: none !important;
 }

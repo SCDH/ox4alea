@@ -110,6 +110,18 @@
         <addAction id="short.encyclopedia"/>
         <addAction id="short.seg.lang"/>
       </toolbar>
+
+      <!--toolbar name="ALEA Recensions">
+        <addAction id="set-visible-D1"/>
+        <addAction id="set-visible-D2"/>
+        <addAction id="set-visible-D3"/>
+        <addAction id="set-visible-D4"/>
+        <separator/>
+        <addAction id="add-visible-D1"/>
+        <addAction id="add-visible-D2"/>
+        <addAction id="add-visible-D3"/>
+        <addAction id="add-visible-D4"/>
+      </toolbar-->
     </toolbars>
 
     <contentCompletion>

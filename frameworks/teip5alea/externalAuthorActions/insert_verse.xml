@@ -12,7 +12,7 @@
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>ancestor-or-self::*:l</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><tei:l/></a:argument>
+        <a:argument name="fragment"><tei:l xml:id="${id}"/></a:argument>
         <a:argument name="insertLocation">ancestor-or-self::*:l</a:argument>
         <a:argument name="insertPosition">After</a:argument>
       </a:arguments>
@@ -20,7 +20,7 @@
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>self::*:lg</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><tei:l/></a:argument>
+        <a:argument name="fragment"><tei:l  xml:id="${id}"/></a:argument>
         <a:argument name="insertLocation">.</a:argument>
         <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>
@@ -29,7 +29,7 @@
       <!-- for inside app/(lem|rdg) that wraps around a verse -->
       <a:xpathCondition>parent::*:app[not(ancestor::*:l)]</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><tei:l/></a:argument>
+        <a:argument name="fragment"><tei:l xml:id="${id}"/></a:argument>
         <a:argument name="insertLocation">.</a:argument>
         <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>
