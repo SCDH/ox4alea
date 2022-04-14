@@ -499,7 +499,7 @@
 					</field>
 					<field name="cascadingStylesheets">
 						<String-array>
-							<String>${pdu}/resources/xsl/adjust-header.xsl</String>
+							<String>${framework}/xsl/postprocess.xsl</String>
 						</String-array>
 					</field>
 					<field name="xslTransformer">
@@ -612,7 +612,7 @@
 					</field>
 					<field name="cascadingStylesheets">
 						<String-array>
-							<String>${pdu}/resources/xsl/adjust-header.xsl</String>
+							<String>${framework}/xsl/postprocess.xsl</String>
 						</String-array>
 					</field>
 					<field name="xslTransformer">

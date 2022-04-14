@@ -1,5 +1,18 @@
 # change log #
 
+## dev ##
+
+- moved transformation scenarios to project
+  - adjust header
+  - set verse meter
+  - latinize witnesses
+  - conversion from flat ODT
+- use `${framework}/xsl/postprocess.xsl` as additional
+  stylesheet when producing TEI. This is established as a standard
+  hook now. We do not want to care about XIncludes etc. in the
+  framework any more. You can simply redirect this to your own XSLT
+  using an XML catalog.
+
 ## 2.3.3 ##
 
 - collate verses in TEI by adding `@corresp` to verses when extracting
