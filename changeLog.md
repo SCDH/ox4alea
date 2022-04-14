@@ -12,6 +12,10 @@
   hook now. We do not want to care about XIncludes etc. in the
   framework any more. You can simply redirect this to your own XSLT
   using an XML catalog.
+- fixed data type of `@type` in CSS and actions
+- fixed data type of `@who` in actions and XSLT
+- replaced bibref action with the one from oXbytao
+- added deprecation notices to old actions and XSLT
 
 ## 2.3.3 ##
 
