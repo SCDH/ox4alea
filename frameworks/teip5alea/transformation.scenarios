@@ -498,7 +498,9 @@
 						</list>
 					</field>
 					<field name="cascadingStylesheets">
-						<String-array/>
+						<String-array>
+							<String>${pdu}/resources/xsl/adjust-header.xsl</String>
+						</String-array>
 					</field>
 					<field name="xslTransformer">
 						<String>Saxon-PE</String>
@@ -609,7 +611,9 @@
 						</list>
 					</field>
 					<field name="cascadingStylesheets">
-						<String-array/>
+						<String-array>
+							<String>${pdu}/resources/xsl/adjust-header.xsl</String>
+						</String-array>
 					</field>
 					<field name="xslTransformer">
 						<String>Saxon-PE</String>
