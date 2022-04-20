@@ -1,6 +1,6 @@
 # change log #
 
-## dev ##
+## 2.4.0 ##
 
 - moved transformation scenarios to project
   - adjust header
@@ -12,6 +12,9 @@
   hook now. We do not want to care about XIncludes etc. in the
   framework any more. You can simply redirect this to your own XSLT
   using an XML catalog.
+- Removed `<xsl:output indent="true"/>` from transformations where TEI
+  documents are affected, because it may mess up white space in the
+  text.
 - fixed data type of `@type` in CSS and actions
 - fixed data type of `@who` in actions and XSLT
 - replaced bibref action with the one from oXbytao
