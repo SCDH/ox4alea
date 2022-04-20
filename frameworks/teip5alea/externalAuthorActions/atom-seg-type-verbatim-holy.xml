@@ -12,7 +12,7 @@
         <a:argument name="name">type</a:argument>
         <a:argument name="elementLocation">self::seg</a:argument>
         <!-- FIXME: @type is of type tei.enumerated, so no fragment identifier! -->
-        <a:argument name="value">#verbatim-holy</a:argument>
+        <a:argument name="value">verbatim-holy</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>

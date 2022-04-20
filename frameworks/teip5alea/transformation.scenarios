@@ -9,7 +9,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA Preview</String>
+						<String>ALEA :: Preview</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -189,115 +189,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA Latinize Witnesses</String>
-					</field>
-					<field name="baseURL">
-						<String></String>
-					</field>
-					<field name="footerURL">
-						<String></String>
-					</field>
-					<field name="fOPMethod">
-						<String>pdf</String>
-					</field>
-					<field name="fOProcessorName">
-						<String>Apache FOP</String>
-					</field>
-					<field name="headerURL">
-						<String></String>
-					</field>
-					<field name="inputXSLURL">
-						<String>${framework}/xsl/latinizeWit.xsl</String>
-					</field>
-					<field name="inputXMLURL">
-						<String>${currentFileURL}</String>
-					</field>
-					<field name="defaultScenario">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="isFOPPerforming">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="type">
-						<String>XSL</String>
-					</field>
-					<field name="saveAs">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="openInBrowser">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="outputResource">
-						<String>${currentFileURL}</String>
-					</field>
-					<field name="openOtherLocationInBrowser">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="locationToOpenInBrowserURL">
-						<null/>
-					</field>
-					<field name="openInEditor">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInHTMLPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="showInSVGPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInResultSetPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="useXSLTInput">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="xsltParams">
-						<list>
-							<transformationParameter>
-								<field name="paramDescription">
-									<paramDescriptor>
-										<field name="localName">
-											<String>witness-cat</String>
-										</field>
-										<field name="prefix">
-											<null/>
-										</field>
-										<field name="namespace">
-											<null/>
-										</field>
-									</paramDescriptor>
-								</field>
-								<field name="value">
-									<String>${ask('Witness Catalogue', url, '${pdu}/WitnessCatalogue.xml')}</String>
-								</field>
-								<field name="hasXPathValue">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isStatic">
-									<Boolean>false</Boolean>
-								</field>
-							</transformationParameter>
-						</list>
-					</field>
-					<field name="cascadingStylesheets">
-						<String-array/>
-					</field>
-					<field name="xslTransformer">
-						<String>Saxon-PE</String>
-					</field>
-					<field name="extensionURLs">
-						<String-array/>
-					</field>
-				</scenario>
-				<scenario>
-					<field name="advancedOptionsMap">
-						<null/>
-					</field>
-					<field name="name">
-						<String>ALEA Synopse</String>
+						<String>ALEA :: Synopse</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -405,7 +297,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA - plain text</String>
+						<String>ALEA :: plain text</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -488,115 +380,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA - set verse meter</String>
-					</field>
-					<field name="baseURL">
-						<String></String>
-					</field>
-					<field name="footerURL">
-						<String></String>
-					</field>
-					<field name="fOPMethod">
-						<String>pdf</String>
-					</field>
-					<field name="fOProcessorName">
-						<String>Apache FOP</String>
-					</field>
-					<field name="headerURL">
-						<String></String>
-					</field>
-					<field name="inputXSLURL">
-						<String>${framework}/xsl/setVerseMeter.xsl</String>
-					</field>
-					<field name="inputXMLURL">
-						<String>${currentFileURL}</String>
-					</field>
-					<field name="defaultScenario">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="isFOPPerforming">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="type">
-						<String>XSL</String>
-					</field>
-					<field name="saveAs">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="openInBrowser">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="outputResource">
-						<String>${cfu}</String>
-					</field>
-					<field name="openOtherLocationInBrowser">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="locationToOpenInBrowserURL">
-						<null/>
-					</field>
-					<field name="openInEditor">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="showInHTMLPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="showInSVGPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInResultSetPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="useXSLTInput">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="xsltParams">
-						<list>
-							<transformationParameter>
-								<field name="paramDescription">
-									<paramDescriptor>
-										<field name="localName">
-											<String>file-path</String>
-										</field>
-										<field name="prefix">
-											<null/>
-										</field>
-										<field name="namespace">
-											<null/>
-										</field>
-									</paramDescriptor>
-								</field>
-								<field name="value">
-									<String>${pdu}/Vokabular.xml</String>
-								</field>
-								<field name="hasXPathValue">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isStatic">
-									<Boolean>false</Boolean>
-								</field>
-							</transformationParameter>
-						</list>
-					</field>
-					<field name="cascadingStylesheets">
-						<String-array/>
-					</field>
-					<field name="xslTransformer">
-						<String>Saxon-PE</String>
-					</field>
-					<field name="extensionURLs">
-						<String-array/>
-					</field>
-				</scenario>
-				<scenario>
-					<field name="advancedOptionsMap">
-						<null/>
-					</field>
-					<field name="name">
-						<String>ALEA - extract reading</String>
+						<String>ALEA :: extract reading</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -667,6 +451,30 @@
 								<field name="paramDescription">
 									<paramDescriptor>
 										<field name="localName">
+											<String>pdu</String>
+										</field>
+										<field name="prefix">
+											<null/>
+										</field>
+										<field name="namespace">
+											<null/>
+										</field>
+									</paramDescriptor>
+								</field>
+								<field name="value">
+									<String>${pdu}</String>
+								</field>
+								<field name="hasXPathValue">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isStatic">
+									<Boolean>false</Boolean>
+								</field>
+							</transformationParameter>
+							<transformationParameter>
+								<field name="paramDescription">
+									<paramDescriptor>
+										<field name="localName">
 											<String>authorname</String>
 										</field>
 										<field name="prefix">
@@ -714,198 +522,9 @@
 						</list>
 					</field>
 					<field name="cascadingStylesheets">
-						<String-array/>
-					</field>
-					<field name="xslTransformer">
-						<String>Saxon-PE</String>
-					</field>
-					<field name="extensionURLs">
-						<String-array/>
-					</field>
-				</scenario>
-				<scenario>
-					<field name="advancedOptionsMap">
-						<null/>
-					</field>
-					<field name="name">
-						<String>ALEA - fodt to TEI, for verses</String>
-					</field>
-					<field name="baseURL">
-						<String></String>
-					</field>
-					<field name="footerURL">
-						<String></String>
-					</field>
-					<field name="fOPMethod">
-						<String>pdf</String>
-					</field>
-					<field name="fOProcessorName">
-						<String>Apache FOP</String>
-					</field>
-					<field name="headerURL">
-						<String></String>
-					</field>
-					<field name="inputXSLURL">
-						<String>${framework}/xsl/odt2tei4verses.xsl</String>
-					</field>
-					<field name="inputXMLURL">
-						<String>${currentFileURL}</String>
-					</field>
-					<field name="defaultScenario">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="isFOPPerforming">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="type">
-						<String>XSL</String>
-					</field>
-					<field name="saveAs">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="openInBrowser">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="outputResource">
-						<null/>
-					</field>
-					<field name="openOtherLocationInBrowser">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="locationToOpenInBrowserURL">
-						<null/>
-					</field>
-					<field name="openInEditor">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInHTMLPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="showInSVGPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInResultSetPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="useXSLTInput">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="xsltParams">
-						<list>
-							<transformationParameter>
-								<field name="paramDescription">
-									<paramDescriptor>
-										<field name="localName">
-											<String>authorname</String>
-										</field>
-										<field name="prefix">
-											<null/>
-										</field>
-										<field name="namespace">
-											<null/>
-										</field>
-									</paramDescriptor>
-								</field>
-								<field name="value">
-									<String>${author.name}</String>
-								</field>
-								<field name="hasXPathValue">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isStatic">
-									<Boolean>false</Boolean>
-								</field>
-							</transformationParameter>
-						</list>
-					</field>
-					<field name="cascadingStylesheets">
-						<String-array/>
-					</field>
-					<field name="xslTransformer">
-						<String>Saxon-PE</String>
-					</field>
-					<field name="extensionURLs">
-						<String-array/>
-					</field>
-				</scenario>
-				<scenario>
-					<field name="advancedOptionsMap">
-						<null/>
-					</field>
-					<field name="name">
-						<String>ALEA - header</String>
-					</field>
-					<field name="baseURL">
-						<String></String>
-					</field>
-					<field name="footerURL">
-						<String></String>
-					</field>
-					<field name="fOPMethod">
-						<String>pdf</String>
-					</field>
-					<field name="fOProcessorName">
-						<String>Apache FOP</String>
-					</field>
-					<field name="headerURL">
-						<String></String>
-					</field>
-					<field name="inputXSLURL">
-						<String>${framework}/xsl/adjustHeader.xsl</String>
-					</field>
-					<field name="inputXMLURL">
-						<String>${currentFileURL}</String>
-					</field>
-					<field name="defaultScenario">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="isFOPPerforming">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="type">
-						<String>XSL</String>
-					</field>
-					<field name="saveAs">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="openInBrowser">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="outputResource">
-						<String>${cfu}</String>
-					</field>
-					<field name="openOtherLocationInBrowser">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="locationToOpenInBrowserURL">
-						<null/>
-					</field>
-					<field name="openInEditor">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInHTMLPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="showInSVGPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="showInResultSetPane">
-						<Boolean>false</Boolean>
-					</field>
-					<field name="useXSLTInput">
-						<Boolean>true</Boolean>
-					</field>
-					<field name="xsltParams">
-						<list/>
-					</field>
-					<field name="cascadingStylesheets">
-						<String-array/>
+						<String-array>
+							<String>${framework}/xsl/postprocess.xsl</String>
+						</String-array>
 					</field>
 					<field name="xslTransformer">
 						<String>Saxon-PE</String>
@@ -1016,7 +635,9 @@
 						</list>
 					</field>
 					<field name="cascadingStylesheets">
-						<String-array/>
+						<String-array>
+							<String>${framework}/xsl/postprocess.xsl</String>
+						</String-array>
 					</field>
 					<field name="xslTransformer">
 						<String>Saxon-PE</String>
