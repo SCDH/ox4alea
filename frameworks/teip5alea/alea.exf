@@ -15,7 +15,7 @@
   <transformationScenarios>
     <addScenarios href="transformation.scenarios"/>
     <defaultScenarios>
-      <name>ALEA Preview</name>
+      <name>ALEA :: Preview</name>
     </defaultScenarios>
   </transformationScenarios>
 
@@ -53,7 +53,6 @@
     </css>
 
     <menu>
-      <removeAction id="link.bibref"/>
       <addAction anchor="insert image" position="after" id="insert_next"/>
       <addAction anchor="insert image" id="insert_lyrics"/>
       <addAction anchor="insert image" id="insert_verse"/>
@@ -74,7 +73,6 @@
       <addAction anchor="annotate" id="insert_taxonomic_tag"/>
       <separator anchor="annotate"/>
       <addAction anchor="annotate" id="insert_seg"/>
-      <addAction anchor="annotate" id="edit_bibref"/>
     </menu>
 
     <toolbars>
@@ -90,7 +88,6 @@
         <removeAction id="insert.table.cell"/>
         <removeAction id="table.join"/>
         <removeAction id="table.split"/>
-        <removeAction id="link.bibref"/>
         <addAction anchor="del.app" id="add_witdetail"/>
         <addAction anchor="del.app" id="register_witness"/>
         <separator anchor="del.app"/>

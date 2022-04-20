@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DEPRECATED -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA" xmlns="http://www.tei-c.org/ns/1.0"

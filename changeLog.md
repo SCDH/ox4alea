@@ -1,5 +1,25 @@
 # change log #
 
+## 2.4.0 ##
+
+- moved transformation scenarios to project
+  - adjust header
+  - set verse meter
+  - latinize witnesses
+  - conversion from flat ODT
+- use `${framework}/xsl/postprocess.xsl` as additional
+  stylesheet when producing TEI. This is established as a standard
+  hook now. We do not want to care about XIncludes etc. in the
+  framework any more. You can simply redirect this to your own XSLT
+  using an XML catalog.
+- Removed `<xsl:output indent="true"/>` from transformations where TEI
+  documents are affected, because it may mess up white space in the
+  text.
+- fixed data type of `@type` in CSS and actions
+- fixed data type of `@who` in actions and XSLT
+- replaced bibref action with the one from oXbytao
+- added deprecation notices to old actions and XSLT
+
 ## 2.3.3 ##
 
 - collate verses in TEI by adding `@corresp` to verses when extracting
