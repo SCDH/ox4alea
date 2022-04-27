@@ -1,5 +1,9 @@
 # change log #
 
+## 2.4.1 ##
+
+- add xml ID to `<note>` produced with shortcut actions
+
 ## 2.4.0 ##
 
 - moved transformation scenarios to project

@@ -11,7 +11,7 @@
       <a:xpathCondition>true()</a:xpathCondition>
       <a:arguments>
         <!-- FIXME: use an editor variable for the language -->
-        <a:argument name="fragment"><![CDATA[<note xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
+        <a:argument name="fragment"><![CDATA[<note xmlns="http://www.tei-c.org/ns/1.0" xml:id="${id}" xml:lang="en">
     <bibl corresp="#Quran"><biblScope>${caret}</biblScope></bibl>
   </note>]]>
         </a:argument>
