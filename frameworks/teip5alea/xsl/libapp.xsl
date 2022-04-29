@@ -15,7 +15,6 @@
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
-    <xsl:include href="librend.xsl"/>
     <xsl:import href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
     <xsl:include href="libcommon.xsl"/>
@@ -288,7 +287,7 @@
         <span class="static-text">]</span>
     </xsl:template>
 
-    <xsl:template match="choice[child::sic and child::corr]" mode="apparatus">
+    <xsl:template match="choice[child::sic[exists(child::node() except child::app)] and child::corr]" mode="apparatus">
         <xsl:variable name="lemma-nodes">
             <xsl:apply-templates select="corr" mode="apparatus-lemma"/>
         </xsl:variable>
