@@ -23,6 +23,7 @@
     <xsl:include href="libanchors.xsl"/>
     <xsl:import href="libld.xsl"/>
     <xsl:import href="libbiblio.xsl"/>
+    <xsl:import href="libmeta.xsl"/>
 
     <!-- URI of witness catalogue. -->
     <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
@@ -995,57 +996,6 @@
     <!-- pass over to tei-ld.xsl, if not in note context -->
     <xsl:template match="(persName | orgName | placeName | geoName)[not(ancestor::note)]" mode="editorial-note">
         <xsl:apply-templates select="." mode="tei-ld"/>
-    </xsl:template>
-
-
-
-    <!-- DEPRECATED -->
-    <xsl:template match="bibl" mode="OFF">
-        <span class="bibliographic-reference">
-            <xsl:value-of select="replace(@corresp, '#', '')"/>
-            <xsl:choose>
-                <xsl:when test="biblScope">
-                    <xsl:text>,</xsl:text>
-                    <span class="bibl-scope">
-                        <xsl:value-of select="biblScope"/>
-                    </span>
-                </xsl:when>
-            </xsl:choose>
-        </span>
-    </xsl:template>
-
-
-    <!-- # Metadata # -->
-
-    <xsl:template match="/ | TEI | teiHeader" mode="metadata">
-        <p>
-            <xsl:apply-templates select="descendant::titleStmt/title" mode="metadata"/>
-            <xsl:apply-templates select="descendant::witness" mode="metadata"/>
-        </p>
-    </xsl:template>
-
-    <xsl:template match="titleStmt/title" mode="metadata">
-            <span lang="de">
-                <xsl:value-of select="normalize-space(.)"/>
-                <xsl:text>: </xsl:text>
-            </span>
-    </xsl:template>
-
-    <xsl:template match="witness" mode="metadata">
-        <span>
-            <!--xsl:value-of select="@xml:id"/-->
-            <xsl:text>&lre;</xsl:text>
-            <span class="siglum">
-            <xsl:call-template name="witness-siglum-html">
-                <xsl:with-param name="wit" select="@xml:id"/>
-            </xsl:call-template>
-            </span>
-            <xsl:text>&pdf;: </xsl:text>
-            <xsl:value-of select="replace(@n, '^[a-zA-Z]+', '')"/>
-        </span>
-        <xsl:if test="position() ne last()">
-            <span>; </span>
-        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
