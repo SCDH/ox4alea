@@ -211,7 +211,10 @@
         <xsl:apply-templates select="lem"/>
     </xsl:template>
 
-    <xsl:template match="(lem[not(/* | /text())] | rdg[not(/* | /text())])">
+    <xsl:template match="lem[//variantEncoding/@medthod ne 'parallel-segmentation']"/>
+
+    <xsl:template
+        match="lem[//variantEncoding/@method eq 'parallel-segmentation'][not(/* | /text())] | rdg[not(/* | /text())]">
         <xsl:text>[!!!]</xsl:text>
     </xsl:template>
 
