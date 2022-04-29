@@ -22,6 +22,7 @@
     <xsl:include href="libcommon.xsl"/>
     <xsl:include href="libanchors.xsl"/>
     <xsl:import href="libld.xsl"/>
+    <xsl:import href="libbiblio.xsl"/>
 
     <!-- URI of witness catalogue. -->
     <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
@@ -1048,97 +1049,6 @@
         <xsl:if test="position() ne last()">
             <span>; </span>
         </xsl:if>
-    </xsl:template>
-
-
-    <!-- # Bibliography # -->
-
-    <xsl:template match="bibl[matches(@corresp, '^#')]" mode="#all">
-        <xsl:variable name="biblnode" select="."/>
-        <xsl:variable name="autotext" as="xs:boolean"
-            select="exists(parent::note[normalize-space(string-join((text()|*) except bibl, '')) eq ''])"/>
-        <xsl:variable name="analogous" as="xs:boolean"
-            select="exists(parent::note/parent::seg[matches(@type, '^#analogous')])"/>
-        <xsl:variable name="ref-id" as="xs:string" select="replace(@corresp, '^#', '')"/>
-        <xsl:variable name="bibliography" select="doc($biblio)"/>
-        <xsl:variable name="ref" select="$bibliography//*[@xml:id eq $ref-id]"/>
-        <xsl:variable name="ref-lang" select="scdh:language($ref)"/>
-        <xsl:if test="exists($bibliography) and $debug">
-            <xsl:message>Bibliography present</xsl:message>
-        </xsl:if>
-        <xsl:if test="not($ref)">
-            <xsl:message>Bibliographic entry '<xsl:value-of select="$ref-id"/>' not found in '<xsl:value-of select="$biblio"/>'</xsl:message>
-            (reference not found!)
-        </xsl:if>
-        <span class="bibliographic-reference"
-            lang="{scdh:language($ref)}"
-            style="direction:{scdh:language-direction($ref)};">
-            <!-- This must be paired with pdf character entity,
-                        because directional embeddings are an embedded CFG! -->
-            <xsl:value-of select="scdh:direction-embedding($ref)"/>
-            <!-- [normalize-space((text()|*) except bibl) eq ''] -->
-            <xsl:if test="$autotext and $analogous">
-                <span class="static-text" data-i18n-key="Cf.">&lre;Cf.&pdf;</span>
-                <xsl:text> </xsl:text>
-            </xsl:if>
-            <xsl:choose>
-                <xsl:when test="$ref">
-                    <xsl:apply-templates select="$ref" mode="biblio"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="replace(@corresp, '#', '')"/>
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:apply-templates mode="biblio"/>
-            <xsl:if test="$autotext">
-                <xsl:text>.</xsl:text>
-            </xsl:if>
-            <xsl:text>&pdf;</xsl:text>
-            <xsl:if test="scdh:language-direction($ref) eq 'ltr' and scdh:language-direction(.) ne 'ltr' and $ltr-to-rtl-extra-space">
-                <xsl:text> </xsl:text>
-            </xsl:if>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="bibl" mode="biblio">
-        <xsl:apply-templates mode="biblio"/>
-    </xsl:template>
-
-    <xsl:template match="choice[child::abbr and child::expan]" mode="biblio">
-        <xsl:apply-templates select="abbr" mode="biblio"/>
-    </xsl:template>
-
-    <xsl:template match="am[parent::abbr/parent::choice[child::expan]]" mode="biblio"/>
-
-    <!-- Exclude whitespace nodes from the bibliographic reference,
-        because they break the interpunctation at the end.
-        This may lead to unwanted effects with some bibliographies. -->
-    <xsl:template match="text()[ancestor::listBibl and matches(., '^\s+$')]" mode="biblio"/>
-
-    <xsl:template match="biblScope[@unit][@from and @to]" mode="biblio">
-        <xsl:text>, </xsl:text>
-        <span class="bibl-scope">
-            <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="@from"/>
-            <xsl:text>-</xsl:text>
-            <xsl:value-of select="@to"/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="biblScope[@unit]" mode="biblio">
-        <xsl:text>, </xsl:text>
-        <span class="bibl-scope">
-            <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
-            <xsl:apply-templates mode="biblio"/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="biblScope" mode="biblio">
-        <xsl:text>, </xsl:text>
-        <span class="bibl-scope">
-            <xsl:apply-templates mode="biblio"/>
-        </span>
     </xsl:template>
 
 </xsl:stylesheet>
