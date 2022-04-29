@@ -1,5 +1,11 @@
 # change log #
 
+## 2.4.3 ##
+
+- preview
+  - made modules from preview.xsl
+
+
 ## 2.4.2 ##
 
 - preview
