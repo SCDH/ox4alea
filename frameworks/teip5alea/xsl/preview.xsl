@@ -39,9 +39,6 @@
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
     <xsl:param name="ui-language" as="xs:string" select="''"/>
 
-    <!-- If true, this an extra space is added on the end of an ltr-to-rtl changeover. -->
-    <xsl:param name="ltr-to-rtl-extra-space" as="xs:boolean" select="true()" required="no"/>
-
     <xsl:function name="scdh:ui-language">
         <xsl:param name="context" as="node()"/>
         <xsl:param name="default" as="xs:string"/>
