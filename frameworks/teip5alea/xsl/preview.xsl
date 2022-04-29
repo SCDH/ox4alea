@@ -337,7 +337,7 @@
 
     <xsl:template match="name[@type]">
         <xsl:variable name="cat" select="@type"/>
-        <abbr title="{/TEI/teiHeader/encodingDesc//category[@xml:id eq replace($cat, '#', '')]/catDesc[1]}">
+        <abbr title="{/TEI/teiHeader/encodingDesc//category[@xml:id eq $cat]/catDesc[1]}">
             <xsl:apply-templates/>
         </abbr>
     </xsl:template>
@@ -447,11 +447,11 @@
         <xsl:choose>
             <!-- ornamented parenthesis around verbatim citation from holy text:
                 not in verses (poems) -->
-            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'start'">
+            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq 'verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'start'">
                 <xsl:text>&#xfd3f;</xsl:text>
             </xsl:when>
             <!-- closing ornamented parenthesis -->
-            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'end'">
+            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq 'verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'end'">
                 <xsl:text>&#xfd3e;</xsl:text>
             </xsl:when>
             <xsl:otherwise/>
