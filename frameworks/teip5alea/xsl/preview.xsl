@@ -1021,17 +1021,17 @@
     <!-- # Metadata # -->
 
     <xsl:template match="/ | TEI | teiHeader" mode="metadata">
-        <xsl:apply-templates select="//sourceDesc" mode="metadata"/>
+        <p>
+            <xsl:apply-templates select="descendant::titleStmt/title" mode="metadata"/>
+            <xsl:apply-templates select="descendant::witness" mode="metadata"/>
+        </p>
     </xsl:template>
 
-    <xsl:template match="sourceDesc" mode="metadata">
-        <p>
+    <xsl:template match="titleStmt/title" mode="metadata">
             <span lang="de">
-                <xsl:value-of select="tokenize(base-uri(), '/')[last()] => replace('\.[a-zA-Z]+', '')"/>
+                <xsl:value-of select="normalize-space(.)"/>
                 <xsl:text>: </xsl:text>
             </span>
-            <xsl:apply-templates select="listWit//witness" mode="metadata"/>
-        </p>
     </xsl:template>
 
     <xsl:template match="witness" mode="metadata">
@@ -1044,7 +1044,7 @@
             </xsl:call-template>
             </span>
             <xsl:text>&pdf;: </xsl:text>
-            <xsl:value-of select="replace(@facs, '^[a-zA-Z]+', '')"/>
+            <xsl:value-of select="replace(@n, '^[a-zA-Z]+', '')"/>
         </span>
         <xsl:if test="position() ne last()">
             <span>; </span>
