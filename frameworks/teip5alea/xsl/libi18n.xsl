@@ -11,9 +11,12 @@
     exclude-result-prefixes="xs scdh"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="2.0">
-    
+
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
     <!--xsl:param name="ui-language" as="xs:string" select="''"/-->
+
+    <!-- If true, this an extra space is added on the end of an ltr-to-rtl changeover. -->
+    <xsl:param name="ltr-to-rtl-extra-space" as="xs:boolean" select="true()" required="no"/>
 
     <xsl:variable name="translations" select="'translation.xml'"/>
 
@@ -181,6 +184,14 @@
         <xsl:variable name="lang" select="scdh:language($context)"/>
         <xsl:attribute name="lang" select="$lang"/>
         <xsl:attribute name="xml:lang" select="$lang"/>
+    </xsl:template>
+
+    <xsl:template name="ltr-to-rtl-extra-space">
+        <xsl:param name="first-direction" as="xs:string"/>
+        <xsl:param name="then-direction" as="xs:string"/>
+        <xsl:if test="$first-direction eq 'ltr' and $then-direction ne 'ltr' and $ltr-to-rtl-extra-space">
+            <xsl:text> </xsl:text>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
