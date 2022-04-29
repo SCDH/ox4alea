@@ -1,5 +1,14 @@
 # change log #
 
+## 2.4.2 ##
+
+- preview
+  - XSLT module for getting references from local URI schemes,
+    document-internal identifierts or global URI schemes
+  - XSLT module for bibliographic references
+  - fixed data type of `@type`
+  - fixed metadata output
+
 ## 2.4.1 ##
 
 - add xml ID to `<note>` produced with shortcut actions

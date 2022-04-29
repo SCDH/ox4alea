@@ -14,19 +14,10 @@ The link may use a private URI scheme defined in a <prefixDef>.
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
+    <xsl:import href="libref.xsl"/>
     <xsl:import href="libi18n.xsl"/>
 
     <xsl:variable name="debug" select="true()"/>
-
-    <xsl:function name="scdh:uri-schemes-regex" as="xs:string">
-        <xsl:param name="context" as="node()"/>
-        <xsl:variable name="prefixes"
-            select="concat('^(', string-join($context//prefixDef/@ident, '|'), ')')"/>
-        <xsl:if test="$debug">
-            <xsl:message>prefixes: <xsl:value-of select="$prefixes"/></xsl:message>
-        </xsl:if>
-        <xsl:value-of select="$prefixes"/>
-    </xsl:function>
 
     <!-- get the real link from an URI scheme defined in a <prefixDef> -->
     <xsl:template mode="tei-ld" match="*[@ref][matches(@ref, scdh:uri-schemes-regex(/))]">
