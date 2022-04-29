@@ -22,6 +22,7 @@
     <xsl:include href="libcommon.xsl"/>
     <xsl:include href="libanchors.xsl"/>
     <xsl:import href="libld.xsl"/>
+    <xsl:import href="libbiblio.xsl"/>
 
     <!-- URI of witness catalogue. -->
     <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
@@ -37,9 +38,6 @@
 
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
     <xsl:param name="ui-language" as="xs:string" select="''"/>
-
-    <!-- If true, this an extra space is added on the end of an ltr-to-rtl changeover. -->
-    <xsl:param name="ltr-to-rtl-extra-space" as="xs:boolean" select="true()" required="no"/>
 
     <xsl:function name="scdh:ui-language">
         <xsl:param name="context" as="node()"/>
@@ -339,7 +337,7 @@
 
     <xsl:template match="name[@type]">
         <xsl:variable name="cat" select="@type"/>
-        <abbr title="{/TEI/teiHeader/encodingDesc//category[@xml:id eq replace($cat, '#', '')]/catDesc[1]}">
+        <abbr title="{/TEI/teiHeader/encodingDesc//category[@xml:id eq $cat]/catDesc[1]}">
             <xsl:apply-templates/>
         </abbr>
     </xsl:template>
@@ -449,11 +447,11 @@
         <xsl:choose>
             <!-- ornamented parenthesis around verbatim citation from holy text:
                 not in verses (poems) -->
-            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'start'">
+            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq 'verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'start'">
                 <xsl:text>&#xfd3f;</xsl:text>
             </xsl:when>
             <!-- closing ornamented parenthesis -->
-            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq '#verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'end'">
+            <xsl:when test="not($node/ancestor::l) and name($node) eq 'seg' and $node/@type eq 'verbatim-holy' and matches(scdh:language($node), '^ar') and $type eq 'end'">
                 <xsl:text>&#xfd3e;</xsl:text>
             </xsl:when>
             <xsl:otherwise/>
@@ -1020,17 +1018,17 @@
     <!-- # Metadata # -->
 
     <xsl:template match="/ | TEI | teiHeader" mode="metadata">
-        <xsl:apply-templates select="//sourceDesc" mode="metadata"/>
+        <p>
+            <xsl:apply-templates select="descendant::titleStmt/title" mode="metadata"/>
+            <xsl:apply-templates select="descendant::witness" mode="metadata"/>
+        </p>
     </xsl:template>
 
-    <xsl:template match="sourceDesc" mode="metadata">
-        <p>
+    <xsl:template match="titleStmt/title" mode="metadata">
             <span lang="de">
-                <xsl:value-of select="tokenize(base-uri(), '/')[last()] => replace('\.[a-zA-Z]+', '')"/>
+                <xsl:value-of select="normalize-space(.)"/>
                 <xsl:text>: </xsl:text>
             </span>
-            <xsl:apply-templates select="listWit//witness" mode="metadata"/>
-        </p>
     </xsl:template>
 
     <xsl:template match="witness" mode="metadata">
@@ -1043,102 +1041,11 @@
             </xsl:call-template>
             </span>
             <xsl:text>&pdf;: </xsl:text>
-            <xsl:value-of select="replace(@facs, '^[a-zA-Z]+', '')"/>
+            <xsl:value-of select="replace(@n, '^[a-zA-Z]+', '')"/>
         </span>
         <xsl:if test="position() ne last()">
             <span>; </span>
         </xsl:if>
-    </xsl:template>
-
-
-    <!-- # Bibliography # -->
-
-    <xsl:template match="bibl[matches(@corresp, '^#')]" mode="#all">
-        <xsl:variable name="biblnode" select="."/>
-        <xsl:variable name="autotext" as="xs:boolean"
-            select="exists(parent::note[normalize-space(string-join((text()|*) except bibl, '')) eq ''])"/>
-        <xsl:variable name="analogous" as="xs:boolean"
-            select="exists(parent::note/parent::seg[matches(@type, '^#analogous')])"/>
-        <xsl:variable name="ref-id" as="xs:string" select="replace(@corresp, '^#', '')"/>
-        <xsl:variable name="bibliography" select="doc($biblio)"/>
-        <xsl:variable name="ref" select="$bibliography//*[@xml:id eq $ref-id]"/>
-        <xsl:variable name="ref-lang" select="scdh:language($ref)"/>
-        <xsl:if test="exists($bibliography) and $debug">
-            <xsl:message>Bibliography present</xsl:message>
-        </xsl:if>
-        <xsl:if test="not($ref)">
-            <xsl:message>Bibliographic entry '<xsl:value-of select="$ref-id"/>' not found in '<xsl:value-of select="$biblio"/>'</xsl:message>
-            (reference not found!)
-        </xsl:if>
-        <span class="bibliographic-reference"
-            lang="{scdh:language($ref)}"
-            style="direction:{scdh:language-direction($ref)};">
-            <!-- This must be paired with pdf character entity,
-                        because directional embeddings are an embedded CFG! -->
-            <xsl:value-of select="scdh:direction-embedding($ref)"/>
-            <!-- [normalize-space((text()|*) except bibl) eq ''] -->
-            <xsl:if test="$autotext and $analogous">
-                <span class="static-text" data-i18n-key="Cf.">&lre;Cf.&pdf;</span>
-                <xsl:text> </xsl:text>
-            </xsl:if>
-            <xsl:choose>
-                <xsl:when test="$ref">
-                    <xsl:apply-templates select="$ref" mode="biblio"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="replace(@corresp, '#', '')"/>
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:apply-templates mode="biblio"/>
-            <xsl:if test="$autotext">
-                <xsl:text>.</xsl:text>
-            </xsl:if>
-            <xsl:text>&pdf;</xsl:text>
-            <xsl:if test="scdh:language-direction($ref) eq 'ltr' and scdh:language-direction(.) ne 'ltr' and $ltr-to-rtl-extra-space">
-                <xsl:text> </xsl:text>
-            </xsl:if>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="bibl" mode="biblio">
-        <xsl:apply-templates mode="biblio"/>
-    </xsl:template>
-
-    <xsl:template match="choice[child::abbr and child::expan]" mode="biblio">
-        <xsl:apply-templates select="abbr" mode="biblio"/>
-    </xsl:template>
-
-    <xsl:template match="am[parent::abbr/parent::choice[child::expan]]" mode="biblio"/>
-
-    <!-- Exclude whitespace nodes from the bibliographic reference,
-        because they break the interpunctation at the end.
-        This may lead to unwanted effects with some bibliographies. -->
-    <xsl:template match="text()[ancestor::listBibl and matches(., '^\s+$')]" mode="biblio"/>
-
-    <xsl:template match="biblScope[@unit][@from and @to]" mode="biblio">
-        <xsl:text>, </xsl:text>
-        <span class="bibl-scope">
-            <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="@from"/>
-            <xsl:text>-</xsl:text>
-            <xsl:value-of select="@to"/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="biblScope[@unit]" mode="biblio">
-        <xsl:text>, </xsl:text>
-        <span class="bibl-scope">
-            <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"/>&pdf;</span>
-            <xsl:apply-templates mode="biblio"/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="biblScope" mode="biblio">
-        <xsl:text>, </xsl:text>
-        <span class="bibl-scope">
-            <xsl:apply-templates mode="biblio"/>
-        </span>
     </xsl:template>
 
 </xsl:stylesheet>
