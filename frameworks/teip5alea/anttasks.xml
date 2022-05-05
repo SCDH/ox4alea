@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ANT build script
+
+USAGE (commandline):
+
+ant -buildfile THISFILE \
+	-Dsaxon.jar=~/.m2/repository/net/sf/saxon/Saxon-HE/10.2/Saxon-HE-10.2.jar \
+	-DinputFile=SOURCE \
+	-DoutputFile=DEST \
+	-Dreading=lemma \
+	extract-reading
+
+-->
+<project basedir="." name="ALEA">
+
+	<!-- oxygenlib, defaults to ant lib -->
+	<property name="oxygenlib" value="..."/>
+
+	<!-- define the the saxon transformer or place it in the ant lib directory -->
+	<property name="saxon.jar" value="${oxygenlib}/saxon9he.jar"/>
+
+	<!-- Path to TEI XML file. -->
+	<property name="inputFile" value=""/>
+
+	<!-- Path where the output file will be saved. -->
+	<property name="outputFile" value=""/>
+
+	<!-- suffix of TEI documents -->
+	<property name="teiSuffix">.tei.xml</property>
+
+	<!-- author name -->
+	<property name="authorname" value="${user.name}"/>
+
+	<!-- directories -->
+	<dirname property="outputDir" file="${outputFile}"/>
+	<dirname property="inputDir" file="${inputFile}"/>
+
+	<!-- modfiy basedir, if necessary: -Dbasedir=... -->
+	<echo> basedir: ${basedir}</echo>
+
+	<echo> using Saxon: ${saxon.jar}</echo>
+
+	<!-- extract reading -->
+
+	<property name="reading" value="lemma"/>
+	<property name="recension" value=""/>
+
+	<target name="extract-reading">
+		<!-- Task for extracting a reading in order to start encoding an other recension based on it.
+			This is done from ANT in order to not expand XIncludes. -->
+		<xslt style="xsl/reading.xsl" in="${inputFile}" out="${outputFile}">
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+			<classpath location="${saxon.jar}"/>
+			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+				value="org.apache.xerces.parsers.XML11Configuration"/>
+			<param name="reading" expression="${reading}" type="STRING"/>
+			<param name="pdu" expression="${basedir}" type="STRING"/>
+			<param name="note-references" expression="true" type="BOOLEAN"/>
+			<param name="authorname" expression="${authorname}" type="STRING"/>
+		</xslt>
+		<echo>Extracted text stored in ${outputFile}</echo>
+	</target>
+
+</project>
