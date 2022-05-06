@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- extract a certain reading in order to make a new document encoding another recension of the work -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs xi" version="3.0"
@@ -9,6 +10,9 @@
 
     <!-- URL of the project root folder -->
     <xsl:param name="pdu" as="xs:string" required="true"/>
+
+    <!-- whether to replace notes with XIncludes or not -->
+    <xsl:param name="note-references" as="xs:boolean" select="true()"/>
 
     <!-- internal ID of the author -->
     <xsl:param name="authorname" as="xs:string" select="'unknown'"/>
@@ -171,6 +175,16 @@
     <!-- put the old ID into @corresp -->
     <xsl:template match="l/@xml:id">
         <xsl:attribute name="corresp" select="concat('cs:', .)"/>
+    </xsl:template>
+
+
+    <!-- replace notes with XInclude -->
+
+    <xsl:template match="note[exists(@xml:id) and $note-references]">
+        <xsl:element name="include" namespace="http://www.w3.org/2001/XInclude">
+            <xsl:attribute name="href" select="tokenize(base-uri(), '/')[last()]"/>
+            <xsl:attribute name="xpointer" select="@xml:id"/>
+        </xsl:element>
     </xsl:template>
 
 </xsl:stylesheet>

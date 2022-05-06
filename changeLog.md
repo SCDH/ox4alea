@@ -1,5 +1,13 @@
 # change log #
 
+## 2.4.4 ##
+
+- extract recension
+  - ANT based scenario that makes references to notes instead of
+    copying them
+  - ANT is important because this needs the XML files have to be
+    parsed without expanding XInclude
+
 ## 2.4.3 ##
 
 - preview
