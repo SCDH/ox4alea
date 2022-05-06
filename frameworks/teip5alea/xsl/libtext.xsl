@@ -214,8 +214,9 @@
     <xsl:template match="lem[//variantEncoding/@medthod ne 'parallel-segmentation']"/>
 
     <xsl:template
-        match="lem[//variantEncoding/@method eq 'parallel-segmentation'][not(/* | /text())] | rdg[not(/* | /text())]">
-        <xsl:text>[!!!]</xsl:text>
+        match="lem[//variantEncoding/@method eq 'parallel-segmentation' and empty(node())]">
+        <!-- FIXME: some error here eg. on BBgim8.tei -->
+        <!--xsl:text>[!!!]</xsl:text-->
     </xsl:template>
 
     <xsl:template match="gap">
