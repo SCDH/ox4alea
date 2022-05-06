@@ -216,7 +216,7 @@
     <xsl:template
         match="lem[//variantEncoding/@method eq 'parallel-segmentation' and empty(node())]">
         <!-- FIXME: some error here eg. on BBgim8.tei -->
-        <xsl:text>[!!!]</xsl:text>
+        <!--xsl:text>[!!!]</xsl:text-->
     </xsl:template>
 
     <xsl:template match="gap">
