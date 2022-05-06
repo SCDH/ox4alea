@@ -38,6 +38,9 @@
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
     <xsl:param name="ui-language" as="xs:string" select="''"/>
 
+    <xsl:param name="font-css" as="xs:string" select="''"/>
+    <xsl:param name="font-name" as="xs:string" select="'Arabic Typesetting'"/>
+
     <xsl:function name="scdh:ui-language">
         <xsl:param name="context" as="node()"/>
         <xsl:param name="default" as="xs:string"/>
@@ -65,12 +68,15 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <title>ALEA Vorschau</title>
                 <style>
+                    <xsl:if test="$font-css ne ''">
+                        <xsl:value-of select="unparsed-text($font-css)"/>
+                    </xsl:if>
                     .title {
                         color:red;
                     }
                     body {
                         direction: <xsl:value-of select="scdh:language-direction(/TEI/text)"/>;
-                        font-family:"Arabic Typesetting";                    
+                        font-family:"<xsl:value-of select="$font-name"/>";
                     }
                     .metadata {
                         direction: ltr;
