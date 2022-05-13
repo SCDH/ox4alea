@@ -8,30 +8,35 @@
     <version>2.4.4</version>
     
     <name>scdh-alea-oxygen-extension</name>
-    <url>https://zivgitlab.uni-muenster.de/SCDH/hees-alea/oxygen-framework</url>
+    <url>https://github.com/scdh/ox4alea</url>
+
+    <developers>
+	<developer>
+	    <name>Christian Lück</name>
+	    <organization>SCDH, University of Münster</organization>
+	</developer>
+	<developer>
+	    <name>Immanuel Normann</name>
+	    <organization>SCDH, University of Münster</organization>
+	</developer>
+    </developers>
+
+    <licenses>
+	<license>
+	    <name>GNU General Public License, version 3</name>
+	    <url>https://gplv3.fsf.org/</url>
+	</license>
+    </licenses>
+
+    <scm>
+	<connection>scm:git:https://github.com/scdh/ox4alea.git</connection>
+	<developerConnection>scm:git:https://github.com/scdh/ox4alea.git</developerConnection>
+	<url>scm:git:https://github.com/scdh/ox4alea.git</url>
+	<tag>HEAD</tag>
+    </scm>
 
     <properties>
-	<distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</distribution.url>
-	<!--distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/2415/packages/maven</distribution.url-->
     </properties>
-
-    <repositories>
-	<repository>
-	    <id>gitlab-maven</id>
-	    <url>${distribution.url}</url>
-	</repository>
-    </repositories>
-
-    <distributionManagement>
-	<repository>
-	    <id>gitlab-maven</id>
-	    <url>${distribution.url}</url>
-	</repository>
-	<snapshotRepository>
-	    <id>gitlab-maven</id>
-	    <url>${distribution.url}</url>
-	</snapshotRepository>
-    </distributionManagement>
 
     <build>
 	<plugins>
