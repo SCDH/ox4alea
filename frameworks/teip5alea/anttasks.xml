@@ -44,6 +44,9 @@ ant -buildfile THISFILE \
 
 	<property name="reading" value="lemma"/>
 	<property name="recension" value=""/>
+	<property name="block-ids" value="false"/>
+	<property name="keep-existing-collation" value="true"/>
+	<property name="protocoll" value="diwan"/>
 
 	<target name="extract-reading">
 		<!-- Task for extracting a reading in order to start encoding an other recension based on it.
@@ -54,9 +57,11 @@ ant -buildfile THISFILE \
 			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
 				value="org.apache.xerces.parsers.XML11Configuration"/>
 			<param name="reading" expression="${reading}" type="STRING"/>
-			<param name="pdu" expression="${basedir}" type="STRING"/>
 			<param name="note-references" expression="true" type="BOOLEAN"/>
 			<param name="authorname" expression="${authorname}" type="STRING"/>
+			<param name="block-ids" expression="${block-ids}" type="BOOLEAN"/>
+			<param name="keep-existing-collation" expression="${keep-existing-collation}" type="BOOLEAN"/>
+			<param name="protocoll" expression="${protocoll}" type="STRING"/>
 		</xslt>
 		<echo>Extracted text stored in ${outputFile}</echo>
 	</target>

@@ -1,5 +1,11 @@
 # change log #
 
+## 2.4.5 ##
+
+- use `diwan:WORK-ID` custom URI scheme for collation sources instead
+  of limited `cs:...` scheme
+- generate `@xml:id` when extracting a reading
+
 ## 2.4.4 ##
 
 - extract recension
