@@ -1,5 +1,9 @@
 # change log #
 
+## 2.4.6 ##
+
+- removed old `edit_bibref` action from content completion
+
 ## 2.4.5 ##
 
 - use `diwan:WORK-ID` custom URI scheme for collation sources instead
