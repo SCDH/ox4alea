@@ -124,7 +124,6 @@
     <contentCompletion>
       <authorActions>
         <addAction id="insert_seg" inElementsView="true" inCCWindow="true"/>
-        <addAction id="edit_bibref" inElementsView="true" inCCWindow="true"/>
         <addAction id="insert_verse" inElementsView="true" inCCWindow="true"/>
         <addAction id="insert_caesura" inElementsView="true" inCCWindow="true"/>
       </authorActions>
