@@ -463,6 +463,10 @@
         <xsl:apply-templates mode="apparatus-lemma"/>
     </xsl:template>
 
+    <xsl:template match="seg | persName | placeName | orgName" mode="apparatus-lemma">
+        <xsl:apply-templates mode="apparatus-lemma"/>
+    </xsl:template>
+
     <xsl:template match="witDetail" mode="apparatus-lemma"/>
 
     <xsl:template match="note" mode="apparatus-lemma"/>
