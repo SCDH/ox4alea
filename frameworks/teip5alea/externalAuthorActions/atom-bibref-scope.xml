@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- editing atom -->
+<!-- add <biblScope> at point and move caret into it -->
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="atom.bibref.koran">
-  <a:name>Koran reference</a:name>
-  <a:description>Insert a note with a reference to the Koran.</a:description>
+  id="atom.bibref.scope">
+  <a:name>Insert &lt;biblScope&gt;</a:name>
+  <a:description>Insert a bibliographic scope, e.g. pages.</a:description>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
-      <a:xpathCondition>true()</a:xpathCondition>
+      <a:xpathCondition>self::bibl | self::biblStruct</a:xpathCondition>
       <a:arguments>
-        <!-- FIXME: use an editor variable for the language -->
-        <a:argument name="fragment"><![CDATA[<note xmlns="http://www.tei-c.org/ns/1.0" xml:id="${id}" xml:lang="en">
-    <bibl corresp="${teilspProp(alea.action.bibref.holy.reference)}"><biblScope>${caret}</biblScope></bibl>
-  </note>]]>
-        </a:argument>
+        <a:argument name="fragment"><![CDATA[<biblScope xmlns="http://www.tei-c.org/ns/1.0">${caret}</biblScope>]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
