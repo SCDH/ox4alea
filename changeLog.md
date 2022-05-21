@@ -1,5 +1,28 @@
 # change log #
 
+## 2.4.7 ##
+
+- fixed shortcut actions for prefix-style bibliographic references
+  using `sel.bibref` from oXbytei
+  - shortcut action for inserting a note with a bibliographic reference
+  - shortcut action for inserting a note with a reference to the holy
+    script
+  - the bibliographic entry of the holy script can now be configured
+    with the teilsp property `alea.action.bibref.holy.reference`. It's
+    default value is `bibl:Quran`
+- removed old `edit_bibref` action completely (it is still referenced
+  in the old framework file)
+
+## 2.4.6 ##
+
+- removed old `edit_bibref` action from content completion
+
+## 2.4.5 ##
+
+- use `diwan:WORK-ID` custom URI scheme for collation sources instead
+  of limited `cs:...` scheme
+- generate `@xml:id` when extracting a reading
+
 ## 2.4.4 ##
 
 - extract recension
