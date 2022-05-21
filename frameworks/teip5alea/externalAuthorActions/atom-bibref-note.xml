@@ -3,16 +3,16 @@
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="atom.bibref.koran">
-  <a:name>Koran reference</a:name>
-  <a:description>Insert a note with a reference to the Koran.</a:description>
+  id="atom.bibref.note">
+  <a:name>Not with bibliographic reference</a:name>
+  <a:description>Insert a note with a bibliographic reference.</a:description>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>true()</a:xpathCondition>
       <a:arguments>
         <!-- FIXME: use an editor variable for the language -->
         <a:argument name="fragment"><![CDATA[<note xmlns="http://www.tei-c.org/ns/1.0" xml:id="${id}" xml:lang="en">
-    <bibl corresp="${teilspProp(alea.action.bibref.holy.reference)}"><biblScope>${caret}</biblScope></bibl>
+    <bibl>${caret}</bibl>
   </note>]]>
         </a:argument>
       </a:arguments>
