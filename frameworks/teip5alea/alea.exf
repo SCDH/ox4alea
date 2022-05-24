@@ -40,7 +40,7 @@
 
     <css>
       <addCss path="${framework}/css/note.css" alternate="true" title="+ Kommentare"/>
-      <addCss path="${framework}/css/recensions.css" alternate="true" title="+ Multiple Recensions"/>
+      <addCss path="${framework}/css/recensions_.css" alternate="true" title="+ Multiple Recensions"/>
     </css>
 
     <menu>
