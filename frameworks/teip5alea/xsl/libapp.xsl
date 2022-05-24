@@ -287,7 +287,9 @@
         <span class="static-text">]</span>
     </xsl:template>
 
-    <xsl:template match="choice[child::sic[exists(child::node() except child::app)] and child::corr]" mode="apparatus">
+    <xsl:template
+        match="choice[child::sic[exists(child::node() except child::app)] and child::corr]"
+        mode="apparatus">
         <xsl:variable name="lemma-nodes">
             <xsl:apply-templates select="corr" mode="apparatus-lemma"/>
         </xsl:variable>
@@ -458,6 +460,18 @@
     <xsl:template match="lem" mode="apparatus-lemma">
         <xsl:apply-templates mode="apparatus-lemma"/>
     </xsl:template>
+
+    <xsl:template match="rdg" mode="apparatus-lemma"/>
+
+    <xsl:template match="choice" mode="apparatus-lemma">
+        <xsl:apply-templates mode="apparatus-lemma"/>
+    </xsl:template>
+
+    <xsl:template match="choice/corr[parent::choice/sic]" mode="apparatus-lemma">
+        <xsl:apply-templates mode="apparatus-lemma"/>
+    </xsl:template>
+
+    <xsl:template match="choice/sic[parent::choice/corr]" mode="apparatus-lemma"/>
 
     <xsl:template match="l | p[not(ancestor::note)]" mode="apparatus-lemma">
         <xsl:apply-templates mode="apparatus-lemma"/>
