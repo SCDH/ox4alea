@@ -20,6 +20,9 @@ We define a default mode in order to make stylesheet composition simpler.
 
     <xsl:param name="debug" as="xs:boolean" select="false()" required="false"/>
 
+    <!-- delete MRE app info -->
+    <xsl:template match="application[@ident eq 'oxmre']"/>
+
     <xsl:template match="/">
         <xsl:if test="$debug">
             <xsl:message>extracting recension '<xsl:value-of select="$source"/>'</xsl:message>
