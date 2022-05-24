@@ -12,7 +12,7 @@ We define a default mode in order to make stylesheet composition simpler.
     xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="xs math"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0"
     default-mode="extract-recension">
-    
+
     <xsl:mode name="extract-recension" on-no-match="shallow-copy"/>
     <xsl:mode name="single-recension" on-no-match="shallow-copy"/>
 
@@ -54,6 +54,30 @@ We define a default mode in order to make stylesheet composition simpler.
         <xsl:apply-templates select="
                 seg[some $s in tokenize(@source, '\s+')
                     satisfies $s eq concat('#', $source)]/node()"/>
+    </xsl:template>
+
+    <!-- this rule applies to positive recension encoding -->
+    <xsl:template match="*[@source]">
+        <xsl:choose>
+            <xsl:when test="
+                    some $s in tokenize(@source, '\s+')
+                        satisfies $s eq concat('#', $source)">
+                <xsl:if test="$debug">
+                    <xsl:message>selecting <xsl:value-of select="name(.)"/> of
+                        recension</xsl:message>
+                </xsl:if>
+                <xsl:copy>
+                    <xsl:apply-templates select="@* except @source"/>
+                    <xsl:apply-templates select="node()"/>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="$debug">
+                    <xsl:message>unselecting <xsl:value-of select="name(.)"/> of
+                        recension</xsl:message>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- delete apparatus entries that only belong to other recensions -->
