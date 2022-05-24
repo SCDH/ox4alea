@@ -1,5 +1,10 @@
 # change log #
 
+## 2.4.8 ##
+
+- fixed preview for of cases where apparatus entries and notes are
+  nested in each other
+
 ## 2.4.7 ##
 
 - fixed shortcut actions for prefix-style bibliographic references
