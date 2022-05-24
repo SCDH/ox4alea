@@ -2,63 +2,96 @@
 @import "recensions-switch.css";
 @namespace xml "http://www.w3.org/XML/1998/namespace";
 
-/* This sets the visibility of a recension depending on listWit/@rend */
+:root {
+    --recensioncolor: magenta;
+}
+
+/* Data for the recension editor is stored in <appInfo type="oxmre">, oXby* multiple recensions editor (MRE) */
+
+
+/* set the visibility of choice/seg in the text according to the information stored for the MRE:
+ * the visibiblity etc. is stored in a pointer of subtype="visible"
+ */
 
 choice > seg[source] {
-    display: oxy_xpath("if (some $s in //sourceDesc//listWit[@rend eq 'visible']/@xml:id satisfies matches(@source, concat('#', $s))) then 'inline' else 'none'");
+    display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then 'inline' else 'none'");
 }
 
 lg > choice > seg[source],
 div > choice > seg[source] {
-    display: oxy_xpath("if (some $s in //sourceDesc//listWit[@rend eq 'visible']/@xml:id satisfies matches(@source, concat('#', $s))) then 'block' else 'none'");
+    display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then 'block' else 'none'");
 }
 
 choice > seg[source]:after {
-    content: oxy_xpath("if (count(//sourceDesc//listWit[@rend eq 'visible']) > 1) then @source else ''");
+    content: oxy_xpath("if (count(tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target)) > 1) then @source else ''");
     color: var(--recensioncolor);
 }
 
 choice > seg[source] {
-    border: oxy_xpath("if (count(//sourceDesc//listWit[@rend eq 'visible']) > 1) then '1px solid magenta' else 'none'");
+    border: oxy_xpath("if (count(tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target)) > 1) then '1px solid magenta' else 'none'");
 }
 
 
-teiHeader > fileDesc > sourceDesc {
+/* make MRE's parameters accessible */
+
+/* we show them in a box fixed on top of the editor window */
+appInfo > application[ident = 'oxmre'] {
     visibility: visible;
-    direction: ltr !important;
     display: block !important;
     position: fixed;
     top: 0;
-    width: 3em !important;
+    width: 10em !important;
     left: 0;
     margin: 0;
     padding: 0;
-}
-
-listWit {
-    -oxy-display-tags: none;
-    display: block;
-}
-
-sourceDesc > listWit {
     direction: ltr !important;
-    font-weight: 900;
-    font-size: x-large;
-    width: 3em !important;
-    content: none;
-    margin: 0;
+    border: 1px solid var(--recensioncolor);
+    background-color: white;
 }
 
-sourceDesc > listWit:before {
+appInfo > application[ident = 'oxmre'] > * {
     display: none;
 }
 
-sourceDesc > listWit > listWit[xml|id]:before {
-    content: oxy_xpath("@xml:id") oxy_checkbox(edit, "@rend", values, "visible", uncheckedValues, "invisible", labels, "");
-    direction: ltr !important;
+appInfo > application[ident = 'oxmre'] > ptr,
+appInfo > application[ident = 'oxmre'] > ptr:before {
+    text-decoration: none;
+    -oxy-display-tags: none;
     color: var(--recensioncolor);
+    font-weight: 900;
 }
 
-listWit > witness {
-    display: none !important;
+/* make visibility and other target accessible */
+appInfo > application[ident = 'oxmre'] > ptr[subtype = 'visible'],
+appInfo > application[ident = 'oxmre'] > ptr[subtype = 'othertarget'] {
+    display: block;
+    content: oxy_popup(
+      edit, "@target",
+      values, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      labels, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      selectionMode, multiple
+      ) !important;    
+}
+
+/* make visibility and other target accessible */
+appInfo > application[ident = 'oxmre'] > ptr[subtype = 'current'] {
+    display: block;
+    content: oxy_popup(
+      edit, "@target",
+      values, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      labels, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      selectionMode, single
+      ) !important;    
+}
+
+appInfo > application[ident = 'oxmre'] > ptr[subtype = 'visible']:before {
+    content: "visible: ";
+}
+
+appInfo > application[ident = 'oxmre'] > ptr[subtype = 'othertarget']:before {
+    content: "target: ";
+}
+
+appInfo > application[ident = 'oxmre'] > ptr[subtype = 'current']:before {
+    content: "current: ";
 }
