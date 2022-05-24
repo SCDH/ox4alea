@@ -16,16 +16,19 @@ choice > seg[source] {
 }
 
 lg > choice > seg[source],
-div > choice > seg[source] {
+div > choice > seg[source],
+*[source] {
     display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then 'block' else 'none'");
 }
 
-choice > seg[source]:after {
-    content: oxy_xpath("if (count(tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target)) > 1) then @source else ''");
+choice > seg[source]:after,
+*[source]:after {
+    content: oxy_xpath("if (count(tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target)) > 1) then concat(' ', @source) else ''");
     color: var(--recensioncolor);
 }
 
-choice > seg[source] {
+choice > seg[source],
+*[source] {
     border: oxy_xpath("if (count(tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target)) > 1) then '1px solid var(--recensioncolor)' else 'none'");
 }
 
