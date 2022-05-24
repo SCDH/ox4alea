@@ -1,5 +1,3 @@
-@import "recensions-project.css";
-@import "recensions-switch.css";
 @namespace xml "http://www.w3.org/XML/1998/namespace";
 
 :root {
@@ -28,7 +26,11 @@ choice > seg[source]:after {
 }
 
 choice > seg[source] {
-    border: oxy_xpath("if (count(tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target)) > 1) then '1px solid magenta' else 'none'");
+    border: oxy_xpath("if (count(tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target)) > 1) then '1px solid var(--recensioncolor)' else 'none'");
+}
+
+choice:has( seg[source] ) {
+    color: inherit;
 }
 
 
