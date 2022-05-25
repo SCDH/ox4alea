@@ -11,14 +11,16 @@
  * the visibiblity etc. is stored in a pointer of subtype="visible"
  */
 
+/*
 choice > seg[source] {
     display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then 'inline' else 'none'");
 }
 
 lg > choice > seg[source],
-div > choice > seg[source],
+div > choice > seg[source], */
+
 *[source] {
-    display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then 'block' else 'none'");
+    display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then (if (ancestor::l | ancestor::p | ancestor::head | ancestor::note) then 'inline' else 'block') else 'none'");
 }
 
 choice > seg[source]:after,
