@@ -1,5 +1,10 @@
 # change log #
 
+## dev ##
+
+- introduce MRE (multiple recension editor)
+- store application information in `<appInfo>`
+
 ## 2.4.7 ##
 
 - fixed shortcut actions for prefix-style bibliographic references
