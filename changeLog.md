@@ -1,5 +1,9 @@
 # change log #
 
+## 2.5.1 ##
+
+- added user action for selecting `@source`
+
 ## 2.5.0 ##
 
 - introduce MRE (multiple recension editor)
