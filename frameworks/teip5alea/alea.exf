@@ -19,15 +19,6 @@
     </defaultScenarios>
   </transformationScenarios>
 
-  <validationScenarios>
-    <addScenarios href="validation.scenarios"/>
-    <defaultScenarios>
-      <name>ALEA - assert consistent witnesses</name>
-      <name>ALEA - verse metres</name>
-      <name>ALEA - oXygen default validation</name>
-    </defaultScenarios>
-  </validationScenarios>
-
 
   <author>
     <!-- 
@@ -49,7 +40,7 @@
 
     <css>
       <addCss path="${framework}/css/note.css" alternate="true" title="+ Kommentare"/>
-      <addCss path="${framework}/css/recensions.css" alternate="true" title="+ Multiple Recensions"/>
+      <addCss path="${framework}/css/recensions_.css" alternate="true" title="+ Multiple Recensions"/>
     </css>
 
     <menu>

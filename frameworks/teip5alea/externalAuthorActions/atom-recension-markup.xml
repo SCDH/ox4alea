@@ -10,7 +10,7 @@
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>ancestor-or-self::choice[child::seg[@source]]</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><![CDATA[<seg xmlns="http://www.tei-c.org/ns/1.0">${caret}</seg>]]></a:argument>
+        <a:argument name="fragment"><![CDATA[<seg xmlns="http://www.tei-c.org/ns/1.0" source="${xpath_eval(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target)}">${caret}</seg>]]></a:argument>
         <a:argument name="insertLocation">ancestor-or-self::choice[child::seg[@source]]</a:argument>
         <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>
@@ -18,7 +18,7 @@
     <a:operation id="SurroundWithFragmentOperation">
       <a:xpathCondition>true()</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><![CDATA[<choice xmlns="http://www.tei-c.org/ns/1.0"><seg>${caret}</seg></choice>]]></a:argument>
+        <a:argument name="fragment"><![CDATA[<choice xmlns="http://www.tei-c.org/ns/1.0"><seg source="${xpath_eval(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'othertarget']/@target)}"/><seg source="${xpath_eval(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target)}">${caret}</seg></choice>]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>

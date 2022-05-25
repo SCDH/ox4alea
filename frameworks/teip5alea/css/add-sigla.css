@@ -1,4 +1,0 @@
-lem:before, rdg:before, witDetail:before {
-  background-color: inherit;
-  content: "‪[" attr(wit) "]‬ ";
-  }

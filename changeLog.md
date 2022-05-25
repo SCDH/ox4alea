@@ -1,7 +1,9 @@
 # change log #
 
-## 2.4.8 ##
+## 2.5.0 ##
 
+- introduce MRE (multiple recension editor)
+- store MRE's application information in `<appInfo>`
 - fixed preview for of cases where apparatus entries and notes are
   nested in each other
 
