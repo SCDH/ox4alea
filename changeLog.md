@@ -1,6 +1,6 @@
 # change log #
 
-## dev ##
+## 2.5.0 ##
 
 - introduce MRE (multiple recension editor)
 - store application information in `<appInfo>`
