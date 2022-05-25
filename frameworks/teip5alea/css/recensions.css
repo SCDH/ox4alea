@@ -11,14 +11,17 @@
  * the visibiblity etc. is stored in a pointer of subtype="visible"
  */
 
+/*
 choice > seg[source] {
     display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then 'inline' else 'none'");
 }
+*/
 
+choice > seg[source],
 lg > choice > seg[source],
 div > choice > seg[source],
 *[source] {
-    display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then 'block' else 'none'");
+    display: oxy_xpath("let $visible := some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s), $fading := boolean(some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'fading']/@target) satisfies matches(@source, $s)), $current-sibling := exists(self::seg/parent::choice/seg[@source eq //appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target]), $display-type := if (ancestor::l | ancestor::p | ancestor::head | ancestor::note) then 'inline' else 'block' return if ($visible and not($fading and $current-sibling)) then $display-type else 'none'");
 }
 
 choice > seg[source]:after,
@@ -68,6 +71,7 @@ appInfo > application[ident = 'oxmre'] > ptr:before {
 
 /* make visibility and other target accessible */
 appInfo > application[ident = 'oxmre'] > ptr[subtype = 'visible'],
+appInfo > application[ident = 'oxmre'] > ptr[subtype = 'fading'],
 appInfo > application[ident = 'oxmre'] > ptr[subtype = 'othertarget'] {
     display: block;
     content: oxy_popup(
@@ -91,6 +95,10 @@ appInfo > application[ident = 'oxmre'] > ptr[subtype = 'current'] {
 
 appInfo > application[ident = 'oxmre'] > ptr[subtype = 'visible']:before {
     content: "visible: ";
+}
+
+appInfo > application[ident = 'oxmre'] > ptr[subtype = 'fading']:before {
+    content: "fading: ";
 }
 
 appInfo > application[ident = 'oxmre'] > ptr[subtype = 'othertarget']:before {

@@ -26,6 +26,7 @@
         <application ident="oxmre" version="0">
             <label>oXbytao multiple recensions editor</label>
             <ptr type="recension" subtype="visible"/>
+            <ptr type="recension" subtype="fading"/>
             <ptr type="recension" subtype="othertarget"/>
             <ptr type="recension" subtype="current"/>
         </application>
