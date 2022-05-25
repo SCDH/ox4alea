@@ -52,6 +52,7 @@
       <addAction anchor="del.app" id="add_witdetail"/>
       <addAction anchor="del.app" id="register_witness"/>
       <separator anchor="del.app"/>
+      <addAction anchor="del.app" id="atom.select.source"/>
       <addAction anchor="del.app" id="recension"/>
       <separator anchor="del.app"/>
       <addAction anchor="note" id="mark-unclear"/>
@@ -82,6 +83,7 @@
         <addAction anchor="del.app" id="add_witdetail"/>
         <addAction anchor="del.app" id="register_witness"/>
         <separator anchor="del.app"/>
+        <addAction anchor="del.app" id="atom.select.source"/>
         <addAction anchor="del.app" id="recension"/>
         <addAction anchor="note" id="mark-unclear"/>
         <addAction anchor="note" id="add-gap"/>
