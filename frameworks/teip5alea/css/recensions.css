@@ -21,7 +21,7 @@ choice > seg[source],
 lg > choice > seg[source],
 div > choice > seg[source],
 *[source] {
-    display: oxy_xpath("let $visible := some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s), $fading := boolean(some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'fading']/@target) satisfies matches(@source, $s)), $current-sibling := exists(self::seg/parent::choice/seg[some $s in tokenize(@source) satisfies matches(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target, $s)]), $display-type := if (ancestor::l | ancestor::p | ancestor::head | ancestor::note) then 'inline' else 'block' return if ($visible and not($fading and $current-sibling)) then $display-type else 'none'");
+    display: oxy_xpath("let $visible := some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s), $fading := boolean(every $s in tokenize(@source) satisfies matches(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'fading']/@target, $s)), $current-sibling := exists(self::seg/parent::choice/seg[some $s in tokenize(@source) satisfies matches(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target, $s)]), $display-type := if (ancestor::l | ancestor::p | ancestor::head | ancestor::note) then 'inline' else 'block' return if ($visible and not($fading and $current-sibling)) then $display-type else 'none'");
 }
 
 choice > seg[source]:after,
