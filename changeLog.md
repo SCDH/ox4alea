@@ -1,5 +1,17 @@
 # change log #
 
+## 2.5.2 ##
+
+- introduced more functions to MRE
+  - reset
+  - send to all recensions but the one in progress
+  - send to all recensions listed in `done`
+  - edit `@source`
+- fixed CSS of MRE
+  - visibility
+  - fading: fade all recensions listed as `fading` as soon there is a
+    sibling from the recension in progress
+
 ## 2.5.1 ##
 
 - added user action for selecting `@source`
