@@ -84,9 +84,6 @@
         <addAction anchor="del.app" id="add_witdetail"/>
         <addAction anchor="del.app" id="register_witness"/>
         <separator anchor="del.app"/>
-        <addAction anchor="del.app" id="atom.select.source"/>
-        <addAction anchor="del.app" id="recension.to.all.but.current"/>
-        <addAction anchor="del.app" id="recension"/>
         <addAction anchor="note" id="mark-unclear"/>
         <addAction anchor="note" id="add-gap"/>
         <separator anchor="note"/>
@@ -95,6 +92,14 @@
       
       -->
       </toolbar>
+
+      <toolbar name="MRE">
+        <addAction id="reset.mre"/>
+        <addAction id="mre.to.done"/>
+        <addAction id="mre.select.source"/>
+        <addAction id="mre.to.all.but.current"/>
+      </toolbar>
+
       <toolbar name="ALEA shortcuts">
         <addAction id="short.seg.note"/>
         <addAction id="short.cite.ref"/>
