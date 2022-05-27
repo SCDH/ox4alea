@@ -4,9 +4,11 @@
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="recension.to.all.but.current">
-  <a:name>REZ</a:name>
+  id="mre.to.all.but.current">
+  <a:name>all but</a:name>
   <a:description>Send selected text to all recensions but the current one.</a:description>
+  <a:smallIconPath href="${framework}/images/mre-but-16.png"/>
+  <a:largeIconPath href="${framework}/images/mre-but-24.png"/>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>ancestor-or-self::choice[child::seg[@source]]</a:xpathCondition>

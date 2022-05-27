@@ -6,6 +6,8 @@
   id="reset.mre">
   <a:name>Reset MRE</a:name>
   <a:description>Reset the MRE: all recesions 'visible' and all recensions but the one in progress are set to 'done' and 'fading'.</a:description>
+  <a:smallIconPath href="${framework}/images/reset-mre-16.png"/>
+  <a:largeIconPath href="${framework}/images/reset-mre-24.png"/>
   <a:operations>
     <a:operation id="ExecuteTransformationScenariosOperation">
       <a:xpathCondition>true()</a:xpathCondition>
