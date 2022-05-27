@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- user action -->
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="reset.mre">
+  <a:name>Reset MRE</a:name>
+  <a:description>Reset the MRE: all recesions 'visible' and all recensions but the one in progress are set to 'done' and 'fading'.</a:description>
+  <a:operations>
+    <a:operation id="ExecuteTransformationScenariosOperation">
+      <a:xpathCondition>true()</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="scenarioNames">ALEA :: reset MRE</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
