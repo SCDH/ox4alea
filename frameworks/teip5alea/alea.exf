@@ -40,7 +40,8 @@
 
     <css>
       <addCss path="${framework}/css/note.css" alternate="true" title="+ Kommentare"/>
-      <addCss path="${framework}/css/recensions_.css" alternate="true" title="+ Multiple Recensions"/>
+      <addCss path="${framework}/css/recensions_.css" alternate="true" title="+ MRE Multiple Recensions Editor"/>
+      <addCss path="${framework}/css/mre-apparatus_.css" alternate="true" title="+ MRE Hide Other Readings"/>
     </css>
 
     <menu>
