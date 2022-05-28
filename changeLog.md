@@ -1,9 +1,35 @@
 # change log #
 
+## 2.5.3 ##
+
+- introduced new optional MRE-related CSS style for hiding `<rdg>`
+  from recensions other than the one in progress
+- made MRE more configurable
+  - `oxbytao.mre.recensions.xpath` TEI LSP property which defaults to
+    `//sourceDesc//listWit[@xml:id]`
+
+## 2.5.2 ##
+
+- introduced more functions to MRE
+  - reset
+  - send to all recensions but the one in progress
+  - send to all recensions listed in `done`
+  - edit `@source`
+- fixed CSS of MRE
+  - visibility
+  - fading: fade all recensions listed as `fading` as soon there is a
+    sibling from the recension in progress
+
+## 2.5.1 ##
+
+- added user action for selecting `@source`
+
 ## 2.5.0 ##
 
 - introduce MRE (multiple recension editor)
-- store application information in `<appInfo>`
+- store MRE's application information in `<appInfo>`
+- fixed preview for of cases where apparatus entries and notes are
+  nested in each other
 
 ## 2.4.7 ##
 

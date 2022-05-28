@@ -9,19 +9,14 @@
 
 /* set the visibility of choice/seg in the text according to the information stored for the MRE:
  * the visibiblity etc. is stored in a pointer of subtype="visible"
+ * the 'fading' pointer subpresses visibility if there is text for the current recension
  */
-
-/*
-choice > seg[source] {
-    display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then 'inline' else 'none'");
-}
-*/
 
 choice > seg[source],
 lg > choice > seg[source],
 div > choice > seg[source],
 *[source] {
-    display: oxy_xpath("let $visible := some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s), $fading := boolean(some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'fading']/@target) satisfies matches(@source, $s)), $current-sibling := exists(self::seg/parent::choice/seg[@source eq //appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target]), $display-type := if (ancestor::l | ancestor::p | ancestor::head | ancestor::note) then 'inline' else 'block' return if ($visible and not($fading and $current-sibling)) then $display-type else 'none'");
+    display: oxy_xpath("let $visible-recensions := tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target), $fading-recensions := tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'fading']/@target), $current := tokenize(@source), $current-and-visible := $current[some $v in $visible-recensions satisfies $v eq .], $visible := some $s in $visible-recensions satisfies matches(@source, $s), $is-fading := every $s in $current-and-visible satisfies matches(string-join($fading-recensions, ' '), $s), $has-current-sibling := exists(self::seg/parent::choice/seg[some $s in tokenize(@source) satisfies matches(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target, $s)]), $display-type := if (ancestor::l | ancestor::p | ancestor::head | ancestor::note) then 'inline' else 'block' return if ($visible and not($is-fading and $has-current-sibling)) then $display-type else 'none'");
 }
 
 choice > seg[source]:after,
@@ -48,7 +43,7 @@ appInfo > application[ident = 'oxmre'] {
     display: block !important;
     position: fixed;
     top: 0;
-    width: 10em !important;
+    width: 14em !important;
     left: 0;
     margin: 0;
     padding: 0;
@@ -76,8 +71,8 @@ appInfo > application[ident = 'oxmre'] > ptr[subtype = 'othertarget'] {
     display: block;
     content: oxy_popup(
       edit, "@target",
-      values, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
-      labels, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      values, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
+      labels, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
       selectionMode, multiple
       ) !important;    
 }
@@ -87,8 +82,8 @@ appInfo > application[ident = 'oxmre'] > ptr[subtype = 'current'] {
     display: block;
     content: oxy_popup(
       edit, "@target",
-      values, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
-      labels, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      values, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
+      labels, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
       selectionMode, single
       ) !important;    
 }
@@ -102,9 +97,9 @@ appInfo > application[ident = 'oxmre'] > ptr[subtype = 'fading']:before {
 }
 
 appInfo > application[ident = 'oxmre'] > ptr[subtype = 'othertarget']:before {
-    content: "target: ";
+    content: "done: ";
 }
 
 appInfo > application[ident = 'oxmre'] > ptr[subtype = 'current']:before {
-    content: "current: ";
+    content: "in progress: ";
 }
