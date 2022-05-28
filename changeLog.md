@@ -1,5 +1,13 @@
 # change log #
 
+## 2.5.3 ##
+
+- introduced new optional MRE-related CSS style for hiding `<rdg>`
+  from recensions other than the one in progress
+- made MRE more configurable
+  - `oxbytao.mre.recensions.xpath` TEI LSP property which defaults to
+    `//sourceDesc//listWit[@xml:id]`
+
 ## 2.5.2 ##
 
 - introduced more functions to MRE

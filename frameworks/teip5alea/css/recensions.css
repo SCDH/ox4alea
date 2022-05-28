@@ -9,13 +9,8 @@
 
 /* set the visibility of choice/seg in the text according to the information stored for the MRE:
  * the visibiblity etc. is stored in a pointer of subtype="visible"
+ * the 'fading' pointer subpresses visibility if there is text for the current recension
  */
-
-/*
-choice > seg[source] {
-    display: oxy_xpath("if (some $s in tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'visible']/@target) satisfies matches(@source, $s)) then 'inline' else 'none'");
-}
-*/
 
 choice > seg[source],
 lg > choice > seg[source],
@@ -76,8 +71,8 @@ appInfo > application[ident = 'oxmre'] > ptr[subtype = 'othertarget'] {
     display: block;
     content: oxy_popup(
       edit, "@target",
-      values, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
-      labels, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      values, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
+      labels, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
       selectionMode, multiple
       ) !important;    
 }
@@ -87,8 +82,8 @@ appInfo > application[ident = 'oxmre'] > ptr[subtype = 'current'] {
     display: block;
     content: oxy_popup(
       edit, "@target",
-      values, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
-      labels, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      values, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
+      labels, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
       selectionMode, single
       ) !important;    
 }
