@@ -76,8 +76,8 @@ appInfo > application[ident = 'oxmre'] > ptr[subtype = 'othertarget'] {
     display: block;
     content: oxy_popup(
       edit, "@target",
-      values, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
-      labels, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      values, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
+      labels, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
       selectionMode, multiple
       ) !important;    
 }
@@ -87,8 +87,8 @@ appInfo > application[ident = 'oxmre'] > ptr[subtype = 'current'] {
     display: block;
     content: oxy_popup(
       edit, "@target",
-      values, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
-      labels, oxy_xpath("let $recensions := /TEI/teiHeader//listWit/@xml:id ! concat('#', .) return string-join($recensions, ',')"),
+      values, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
+      labels, oxy_xpath("let $recensions := ${teilspProp(oxbytao.mre.recensions.xpath)}/@xml:id!concat('#',.) return string-join($recensions, ',')"),
       selectionMode, single
       ) !important;    
 }
