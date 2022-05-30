@@ -37,6 +37,12 @@ choice:has( seg[source] ) {
 
 /* make MRE's parameters accessible */
 
+teiHeader,
+teiHeader > encodingDesc:has(appInfo:has(application[ident = 'oxmre'])),
+teiHeader > encodingDesc > appInfo:has(application[ident = 'oxmre']) {
+    display: block !important;
+}
+
 /* we show them in a box fixed on top of the editor window */
 appInfo > application[ident = 'oxmre'] {
     visibility: visible;
