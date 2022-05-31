@@ -3,9 +3,6 @@
     <properties>
         <!-- MRE: how to find recensions. Default: all sourceDesc//listWit elements with @xml:id -->
         <property name="oxbytao.mre.recensions.xpath">//sourceDesc//listWit[@xml:id]</property>
-        <!-- CSS: links -->
-        <property name="oxbytao.css.prefixDef.relBase">'occurrence'</property>
-        <property name="oxbytao.css.reference.evaluation">$context := self::*, $protocol := //prefixDef[matches($first, concat(@ident, ':', @matchPattern))][1], $base := (if (${teilspProp(oxbytao.css.prefixDef.relBase)} eq 'definition') then base-uri($protocol) else base-uri($context)), $href := if ($protocol) then replace($first, concat($protocol/@ident, ':', $protocol/@matchPattern), $protocol/@replacementPattern) else $first return resolve-uri($href, ($base, base-uri(/))[1])</property>
     </properties>
     <plugins>
         <plugin>
