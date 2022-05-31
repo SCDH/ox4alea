@@ -7,6 +7,8 @@
 - made MRE more configurable
   - `oxbytao.mre.recensions.xpath` TEI LSP property which defaults to
     `//sourceDesc//listWit[@xml:id]`
+  - related CSS is still not configurable because usage of editor
+    variables is broken/unstable in CSS
 
 ## 2.5.2 ##
 
