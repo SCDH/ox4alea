@@ -95,10 +95,12 @@
       </toolbar>
 
       <toolbar name="MRE">
-        <addAction id="reset.mre"/>
+        <addAction id="mre.reset"/>
+        <addAction id="mre.next"/>
+        <addAction id="mre.complement"/>
         <addAction id="mre.to.done"/>
         <addAction id="mre.select.source"/>
-        <addAction id="mre.to.all.but.current"/>
+        <!--addAction id="mre.to.all.but.current"/-->
       </toolbar>
 
       <toolbar name="ALEA shortcuts">

@@ -3,16 +3,16 @@
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="reset.mre">
-  <a:name>Reset MRE</a:name>
-  <a:description>Reset the MRE: all recesions 'visible' and all recensions but the one in progress are set to 'done' and 'fading'.</a:description>
-  <a:smallIconPath href="${framework}/images/reset-mre-16.png"/>
-  <a:largeIconPath href="${framework}/images/reset-mre-24.png"/>
+  id="mre.complement">
+  <a:name>MRE complement</a:name>
+  <a:description>Set the MRE: all recesions 'visible' and all recensions but the one in progress are set to 'done' and 'fading'.</a:description>
+  <a:smallIconPath href="${framework}/images/mre-complement-16.png"/>
+  <a:largeIconPath href="${framework}/images/mre-complement-24.png"/>
   <a:operations>
     <a:operation id="ExecuteTransformationScenariosOperation">
       <a:xpathCondition>true()</a:xpathCondition>
       <a:arguments>
-        <a:argument name="scenarioNames">ALEA :: reset MRE</a:argument>
+        <a:argument name="scenarioNames">ALEA :: MRE complement</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
