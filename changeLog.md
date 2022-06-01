@@ -1,5 +1,9 @@
 # change log #
 
+## 2.5.5 ##
+
+- fixed optional CSS for hiding readings from other recensions
+
 ## 2.5.4 ##
 
 - actions for setting MRE parameters
