@@ -1,5 +1,5 @@
 @namespace xml "http://www.w3.org/XML/1998/namespace";
 
-rdg {
+rdg[wit] {
     display: oxy_xpath("let $wit := tokenize(@wit) ! substring(., 2), $recensions := //sourceDesc//listWit[@xml:id][some $w in $wit satisfies descendant::*[@xml:id eq $w]]/@xml:id ! concat('#', .), $isvisible := some $r in $recensions satisfies matches(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target, $r) return if ($isvisible) then 'inline' else 'none'") !important;
 }
