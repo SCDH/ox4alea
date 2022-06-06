@@ -517,10 +517,6 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="lem" mode="apparatus-lemma">
-        <xsl:apply-templates mode="apparatus-lemma"/>
-    </xsl:template>
-
     <xsl:template match="rdg" mode="apparatus-lemma"/>
 
     <xsl:template match="choice" mode="apparatus-lemma">
@@ -537,10 +533,6 @@
         <xsl:apply-templates mode="apparatus-lemma"/>
     </xsl:template>
 
-    <xsl:template match="seg | persName | placeName | orgName" mode="apparatus-lemma">
-        <xsl:apply-templates mode="apparatus-lemma"/>
-    </xsl:template>
-
     <xsl:template match="witDetail" mode="apparatus-lemma"/>
 
     <xsl:template match="note" mode="apparatus-lemma"/>
@@ -551,8 +543,11 @@
     </xsl:template>
 
     <xsl:template match="*" mode="apparatus-lemma">
-        <!-- We can pass it over to the default templates, now. -->
-        <xsl:apply-templates/>
+        <xsl:apply-templates mode="apparatus-lemma"/>
+    </xsl:template>
+
+    <xsl:template match="text()" mode="apparatus-lemma">
+        <xsl:value-of select="."/>
     </xsl:template>
 
 
