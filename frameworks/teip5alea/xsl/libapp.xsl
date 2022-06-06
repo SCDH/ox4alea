@@ -97,8 +97,7 @@
 
 
     <!-- make an apparatus line and hand over to templates that do the apparatus entries -->
-    <xsl:template
-        match="head | app//head | l | app//l | p | app//p[not(ancestor::note)] | lg/anchor"
+    <xsl:template match="head | app//head | l | app//l | p | app//p[not(ancestor::note)]"
         mode="apparatus-line">
         <xsl:variable name="entries" as="node()*">
             <!-- make a sequence of all nodes, that need an apparatus entry for this line -->
