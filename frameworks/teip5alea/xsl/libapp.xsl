@@ -33,14 +33,14 @@
                     lose focus on the line when there are several in an <app>. See #12.
                     We need app//l instead an some etra templates for handling app//l. -->
                 <xsl:text>
-                    descendant::app[not(parent::sic)] |
                     descendant::gap[not(parent::lem)] |
-                    descendant::unclear[not(parent::lem)] |
+                    descendant::unclear[not(parent::lem | parent::rdg)] |
                     descendant::sic[not(parent::choice)] |
                     descendant::corr[not(parent::choice)] |
                     descendant::choice |
                     descendant::supplied[not(parent::rdg)] |
                     descendant::witDetail[not(parent::app)] |
+                    descendant::app[not(parent::sic)] |
                     descendant::app/lem/(gap | unclear | choice) |
                     self::l[ancestor::app] |
                     self::head[ancestor::app] |
