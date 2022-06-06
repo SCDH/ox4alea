@@ -47,6 +47,26 @@
                     self::p[ancestor::app and not(ancestor::note)]
                 </xsl:text>
             </xsl:when>
+            <xsl:when
+                test="//variantEncoding[@method eq 'double-end-point' and @location eq 'internal']">
+                <!-- we can't add simple ...|ancestor::app to the selector, because then we
+                    lose focus on the line when there are several in an <app>. See #12.
+                    We need app//l instead an some etra templates for handling app//l. -->
+                <xsl:text>
+                    descendant::gap[not(parent::lem)] |
+                    descendant::unclear[not(parent::lem | parent::rdg)] |
+                    descendant::sic[not(parent::choice)] |
+                    descendant::corr[not(parent::choice)] |
+                    descendant::choice |
+                    descendant::supplied[not(parent::rdg)] |
+                    descendant::witDetail[not(parent::app)] |
+                    descendant::app |
+                    descendant::app/lem/(gap | unclear | choice) |
+                    self::l[ancestor::app] |
+                    self::head[ancestor::app] |
+                    self::p[ancestor::app and not(ancestor::note)]
+                </xsl:text>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:message terminate="yes">Variant Encoding is not supported</xsl:message>
             </xsl:otherwise>
@@ -449,18 +469,18 @@
     <!-- we have to get the lemma by evaluating app/@from and/or app/@to -->
     <xsl:template match="app[not(exists(lem)) and //variantEncoding[@method eq 'double-end-point']]"
         mode="apparatus-lemma">
-        <xsl:variable name="from-node" select="
-                let $from := @from
-                return
-                    (//*[@xml:id eq $from], .)[1]"/>
-        <xsl:variable name="to-node" select="
-                let $to := @to
-                return
-                    (//*[@xml:id eq $to], .)[1]"/>
+        <xsl:message>Getting lemme from between nodes</xsl:message>
         <xsl:variable name="lemma-nodes" as="node()*">
-            <xsl:apply-templates
-                select="$from-node/following::text() intersect $to-node/preceding::text()"
-                mode="between-anchors"/>
+            <xsl:call-template name="nodes-between-nodes">
+                <xsl:with-param name="start-node" select="
+                        let $from := substring(@from, 2)
+                        return
+                            (//*[@xml:id eq $from], .)[1]"/>
+                <xsl:with-param name="end-node" select="
+                        let $to := substring(@to, 2)
+                        return
+                            (//*[@xml:id eq $to], .)[1]"/>
+            </xsl:call-template>
         </xsl:variable>
         <xsl:value-of select="string-join($lemma-nodes, '')"/>
     </xsl:template>
