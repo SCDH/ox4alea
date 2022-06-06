@@ -26,6 +26,13 @@ It is called after the transformation in 'extract' mode.
         />
     </xsl:template>
 
+    <xsl:template name="nodes-between-nodes" as="node()*">
+        <xsl:param name="start-node" as="node()"/>
+        <xsl:param name="end-node" as="node()"/>
+        <xsl:apply-templates mode="extract"
+            select="$start-node/following::text() intersect $end-node/preceding::text()"/>
+    </xsl:template>
+
     <!-- A template named 'finalize-extracted' is expected to be present! -->
     <xsl:template name="finalize-extracted">
         <xsl:param name="extracted" as="node()*"/>
