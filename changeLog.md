@@ -1,5 +1,14 @@
 # change log #
 
+## 2.5.4 ##
+
+- actions for setting MRE parameters
+  - `reset`: empty all parameters
+  - `next`: shift `in progress` to the next recension (order
+    determined from header) and add old `in progress` to `done`
+  - `complement`: set `done` as `in progress`'s complement set of
+    recensions
+
 ## 2.5.3 ##
 
 - introduced new optional MRE-related CSS style for hiding `<rdg>`
@@ -7,6 +16,8 @@
 - made MRE more configurable
   - `oxbytao.mre.recensions.xpath` TEI LSP property which defaults to
     `//sourceDesc//listWit[@xml:id]`
+  - related CSS is still not configurable because usage of editor
+    variables is broken/unstable in CSS
 
 ## 2.5.2 ##
 
