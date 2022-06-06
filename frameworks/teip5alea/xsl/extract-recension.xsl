@@ -22,6 +22,7 @@ We define a default mode in order to make stylesheet composition simpler.
 
     <!-- delete MRE app info -->
     <xsl:template match="application[@ident eq 'oxmre']"/>
+    <xsl:template match="appInfo[not(exists(application[@ident ne 'oxmre']))]"/>
 
     <xsl:template match="/">
         <xsl:if test="$debug">
@@ -110,8 +111,8 @@ We define a default mode in order to make stylesheet composition simpler.
 
     <!-- remove variant readings not from the current recension -->
     <xsl:template match="
-            rdg[every $wit in tokenize(@wit) ! substring(., 2)
-                satisfies not(exists(//teiHeader//sourceDesc//listWit[@xml:id eq $source]//witness[@xml:id eq $wit]))]">
+            (rdg | witDetail)[every $wit in (tokenize(@wit) ! substring(., 2))
+                satisfies empty(//teiHeader//sourceDesc//listWit[@xml:id eq $source]//witness[@xml:id eq $wit])]">
         <xsl:if test="$debug">
             <xsl:message>deleting single reading</xsl:message>
         </xsl:if>
