@@ -66,7 +66,10 @@
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-                <title>ALEA Vorschau</title>
+                <title>
+                    <xsl:value-of select="$work-id"/>
+                    <xsl:text> :: ALEA Vorschau</xsl:text>
+                </title>
                 <style>
                     <xsl:if test="$font-css ne ''">
                         <xsl:value-of select="unparsed-text($font-css)"/>

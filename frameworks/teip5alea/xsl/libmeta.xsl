@@ -12,22 +12,23 @@
 
     <xsl:import href="libwit.xsl"/>
 
+    <xsl:param name="work-id-xpath">
+        <xsl:text>(/@xml:id, //idno[@type eq 'canonical-id'], //idno[@type eq 'work-identifier'], tokenize(tokenize(base-uri(/), '/')[last()], '\.')[1])[1]</xsl:text>
+    </xsl:param>
+
+    <xsl:variable name="work-id" as="xs:string">
+        <xsl:evaluate as="xs:string" context-item="/" xpath="$work-id-xpath" expand-text="true"/>
+    </xsl:variable>
+
     <xsl:mode name="metadata" on-no-match="shallow-skip"/>
 
     <xsl:template match="/ | TEI | teiHeader" mode="metadata">
         <p>
-            <xsl:apply-templates select="descendant-or-self::teiHeader/descendant::titleStmt/title"
-                mode="metadata"/>
+            <xsl:value-of select="$work-id"/>
+            <xsl:text>: </xsl:text>
             <xsl:apply-templates select="descendant-or-self::teiHeader/descendant::witness"
                 mode="metadata"/>
         </p>
-    </xsl:template>
-
-    <xsl:template match="titleStmt/title" mode="metadata">
-        <span lang="de">
-            <xsl:value-of select="normalize-space(.)"/>
-            <xsl:text>: </xsl:text>
-        </span>
     </xsl:template>
 
     <xsl:template match="witness" mode="metadata">
