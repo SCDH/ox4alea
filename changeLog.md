@@ -16,6 +16,10 @@
   - author mode actions only active when there's an application info
     in the encoding description
 
+## 2.5.5 ##
+
+- fixed optional CSS for hiding readings from other recensions
+
 ## 2.5.4 ##
 
 - actions for setting MRE parameters
