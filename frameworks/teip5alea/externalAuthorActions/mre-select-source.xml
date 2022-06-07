@@ -11,7 +11,7 @@
   <a:largeIconPath href="${framework}/images/mre-source-24.png"/>
   <a:operations>
     <a:operation id="de.wwu.scdh.oxbytei.SelectAttributeValueOperation">
-      <a:xpathCondition>self::*</a:xpathCondition>
+      <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
         <a:argument name="name">source</a:argument>
         <a:argument name="elementLocation">self::*</a:argument>

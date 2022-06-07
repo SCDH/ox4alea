@@ -63,7 +63,7 @@
 						<Boolean>false</Boolean>
 					</field>
 					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
+						<Boolean>false</Boolean>
 					</field>
 					<field name="showInSVGPane">
 						<Boolean>false</Boolean>
@@ -710,7 +710,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA :: extract reading</String>
+						<String>ALEA :: Extract Reading</String>
 					</field>
 					<field name="baseURL">
 						<null/>
@@ -1455,7 +1455,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA :: extract recension</String>
+						<String>ALEA :: Extract Recension</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -1509,7 +1509,7 @@
 						<Boolean>false</Boolean>
 					</field>
 					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
+						<Boolean>false</Boolean>
 					</field>
 					<field name="showInSVGPane">
 						<Boolean>false</Boolean>
@@ -1622,7 +1622,7 @@
 						<Boolean>false</Boolean>
 					</field>
 					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
+						<Boolean>false</Boolean>
 					</field>
 					<!--
 					<field name="saveAs">

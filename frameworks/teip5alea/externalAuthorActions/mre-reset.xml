@@ -10,7 +10,7 @@
   <a:largeIconPath href="${framework}/images/reset-mre-24.png"/>
   <a:operations>
     <a:operation id="ExecuteTransformationScenariosOperation">
-      <a:xpathCondition>true()</a:xpathCondition>
+      <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
         <a:argument name="scenarioNames">ALEA :: MRE reset</a:argument>
       </a:arguments>

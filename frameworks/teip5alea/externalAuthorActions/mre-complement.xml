@@ -10,7 +10,7 @@
   <a:largeIconPath href="${framework}/images/mre-complement-24.png"/>
   <a:operations>
     <a:operation id="ExecuteTransformationScenariosOperation">
-      <a:xpathCondition>true()</a:xpathCondition>
+      <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
         <a:argument name="scenarioNames">ALEA :: MRE complement</a:argument>
       </a:arguments>

@@ -25,69 +25,101 @@
 
     <!-- # Apparatus # -->
 
+    <!-- XPath expression, that describes, what appears in the apparatus: context: verse or other block element -->
+    <xsl:param name="apparatus-entries-xpath">
+        <xsl:choose>
+            <xsl:when test="//variantEncoding[@method eq 'parallel-segmentation']">
+                <!-- we can't add simple ...|ancestor::app to the selector, because then we
+                    lose focus on the line when there are several in an <app>. See #12.
+                    We need app//l instead an some etra templates for handling app//l. -->
+                <xsl:text>
+                    descendant::gap[not(parent::lem | parent::rdg)] |
+                    descendant::unclear[not(parent::lem | parent::rdg)] |
+                    descendant::sic[not(parent::choice)] |
+                    descendant::corr[not(parent::choice)] |
+                    descendant::choice |
+                    descendant::supplied[not(parent::rdg)] |
+                    descendant::witDetail[not(parent::app)] |
+                    descendant::app[not(parent::sic)] |
+                    descendant::app/lem/(gap | unclear | choice) |
+                    self::l[ancestor::app] |
+                    self::head[ancestor::app] |
+                    self::p[ancestor::app and not(ancestor::note)]
+                </xsl:text>
+            </xsl:when>
+            <xsl:when
+                test="//variantEncoding[@method eq 'double-end-point' and @location eq 'internal']">
+                <!-- we can't add simple ...|ancestor::app to the selector, because then we
+                    lose focus on the line when there are several in an <app>. See #12.
+                    We need app//l instead an some etra templates for handling app//l. -->
+                <xsl:text>
+                    descendant::gap[not(parent::lem)] |
+                    descendant::unclear[not(parent::lem | parent::rdg)] |
+                    descendant::sic[not(parent::choice)] |
+                    descendant::corr[not(parent::choice)] |
+                    descendant::choice |
+                    descendant::supplied[not(parent::rdg)] |
+                    descendant::witDetail[not(parent::app)] |
+                    descendant::app |
+                    descendant::app/lem/(gap | unclear | choice) |
+                    self::l[ancestor::app] |
+                    self::head[ancestor::app] |
+                    self::p[ancestor::app and not(ancestor::note)]
+                </xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message terminate="yes">Variant Encoding is not supported</xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:param>
+
+    <xsl:function name="scdh:empty-lemma" as="xs:boolean">
+        <xsl:param name="reading" as="node()"/>
+        <xsl:choose>
+            <xsl:when
+                test="$reading/ancestor::TEI//varaintEncoding/@method eq 'parallel-segmentation'">
+                <xsl:value-of select="normalize-space($reading/ancestor::app/lem) eq ''"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="false()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
     <!-- ## Apparatus line ## -->
 
     <xsl:template name="line-referencing-apparatus">
         <table>
-            <xsl:apply-templates select="
-                    /TEI/text//(l[not(ancestor::head)] | p | head)
-                    [descendant::app or
-                    descendant::witDetail or
-                    descendant::gap or
-                    descendant::unclear or
-                    descendant::choice or
-                    descendant::sic or
-                    descendant::corr or
-                    descendant::supplied or
-                    descendant::anchor[let $id := @xml:id
-                    return
-                        //app[@from eq concat('#', $id)]] or
-                    ancestor::app] |
-                    /TEI/text//lg/anchor[let $id := @xml:id
-                    return
-                        //app[@from eq concat('#', $id)]]" mode="apparatus-line"/>
+            <xsl:apply-templates select="/TEI/text/body" mode="apparatus-line"/>
         </table>
     </xsl:template>
 
+
     <!-- make an apparatus line and hand over to templates that do the apparatus entries -->
-    <xsl:template
-        match="head | app//head | l | app//l | p | app//p[not(ancestor::note)] | lg/anchor"
+    <xsl:template match="head | app//head | l | app//l | p | app//p[not(ancestor::note)]"
         mode="apparatus-line">
-        <tr>
-            <td class="apparatus-line-number">
-                <xsl:value-of select="scdh:line-number(.)"/>
-            </td>
-            <td>
-                <!-- we can't add simple ...|ancestor::app to the selector, because then we
-                    lose focus on the line when there are several in an <app>. See #12.
-                    We need app//l instead an some etra templates for handling app//l. -->
-                <xsl:for-each select="
-                        descendant::app[not(parent::sic)] |
-                        descendant::anchor[let $id := @xml:id
-                        return
-                            exists(//app[@from eq concat('#', $id)])] |
-                        descendant::gap[not(parent::lem)] |
-                        descendant::unclear[not(parent::lem)] |
-                        descendant::sic[not(parent::choice)] |
-                        descendant::corr[not(parent::choice)] |
-                        descendant::choice |
-                        descendant::supplied[not(parent::rdg)] |
-                        descendant::witDetail[not(parent::app)] |
-                        descendant::app/lem/(gap | unclear | choice) |
-                        self::l[ancestor::app] |
-                        self::head[ancestor::app] |
-                        self::p[ancestor::app and not(ancestor::note)] |
-                        self::anchor[let $id := @xml:id
-                        return
-                            exists(//app[@from eq concat('#', $id)])]">
-                    <xsl:apply-templates select="." mode="apparatus"/>
-                    <xsl:if test="position() != last()">
-                        <span class="apparatus-sep" data-i18n-key="app-entry-sep"
-                            >&nbsp;|&emsp;</span>
-                    </xsl:if>
-                </xsl:for-each>
-            </td>
-        </tr>
+        <xsl:variable name="entries" as="node()*">
+            <!-- make a sequence of all nodes, that need an apparatus entry for this line -->
+            <xsl:evaluate as="node()*" context-item="." xpath="$apparatus-entries-xpath"
+                expand-text="true"/>
+        </xsl:variable>
+        <xsl:if test="not(empty($entries))">
+            <tr>
+                <td class="apparatus-line-number">
+                    <xsl:value-of select="scdh:line-number(.)"/>
+                </td>
+                <td>
+                    <xsl:for-each select="$entries">
+                        <xsl:apply-templates select="." mode="apparatus"/>
+                        <xsl:if test="position() != last()">
+                            <span class="apparatus-sep" data-i18n-key="app-entry-sep"
+                                >&nbsp;|&emsp;</span>
+                        </xsl:if>
+                    </xsl:for-each>
+                </td>
+            </tr>
+        </xsl:if>
     </xsl:template>
 
     <!-- ## Apparatus entries ## -->
@@ -102,14 +134,15 @@
 
     <xsl:template match="app" mode="apparatus">
         <xsl:variable name="lemma-nodes">
-            <xsl:apply-templates select="lem" mode="apparatus-lemma"/>
+            <xsl:apply-templates select="." mode="apparatus-lemma"/>
         </xsl:variable>
         <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
         <xsl:for-each select="rdg | witDetail">
             <!-- repeat prefix if necessary -->
-            <xsl:if test="parent::app/lem[. eq '']">
-                <xsl:apply-templates select="parent::app/lem" mode="apparatus-lemma"/>
+            <xsl:if test="normalize-space($lemma-nodes) eq ''">
+                <!-- TODO: broken? -->
+                <xsl:apply-templates select="$lemma-nodes" mode="apparatus-lemma"/>
                 <xsl:text>&#x20;</xsl:text>
             </xsl:if>
             <xsl:apply-templates select="." mode="apparatus-rdg"/>
@@ -126,6 +159,7 @@
         </xsl:for-each>
     </xsl:template>
 
+    <!-- whole verse in <lem>, this is relevant in parallel segementation only -->
     <xsl:template match="app/lem/l | app/lem/p[not(ancestor::note)]" mode="apparatus">
         <xsl:variable name="lemma-nodes">
             <xsl:apply-templates select="parent::lem" mode="apparatus-lemma"/>
@@ -146,8 +180,9 @@
         </xsl:for-each>
     </xsl:template>
 
+    <!-- extra verse in reading -->
     <xsl:template
-        match="l[not(ancestor::app/lem/l)] | p[not(ancestor::app/lem/p) and not(ancestor::note)]"
+        match="rdg/l[scdh:empty-lemma(parent::rdg)] | rdg/p[scdh:empty-lemma(parent::rdg) and not(ancestor::note)]"
         mode="apparatus">
         <xsl:apply-templates mode="apparatus"/>
         <xsl:text> </xsl:text>
@@ -326,7 +361,7 @@
     <!-- apparatus entry for sic/app -->
     <xsl:template match="sic[not(parent::choice) and child::app]" mode="apparatus">
         <xsl:variable name="lemma-nodes">
-            <xsl:apply-templates select="app/lem" mode="apparatus-lemma"/>
+            <xsl:apply-templates select="app" mode="apparatus-lemma"/>
         </xsl:variable>
         <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
         <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">] </span>
@@ -425,6 +460,30 @@
     <!-- MODE: apparatus-lemma
         These templates are generate the text repeated as the lemma in the apparatus.-->
 
+    <!-- we can get the lemma from the app -->
+    <xsl:template match="app[exists(lem)]" mode="apparatus-lemma">
+        <xsl:apply-templates mode="apparatus-lemma" select="lem"/>
+    </xsl:template>
+
+    <!-- we have to get the lemma by evaluating app/@from and/or app/@to -->
+    <xsl:template match="app[not(exists(lem)) and //variantEncoding[@method eq 'double-end-point']]"
+        mode="apparatus-lemma">
+        <xsl:message>Getting lemme from between nodes</xsl:message>
+        <xsl:variable name="lemma-nodes" as="node()*">
+            <xsl:call-template name="nodes-between-nodes">
+                <xsl:with-param name="start-node" select="
+                        let $from := substring(@from, 2)
+                        return
+                            (//*[@xml:id eq $from], .)[1]"/>
+                <xsl:with-param name="end-node" select="
+                        let $to := substring(@to, 2)
+                        return
+                            (//*[@xml:id eq $to], .)[1]"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:value-of select="string-join($lemma-nodes, '')"/>
+    </xsl:template>
+
     <xsl:template match="lem[. eq ''][//variantEncoding[@method eq 'parallel-segmentation']]"
         mode="apparatus-lemma">
         <!-- We have to present something, to mark the place where the variant adds something.
@@ -457,10 +516,6 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="lem" mode="apparatus-lemma">
-        <xsl:apply-templates mode="apparatus-lemma"/>
-    </xsl:template>
-
     <xsl:template match="rdg" mode="apparatus-lemma"/>
 
     <xsl:template match="choice" mode="apparatus-lemma">
@@ -477,10 +532,6 @@
         <xsl:apply-templates mode="apparatus-lemma"/>
     </xsl:template>
 
-    <xsl:template match="seg | persName | placeName | orgName" mode="apparatus-lemma">
-        <xsl:apply-templates mode="apparatus-lemma"/>
-    </xsl:template>
-
     <xsl:template match="witDetail" mode="apparatus-lemma"/>
 
     <xsl:template match="note" mode="apparatus-lemma"/>
@@ -491,8 +542,11 @@
     </xsl:template>
 
     <xsl:template match="*" mode="apparatus-lemma">
-        <!-- We can pass it over to the default templates, now. -->
-        <xsl:apply-templates/>
+        <xsl:apply-templates mode="apparatus-lemma"/>
+    </xsl:template>
+
+    <xsl:template match="text()" mode="apparatus-lemma">
+        <xsl:value-of select="."/>
     </xsl:template>
 
 

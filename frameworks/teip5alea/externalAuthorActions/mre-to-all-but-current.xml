@@ -19,7 +19,7 @@
       </a:arguments>
     </a:operation>
     <a:operation id="SurroundWithFragmentOperation">
-      <a:xpathCondition>true()</a:xpathCondition>
+      <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
         <a:argument name="fragment"><![CDATA[<choice xmlns="http://www.tei-c.org/ns/1.0"><seg source="${xpath_eval(string-join(//sourceDesc//listWit[@xml:id and (let $recension := @xml:id, $current := tokenize(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target) return  some $c in $current satisfies $c ne concat('#', $recension))]/@xml:id ! concat('#', .), ' '))}"/><seg source="${xpath_eval(//appInfo/application[@ident eq 'oxmre']/ptr[@subtype eq 'current']/@target)}">${caret}</seg></choice>]]></a:argument>
       </a:arguments>
