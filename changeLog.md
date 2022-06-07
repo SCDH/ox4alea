@@ -1,5 +1,21 @@
 # change log #
 
+## 2.6.0 ##
+
+- Preview
+  - make internal double end-point attached apparatus work
+  - simpler code base
+  - fixes for `<unclear>` and `<gap>` nested in an apparatus
+  - let work ID appear in HTML title element
+- make transformations less verbose: do not open XML result pane etc.
+- MRE
+  - transformation for extracting recensions
+	- make new work identifier and write it to `/TEI/@xml:id`
+	- extraction for `<witDetail>`
+	- remove empty `<appInfo>`
+  - author mode actions only active when there's an application info
+    in the encoding description
+
 ## 2.5.4 ##
 
 - actions for setting MRE parameters
