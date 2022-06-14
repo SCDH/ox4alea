@@ -53,6 +53,7 @@
                     lose focus on the line when there are several in an <app>. See #12.
                     We need app//l instead an some etra templates for handling app//l. -->
                 <xsl:text>
+                    let $next-block := (following-sibling::l | following-sibling::p)[1] return
                     descendant::gap[not(parent::lem)] |
                     descendant::unclear[not(parent::lem | parent::rdg)] |
                     descendant::sic[not(parent::choice)] |
@@ -62,6 +63,8 @@
                     descendant::witDetail[not(parent::app)] |
                     descendant::app |
                     descendant::app/lem/(gap | unclear | choice) |
+                    (following-sibling::app intersect $next-block/preceding-sibling::app)[1] |
+                    self::l[not(following-sibling::l)]/following-sibling::app |
                     self::l[ancestor::app] |
                     self::head[ancestor::app] |
                     self::p[ancestor::app and not(ancestor::note)]
