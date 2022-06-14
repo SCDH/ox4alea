@@ -63,11 +63,11 @@
                     descendant::witDetail[not(parent::app)] |
                     descendant::app |
                     descendant::app/lem/(gap | unclear | choice) |
-                    (following-sibling::app intersect $next-block/preceding-sibling::app)[1] |
+                    (following-sibling::app[empty(rdg)] intersect $next-block/preceding-sibling::app[empty(rdg)])[1] |
                     self::l[not(following-sibling::l)]/following-sibling::app |
-                    self::l[ancestor::app] |
-                    self::head[ancestor::app] |
-                    self::p[ancestor::app and not(ancestor::note)]
+                    self::l/ancestor::app |
+                    self::head/ancestor::app |
+                    self::p[not(ancestor::note)]/ancestor::app
                 </xsl:text>
             </xsl:when>
             <xsl:otherwise>
