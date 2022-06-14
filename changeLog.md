@@ -1,5 +1,12 @@
 # change log #
 
+### 2.6.1 ##
+
+- inproved Preview
+  - internal double end-point attachted apparatus make use of new
+    `libbetween.xsl` XSLT library
+  - fixed some apparatus entries
+
 ## 2.6.0 ##
 
 - Preview
