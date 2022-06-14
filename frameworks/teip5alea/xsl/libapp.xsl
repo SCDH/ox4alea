@@ -10,15 +10,15 @@
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    exclude-result-prefixes="xs scdh" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    version="3.0">
+    xmlns:scdhx="http://scdh.wwu.de/xslt#" exclude-result-prefixes="xs scdh scdhx"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0">
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
     <xsl:import href="libwit.xsl"/>
     <xsl:include href="libi18n.xsl"/>
     <xsl:include href="libcommon.xsl"/>
-    <xsl:include href="libanchors.xsl"/>
+    <xsl:import href="libbetween.xsl"/>
     <xsl:import href="libld.xsl"/>
     <xsl:import href="libbiblio.xsl"/>
 
@@ -466,22 +466,26 @@
     </xsl:template>
 
     <!-- we have to get the lemma by evaluating app/@from and/or app/@to -->
-    <xsl:template match="app[not(exists(lem)) and //variantEncoding[@method eq 'double-end-point']]"
+    <xsl:template
+        match="app[@from and //variantEncoding[@method eq 'double-end-point' and @location eq 'internal']]"
         mode="apparatus-lemma">
-        <xsl:message>Getting lemme from between nodes</xsl:message>
-        <xsl:variable name="lemma-nodes" as="node()*">
-            <xsl:call-template name="nodes-between-nodes">
-                <xsl:with-param name="start-node" select="
-                        let $from := substring(@from, 2)
-                        return
-                            (//*[@xml:id eq $from], .)[1]"/>
-                <xsl:with-param name="end-node" select="
-                        let $to := substring(@to, 2)
-                        return
-                            (//*[@xml:id eq $to], .)[1]"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:value-of select="string-join($lemma-nodes, '')"/>
+        <xsl:variable name="other" as="node()" select="
+                let $id := substring(@from, 2)
+                return
+                    //*[@xml:id eq $id]"/>
+        <xsl:apply-templates select="scdhx:subtrees-between-anchors($other, .)"
+            mode="apparatus-lemma"/>
+    </xsl:template>
+
+    <xsl:template
+        match="app[@to and //variantEncoding[@method eq 'double-end-point' and @location eq 'internal']]"
+        mode="apparatus-lemma">
+        <xsl:variable name="other" as="node()" select="
+                let $id := substring(@to, 2)
+                return
+                    //*[@xml:id eq $id]"/>
+        <xsl:apply-templates select="scdhx:subtrees-between-anchors(., $other)"
+            mode="apparatus-lemma"/>
     </xsl:template>
 
     <xsl:template match="lem[. eq ''][//variantEncoding[@method eq 'parallel-segmentation']]"
@@ -614,12 +618,8 @@
             </td>
             <td class="editorial-note-text">
                 <span class="note-lemma">
-                    <xsl:variable name="lemma-nodes">
-                        <xsl:call-template name="nodes-between">
-                            <xsl:with-param name="startId" select="$fromId"/>
-                            <xsl:with-param name="endId" select="$toId"/>
-                        </xsl:call-template>
-                    </xsl:variable>
+                    <xsl:variable name="lemma-nodes"
+                        select="scdhx:subtrees-between-anchors(., $fromId, $toId)"/>
                     <xsl:value-of select="scdh:shorten-string($lemma-nodes)"/>
                     <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
                 </span>
