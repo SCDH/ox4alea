@@ -152,7 +152,7 @@
 								<field name="paramDescription">
 									<paramDescriptor>
 										<field name="localName">
-											<String>witness-cat</String>
+											<String>witnesses-xpath</String>
 										</field>
 										<field name="prefix">
 											<null/>
@@ -163,7 +163,55 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${pdu}/WitnessCatalogue.xml</String>
+									<String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String>
+								</field>
+								<field name="hasXPathValue">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isStatic">
+									<Boolean>false</Boolean>
+								</field>
+							</transformationParameter>
+							<transformationParameter>
+								<field name="paramDescription">
+									<paramDescriptor>
+										<field name="localName">
+											<String>witness-siglum-xpath</String>
+										</field>
+										<field name="prefix">
+											<null/>
+										</field>
+										<field name="namespace">
+											<null/>
+										</field>
+									</paramDescriptor>
+								</field>
+								<field name="value">
+									<String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String>
+								</field>
+								<field name="hasXPathValue">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isStatic">
+									<Boolean>false</Boolean>
+								</field>
+							</transformationParameter>
+							<transformationParameter>
+								<field name="paramDescription">
+									<paramDescriptor>
+										<field name="localName">
+											<String>witness-siglum-xpath</String>
+										</field>
+										<field name="prefix">
+											<null/>
+										</field>
+										<field name="namespace">
+											<null/>
+										</field>
+									</paramDescriptor>
+								</field>
+								<field name="value">
+									<String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
@@ -260,7 +308,7 @@
 								<field name="paramDescription">
 									<paramDescriptor>
 										<field name="localName">
-											<String>witness-cat</String>
+											<String>witnesses-xpath</String>
 										</field>
 										<field name="prefix">
 											<null/>
@@ -271,7 +319,31 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${pdu}/WitnessCatalogue.xml</String>
+									<String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String>
+								</field>
+								<field name="hasXPathValue">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isStatic">
+									<Boolean>false</Boolean>
+								</field>
+							</transformationParameter>
+							<transformationParameter>
+								<field name="paramDescription">
+									<paramDescriptor>
+										<field name="localName">
+											<String>witness-siglum-xpath</String>
+										</field>
+										<field name="prefix">
+											<null/>
+										</field>
+										<field name="namespace">
+											<null/>
+										</field>
+									</paramDescriptor>
+								</field>
+								<field name="value">
+									<String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
@@ -1764,7 +1836,7 @@
 								<field name="paramDescription">
 									<paramDescriptor>
 										<field name="localName">
-											<String>witness-cat</String>
+											<String>witnesses-xpath</String>
 										</field>
 										<field name="prefix">
 											<null/>
@@ -1775,7 +1847,31 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${pdu}/WitnessCatalogue.xml</String>
+									<String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String>
+								</field>
+								<field name="hasXPathValue">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isStatic">
+									<Boolean>false</Boolean>
+								</field>
+							</transformationParameter>
+							<transformationParameter>
+								<field name="paramDescription">
+									<paramDescriptor>
+										<field name="localName">
+											<String>witness-siglum-xpath</String>
+										</field>
+										<field name="prefix">
+											<null/>
+										</field>
+										<field name="namespace">
+											<null/>
+										</field>
+									</paramDescriptor>
+								</field>
+								<field name="value">
+									<String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
