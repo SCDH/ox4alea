@@ -86,7 +86,6 @@ customization. Customization includes:
 
 - redirect to a bibliography through an [XML
   catalog](https://www.oxygenxml.com/doc/versions/23.1/ug-editor/topics/using-XML-Catalogs.html#using-XML-Catalogs)
-- redirect to a catalog of witnesses through an XML catalog 
 - redirect to local CSS with font definitions etc. through an XML
   catalog
 - register the [XML
