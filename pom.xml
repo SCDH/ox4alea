@@ -45,6 +45,9 @@
                     <!--coverage>true</coverage-->
 		    <generateSurefireReport>true</generateSurefireReport>
 		    <testDir>test/xspec</testDir>
+		    <excludes>
+		       <exclude>**/libwit*.xspec</exclude>
+		    </excludes>
 		    <catalogFile>${project.basedir}/catalog.xml</catalogFile>
 		</configuration>
 		<executions>
