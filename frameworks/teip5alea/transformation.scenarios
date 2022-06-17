@@ -163,7 +163,8 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String>
+									<!--String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String-->
+									<String>doc('${pdu}/WitnessCatalogue.xml')//text//listWit//witness</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
@@ -187,31 +188,8 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String>
-								</field>
-								<field name="hasXPathValue">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isStatic">
-									<Boolean>false</Boolean>
-								</field>
-							</transformationParameter>
-							<transformationParameter>
-								<field name="paramDescription">
-									<paramDescriptor>
-										<field name="localName">
-											<String>witness-siglum-xpath</String>
-										</field>
-										<field name="prefix">
-											<null/>
-										</field>
-										<field name="namespace">
-											<null/>
-										</field>
-									</paramDescriptor>
-								</field>
-								<field name="value">
-									<String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String>
+									<!--String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String-->
+									<String>descendant::abbr[@type eq 'siglum'][1]</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
@@ -319,7 +297,8 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String>
+									<!--String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String-->
+									<String>doc('${pdu}/WitnessCatalogue.xml')//text//listWit//witness</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
@@ -343,7 +322,8 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String>
+									<!--String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String-->
+									<String>descendant::abbr[@type eq 'siglum'][1]</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
@@ -1847,7 +1827,8 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String>
+									<!--String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String-->
+									<String>doc('${pdu}/WitnessCatalogue.xml')//text//listWit//witness</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
@@ -1871,7 +1852,8 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String>
+									<!--String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String-->
+									<String>descendant::abbr[@type eq 'siglum'][1]</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
