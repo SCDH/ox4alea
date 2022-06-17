@@ -1,5 +1,13 @@
 # change log #
 
+### dev ###
+
+- made libwit.xsl and Preview configurable
+  - libwit.xsl takes XPath expressions as parameter now
+  - where to find witness information
+  - where to find the siglum of a witness
+  - old parameter that points to a central witness catalogue is gone
+
 ### 2.6.1 ##
 
 - inproved Preview
