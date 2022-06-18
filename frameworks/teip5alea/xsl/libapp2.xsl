@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:alea="http://scdh.wwu.de/oxygen#ALEA"
-    xmlns:scdh="http://scdh.wwu.de/xslt#" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    exclude-result-prefixes="xs alea scdh" version="3.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+    xmlns:alea="http://scdh.wwu.de/oxygen#ALEA" xmlns:scdh="http://scdh.wwu.de/xslt#"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs alea scdh"
+    version="3.1">
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
@@ -58,70 +60,84 @@
     <xsl:template name="line-referencing-apparatus">
         <div>
             <!-- we first generate a sequence of all elements that should show up in the apparatus -->
-            <xsl:variable name="entries" as="element()*">
+            <xsl:variable name="entry-elements" as="element()*">
                 <xsl:evaluate as="element()*" context-item="/" expand-text="true"
                     xpath="$app-entries-xpath"/>
             </xsl:variable>
-            <!-- we then group by such entries, that get their lemma (repetition of the base text) from the same set of text nodes,
-                because we want to join them into one entry -->
-            <xsl:for-each-group select="$entries"
-                group-by="scdh:lemma-text-node-ids-or-self-id(.) => string-join('-')">
+            <xsl:variable name="entries" as="map(*)*"
+                select="$entry-elements ! scdh:mk-entry-map(.)"/>
+            <!-- we first group the entries by line number -->
+            <xsl:for-each-group select="$entries" group-by="map:get(., 'line-number')">
                 <xsl:if test="$debug">
                     <xsl:message>
-                        <xsl:text>Joining apparatus entry for </xsl:text>
-                        <xsl:value-of select="count(current-group())"/>
-                        <xsl:text> element(s) referencing text nodes </xsl:text>
+                        <xsl:text>Apparatus entries for line </xsl:text>
                         <xsl:value-of select="current-grouping-key()"/>
-                    </xsl:message>
-                </xsl:if>
-                <xsl:variable name="lemma-node-for-line" as="node()">
-                    <!-- this variable's type is node() and not text(),
-                        since we may have had an empty element so scdh:get-lemma-text-node-ids-or-self()
-                        may have returned an ID of an element node. -->
-                    <xsl:choose>
-                        <xsl:when test="$lemma-first-text-node-line-crit">
-                            <xsl:sequence
-                                select="current-group()/descendant-or-self::node()[generate-id(.) eq tokenize(current-grouping-key(), '-')[1]]"
-                            />
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:sequence
-                                select="current-group()/descendant-or-self::node()[generate-id(.) eq tokenize(current-grouping-key(), '-')[last()]]"
-                            />
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
-                <xsl:variable name="line-number" select="alea:line-number($lemma-node-for-line)"/>
-                <xsl:if test="$debug">
-                    <xsl:message>
-                        <xsl:text>Line number for node </xsl:text>
-                        <xsl:value-of select="generate-id($lemma-node-for-line)"/>
-                        <xsl:text>: </xsl:text>
-                        <xsl:value-of select="$line-number"/>
+                        <xsl:text> : </xsl:text>
+                        <xsl:value-of select="count(current-group())"/>
                     </xsl:message>
                 </xsl:if>
 
+                <!-- we then group by such entries, that get their lemma (repetition of the base text)
+                    from the same set of text nodes, because we want to join them into one entry -->
+                <xsl:for-each-group select="current-group()"
+                    group-by="map:get(., 'lemma-grouping-ids')">
+                    <xsl:if test="$debug and count(current-group()) > 1">
+                        <xsl:message>
+                            <xsl:text>Joining </xsl:text>
+                            <xsl:value-of select="count(current-group())"/>
+                            <xsl:text> apparatus entries referencing text nodes </xsl:text>
+                            <xsl:value-of select="current-grouping-key()"/>
+                        </xsl:message>
+                    </xsl:if>
 
+                </xsl:for-each-group>
 
             </xsl:for-each-group>
         </div>
     </xsl:template>
 
-    <!-- if the element passed in is empty, the ID of the element is returned. This asserts, that we have a grouping key.
-        Whitespace text nodes are dropped because they generally interfere with testing where the lemme originates from.
-    -->
-    <xsl:function name="scdh:lemma-text-node-ids-or-self-id" as="xs:string*">
-        <xsl:param name="element" as="element()"/>
-        <xsl:variable name="text-node-ids" as="xs:string*"
-            select="(scdh:lemma-text-nodes($element)[normalize-space(.) ne '']) ! generate-id(.)"/>
-        <xsl:choose>
-            <xsl:when test="empty($text-node-ids)">
-                <xsl:value-of select="generate-id($element)"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:sequence select="$text-node-ids"/>
-            </xsl:otherwise>
-        </xsl:choose>
+    <!-- this generates a map (object) for an apparatus entry
+        with all there is needed for grouping and creating the entry -->
+    <xsl:function name="scdh:mk-entry-map" as="map(*)">
+        <xsl:param name="entry" as="element()"/>
+        <xsl:variable name="lemma-text-nodes" as="text()*">
+            <xsl:apply-templates select="$entry" mode="lemma-text-nodes"/>
+        </xsl:variable>
+        <xsl:variable name="lemma-text-node-ids" as="xs:string*"
+            select="$lemma-text-nodes[normalize-space(.) ne ''] ! generate-id(.)"/>
+        <xsl:variable name="lemma-grouping-ids" as="xs:string">
+            <!-- if the element passed in is empty, the ID of the element is used. This asserts, that we have a grouping key.
+                Whitespace text nodes are dropped because they generally interfere with testing where the lemme originates from.
+                -->
+            <xsl:choose>
+                <xsl:when test="empty($lemma-text-node-ids)">
+                    <xsl:value-of select="generate-id($entry)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:sequence select="$lemma-text-node-ids => string-join('-')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="lemma-node-for-line" as="node()">
+            <!-- this variable's type is node() and not text(),
+                since we may have had an empty element. -->
+            <xsl:choose>
+                <xsl:when test="$lemma-first-text-node-line-crit">
+                    <xsl:sequence select="($lemma-text-nodes, $entry)[1]"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:sequence select="($entry, $lemma-text-nodes)[last()]"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="line-number" select="alea:line-number($lemma-node-for-line)"/>
+        <xsl:sequence select="
+                map {
+                    'entry': $entry,
+                    'lemma-text-nodes': $lemma-text-nodes,
+                    'lemma-grouping-ids': $lemma-grouping-ids,
+                    'line-number': $line-number
+                }"/>
     </xsl:function>
 
     <xsl:function name="scdh:lemma-text-nodes" as="text()*">
