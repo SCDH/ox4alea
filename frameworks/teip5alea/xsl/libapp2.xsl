@@ -140,6 +140,11 @@
         <xsl:variable name="lemma-node-for-line" as="node()">
             <!-- this variable's type is node() and not text(),
                 since we may have had an empty element. -->
+            <!-- TODO: for external apparatus, we will have to extend
+                the logic in case a entry is nested in an external element,
+                e.g. a <rdg>. This can be done by introducing another mode analog
+                to lemma-text-nodes, that switches to the lemma of the including
+                elment. -->
             <xsl:choose>
                 <xsl:when test="$lemma-first-text-node-line-crit">
                     <xsl:sequence select="($lemma-text-nodes, $entry)[1]"/>
@@ -204,6 +209,10 @@
     <xsl:template name="scdh:apparatus-entry">
         <xsl:param name="entries" as="map(*)*"/>
         <span class="apparatus-entry">
+            <!-- TODO: when the lemma is empty
+                call a function/template for generating a prefix or suffix from the base text.
+                Pass this suffix via tunnel parameters on to mode 'apparatus-reading', so that
+                the prefix or suffix can be added in the reading -->
             <xsl:call-template name="scdh:apparatus-lemma">
                 <xsl:with-param name="entry" select="$entries[1]"/>
             </xsl:call-template>
