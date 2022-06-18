@@ -8,7 +8,7 @@
 
     <xsl:import href="libbetween.xsl"/>
     <xsl:import href="libcommon.xsl"/>
-    
+
 
     <xsl:param name="app-entries-xpath-internal-parallel-segmentation" as="xs:string*"
         required="false">
@@ -20,7 +20,7 @@
         <xsl:text>descendant::app</xsl:text>
         <xsl:text>| descendant::corr</xsl:text>
     </xsl:param>
-    
+
     <!-- whether or not the first text node from a lemma determines the line number of the entry -->
     <xsl:param name="lemma-first-text-node-line-crit" as="xs:boolean" select="true()"
         required="false"/>
@@ -65,10 +65,10 @@
             <!-- we then group by such entries, that get their lemma (repetition of the base text) from the same set of text nodes,
                 because we want to join them into one entry -->
             <xsl:for-each-group select="$entries"
-                group-by="scdh:get-lemma-text-node-ids-or-self(.) => string-join('-')">
+                group-by="scdh:lemma-text-node-ids-or-self-id(.) => string-join('-')">
                 <xsl:if test="$debug">
                     <xsl:message>
-                        <xsl:text>Generating apparatus entry for </xsl:text>
+                        <xsl:text>Joining apparatus entry for </xsl:text>
                         <xsl:value-of select="count(current-group())"/>
                         <xsl:text> element(s) referencing text nodes </xsl:text>
                         <xsl:value-of select="current-grouping-key()"/>
@@ -100,17 +100,20 @@
                         <xsl:value-of select="$line-number"/>
                     </xsl:message>
                 </xsl:if>
-                
-                
+
+
 
             </xsl:for-each-group>
         </div>
     </xsl:template>
-    
-    <!-- if the element passed in is empty, the ID of the element is returned. This asserts, that we have a grouping key. -->
-    <xsl:function name="scdh:get-lemma-text-node-ids-or-self" as="xs:string*">
+
+    <!-- if the element passed in is empty, the ID of the element is returned. This asserts, that we have a grouping key.
+        Whitespace text nodes are dropped because they generally interfere with testing where the lemme originates from.
+    -->
+    <xsl:function name="scdh:lemma-text-node-ids-or-self-id" as="xs:string*">
         <xsl:param name="element" as="element()"/>
-        <xsl:variable name="text-node-ids" as="xs:string*" select="scdh:get-lemma-text-node-ids($element)"/>
+        <xsl:variable name="text-node-ids" as="xs:string*"
+            select="(scdh:lemma-text-nodes($element)[normalize-space(.) ne '']) ! generate-id(.)"/>
         <xsl:choose>
             <xsl:when test="empty($text-node-ids)">
                 <xsl:value-of select="generate-id($element)"/>
@@ -121,39 +124,46 @@
         </xsl:choose>
     </xsl:function>
 
-    <xsl:function name="scdh:get-lemma-text-node-ids" as="xs:string*">
+    <xsl:function name="scdh:lemma-text-nodes" as="text()*">
         <xsl:param name="element" as="element()"/>
-        <xsl:apply-templates select="$element" mode="lemma-text-node-ids"/>
+        <xsl:apply-templates select="$element" mode="lemma-text-nodes"/>
     </xsl:function>
 
-    <!-- the mode lemma-text-node-ids is for grouping apparatus entries by the text repeated from the base text -->
-    <xsl:mode name="lemma-text-node-ids" on-no-match="shallow-skip"/>
+    <!-- the mode lemma-text-nodes is for grouping apparatus entries by the text repeated from the base text -->
+    <xsl:mode name="lemma-text-nodes" on-no-match="shallow-skip"/>
 
-    <xsl:template mode="lemma-text-node-ids" match="text()[normalize-space(.) eq '']"/>
-
-    <xsl:template mode="lemma-text-node-ids" match="text()[normalize-space(.) ne '']">
-        <xsl:value-of select="generate-id(.)"/>
+    <xsl:template mode="lemma-text-nodes" match="text()" as="text()">
+        <xsl:sequence select="."/>
     </xsl:template>
 
     <!-- things that do not go into the base text -->
-    <xsl:template mode="lemma-text-node-ids"
+    <xsl:template mode="lemma-text-nodes"
         match="rdg | choice[corr]/sic | choice[reg]/orig | span | index | note | witDetail"/>
 
-    <xsl:template mode="lemma-text-node-ids"
+    <xsl:template mode="lemma-text-nodes"
         match="lem[matches($variant-encoding, 'ternal-double-end-point')]"/>
 
-    <xsl:template mode="lemma-text-node-ids"
+    <xsl:template mode="lemma-text-nodes"
         match="app[@from and $variant-encoding eq 'internal-double-end-point']">
         <xsl:variable name="limit-id" select="substring(@from, 2)"/>
         <xsl:variable name="limit" select="//*[@xml:id eq $limit-id]"/>
         <xsl:apply-templates mode="#current" select="scdh:subtrees-between-anchors($limit, .)"/>
     </xsl:template>
 
-    <xsl:template mode="lemma-text-node-ids"
+    <xsl:template mode="lemma-text-nodes"
         match="app[@to and $variant-encoding eq 'internal-double-end-point']">
         <xsl:variable name="limit-id" select="substring(@to, 2)"/>
         <xsl:variable name="limit" select="//*[@xml:id eq $limit-id]"/>
         <xsl:apply-templates mode="#current" select="scdh:subtrees-between-anchors(., $limit)"/>
+    </xsl:template>
+
+    <xsl:template mode="lemma-text-nodes"
+        match="app[@from and @to and $variant-encoding eq 'external-double-end-point']">
+        <xsl:variable name="from-id" select="substring(@from, 2)"/>
+        <xsl:variable name="from" select="//*[@xml:id eq $from-id]"/>
+        <xsl:variable name="to-id" select="substring(@to, 2)"/>
+        <xsl:variable name="to" select="//*[@xml:id eq $to-id]"/>
+        <xsl:apply-templates mode="#current" select="scdh:subtrees-between-anchors($from, $to)"/>
     </xsl:template>
 
 
