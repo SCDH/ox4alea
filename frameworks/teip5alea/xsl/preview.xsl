@@ -17,6 +17,7 @@
     <xsl:include href="libtext.xsl"/>
     <xsl:include href="librend.xsl"/>
     <xsl:include href="libapp.xsl"/>
+    <xsl:import href="libnote.xsl"/>
     <xsl:include href="libmeta.xsl"/>
     <xsl:import href="libwit.xsl"/>
     <xsl:import href="libi18n.xsl"/>
