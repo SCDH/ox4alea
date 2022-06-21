@@ -16,8 +16,8 @@
 
     <xsl:include href="libtext.xsl"/>
     <xsl:include href="librend.xsl"/>
-    <xsl:include href="libapp.xsl"/>
     <xsl:import href="libnote.xsl"/>
+    <xsl:import href="libapp2.xsl"/>
     <xsl:include href="libmeta.xsl"/>
     <xsl:import href="libwit.xsl"/>
     <xsl:import href="libi18n.xsl"/>
@@ -34,7 +34,7 @@
     <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
     <xsl:param name="locales-directory" select="'./locales'" as="xs:string"/>
 
-    <xsl:param name="debug" select="false()" as="xs:boolean"/>
+    <xsl:param name="debug" select="true()" as="xs:boolean"/>
 
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
     <xsl:param name="ui-language" as="xs:string" select="''"/>
