@@ -101,10 +101,12 @@
                     }
                     td.line-number, td.apparatus-line-number, td.editorial-note-number {
                         vertical-align:top;
-                        text-align:right;
-                        font-size: 0.7em;
-                        padding-top: 0.3em;
-                        padding-left: 10px;
+                    }
+                    .line-number, .apparatus-line-number, .editor-note-number {
+                    text-align:right;
+                    font-size: 0.7em;
+                    padding-top: 0.3em;
+                    padding-left: 10px;
                     }
                     td.text-col1 {
                         padding-left: 40px;

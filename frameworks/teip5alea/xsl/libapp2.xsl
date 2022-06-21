@@ -87,7 +87,7 @@
                 </xsl:if>
 
                 <div class="apparatus-line">
-                    <span class="line-number">
+                    <span class="apparatus-line-number">
                         <xsl:value-of select="current-grouping-key()"/>
                     </span>
                     <span>
