@@ -282,7 +282,7 @@
         <xsl:apply-templates mode="apparatus-reading" select="witDetail"/>
     </xsl:template>
 
-    <xsl:template mode="apparatus-reading" match="rdg">
+    <xsl:template mode="apparatus-reading" match="rdg | witDetail">
         <span class="reading">
             <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
             <xsl:if test="@wit">
