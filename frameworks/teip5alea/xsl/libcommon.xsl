@@ -87,7 +87,7 @@
         USAGE: see preview.xsl -->
     <xsl:function name="scdh:shorten-string" as="xs:normalizedString">
         <xsl:param name="nodes" as="node()*"/>
-        <xsl:variable name="lemma-text" select="tokenize(normalize-space(string($nodes)), '\s+')"/>
+        <xsl:variable name="lemma-text" select="tokenize(normalize-space(string-join($nodes, '')), '\s+')"/>
         <xsl:value-of select="
                 if (count($lemma-text) gt 3)
                 then
