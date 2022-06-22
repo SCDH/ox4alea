@@ -33,7 +33,11 @@
     <xsl:param name="app-entries-xpath-internal-double-end-point" as="xs:string*" required="false">
         <xsl:variable name="xpath" as="xs:string*">
             <xsl:text>descendant::app</xsl:text>
-            <xsl:text>| descendant::corr</xsl:text>
+            <xsl:text>| descendant::corr[not(parent::choice)]</xsl:text>
+            <xsl:text>| descendant::sic[not(parent::choice)]</xsl:text>
+            <xsl:text>| descendant::choice[sic and corr]</xsl:text>
+            <xsl:text>| descendant::unclear[not(parent::choice)]</xsl:text>
+            <xsl:text>| descendant::choice[unclear]</xsl:text>
         </xsl:variable>
         <xsl:value-of select="string-join($xpath, '')"/>
     </xsl:param>
@@ -55,12 +59,10 @@
     <xsl:variable name="app-entries-xpath">
         <xsl:choose>
             <xsl:when test="$variant-encoding eq 'internal-double-end-point'">
-                <xsl:value-of select="$app-entries-xpath-internal-double-end-point"
-                />
+                <xsl:value-of select="$app-entries-xpath-internal-double-end-point"/>
             </xsl:when>
             <xsl:when test="$variant-encoding eq 'internal-parallel-segmentation'">
-                <xsl:value-of
-                    select="$app-entries-xpath-internal-parallel-segmentation"/>
+                <xsl:value-of select="$app-entries-xpath-internal-parallel-segmentation"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:message terminate="yes">
@@ -196,6 +198,11 @@
     <xsl:mode name="lemma-text-nodes-dspt"/>
 
     <xsl:template mode="lemma-text-nodes-dspt"
+        match="app[$variant-encoding eq 'internal-parallel-segmentation']">
+        <xsl:apply-templates mode="lemma-text-nodes" select="lem"/>
+    </xsl:template>
+
+    <xsl:template mode="lemma-text-nodes-dspt"
         match="app[@from and $variant-encoding eq 'internal-double-end-point']">
         <xsl:variable name="limit-id" select="substring(@from, 2)"/>
         <xsl:variable name="limit" select="//*[@xml:id eq $limit-id]"/>
@@ -219,6 +226,11 @@
         <xsl:variable name="to" select="//*[@xml:id eq $to-id]"/>
         <xsl:apply-templates mode="lemma-text-nodes"
             select="scdh:subtrees-between-anchors($from, $to)"/>
+    </xsl:template>
+
+    <xsl:template mode="lemma-text-nodes-dspt"
+        match="app[$variant-encoding eq 'internal-location-referenced']">
+        <xsl:apply-templates mode="lemma-text-nodes" select="lem"/>
     </xsl:template>
 
     <xsl:template mode="lemma-text-nodes-dspt" match="corr">
@@ -253,7 +265,7 @@
     </xsl:template>
 
 
-
+    <!-- the template for an entry -->
     <xsl:template name="scdh:apparatus-entry">
         <xsl:param name="entries" as="map(*)*"/>
         <span class="apparatus-entry">
@@ -275,6 +287,7 @@
         </span>
     </xsl:template>
 
+    <!-- template for making the lemma text with some logic for handling empty lemmas -->
     <xsl:template name="scdh:apparatus-lemma">
         <xsl:param name="entry" as="map(*)"/>
         <span class="apparatus-lemma">
@@ -294,7 +307,7 @@
 
 
     <!-- The mode apparatus-reading is for the entries after the lemma (readings, etc.).
-        It is an entering mode or dispatcher for different types of entries.
+        It serves as a dispatcher for different types of entries.
         All templates should leave it again to get the text of the reading etc. -->
     <xsl:mode name="apparatus-reading" on-no-match="shallow-skip"/>
 
@@ -302,11 +315,16 @@
         <span class="static-text" data-i18n-key="coniec">&lre;coniec.&pdf;</span>
     </xsl:template>
 
-    <!-- we want corr first and sic second -->
+    <xsl:template mode="apparatus-reading" match="sic[not(parent::choice)]">
+        <span class="static-text" data-i18n-key="coniec">&lre;coniec.&pdf;</span>
+    </xsl:template>
+
+    <!-- we want corr first and sic second -/->
     <xsl:template mode="apparatus-reading" match="choice[corr and sic]">
         <xsl:apply-templates mode="apparatus-reading" select="corr"/>
         <xsl:apply-templates mode="apparatus-reading" select="sic"/>
     </xsl:template>
+    -->
 
     <xsl:template mode="apparatus-reading" match="choice[corr]/sic">
         <span class="reading">
