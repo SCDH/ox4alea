@@ -126,7 +126,7 @@
     <xsl:function name="scdh:mk-entry-map" as="map(*)">
         <xsl:param name="entry" as="element()"/>
         <xsl:variable name="lemma-text-nodes" as="text()*">
-            <xsl:apply-templates select="$entry" mode="lemma-text-nodes"/>
+            <xsl:apply-templates select="$entry" mode="lemma-text-nodes-dspt"/>
         </xsl:variable>
         <xsl:variable name="lemma-text-node-ids" as="xs:string*"
             select="$lemma-text-nodes[normalize-space(.) ne ''] ! generate-id(.)"/>
@@ -187,30 +187,72 @@
         match="rdg | choice[corr]/sic | choice[reg]/orig | span | index | note | witDetail"/>
 
     <xsl:template mode="lemma-text-nodes"
-        match="lem[matches($variant-encoding, 'ternal-double-end-point')]"/>
+        match="lem[matches($variant-encoding, '^(in|ex)ternal-double-end-point')]"/>
 
-    <xsl:template mode="lemma-text-nodes"
+
+    <!-- mode 'lemma-text-nodes-dspt' is a dispatcher for various element types.
+        The templates have to select nodes that go into the lemma. Typically they
+        apply the rules from 'lemma-text-nodes' on them. -->
+    <xsl:mode name="lemma-text-nodes-dspt"/>
+
+    <xsl:template mode="lemma-text-nodes-dspt"
         match="app[@from and $variant-encoding eq 'internal-double-end-point']">
         <xsl:variable name="limit-id" select="substring(@from, 2)"/>
         <xsl:variable name="limit" select="//*[@xml:id eq $limit-id]"/>
-        <xsl:apply-templates mode="#current" select="scdh:subtrees-between-anchors($limit, .)"/>
+        <xsl:apply-templates mode="lemma-text-nodes"
+            select="scdh:subtrees-between-anchors($limit, .)"/>
     </xsl:template>
 
-    <xsl:template mode="lemma-text-nodes"
+    <xsl:template mode="lemma-text-nodes-dspt"
         match="app[@to and $variant-encoding eq 'internal-double-end-point']">
         <xsl:variable name="limit-id" select="substring(@to, 2)"/>
         <xsl:variable name="limit" select="//*[@xml:id eq $limit-id]"/>
-        <xsl:apply-templates mode="#current" select="scdh:subtrees-between-anchors(., $limit)"/>
+        <xsl:apply-templates mode="lemma-text-nodes"
+            select="scdh:subtrees-between-anchors(., $limit)"/>
     </xsl:template>
 
-    <xsl:template mode="lemma-text-nodes"
+    <xsl:template mode="lemma-text-nodes-dspt"
         match="app[@from and @to and $variant-encoding eq 'external-double-end-point']">
         <xsl:variable name="from-id" select="substring(@from, 2)"/>
         <xsl:variable name="from" select="//*[@xml:id eq $from-id]"/>
         <xsl:variable name="to-id" select="substring(@to, 2)"/>
         <xsl:variable name="to" select="//*[@xml:id eq $to-id]"/>
-        <xsl:apply-templates mode="#current" select="scdh:subtrees-between-anchors($from, $to)"/>
+        <xsl:apply-templates mode="lemma-text-nodes"
+            select="scdh:subtrees-between-anchors($from, $to)"/>
     </xsl:template>
+
+    <xsl:template mode="lemma-text-nodes-dspt" match="corr">
+        <xsl:apply-templates mode="lemma-text-nodes"/>
+    </xsl:template>
+
+    <xsl:template mode="lemma-text-nodes-dspt" match="choice[corr and sic]">
+        <xsl:apply-templates mode="lemma-text-nodes" select="corr"/>
+    </xsl:template>
+
+    <xsl:template mode="lemma-text-nodes-dspt"
+        match="sic[not(parent::choice)] | unclear[not(parent::choice)]">
+        <xsl:apply-templates mode="lemma-text-nodes"/>
+    </xsl:template>
+
+    <xsl:template mode="lemma-text-nodes-dspt" match="choice[unclear]">
+        <xsl:apply-templates mode="lemma-text-nodes" select="unclear[1]"/>
+    </xsl:template>
+
+    <xsl:template mode="lemma-text-nodes-dspt" match="choice[orig and reg]">
+        <xsl:apply-templates mode="lemma-text-nodes" select="reg"/>
+    </xsl:template>
+
+
+    <!-- default rule -->
+    <xsl:template mode="lemma-text-nodes-dspt" match="*">
+        <xsl:message>
+            <xsl:text>No matching rule in mode 'lemma-text-nodes-dspt' for apparatus element: </xsl:text>
+            <xsl:value-of select="name(.)"/>
+        </xsl:message>
+        <xsl:apply-templates mode="lemma-text-nodes"/>
+    </xsl:template>
+
+
 
     <xsl:template name="scdh:apparatus-entry">
         <xsl:param name="entries" as="map(*)*"/>
