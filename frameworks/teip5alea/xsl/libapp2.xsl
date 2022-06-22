@@ -21,15 +21,21 @@
     <xsl:import href="libwit.xsl"/>
 
 
-    <xsl:param name="app-entries-xpath-internal-parallel-segmentation" as="xs:string*"
+    <xsl:param name="app-entries-xpath-internal-parallel-segmentation" as="xs:string"
         required="false">
-        <xsl:text>descendant::app</xsl:text>
-        <xsl:text>| descendant::corr</xsl:text>
+        <xsl:variable name="xpath" as="xs:string*">
+            <xsl:text>descendant::app</xsl:text>
+            <xsl:text>| descendant::corr</xsl:text>
+        </xsl:variable>
+        <xsl:value-of select="string-join($xpath, '')"/>
     </xsl:param>
 
     <xsl:param name="app-entries-xpath-internal-double-end-point" as="xs:string*" required="false">
-        <xsl:text>descendant::app</xsl:text>
-        <xsl:text>| descendant::corr</xsl:text>
+        <xsl:variable name="xpath" as="xs:string*">
+            <xsl:text>descendant::app</xsl:text>
+            <xsl:text>| descendant::corr</xsl:text>
+        </xsl:variable>
+        <xsl:value-of select="string-join($xpath, '')"/>
     </xsl:param>
 
     <!-- whether or not the first text node from a lemma determines the line number of the entry -->
@@ -49,12 +55,12 @@
     <xsl:variable name="app-entries-xpath">
         <xsl:choose>
             <xsl:when test="$variant-encoding eq 'internal-double-end-point'">
-                <xsl:value-of select="string-join($app-entries-xpath-internal-double-end-point, '')"
+                <xsl:value-of select="$app-entries-xpath-internal-double-end-point"
                 />
             </xsl:when>
             <xsl:when test="$variant-encoding eq 'internal-parallel-segmentation'">
                 <xsl:value-of
-                    select="string-join($app-entries-xpath-internal-parallel-segmentation, '')"/>
+                    select="$app-entries-xpath-internal-parallel-segmentation"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:message terminate="yes">
