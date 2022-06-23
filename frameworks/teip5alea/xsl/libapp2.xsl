@@ -113,17 +113,29 @@
         </xsl:choose>
     </xsl:variable>
 
-    <!-- entrance for generating the apparatus -->
-    <xsl:template name="line-referencing-apparatus">
+    <!-- generate apparatus elements for a given context, e.g. / and prepare mappings for them -->
+    <xsl:function name="scdh:apparatus-entries" as="map(*)*">
+        <xsl:param name="context" as="node()*"/>
+        <!-- we first generate a sequence of all elements that should show up in the apparatus -->
+        <xsl:variable name="entry-elements" as="element()*">
+            <xsl:evaluate as="element()*" context-item="$context" expand-text="true"
+                xpath="$app-entries-xpath"/>
+        </xsl:variable>
+        <xsl:sequence as="map(*)*" select="$entry-elements ! scdh:mk-entry-map(.)"/>
+    </xsl:function>
+
+    <!-- generate the apparatus for a given context, e.g. / -->
+    <xsl:template name="scdh:apparatus-for-context">
         <xsl:param name="app-context" as="node()*"/>
+        <xsl:call-template name="scdh:apparatus">
+            <xsl:with-param name="entries" select="scdh:apparatus-entries($app-context)"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!-- generate the apparatus for a sequence of prepared maps -->
+    <xsl:template name="scdh:apparatus">
+        <xsl:param name="entries" as="map(*)*"/>
         <div>
-            <!-- we first generate a sequence of all elements that should show up in the apparatus -->
-            <xsl:variable name="entry-elements" as="element()*">
-                <xsl:evaluate as="element()*" context-item="$app-context" expand-text="true"
-                    xpath="$app-entries-xpath"/>
-            </xsl:variable>
-            <xsl:variable name="entries" as="map(*)*"
-                select="$entry-elements ! scdh:mk-entry-map(.)"/>
             <!-- we first group the entries by line number -->
             <xsl:for-each-group select="$entries" group-by="map:get(., 'line-number')">
                 <xsl:if test="$debug">
