@@ -52,6 +52,20 @@
         </xsl:value-of>
     </xsl:param>
 
+    <xsl:param name="app-entries-xpath-external-double-end-point" as="xs:string" required="false">
+        <xsl:value-of>
+            <!-- choice+corr+sic+app+rdg was an old encoding of conjectures in ALEA -->
+            <xsl:text>descendant::app</xsl:text>
+            <xsl:text>| descendant::witDetail[not(parent::app)]</xsl:text>
+            <xsl:text>| descendant::corr[not(parent::choice)]</xsl:text>
+            <xsl:text>| descendant::sic[not(parent::choice)]</xsl:text>
+            <xsl:text>| descendant::choice[sic and corr]</xsl:text>
+            <xsl:text>| descendant::unclear[not(parent::choice)]</xsl:text>
+            <xsl:text>| descendant::choice[unclear]</xsl:text>
+            <xsl:text>| descendant::gap</xsl:text>
+        </xsl:value-of>
+    </xsl:param>
+
     <!-- whether or not the first text node from a lemma determines the line number of the entry -->
     <xsl:param name="lemma-first-text-node-line-crit" as="xs:boolean" select="true()"
         required="false"/>
@@ -69,6 +83,9 @@
     <xsl:variable name="app-entries-xpath">
         <xsl:choose>
             <xsl:when test="$variant-encoding eq 'internal-double-end-point'">
+                <xsl:value-of select="$app-entries-xpath-internal-double-end-point"/>
+            </xsl:when>
+            <xsl:when test="$variant-encoding eq 'external-double-end-point'">
                 <xsl:value-of select="$app-entries-xpath-internal-double-end-point"/>
             </xsl:when>
             <xsl:when test="$variant-encoding eq 'internal-parallel-segmentation'">
