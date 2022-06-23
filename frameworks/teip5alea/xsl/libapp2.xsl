@@ -352,7 +352,7 @@
     <xsl:mode name="apparatus-reading" on-no-match="shallow-skip"/>
 
     <xsl:template mode="apparatus-reading-dspt" match="corr">
-        <span class="static-text" data-i18n-key="coniec">&lre;coniec.&pdf;</span>
+        <span class="static-text" data-i18n-key="conieci">&lre;coniec.&pdf;</span>
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-dspt" match="sic[not(parent::choice)]">
