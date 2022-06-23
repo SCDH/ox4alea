@@ -100,7 +100,7 @@
                     <span class="apparatus-line-number">
                         <xsl:value-of select="current-grouping-key()"/>
                     </span>
-                    <span>
+                    <span class="apparatus-line-entries">
                         <!-- we then group by such entries, that get their lemma (repetition of the base text)
                             from the same set of text nodes, because we want to join them into one entry -->
                         <xsl:for-each-group select="current-group()"
@@ -286,6 +286,9 @@
                         >;</span>
                 </xsl:if>
             </xsl:for-each>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
+            </xsl:if>
         </span>
     </xsl:template>
 
