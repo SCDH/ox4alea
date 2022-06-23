@@ -30,14 +30,16 @@
         <xsl:value-of select="string-join($xpath, '')"/>
     </xsl:param>
 
-    <xsl:param name="app-entries-xpath-internal-double-end-point" as="xs:string*" required="false">
+    <xsl:param name="app-entries-xpath-internal-double-end-point" as="xs:string" required="false">
         <xsl:variable name="xpath" as="xs:string*">
             <xsl:text>descendant::app</xsl:text>
+            <xsl:text>| descendant::witDetail[not(parent::app)]</xsl:text>
             <xsl:text>| descendant::corr[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::sic[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::choice[sic and corr]</xsl:text>
             <xsl:text>| descendant::unclear[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::choice[unclear]</xsl:text>
+            <xsl:text>| descendant::gap</xsl:text>
         </xsl:variable>
         <xsl:value-of select="string-join($xpath, '')"/>
     </xsl:param>
@@ -278,7 +280,7 @@
             </xsl:call-template>
             <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
             <xsl:for-each select="$entries">
-                <xsl:apply-templates mode="apparatus-reading" select="map:get(., 'entry')"/>
+                <xsl:apply-templates mode="apparatus-reading-dspt" select="map:get(., 'entry')"/>
                 <xsl:if test="position() ne last()">
                     <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
                         >;</span>
@@ -306,29 +308,29 @@
     </xsl:template>
 
 
-    <!-- The mode apparatus-reading is for the entries after the lemma (readings, etc.).
+    <!-- The mode apparatus-reading-dspt is for the entries after the lemma (readings, etc.).
         It serves as a dispatcher for different types of entries.
         All templates should leave it again to get the text of the reading etc. -->
     <xsl:mode name="apparatus-reading" on-no-match="shallow-skip"/>
 
-    <xsl:template mode="apparatus-reading" match="corr">
+    <xsl:template mode="apparatus-reading-dspt" match="corr">
         <span class="static-text" data-i18n-key="coniec">&lre;coniec.&pdf;</span>
     </xsl:template>
 
-    <xsl:template mode="apparatus-reading" match="sic[not(parent::choice)]">
+    <xsl:template mode="apparatus-reading-dspt" match="sic[not(parent::choice)]">
         <span class="static-text" data-i18n-key="coniec">&lre;coniec.&pdf;</span>
     </xsl:template>
 
     <!-- we want corr first and sic second -/->
-    <xsl:template mode="apparatus-reading" match="choice[corr and sic]">
-        <xsl:apply-templates mode="apparatus-reading" select="corr"/>
-        <xsl:apply-templates mode="apparatus-reading" select="sic"/>
+    <xsl:template mode="apparatus-reading-dspt" match="choice[corr and sic]">
+        <xsl:apply-templates mode="apparatus-reading-dspt" select="corr"/>
+        <xsl:apply-templates mode="apparatus-reading-dspt" select="sic"/>
     </xsl:template>
     -->
 
-    <xsl:template mode="apparatus-reading" match="choice[corr]/sic">
+    <xsl:template mode="apparatus-reading-dspt" match="choice[corr]/sic">
         <span class="reading">
-            <xsl:apply-templates select="." mode="apparatus-reading-text-text"/>
+            <xsl:apply-templates select="." mode="apparatus-reading-text"/>
             <xsl:if test="@source">
                 <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
                     >:</span>
@@ -343,12 +345,12 @@
         </span>
     </xsl:template>
 
-    <xsl:template mode="apparatus-reading" match="app">
-        <xsl:apply-templates mode="apparatus-reading" select="rdg | note"/>
-        <xsl:apply-templates mode="apparatus-reading" select="witDetail"/>
+    <xsl:template mode="apparatus-reading-dspt" match="app">
+        <xsl:apply-templates mode="apparatus-reading-dspt" select="rdg | note"/>
+        <xsl:apply-templates mode="apparatus-reading-dspt" select="witDetail"/>
     </xsl:template>
 
-    <xsl:template mode="apparatus-reading" match="rdg | witDetail">
+    <xsl:template mode="apparatus-reading-dspt" match="rdg | witDetail">
         <span class="reading">
             <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
             <xsl:if test="@wit">
@@ -365,8 +367,18 @@
         </span>
     </xsl:template>
 
+    <xsl:template mode="apparatus-reading-dspt" match="app/note">
+        <span class="reading reading-note">
+            <xsl:apply-templates mode="apparatus-reading-text" select="node()"/>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                    >;</span>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
     <!-- a default rule -->
-    <xsl:template mode="apparatus-reading" match="*">
+    <xsl:template mode="apparatus-reading-dspt" match="*">
         <xsl:message>
             <xsl:text>WARNING: no rule for generating the lemma for </xsl:text>
             <xsl:value-of select="name(.)"/>
@@ -385,14 +397,10 @@
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-text"
-        match="app[matches($variant-encoding, 'ternal-double-end-point')]"/>
+        match="app[matches($variant-encoding, '^(in|ex)ternal-double-end-point')]"/>
 
     <xsl:template mode="apparatus-reading-text" match="choice[sic and corr]">
         <xsl:apply-templates mode="apparatus-reading-text" select="corr"/>
-    </xsl:template>
-
-    <xsl:template mode="apparatus-reading-text" match="rdg">
-        <xsl:apply-templates mode="apparatus-reading-text"/>
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-text" match="text()">
