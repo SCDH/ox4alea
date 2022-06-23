@@ -281,6 +281,9 @@
         <xsl:apply-templates mode="lemma-text-nodes" select="reg"/>
     </xsl:template>
 
+    <!-- handle <gap> as empty, what ever occurs -->
+    <xsl:template mode="lemma-text-nodes-dspt" match="gap"/>
+
 
     <!-- default rule -->
     <xsl:template mode="lemma-text-nodes-dspt" match="*">
@@ -328,6 +331,9 @@
             <xsl:variable name="full-lemma" as="xs:string"
                 select="map:get($entry, 'lemma-text-nodes') => alea:shorten-string()"/>
             <xsl:choose>
+                <xsl:when test="map:get($entry, 'entry')/self::gap">
+                    <span class="lemma-gap" data-i18n-key="gap-rep">[…]</span>
+                </xsl:when>
                 <xsl:when test="$full-lemma ne ''">
                     <xsl:value-of select="$full-lemma"/>
                 </xsl:when>
@@ -460,6 +466,51 @@
                     >;</span>
             </xsl:if>
         </span>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="unclear[not(parent::choice)]">
+        <span class="reading unclear">
+            <xsl:choose>
+                <xsl:when test="@reason">
+                    <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of
+                            select="@reason"/>&pdf;</span>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- TODO: latin -->
+                    <span class="static-text" data-i18n-key="unclear">&lre;unclear&pdf;</span>
+                </xsl:otherwise>
+            </xsl:choose>
+        </span>
+        <xsl:if test="position() ne last()">
+            <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="gap">
+        <span class="reading gap">
+            <xsl:choose>
+                <xsl:when test="@reason">
+                    <span class="static-text" data-i18n-key="{@reason}">&lre;<xsl:value-of
+                            select="@reason"/>&pdf;</span>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- TODO: latin -->
+                    <span class="static-text" data-i18n-key="lost">&lre;lost&pdf;</span>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:if test="@quantity and @unit">
+                <span class="apparatus-sep" data-i18n-key="reason-quantity-sep">, </span>
+                <span class="static-text">
+                    <xsl:value-of select="@quantity"/>
+                </span>
+                <xsl:text>&#160;</xsl:text>
+                <span class="static-text" data-i18n-key="{@unit}">&lre;<xsl:value-of select="@unit"
+                    />&pdf;</span>
+            </xsl:if>
+        </span>
+        <xsl:if test="position() ne last()">
+            <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span>
+        </xsl:if>
     </xsl:template>
 
     <!-- a default rule -->
