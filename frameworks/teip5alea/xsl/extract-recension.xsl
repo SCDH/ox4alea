@@ -117,12 +117,12 @@ We define a default mode in order to make stylesheet composition simpler.
 
     <!-- delete apparatus entries that only belong to other recensions -->
     <xsl:template match="
-            app[every $wit in (string-join(child::rdg/@wit, ' ') => tokenize()) ! substring(., 2)
+            app[every $wit in (string-join((child::rdg/@wit | child::witDetail/@wit), ' ') => tokenize()) ! substring(., 2)
                 satisfies not(exists(//teiHeader//sourceDesc//listWit[@xml:id eq $source]//witness[@xml:id eq $wit]))]">
         <!-- handle the lemma according to variant encoding -->
         <xsl:if test="$debug">
             <xsl:message>delete whole app with readings from <xsl:value-of
-                    select="string-join(child::rdg/@wit, ' ')"/>
+                    select="string-join((child::rdg/@wit, child::witDetail/@wit), ' ')"/>
             </xsl:message>
         </xsl:if>
         <xsl:apply-templates select="lem" mode="lemma"/>
