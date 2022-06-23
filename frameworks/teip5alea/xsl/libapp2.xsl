@@ -539,6 +539,15 @@
         <xsl:apply-templates mode="apparatus-reading-text" select="corr"/>
     </xsl:template>
 
+    <xsl:template mode="apparatus-reading-text" match="caesura">
+        <xsl:text> || </xsl:text>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-text" match="l[preceding-sibling::l]">
+        <xsl:text> / </xsl:text>
+        <xsl:apply-templates mode="apparatus-reading-text"/>
+    </xsl:template>
+
     <xsl:template mode="apparatus-reading-text" match="text()">
         <xsl:value-of select="."/>
     </xsl:template>
