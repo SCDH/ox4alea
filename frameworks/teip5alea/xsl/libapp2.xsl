@@ -349,11 +349,10 @@
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-dspt" match="app">
-        <xsl:apply-templates mode="apparatus-reading-dspt" select="rdg | note"/>
-        <xsl:apply-templates mode="apparatus-reading-dspt" select="witDetail"/>
+        <xsl:apply-templates mode="apparatus-reading-dspt" select="rdg | witDetail | note"/>
     </xsl:template>
 
-    <xsl:template mode="apparatus-reading-dspt" match="rdg | witDetail">
+    <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) ne ''] | witDetail">
         <span class="reading">
             <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
             <xsl:if test="@wit">
@@ -369,6 +368,24 @@
             </xsl:if>
         </span>
     </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) eq '']">
+        <span class="reading">
+            <span class="static-text" data-i18n-key="omisit">&lre;om.&pdf;</span>
+            <xsl:if test="@wit">
+                <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
+                    >:</span>
+                <xsl:call-template name="witness-siglum-html">
+                    <xsl:with-param name="wit" select="@wit"/>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                    >;</span>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
 
     <xsl:template mode="apparatus-reading-dspt" match="app/note">
         <span class="reading reading-note">
