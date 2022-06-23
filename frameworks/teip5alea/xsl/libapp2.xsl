@@ -321,7 +321,7 @@
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-dspt" match="sic[not(parent::choice)]">
-        <span class="static-text" data-i18n-key="coniec">&lre;coniec.&pdf;</span>
+        <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
     </xsl:template>
 
     <!-- we want corr first and sic second -/->
