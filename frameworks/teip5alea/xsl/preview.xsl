@@ -158,7 +158,9 @@
                 </section>
                 <hr/>
                 <section class="variants">
-                    <xsl:call-template name="line-referencing-apparatus"/>
+                    <xsl:call-template name="line-referencing-apparatus">
+                        <xsl:with-param name="app-context" select="/"/>
+                    </xsl:call-template>
                 </section>
                 <hr/>
                 <section class="comments">

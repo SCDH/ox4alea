@@ -115,10 +115,11 @@
 
     <!-- entrance for generating the apparatus -->
     <xsl:template name="line-referencing-apparatus">
+        <xsl:param name="app-context" as="node()*"/>
         <div>
             <!-- we first generate a sequence of all elements that should show up in the apparatus -->
             <xsl:variable name="entry-elements" as="element()*">
-                <xsl:evaluate as="element()*" context-item="/" expand-text="true"
+                <xsl:evaluate as="element()*" context-item="$app-context" expand-text="true"
                     xpath="$app-entries-xpath"/>
             </xsl:variable>
             <xsl:variable name="entries" as="map(*)*"
