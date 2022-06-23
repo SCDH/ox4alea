@@ -20,6 +20,7 @@
     <xsl:import href="libbetween.xsl"/>
     <xsl:import href="libcommon.xsl"/>
     <xsl:import href="libwit.xsl"/>
+    <xsl:import href="libi18n.xsl"/>
 
 
     <xsl:param name="app-entries-xpath-internal-parallel-segmentation" as="xs:string"
@@ -255,6 +256,10 @@
         <xsl:apply-templates mode="lemma-text-nodes" select="lem"/>
     </xsl:template>
 
+    <xsl:template mode="lemma-text-nodes-dspt" match="witDetail[not(parent::app)]">
+        <xsl:apply-templates mode="lemma-text-nodes" select="parent::*"/>
+    </xsl:template>
+
     <xsl:template mode="lemma-text-nodes-dspt" match="corr">
         <xsl:apply-templates mode="lemma-text-nodes"/>
     </xsl:template>
@@ -280,6 +285,7 @@
     <!-- default rule -->
     <xsl:template mode="lemma-text-nodes-dspt" match="*">
         <xsl:message>
+            <xsl:text>WARNING: </xsl:text>
             <xsl:text>No matching rule in mode 'lemma-text-nodes-dspt' for apparatus element: </xsl:text>
             <xsl:value-of select="name(.)"/>
         </xsl:message>
@@ -376,6 +382,7 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- ALEA's old encoding of conjectures -->
     <xsl:template mode="apparatus-reading-dspt" match="choice[corr and sic/app]" priority="2">
         <span class="reading">
             <xsl:apply-templates select="corr" mode="apparatus-reading-dspt"/>
@@ -391,7 +398,7 @@
         <xsl:apply-templates mode="apparatus-reading-dspt" select="rdg | witDetail | note"/>
     </xsl:template>
 
-    <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) ne ''] | witDetail">
+    <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) ne '']">
         <span class="reading">
             <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
             <xsl:if test="@wit">
@@ -425,6 +432,25 @@
         </span>
     </xsl:template>
 
+    <xsl:template mode="apparatus-reading-dspt" match="witDetail">
+        <span class="reading note-text witDetail" lang="{alea:language(.)}"
+            style="direction:{alea:language-direction(.)}; text-align:{alea:language-align(.)};">
+            <xsl:value-of select="alea:direction-embedding(.)"/>
+            <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
+            <xsl:text>&pdf;</xsl:text>
+            <xsl:if test="@wit">
+                <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
+                    >:</span>
+                <xsl:call-template name="witness-siglum-html">
+                    <xsl:with-param name="wit" select="@wit"/>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                    >;</span>
+            </xsl:if>
+        </span>
+    </xsl:template>
 
     <xsl:template mode="apparatus-reading-dspt" match="app/note">
         <span class="reading reading-note">
