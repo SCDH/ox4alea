@@ -26,7 +26,7 @@
         <!-- suffix is a marker for additional verses or paragraphs in readings.
             It is displayed in the apparatus. -->
         <xsl:variable name="suffix" select="
-                if (exists($el/ancestor::rdg)) then
+                if (exists($el/ancestor-or-self::l/parent::rdg)) then
                     '+'
                 else
                     ''"/>
