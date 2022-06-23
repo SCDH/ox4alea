@@ -3,6 +3,7 @@
     <!ENTITY lre "&#x202a;" >
     <!ENTITY rle "&#x202b;" >
     <!ENTITY pdf "&#x202c;" >
+    <!ENTITY sp "&#x20;" >
     <!ENTITY nbsp "&#xa0;" >
     <!ENTITY emsp "&#x2003;" >
     <!ENTITY lb "&#xa;" >
@@ -99,6 +100,7 @@
                 <div class="apparatus-line">
                     <span class="apparatus-line-number">
                         <xsl:value-of select="current-grouping-key()"/>
+                        <xsl:text>&sp;</xsl:text>
                     </span>
                     <span class="apparatus-line-entries">
                         <!-- we then group by such entries, that get their lemma (repetition of the base text)
