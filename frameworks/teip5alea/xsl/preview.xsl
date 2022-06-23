@@ -125,6 +125,9 @@
                     abbr {
                         text-decoration: none;
                     }
+                    .lemma-gap {
+                        font-size:.8em;
+                    }
                     @font-face {
                         font-family:"Arabic Typesetting";
                         src:url("../../../arabt100.ttf");
