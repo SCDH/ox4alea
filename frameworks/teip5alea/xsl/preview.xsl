@@ -102,12 +102,16 @@
                     }
                     td.line-number, td.apparatus-line-number, td.editorial-note-number {
                         vertical-align:top;
-                    }
+                        padding-left: 10px;
+                        }
                     .line-number, .apparatus-line-number, .editor-note-number {
-                    text-align:right;
-                    font-size: 0.7em;
-                    padding-top: 0.3em;
-                    padding-left: 10px;
+                        text-align:right;
+                        font-size: 0.7em;
+                        padding-top: 0.3em;
+                    }
+                    span.apparatus-line-number {
+                        display: inline-block;
+                        min-width: 3em;
                     }
                     td.text-col1 {
                         padding-left: 40px;
