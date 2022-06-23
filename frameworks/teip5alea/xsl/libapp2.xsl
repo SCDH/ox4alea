@@ -54,10 +54,20 @@
 
     <xsl:param name="app-entries-xpath-external-double-end-point" as="xs:string" required="false">
         <xsl:value-of>
-            <!-- choice+corr+sic+app+rdg was an old encoding of conjectures in ALEA -->
             <xsl:text>descendant::app</xsl:text>
             <xsl:text>| descendant::witDetail[not(parent::app)]</xsl:text>
             <xsl:text>| descendant::corr[not(parent::choice)]</xsl:text>
+            <xsl:text>| descendant::sic[not(parent::choice)]</xsl:text>
+            <xsl:text>| descendant::choice[sic and corr]</xsl:text>
+            <xsl:text>| descendant::unclear[not(parent::choice)]</xsl:text>
+            <xsl:text>| descendant::choice[unclear]</xsl:text>
+            <xsl:text>| descendant::gap</xsl:text>
+        </xsl:value-of>
+    </xsl:param>
+
+    <xsl:param name="app-entries-xpath-no-textcrit" as="xs:string" required="false">
+        <xsl:value-of>
+            <xsl:text>descendant::corr[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::sic[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::choice[sic and corr]</xsl:text>
             <xsl:text>| descendant::unclear[not(parent::choice)]</xsl:text>
@@ -90,6 +100,9 @@
             </xsl:when>
             <xsl:when test="$variant-encoding eq 'internal-parallel-segmentation'">
                 <xsl:value-of select="$app-entries-xpath-internal-parallel-segmentation"/>
+            </xsl:when>
+            <xsl:when test="$variant-encoding eq '-'">
+                <xsl:value-of select="$app-entries-xpath-no-textcrit"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:message terminate="yes">
