@@ -177,6 +177,56 @@
         </div>
     </xsl:template>
 
+    <!-- the template for an entry -->
+    <xsl:template name="scdh:apparatus-entry">
+        <xsl:param name="entries" as="map(*)*"/>
+        <span class="apparatus-entry">
+            <!-- TODO: when the lemma is empty
+                call a function/template for generating a prefix or suffix from the base text.
+                Pass this suffix via tunnel parameters on to mode 'apparatus-reading', so that
+                the prefix or suffix can be added in the reading -->
+            <xsl:call-template name="scdh:apparatus-lemma">
+                <xsl:with-param name="entry" select="$entries[1]"/>
+            </xsl:call-template>
+            <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
+            <xsl:for-each select="$entries">
+                <xsl:apply-templates mode="apparatus-reading-dspt" select="map:get(., 'entry')">
+                    <xsl:with-param name="apparatus-entry-map" as="map(*)" select="." tunnel="true"
+                    />
+                </xsl:apply-templates>
+                <xsl:if test="position() ne last()">
+                    <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                        >;</span>
+                </xsl:if>
+            </xsl:for-each>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
+    <!-- template for making the lemma text with some logic for handling empty lemmas -->
+    <xsl:template name="scdh:apparatus-lemma">
+        <xsl:param name="entry" as="map(*)"/>
+        <span class="apparatus-lemma">
+            <xsl:variable name="full-lemma" as="xs:string"
+                select="map:get($entry, 'lemma-text-nodes') => alea:shorten-string()"/>
+            <xsl:choose>
+                <xsl:when test="map:get($entry, 'entry')/self::gap">
+                    <span class="lemma-gap" data-i18n-key="gap-rep">[…]</span>
+                </xsl:when>
+                <xsl:when test="$full-lemma ne ''">
+                    <xsl:value-of select="$full-lemma"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- FIXME -->
+                    <xsl:text>empty</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </span>
+    </xsl:template>
+
+
     <!-- this generates a map (object) for an apparatus entry
         with all there is needed for grouping and creating the entry -->
     <xsl:function name="scdh:mk-entry-map" as="map(*)">
@@ -250,6 +300,7 @@
         <xsl:apply-templates select="$element" mode="lemma-text-nodes"/>
     </xsl:function>
 
+
     <!-- the mode lemma-text-nodes is for grouping apparatus entries by the text repeated from the base text -->
     <xsl:mode name="lemma-text-nodes" on-no-match="shallow-skip"/>
 
@@ -265,10 +316,53 @@
         match="lem[matches($variant-encoding, '^(in|ex)ternal-double-end-point')]"/>
 
 
+    <!-- The mode apparatus-reading-text is for printing the text of a reading etc.
+        Typically it is entred from a template in the mode apparatus-reading -->
+    <xsl:mode name="apparatus-reading-text" on-no-match="shallow-skip"/>
+
+    <xsl:template mode="apparatus-reading-text"
+        match="app[$variant-encoding eq 'internal-parallel-segmentation']">
+        <xsl:apply-templates mode="apparatus-reading-text" select="lem"/>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-text"
+        match="app[matches($variant-encoding, '^(in|ex)ternal-double-end-point')]"/>
+
+    <xsl:template mode="apparatus-reading-text" match="choice[sic and corr]">
+        <xsl:apply-templates mode="apparatus-reading-text" select="corr"/>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-text" match="caesura">
+        <xsl:text> || </xsl:text>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-text" match="l[preceding-sibling::l]">
+        <xsl:text> / </xsl:text>
+        <xsl:apply-templates mode="apparatus-reading-text"/>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-text" match="text()">
+        <xsl:value-of select="."/>
+    </xsl:template>
+
+
+
+    <!-- Both of the two dispatcher modes should define transformation rules
+	 for each type of encoding that appears in the apparatus. -->
+
+
     <!-- mode 'lemma-text-nodes-dspt' is a dispatcher for various element types.
         The templates have to select nodes that go into the lemma. Typically they
         apply the rules from 'lemma-text-nodes' on them. -->
-    <xsl:mode name="lemma-text-nodes-dspt"/>
+    <xsl:mode name="lemma-text-nodes-dspt" on-no-match="shallow-skip"/>
+
+    <!-- The mode apparatus-reading-dspt is for the entries after the lemma (readings, etc.).
+        It serves as a dispatcher for different types of entries.
+        All templates should leave it again to get the text of the reading etc. -->
+    <xsl:mode name="apparatus-reading" on-no-match="shallow-skip"/>
+
+
+    <!-- app -->
 
     <xsl:template mode="lemma-text-nodes-dspt"
         match="app[$variant-encoding eq 'internal-parallel-segmentation']">
@@ -306,21 +400,108 @@
         <xsl:apply-templates mode="lemma-text-nodes" select="lem"/>
     </xsl:template>
 
+    <xsl:template mode="apparatus-reading-dspt" match="app">
+        <xsl:apply-templates mode="apparatus-reading-dspt" select="rdg | witDetail | note"/>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) ne '']">
+        <span class="reading">
+            <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
+            <xsl:if test="@wit">
+                <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
+                    >:</span>
+                <xsl:call-template name="witness-siglum-html">
+                    <xsl:with-param name="wit" select="@wit"/>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                    >;</span>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) eq '']">
+        <span class="reading">
+            <span class="static-text" data-i18n-key="omisit">&lre;om.&pdf;</span>
+            <xsl:if test="@wit">
+                <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
+                    >:</span>
+                <xsl:call-template name="witness-siglum-html">
+                    <xsl:with-param name="wit" select="@wit"/>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                    >;</span>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="app/note">
+        <span class="reading reading-note">
+            <xsl:apply-templates mode="apparatus-reading-text" select="node()"/>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                    >;</span>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
+
+    <!-- witDetail -->
+
     <xsl:template mode="lemma-text-nodes-dspt" match="witDetail[not(parent::app)]">
         <xsl:apply-templates mode="lemma-text-nodes" select="parent::*"/>
     </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="witDetail">
+        <span class="reading note-text witDetail" lang="{alea:language(.)}"
+            style="direction:{alea:language-direction(.)}; text-align:{alea:language-align(.)};">
+            <xsl:value-of select="alea:direction-embedding(.)"/>
+            <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
+            <xsl:text>&pdf;</xsl:text>
+            <xsl:if test="@wit">
+                <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
+                    >:</span>
+                <xsl:call-template name="witness-siglum-html">
+                    <xsl:with-param name="wit" select="@wit"/>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                    >;</span>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
+
+    <!-- corr -->
 
     <xsl:template mode="lemma-text-nodes-dspt" match="corr">
         <xsl:apply-templates mode="lemma-text-nodes"/>
     </xsl:template>
 
-    <xsl:template mode="lemma-text-nodes-dspt" match="choice[corr and sic]">
-        <xsl:apply-templates mode="lemma-text-nodes" select="corr"/>
+    <xsl:template mode="apparatus-reading-dspt" match="corr">
+        <span class="static-text" data-i18n-key="conieci">&lre;coniec.&pdf;</span>
     </xsl:template>
 
-    <xsl:template mode="lemma-text-nodes-dspt"
-        match="sic[not(parent::choice)] | unclear[not(parent::choice)]">
+
+    <!-- sic -->
+
+    <xsl:template mode="lemma-text-nodes-dspt" match="sic[not(parent::choice)]">
         <xsl:apply-templates mode="lemma-text-nodes"/>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="sic[not(parent::choice)]">
+        <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
+    </xsl:template>
+
+
+    <!-- choice -->
+
+    <xsl:template mode="lemma-text-nodes-dspt" match="choice[corr and sic]">
+        <xsl:apply-templates mode="lemma-text-nodes" select="corr"/>
     </xsl:template>
 
     <xsl:template mode="lemma-text-nodes-dspt" match="choice[unclear]">
@@ -329,84 +510,6 @@
 
     <xsl:template mode="lemma-text-nodes-dspt" match="choice[orig and reg]">
         <xsl:apply-templates mode="lemma-text-nodes" select="reg"/>
-    </xsl:template>
-
-    <!-- handle <gap> as empty, what ever occurs -->
-    <xsl:template mode="lemma-text-nodes-dspt" match="gap"/>
-
-
-    <!-- default rule -->
-    <xsl:template mode="lemma-text-nodes-dspt" match="*">
-        <xsl:message>
-            <xsl:text>WARNING: </xsl:text>
-            <xsl:text>No matching rule in mode 'lemma-text-nodes-dspt' for apparatus element: </xsl:text>
-            <xsl:value-of select="name(.)"/>
-        </xsl:message>
-        <xsl:apply-templates mode="lemma-text-nodes"/>
-    </xsl:template>
-
-
-    <!-- the template for an entry -->
-    <xsl:template name="scdh:apparatus-entry">
-        <xsl:param name="entries" as="map(*)*"/>
-        <span class="apparatus-entry">
-            <!-- TODO: when the lemma is empty
-                call a function/template for generating a prefix or suffix from the base text.
-                Pass this suffix via tunnel parameters on to mode 'apparatus-reading', so that
-                the prefix or suffix can be added in the reading -->
-            <xsl:call-template name="scdh:apparatus-lemma">
-                <xsl:with-param name="entry" select="$entries[1]"/>
-            </xsl:call-template>
-            <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
-            <xsl:for-each select="$entries">
-                <xsl:apply-templates mode="apparatus-reading-dspt" select="map:get(., 'entry')">
-                    <xsl:with-param name="apparatus-entry-map" as="map(*)" select="." tunnel="true"
-                    />
-                </xsl:apply-templates>
-                <xsl:if test="position() ne last()">
-                    <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
-                        >;</span>
-                </xsl:if>
-            </xsl:for-each>
-            <xsl:if test="position() ne last()">
-                <span class="apparatus-sep" data-i18n-key="app-entry-sep">&nbsp;|&emsp;</span>
-            </xsl:if>
-        </span>
-    </xsl:template>
-
-    <!-- template for making the lemma text with some logic for handling empty lemmas -->
-    <xsl:template name="scdh:apparatus-lemma">
-        <xsl:param name="entry" as="map(*)"/>
-        <span class="apparatus-lemma">
-            <xsl:variable name="full-lemma" as="xs:string"
-                select="map:get($entry, 'lemma-text-nodes') => alea:shorten-string()"/>
-            <xsl:choose>
-                <xsl:when test="map:get($entry, 'entry')/self::gap">
-                    <span class="lemma-gap" data-i18n-key="gap-rep">[…]</span>
-                </xsl:when>
-                <xsl:when test="$full-lemma ne ''">
-                    <xsl:value-of select="$full-lemma"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <!-- FIXME -->
-                    <xsl:text>empty</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </span>
-    </xsl:template>
-
-
-    <!-- The mode apparatus-reading-dspt is for the entries after the lemma (readings, etc.).
-        It serves as a dispatcher for different types of entries.
-        All templates should leave it again to get the text of the reading etc. -->
-    <xsl:mode name="apparatus-reading" on-no-match="shallow-skip"/>
-
-    <xsl:template mode="apparatus-reading-dspt" match="corr">
-        <span class="static-text" data-i18n-key="conieci">&lre;coniec.&pdf;</span>
-    </xsl:template>
-
-    <xsl:template mode="apparatus-reading-dspt" match="sic[not(parent::choice)]">
-        <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-dspt" match="choice/sic">
@@ -450,72 +553,11 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template mode="apparatus-reading-dspt" match="app">
-        <xsl:apply-templates mode="apparatus-reading-dspt" select="rdg | witDetail | note"/>
-    </xsl:template>
 
-    <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) ne '']">
-        <span class="reading">
-            <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
-            <xsl:if test="@wit">
-                <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
-                    >:</span>
-                <xsl:call-template name="witness-siglum-html">
-                    <xsl:with-param name="wit" select="@wit"/>
-                </xsl:call-template>
-            </xsl:if>
-            <xsl:if test="position() ne last()">
-                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
-                    >;</span>
-            </xsl:if>
-        </span>
-    </xsl:template>
+    <!-- unclear -->
 
-    <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) eq '']">
-        <span class="reading">
-            <span class="static-text" data-i18n-key="omisit">&lre;om.&pdf;</span>
-            <xsl:if test="@wit">
-                <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
-                    >:</span>
-                <xsl:call-template name="witness-siglum-html">
-                    <xsl:with-param name="wit" select="@wit"/>
-                </xsl:call-template>
-            </xsl:if>
-            <xsl:if test="position() ne last()">
-                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
-                    >;</span>
-            </xsl:if>
-        </span>
-    </xsl:template>
-
-    <xsl:template mode="apparatus-reading-dspt" match="witDetail">
-        <span class="reading note-text witDetail" lang="{alea:language(.)}"
-            style="direction:{alea:language-direction(.)}; text-align:{alea:language-align(.)};">
-            <xsl:value-of select="alea:direction-embedding(.)"/>
-            <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
-            <xsl:text>&pdf;</xsl:text>
-            <xsl:if test="@wit">
-                <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
-                    >:</span>
-                <xsl:call-template name="witness-siglum-html">
-                    <xsl:with-param name="wit" select="@wit"/>
-                </xsl:call-template>
-            </xsl:if>
-            <xsl:if test="position() ne last()">
-                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
-                    >;</span>
-            </xsl:if>
-        </span>
-    </xsl:template>
-
-    <xsl:template mode="apparatus-reading-dspt" match="app/note">
-        <span class="reading reading-note">
-            <xsl:apply-templates mode="apparatus-reading-text" select="node()"/>
-            <xsl:if test="position() ne last()">
-                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
-                    >;</span>
-            </xsl:if>
-        </span>
+    <xsl:template mode="lemma-text-nodes-dspt" match="unclear[not(parent::choice)]">
+        <xsl:apply-templates mode="lemma-text-nodes"/>
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-dspt" match="unclear[not(parent::choice)]">
@@ -535,6 +577,12 @@
             <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span>
         </xsl:if>
     </xsl:template>
+
+
+    <!-- gap -->
+
+    <!-- handle <gap> as empty, what ever occurs -->
+    <xsl:template mode="lemma-text-nodes-dspt" match="gap"/>
 
     <xsl:template mode="apparatus-reading-dspt" match="gap">
         <span class="reading gap">
@@ -563,43 +611,27 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- a default rule -->
-    <xsl:template mode="apparatus-reading-dspt" match="*">
+
+
+    <!-- default rules -->
+
+    <xsl:template mode="lemma-text-nodes-dspt" match="*">
         <xsl:message>
-            <xsl:text>WARNING: no rule for generating the lemma for </xsl:text>
+            <xsl:text>WARNING: </xsl:text>
+            <xsl:text>No rule in mode 'lemma-text-nodes-dspt' for apparatus element: </xsl:text>
             <xsl:value-of select="name(.)"/>
         </xsl:message>
-        <xsl:apply-templates mode="apparatus-reading-text" select="."/>
+        <xsl:apply-templates mode="lemma-text-nodes"/>
     </xsl:template>
 
-
-    <!-- The mode apparatus-reading-text is for printing the text of a reading etc.
-        Typically it is entred from a template in the mode apparatus-reading -->
-    <xsl:mode name="apparatus-reading-text" on-no-match="shallow-skip"/>
-
-    <xsl:template mode="apparatus-reading-text"
-        match="app[$variant-encoding eq 'internal-parallel-segmentation']">
-        <xsl:apply-templates mode="apparatus-reading-text" select="lem"/>
-    </xsl:template>
-
-    <xsl:template mode="apparatus-reading-text"
-        match="app[matches($variant-encoding, '^(in|ex)ternal-double-end-point')]"/>
-
-    <xsl:template mode="apparatus-reading-text" match="choice[sic and corr]">
-        <xsl:apply-templates mode="apparatus-reading-text" select="corr"/>
-    </xsl:template>
-
-    <xsl:template mode="apparatus-reading-text" match="caesura">
-        <xsl:text> || </xsl:text>
-    </xsl:template>
-
-    <xsl:template mode="apparatus-reading-text" match="l[preceding-sibling::l]">
-        <xsl:text> / </xsl:text>
+    <xsl:template mode="apparatus-reading-dspt" match="*">
+        <xsl:message>
+            <xsl:text>WARNING: </xsl:text>
+            <xsl:text>No rule for in mode 'apparatus-reading-dspt' for apparatur element: </xsl:text>
+            <xsl:value-of select="name(.)"/>
+        </xsl:message>
         <xsl:apply-templates mode="apparatus-reading-text"/>
     </xsl:template>
 
-    <xsl:template mode="apparatus-reading-text" match="text()">
-        <xsl:value-of select="."/>
-    </xsl:template>
 
 </xsl:stylesheet>
