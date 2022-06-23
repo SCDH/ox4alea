@@ -9,8 +9,8 @@
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    exclude-result-prefixes="xs scdh" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    version="3.0" default-mode="preview">
+    xmlns:scdhx="http://scdh.wwu.de/xslt#" exclude-result-prefixes="xs scdh"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0" default-mode="preview">
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
@@ -158,7 +158,7 @@
                 </section>
                 <hr/>
                 <section class="variants">
-                    <xsl:call-template name="line-referencing-apparatus">
+                    <xsl:call-template name="scdhx:apparatus-for-context">
                         <xsl:with-param name="app-context" select="/"/>
                     </xsl:call-template>
                 </section>
