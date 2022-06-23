@@ -299,7 +299,10 @@
             </xsl:call-template>
             <span class="apparatus-sep" data-i18n-key="lem-rdg-sep">]</span>
             <xsl:for-each select="$entries">
-                <xsl:apply-templates mode="apparatus-reading-dspt" select="map:get(., 'entry')"/>
+                <xsl:apply-templates mode="apparatus-reading-dspt" select="map:get(., 'entry')">
+                    <xsl:with-param name="apparatus-entry-map" as="map(*)" select="." tunnel="true"
+                    />
+                </xsl:apply-templates>
                 <xsl:if test="position() ne last()">
                     <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
                         >;</span>
