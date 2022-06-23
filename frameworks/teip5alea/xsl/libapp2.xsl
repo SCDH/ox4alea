@@ -24,15 +24,14 @@
 
     <xsl:param name="app-entries-xpath-internal-parallel-segmentation" as="xs:string"
         required="false">
-        <xsl:variable name="xpath" as="xs:string*">
+        <xsl:value-of>
             <xsl:text>descendant::app</xsl:text>
             <xsl:text>| descendant::corr</xsl:text>
-        </xsl:variable>
-        <xsl:value-of select="string-join($xpath, '')"/>
+        </xsl:value-of>
     </xsl:param>
 
     <xsl:param name="app-entries-xpath-internal-double-end-point" as="xs:string" required="false">
-        <xsl:variable name="xpath" as="xs:string*">
+        <xsl:value-of>
             <xsl:text>descendant::app</xsl:text>
             <xsl:text>| descendant::witDetail[not(parent::app)]</xsl:text>
             <xsl:text>| descendant::corr[not(parent::choice)]</xsl:text>
@@ -41,8 +40,7 @@
             <xsl:text>| descendant::unclear[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::choice[unclear]</xsl:text>
             <xsl:text>| descendant::gap</xsl:text>
-        </xsl:variable>
-        <xsl:value-of select="string-join($xpath, '')"/>
+        </xsl:value-of>
     </xsl:param>
 
     <!-- whether or not the first text node from a lemma determines the line number of the entry -->
