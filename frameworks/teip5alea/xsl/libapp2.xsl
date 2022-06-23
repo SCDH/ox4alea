@@ -132,11 +132,13 @@
         <xsl:variable name="lemma-text-nodes" as="text()*">
             <xsl:apply-templates select="$entry" mode="lemma-text-nodes-dspt"/>
         </xsl:variable>
+        <xsl:variable name="non-whitespace-text-nodes" as="text()*"
+            select="$lemma-text-nodes[normalize-space(.) ne '']"/>
         <xsl:variable name="lemma-text-node-ids" as="xs:string*"
-            select="$lemma-text-nodes[normalize-space(.) ne ''] ! generate-id(.)"/>
+            select="$non-whitespace-text-nodes ! generate-id(.)"/>
         <xsl:variable name="lemma-grouping-ids" as="xs:string">
             <!-- if the element passed in is empty, the ID of the element is used. This asserts, that we have a grouping key.
-                Whitespace text nodes are dropped because they generally interfere with testing where the lemme originates from.
+                Whitespace text nodes are dropped because they generally interfere with testing where the lemma originates from.
                 -->
             <xsl:choose>
                 <xsl:when test="empty($lemma-text-node-ids)">
@@ -157,14 +159,31 @@
                 elment. -->
             <xsl:choose>
                 <xsl:when test="$lemma-first-text-node-line-crit">
-                    <xsl:sequence select="($lemma-text-nodes, $entry)[1]"/>
+                    <xsl:sequence select="($non-whitespace-text-nodes, $entry)[1]"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:sequence select="($entry, $lemma-text-nodes)[last()]"/>
+                    <xsl:sequence select="($entry, $non-whitespace-text-nodes)[last()]"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="line-number" select="alea:line-number($lemma-node-for-line)"/>
+        <xsl:if test="$debug">
+            <xsl:message>
+                <xsl:text>Line number for </xsl:text>
+                <xsl:value-of select="
+                        if ($lemma-node-for-line[element()]) then
+                            name($lemma-node-for-line)
+                        else
+                            'text()'"/>
+                <xsl:text> node </xsl:text>
+                <xsl:value-of select="generate-id($lemma-node-for-line)"/>
+                <xsl:text>: </xsl:text>
+                <xsl:value-of select="$line-number"/>
+                <xsl:if test="matches($line-number, '\?')">
+                    <xsl:value-of select="$lemma-node-for-line"/>
+                </xsl:if>
+            </xsl:message>
+        </xsl:if>
         <xsl:sequence select="
                 map {
                     'entry': $entry,
