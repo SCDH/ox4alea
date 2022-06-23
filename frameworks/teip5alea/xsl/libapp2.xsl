@@ -32,7 +32,8 @@
 
     <xsl:param name="app-entries-xpath-internal-double-end-point" as="xs:string" required="false">
         <xsl:value-of>
-            <xsl:text>descendant::app</xsl:text>
+            <!-- choice+corr+sic+app+rdg was an old encoding of conjectures in ALEA -->
+            <xsl:text>descendant::app[not(parent::sic[parent::choice])]</xsl:text>
             <xsl:text>| descendant::witDetail[not(parent::app)]</xsl:text>
             <xsl:text>| descendant::corr[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::sic[not(parent::choice)]</xsl:text>
@@ -346,16 +347,9 @@
         <span class="static-text" data-i18n-key="sic">&lre;sic!&pdf;</span>
     </xsl:template>
 
-    <!-- we want corr first and sic second -/->
-    <xsl:template mode="apparatus-reading-dspt" match="choice[corr and sic]">
-        <xsl:apply-templates mode="apparatus-reading-dspt" select="corr"/>
-        <xsl:apply-templates mode="apparatus-reading-dspt" select="sic"/>
-    </xsl:template>
-    -->
-
-    <xsl:template mode="apparatus-reading-dspt" match="choice[corr]/sic">
+    <xsl:template mode="apparatus-reading-dspt" match="choice/sic">
         <span class="reading">
-            <xsl:apply-templates select="." mode="apparatus-reading-text"/>
+            <xsl:apply-templates mode="apparatus-reading-text"/>
             <xsl:if test="@source">
                 <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
                     >:</span>
@@ -363,11 +357,34 @@
                     <xsl:with-param name="wit" select="@source"/>
                 </xsl:call-template>
             </xsl:if>
-            <xsl:if test="position() ne last()">
-                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
-                    >;</span>
-            </xsl:if>
         </span>
+        <xsl:if test="position() ne last()">
+            <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                >;&sp;</span>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="choice[corr and sic]">
+        <span class="reading">
+            <xsl:apply-templates select="corr" mode="apparatus-reading-dspt"/>
+            <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span>
+            <xsl:apply-templates select="sic" mode="apparatus-reading-dspt"/>
+        </span>
+        <xsl:if test="position() ne last()">
+            <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                >;&sp;</span>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-dspt" match="choice[corr and sic/app]" priority="2">
+        <span class="reading">
+            <xsl:apply-templates select="corr" mode="apparatus-reading-dspt"/>
+            <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span>
+            <xsl:apply-templates select="sic/app" mode="apparatus-reading-dspt"/>
+        </span>
+        <xsl:if test="position() ne last()">
+            <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep">;</span>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-dspt" match="app">
