@@ -2,6 +2,9 @@
 
 ### dev ###
 
+- use libapp2.xsl for the apparatus
+  - works for `double-end-point` and `parallel-segmentation`
+
 - made libwit.xsl and Preview configurable
   - libwit.xsl takes XPath expressions as parameter now
   - where to find witness information
