@@ -9,8 +9,9 @@
     <!ENTITY lb "&#xa;" >
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs scdh"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/xslt#"
+    xmlns:alea="http://scdh.wwu.de/oxygen#ALEA"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs scdh alea"
     version="3.0">
 
     <xsl:import href="libi18n.xsl"/>
@@ -25,13 +26,14 @@
             select="exists(parent::note[normalize-space(string-join((text() | *) except bibl, '')) eq ''])"/>
         <xsl:variable name="analogous" as="xs:boolean"
             select="exists(parent::note/parent::seg[matches(@type, '^analogous')])"/>
-        <xsl:variable name="ref" as="element()" select="scdh:get-reference(@corresp, .)"/>
-        <xsl:variable name="ref-lang" select="scdh:language($ref)"/>
-        <span class="bibliographic-reference" lang="{scdh:language($ref)}"
-            style="direction:{scdh:language-direction($ref)};">
+        <xsl:variable name="ref" as="element()"
+            select="(scdh:references-from-attribute(@corresp)[1] => scdh:dereference(.)) treat as element()"/>
+        <xsl:variable name="ref-lang" select="alea:language($ref)"/>
+        <span class="bibliographic-reference" lang="{alea:language($ref)}"
+            style="direction:{alea:language-direction($ref)};">
             <!-- This must be paired with pdf character entity,
                         because directional embeddings are an embedded CFG! -->
-            <xsl:value-of select="scdh:direction-embedding($ref)"/>
+            <xsl:value-of select="alea:direction-embedding($ref)"/>
             <!-- [normalize-space((text()|*) except bibl) eq ''] -->
             <xsl:if test="$autotext and $analogous">
                 <span class="static-text" data-i18n-key="Cf.">&lre;Cf.&pdf;</span>
@@ -51,8 +53,8 @@
             </xsl:if>
             <xsl:text>&pdf;</xsl:text>
             <xsl:call-template name="ltr-to-rtl-extra-space">
-                <xsl:with-param name="first-direction" select="scdh:language-direction($ref)"/>
-                <xsl:with-param name="then-direction" select="scdh:language-direction(.)"/>
+                <xsl:with-param name="first-direction" select="alea:language-direction($ref)"/>
+                <xsl:with-param name="then-direction" select="alea:language-direction(.)"/>
             </xsl:call-template>
         </span>
     </xsl:template>
@@ -68,11 +70,11 @@
             select="exists(parent::note[normalize-space(string-join((text() | *) except bibl, '')) eq ''])"/>
         <xsl:variable name="analogous" as="xs:boolean"
             select="exists(parent::note/parent::seg[matches(@type, '^analogous')])"/>
-        <span class="bibliographic-reference" lang="{scdh:language(.)}"
-            style="direction:{scdh:language-direction(.)};">
+        <span class="bibliographic-reference" lang="{alea:language(.)}"
+            style="direction:{alea:language-direction(.)};">
             <!-- This must be paired with pdf character entity,
                         because directional embeddings are an embedded CFG! -->
-            <xsl:value-of select="scdh:direction-embedding(.)"/>
+            <xsl:value-of select="alea:direction-embedding(.)"/>
             <!-- [normalize-space((text()|*) except bibl) eq ''] -->
             <xsl:if test="$autotext and $analogous">
                 <span class="static-text" data-i18n-key="Cf.">&lre;Cf.&pdf;</span>

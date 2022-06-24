@@ -6,6 +6,9 @@
   - internal double end-point attachted apparatus make use of new
     `libbetween.xsl` XSLT library
   - fixed some apparatus entries
+  - new generic `libref.xsl` that fully implements the specification
+	of `<prefixDef>` and the addition suggested by CL on TEI-L on
+	2022-05-29.
 
 ## 2.6.0 ##
 
