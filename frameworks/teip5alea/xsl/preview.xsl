@@ -16,7 +16,7 @@
 
     <xsl:include href="libtext.xsl"/>
     <xsl:include href="librend.xsl"/>
-    <xsl:import href="libnote.xsl"/>
+    <xsl:import href="libnote2.xsl"/>
     <xsl:import href="libapp2.xsl"/>
     <xsl:include href="libmeta.xsl"/>
     <xsl:import href="libwit.xsl"/>
@@ -164,7 +164,9 @@
                 </section>
                 <hr/>
                 <section class="comments">
-                    <xsl:call-template name="line-referencing-comments"/>
+                    <xsl:call-template name="scdhx:editorial-notes">
+                        <xsl:with-param name="notes" select="scdhx:editorial-notes(//text/body, 'descendant::note')"/>
+                    </xsl:call-template>
                 </section>
                 <hr/>
                 <xsl:call-template name="i18n-language-chooser-html">
