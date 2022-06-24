@@ -2,14 +2,19 @@
 
 ### dev ###
 
-- use libapp2.xsl for the apparatus
+- use `libapp2.xsl` for the apparatus
   - works for `double-end-point` and `parallel-segmentation`
-
-- made libwit.xsl and Preview configurable
-  - libwit.xsl takes XPath expressions as parameter now
+  - allows multiple apparatus
+- rewritten `libnote2.xsl` analogously
+- generic implementation of reference processing including the full
+  specification of `<prefixDef>` in `libref.xsl`
+- made `libwit.xsl` and Preview configurable
+  - takes XPath expressions as parameter now
   - where to find witness information
   - where to find the siglum of a witness
   - old parameter that points to a central witness catalogue is gone
+- be more precise in which modes to use the templates defined in
+  `librend.xsl` and `libbiblio.xsl`
 
 ### 2.6.1 ##
 
