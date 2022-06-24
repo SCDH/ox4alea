@@ -22,6 +22,15 @@
     <xsl:import href="libwit.xsl"/>
     <xsl:import href="libi18n.xsl"/>
 
+    <!-- whether or not the first text node from a lemma determines the line number of the entry -->
+    <xsl:param name="lemma-first-text-node-line-crit" as="xs:boolean" select="true()"
+        required="false"/>
+
+    <xsl:param name="debug" as="xs:boolean" select="true()" required="false"/>
+
+
+    <!-- parameters that determine, what shows up in the apparatus
+        Please note that you can bypass them e.g. when you want multiple apparatus. -->
 
     <xsl:param name="app-entries-xpath-internal-parallel-segmentation" as="xs:string"
         required="false">
@@ -76,12 +85,6 @@
         </xsl:value-of>
     </xsl:param>
 
-    <!-- whether or not the first text node from a lemma determines the line number of the entry -->
-    <xsl:param name="lemma-first-text-node-line-crit" as="xs:boolean" select="true()"
-        required="false"/>
-
-    <xsl:param name="debug" as="xs:boolean" select="true()" required="false"/>
-
     <!-- for convenience this will be '@location-@method' -->
     <xsl:variable name="variant-encoding">
         <xsl:variable name="ve"
@@ -113,15 +116,17 @@
         </xsl:choose>
     </xsl:variable>
 
-    <!-- generate apparatus elements for a given context, e.g. / and prepare mappings for them -->
+
+
+    <!-- convenience functions and templates for generating the apparatus with the XPaths from the parameters above. -->
+
+    <!-- generate apparatus elements for a given context, e.g. / and prepare mappings for them.
+        This implementation uses the XPaths defined above to generate the sequence of apparatus entries.
+    -->
     <xsl:function name="scdh:apparatus-entries" as="map(*)*">
         <xsl:param name="context" as="node()*"/>
         <!-- we first generate a sequence of all elements that should show up in the apparatus -->
-        <xsl:variable name="entry-elements" as="element()*">
-            <xsl:evaluate as="element()*" context-item="$context" expand-text="true"
-                xpath="$app-entries-xpath"/>
-        </xsl:variable>
-        <xsl:sequence as="map(*)*" select="$entry-elements ! scdh:mk-entry-map(.)"/>
+        <xsl:sequence as="map(*)*" select="scdh:apparatus-entries($context, $app-entries-xpath)"/>
     </xsl:function>
 
     <!-- generate the apparatus for a given context, e.g. / -->
@@ -131,6 +136,27 @@
             <xsl:with-param name="entries" select="scdh:apparatus-entries($app-context)"/>
         </xsl:call-template>
     </xsl:template>
+
+
+
+    <!-- generic implementation of the apparatus
+        The XPath expressions from above are not hard-wired anywhere below.
+    -->
+
+    <!-- generate apparatus elements for a given context, e.g. / and prepare mappings for them.
+        The second argument is an XPath expression that tells what elements should go into the apparatus.
+        It is evaluated in the context given by the parameter 'context'.
+    -->
+    <xsl:function name="scdh:apparatus-entries" as="map(*)*">
+        <xsl:param name="context" as="node()*"/>
+        <xsl:param name="app-entries-xpath" as="xs:string"/>
+        <!-- we first generate a sequence of all elements that should show up in the apparatus -->
+        <xsl:variable name="entry-elements" as="element()*">
+            <xsl:evaluate as="element()*" context-item="$context" expand-text="true"
+                xpath="$app-entries-xpath"/>
+        </xsl:variable>
+        <xsl:sequence as="map(*)*" select="$entry-elements ! scdh:mk-entry-map(.)"/>
+    </xsl:function>
 
     <!-- generate the apparatus for a sequence of prepared maps -->
     <xsl:template name="scdh:apparatus">
