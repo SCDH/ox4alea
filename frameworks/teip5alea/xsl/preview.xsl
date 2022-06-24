@@ -9,15 +9,15 @@
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    exclude-result-prefixes="xs scdh" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    version="3.0" default-mode="preview">
+    xmlns:scdhx="http://scdh.wwu.de/xslt#" exclude-result-prefixes="xs scdh"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0" default-mode="preview">
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
     <xsl:include href="libtext.xsl"/>
     <xsl:include href="librend.xsl"/>
-    <xsl:include href="libapp.xsl"/>
     <xsl:import href="libnote.xsl"/>
+    <xsl:import href="libapp2.xsl"/>
     <xsl:include href="libmeta.xsl"/>
     <xsl:import href="libwit.xsl"/>
     <xsl:import href="libi18n.xsl"/>
@@ -34,7 +34,7 @@
     <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
     <xsl:param name="locales-directory" select="'./locales'" as="xs:string"/>
 
-    <xsl:param name="debug" select="false()" as="xs:boolean"/>
+    <xsl:param name="debug" select="true()" as="xs:boolean"/>
 
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
     <xsl:param name="ui-language" as="xs:string" select="''"/>
@@ -102,10 +102,16 @@
                     }
                     td.line-number, td.apparatus-line-number, td.editorial-note-number {
                         vertical-align:top;
+                        padding-left: 10px;
+                        }
+                    .line-number, .apparatus-line-number, .editor-note-number {
                         text-align:right;
                         font-size: 0.7em;
                         padding-top: 0.3em;
-                        padding-left: 10px;
+                    }
+                    span.apparatus-line-number {
+                        display: inline-block;
+                        min-width: 3em;
                     }
                     td.text-col1 {
                         padding-left: 40px;
@@ -118,6 +124,9 @@
                     }
                     abbr {
                         text-decoration: none;
+                    }
+                    .lemma-gap {
+                        font-size:.8em;
                     }
                     @font-face {
                         font-family:"Arabic Typesetting";
@@ -149,7 +158,9 @@
                 </section>
                 <hr/>
                 <section class="variants">
-                    <xsl:call-template name="line-referencing-apparatus"/>
+                    <xsl:call-template name="scdhx:apparatus-for-context">
+                        <xsl:with-param name="app-context" select="/"/>
+                    </xsl:call-template>
                 </section>
                 <hr/>
                 <section class="comments">
