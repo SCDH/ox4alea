@@ -132,7 +132,7 @@
     <xsl:template match="note" mode="note-text-repetition"/>
 
     <!-- this fixes issue #38 on the surface -->
-    <xsl:template match="caesura" mode="note-text-repetition #default">
+    <xsl:template match="caesura" mode="note-text-repetition">
         <xsl:text> </xsl:text>
     </xsl:template>
 
@@ -147,33 +147,6 @@
 
     <xsl:template mode="editorial-note" match="text()">
         <xsl:value-of select="."/>
-    </xsl:template>
-
-    <xsl:template mode="editorial-note" match="hi[@rend eq 'italic']">
-        <i>
-            <xsl:call-template name="lang-attributes">
-                <xsl:with-param name="context" select="."/>
-            </xsl:call-template>
-            <xsl:apply-templates mode="editorial-note"/>
-        </i>
-    </xsl:template>
-
-    <xsl:template mode="editorial-note" match="hi[@rend eq 'bold']">
-        <b>
-            <xsl:call-template name="lang-attributes">
-                <xsl:with-param name="context" select="."/>
-            </xsl:call-template>
-            <xsl:apply-templates mode="editorial-note"/>
-        </b>
-    </xsl:template>
-
-    <xsl:template mode="editorial-note" match="hi[@rend eq 'ul']">
-        <u>
-            <xsl:call-template name="lang-attributes">
-                <xsl:with-param name="context" select="."/>
-            </xsl:call-template>
-            <xsl:apply-templates mode="editorial-note"/>
-        </u>
     </xsl:template>
 
     <!-- change language if necessary -->
