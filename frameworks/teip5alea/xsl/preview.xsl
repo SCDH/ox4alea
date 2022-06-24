@@ -109,7 +109,11 @@
                         font-size: 0.7em;
                         padding-top: 0.3em;
                     }
-                    span.apparatus-line-number {
+                    div.apparatus-line,
+                    div.editorial-note {
+                        padding: 2px 0;
+                    }
+                    span.line-number {
                         display: inline-block;
                         min-width: 3em;
                     }
