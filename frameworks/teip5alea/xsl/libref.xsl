@@ -69,35 +69,42 @@ scdh:references-from-attribute(@target)[1] => scdh:dereference()
     <xsl:function name="scdh:process-reference" as="xs:string">
         <xsl:param name="reference" as="xs:string"/>
         <xsl:param name="occurrence" as="node()"/>
-        <!-- TODO: improve performance by testing for same-doc ref before getting prefix definitons -->
-        <xsl:variable name="definitions" as="node()*"
-            select="($occurrence/ancestor-or-self::TEI | (root($occurrence) treat as document-node())/teiCorpus)/teiHeader/encodingDesc/listPrefixDef//prefixDef[matches($reference, concat('^', @ident, ':', @matchPattern))]"/>
         <xsl:choose>
-            <xsl:when test="empty($definitions)">
-                <!-- not a local URI, return without expanding/replacing -->
-                <xsl:value-of select="scdh:resolve-uri-or-fragment($reference, $occurrence)"/>
+            <xsl:when test="starts-with($reference, '#') and $is-fragment-same-doc">
+                <xsl:value-of select="$reference"/>
             </xsl:when>
             <xsl:otherwise>
-                <!-- using the first match only -->
-                <xsl:variable name="definition" as="node()" select="$definitions[1]"/>
-                <!-- expand/replace the URI -->
-                <xsl:variable name="href" as="xs:string"
-                    select="replace($reference, concat($definition/@ident, ':', $definition/@matchPattern), $definition/@replacementPattern)"/>
-                <!-- get XML Base property of definition or occurrence
-                    Cf. https://tei-l.markmail.org/thread/eogjsbfing65ubm4 -->
-                <xsl:variable name="base">
-                    <xsl:choose>
-                        <xsl:when
-                            test="$definition/@xml:base or $definition/@relativeFrom eq 'definition'">
-                            <xsl:value-of select="($definition, $occurrence)[1]"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="$occurrence"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
-                <!-- dereference -->
-                <xsl:value-of select="scdh:resolve-uri-or-fragment($href, $base)"/>
+                <xsl:variable name="definitions" as="node()*"
+                    select="($occurrence/ancestor-or-self::TEI | (root($occurrence) treat as document-node())/teiCorpus)/teiHeader/encodingDesc/listPrefixDef//prefixDef[matches($reference, concat('^', @ident, ':', @matchPattern))]"/>
+                <xsl:choose>
+                    <xsl:when test="empty($definitions)">
+                        <!-- not a local URI, return without expanding/replacing -->
+                        <xsl:value-of select="resolve-uri($reference, base-uri($occurrence))"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- using the first match only. We can assert that it is present, because we are on a branch
+                            where $definitions is non-empty. -->
+                        <xsl:variable name="definition" as="node()"
+                            select="$definitions[1] treat as node()"/>
+                        <!-- expand/replace the URI -->
+                        <xsl:variable name="href" as="xs:string"
+                            select="replace($reference, concat($definition/@ident, ':', $definition/@matchPattern), $definition/@replacementPattern)"/>
+                        <xsl:choose>
+                            <xsl:when test="starts-with($href, '#') and $is-fragment-same-doc">
+                                <xsl:value-of select="$href"/>
+                            </xsl:when>
+                            <!-- get XML Base property of definition or occurrence
+                                Cf. https://tei-l.markmail.org/thread/eogjsbfing65ubm4 -->
+                            <xsl:when
+                                test="$definition/@xml:base or $definition/@relativeFrom eq 'definition'">
+                                <xsl:value-of select="resolve-uri($href, base-uri($definition))"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="resolve-uri($href, base-uri($occurrence))"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
