@@ -9,7 +9,7 @@
 
     <!-- returns the line or verse number, depending on the value of $typed-line-numbering -->
     <xsl:function name="scdh:line-number" as="xs:string">
-        <xsl:param name="el" as="element()"/>
+        <xsl:param name="el" as="node()"/>
         <xsl:choose>
             <xsl:when test="$typed-line-numbering">
                 <xsl:value-of select="scdh:typed-line-number($el)"/>
@@ -22,31 +22,31 @@
 
     <!-- returns the verse or paragraph number  -->
     <xsl:function name="scdh:typed-line-number" as="xs:string">
-        <xsl:param name="el" as="element()"/>
+        <xsl:param name="el" as="node()"/>
         <!-- suffix is a marker for additional verses or paragraphs in readings.
             It is displayed in the apparatus. -->
         <xsl:variable name="suffix" select="
-                if (exists($el/ancestor::rdg)) then
+                if (exists($el/ancestor-or-self::l/parent::rdg)) then
                     '+'
                 else
                     ''"/>
         <xsl:choose>
-            <xsl:when test="$el/self::head[l]">
+            <xsl:when test="$el/ancestor-or-self::head[l]">
                 <xsl:value-of select="
                         concat('H', count($el/preceding::head[not(ancestor::rdg)]) + 1,
                         '/V', count($el/preceding::l[not(ancestor::rdg)]) + 1, $suffix)"
                 />
             </xsl:when>
-            <xsl:when test="$el/self::head">
+            <xsl:when test="$el/ancestor-or-self::head">
                 <xsl:value-of
                     select="concat('H', count($el/preceding::head[not(ancestor::rdg)]) + 1, $suffix)"
                 />
             </xsl:when>
-            <xsl:when test="$el/self::p">
+            <xsl:when test="$el/ancestor-or-self::p">
                 <xsl:value-of
                     select="concat('P', count($el/preceding::p[not(ancestor::rdg)]) + 1, $suffix)"/>
             </xsl:when>
-            <xsl:when test="$el/self::l">
+            <xsl:when test="$el/ancestor-or-self::l">
                 <xsl:variable name="inc" select="
                         if ($el/ancestor::rdg) then
                             0
@@ -87,7 +87,7 @@
         USAGE: see preview.xsl -->
     <xsl:function name="scdh:shorten-string" as="xs:normalizedString">
         <xsl:param name="nodes" as="node()*"/>
-        <xsl:variable name="lemma-text" select="tokenize(normalize-space(string($nodes)), '\s+')"/>
+        <xsl:variable name="lemma-text" select="tokenize(normalize-space(string-join($nodes, '')), '\s+')"/>
         <xsl:value-of select="
                 if (count($lemma-text) gt 3)
                 then

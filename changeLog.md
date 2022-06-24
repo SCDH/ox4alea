@@ -1,5 +1,93 @@
 # change log #
 
+### dev ###
+
+- use `libapp2.xsl` for the apparatus
+  - works for `double-end-point` and `parallel-segmentation`
+  - allows multiple apparatus
+- rewritten `libnote2.xsl` analogously
+- generic implementation of reference processing including the full
+  specification of `<prefixDef>` in `libref.xsl`
+- made `libwit.xsl` and Preview configurable
+  - takes XPath expressions as parameter now
+  - where to find witness information
+  - where to find the siglum of a witness
+  - old parameter that points to a central witness catalogue is gone
+- be more precise in which modes to use the templates defined in
+  `librend.xsl` and `libbiblio.xsl`
+
+### 2.6.1 ##
+
+- inproved Preview
+  - internal double end-point attachted apparatus make use of new
+    `libbetween.xsl` XSLT library
+  - fixed some apparatus entries
+  - new generic `libref.xsl` that fully implements the specification
+	of `<prefixDef>` and the addition suggested by CL on TEI-L on
+	2022-05-29.
+
+## 2.6.0 ##
+
+- Preview
+  - make internal double end-point attached apparatus work
+  - simpler code base
+  - fixes for `<unclear>` and `<gap>` nested in an apparatus
+  - let work ID appear in HTML title element
+- make transformations less verbose: do not open XML result pane etc.
+- MRE
+  - transformation for extracting recensions
+	- make new work identifier and write it to `/TEI/@xml:id`
+	- extraction for `<witDetail>`
+	- remove empty `<appInfo>`
+  - author mode actions only active when there's an application info
+    in the encoding description
+
+## 2.5.5 ##
+
+- fixed optional CSS for hiding readings from other recensions
+
+## 2.5.4 ##
+
+- actions for setting MRE parameters
+  - `reset`: empty all parameters
+  - `next`: shift `in progress` to the next recension (order
+    determined from header) and add old `in progress` to `done`
+  - `complement`: set `done` as `in progress`'s complement set of
+    recensions
+
+## 2.5.3 ##
+
+- introduced new optional MRE-related CSS style for hiding `<rdg>`
+  from recensions other than the one in progress
+- made MRE more configurable
+  - `oxbytao.mre.recensions.xpath` TEI LSP property which defaults to
+    `//sourceDesc//listWit[@xml:id]`
+  - related CSS is still not configurable because usage of editor
+    variables is broken/unstable in CSS
+
+## 2.5.2 ##
+
+- introduced more functions to MRE
+  - reset
+  - send to all recensions but the one in progress
+  - send to all recensions listed in `done`
+  - edit `@source`
+- fixed CSS of MRE
+  - visibility
+  - fading: fade all recensions listed as `fading` as soon there is a
+    sibling from the recension in progress
+
+## 2.5.1 ##
+
+- added user action for selecting `@source`
+
+## 2.5.0 ##
+
+- introduce MRE (multiple recension editor)
+- store MRE's application information in `<appInfo>`
+- fixed preview for of cases where apparatus entries and notes are
+  nested in each other
+
 ## 2.4.7 ##
 
 - fixed shortcut actions for prefix-style bibliographic references

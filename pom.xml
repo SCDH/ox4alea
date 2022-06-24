@@ -5,7 +5,7 @@
 
     <groupId>de.wwu.scdh.oxygen.alea</groupId>
     <artifactId>scdh-alea-oxygen-extension</artifactId>
-    <version>2.4.7</version>
+    <version>2.6.1</version>
     
     <name>scdh-alea-oxygen-extension</name>
     <url>https://github.com/scdh/ox4alea</url>
@@ -50,6 +50,9 @@
                     <!--coverage>true</coverage-->
 		    <generateSurefireReport>true</generateSurefireReport>
 		    <testDir>test/xspec</testDir>
+		    <excludes>
+		       <exclude>**/libwit*.xspec</exclude>
+		    </excludes>
 		    <catalogFile>${project.basedir}/catalog.xml</catalogFile>
 		</configuration>
 		<executions>

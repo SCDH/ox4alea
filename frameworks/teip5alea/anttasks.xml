@@ -65,5 +65,53 @@ ant -buildfile THISFILE \
 		</xslt>
 		<echo>Extracted text stored in ${outputFile}</echo>
 	</target>
+	
+	<target name="add-multiple-recensions-editor-appinfo">
+		<!-- This task adds <appInfo> for the multiple recensions editor -->
+		<xslt style="xsl/recensions-appinfo.xsl" in="${inputFile}" out="${inputFile}.temp">
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+			<classpath location="${saxon.jar}"/>
+			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+				value="org.apache.xerces.parsers.XML11Configuration"/>
+		</xslt>
+		<!-- the xslt task fails when writing to the same file. -->
+		<move file="${inputFile}.temp" toFile="${outputFile}"/>
+	</target>
+
+	<target name="mre-reset">
+		<!-- This tasks resets the multiple recensions editor (MRE) -->
+		<xslt style="xsl/mre-reset.xsl" in="${inputFile}" out="${outputFile}.temp">
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+			<classpath location="${saxon.jar}"/>
+			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+				value="org.apache.xerces.parsers.XML11Configuration"/>			
+		</xslt>
+		<!-- the xslt task fails when writing to the same file. -->
+		<move file="${inputFile}.temp" toFile="${outputFile}"/>
+	</target>
+
+	<target name="mre-next">
+		<!-- This tasks resets the multiple recensions editor (MRE) -->
+		<xslt style="xsl/mre-next.xsl" in="${inputFile}" out="${outputFile}.temp">
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+			<classpath location="${saxon.jar}"/>
+			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+				value="org.apache.xerces.parsers.XML11Configuration"/>			
+		</xslt>
+		<!-- the xslt task fails when writing to the same file. -->
+		<move file="${inputFile}.temp" toFile="${outputFile}"/>
+	</target>
+
+	<target name="mre-complement">
+		<!-- This tasks resets the multiple recensions editor (MRE) -->
+		<xslt style="xsl/mre-complement.xsl" in="${inputFile}" out="${outputFile}.temp">
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+			<classpath location="${saxon.jar}"/>
+			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+				value="org.apache.xerces.parsers.XML11Configuration"/>			
+		</xslt>
+		<!-- the xslt task fails when writing to the same file. -->
+		<move file="${inputFile}.temp" toFile="${outputFile}"/>
+	</target>
 
 </project>

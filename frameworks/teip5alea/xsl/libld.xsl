@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- deal with annotated entities (persons, places)
+<!-- DEPRECATED 
+    
+deal with annotated entities (persons, places)
 
 This stylesheet uses 'tei-ld-out' as default mode which produces HTML5 output of the referenced entities.
 
@@ -7,9 +9,8 @@ However, the entry mode is 'tei-ld' for getting an entity from a link.
 The link may use a private URI scheme defined in a <prefixDef>.
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="xs math scdh"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/xslt#"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs scdh"
     version="3.0" default-mode="tei-ld-out">
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
@@ -20,16 +21,9 @@ The link may use a private URI scheme defined in a <prefixDef>.
     <xsl:variable name="debug" select="true()"/>
 
     <!-- get the real link from an URI scheme defined in a <prefixDef> -->
-    <xsl:template mode="tei-ld" match="*[@ref][matches(@ref, scdh:uri-schemes-regex(/))]">
-        <xsl:variable name="docnode" select="."/>
-        <xsl:variable name="ref" select="@ref"/>
-        <xsl:variable name="prefix" select="tokenize($ref, ':')[1]"/>
-        <xsl:variable name="prefixDef" select="//prefixDef[@ident eq $prefix]"/>
-        <xsl:variable name="link"
-            select="replace($ref, concat($prefix, ':'), $prefixDef/@replacementPattern)"/>
-        <xsl:variable name="url" select="tokenize($link, '#')[1]"/>
-        <xsl:variable name="fragment" select="tokenize($link, '#')[2]"/>
-        <xsl:variable name="entity" select="doc($url)//*[@xml:id eq $fragment]"/>
+    <xsl:template mode="tei-ld" match="*[@ref]">
+        <xsl:variable name="link" as="xs:string" select="scdh:references-from-attribute(@ref)[1]"/>
+        <xsl:variable name="entity" select="scdh:dereference($link, .)"/>
         <xsl:if test="$debug">
             <xsl:message>
                 <xsl:text>tei-ld: Getting entity from: </xsl:text>

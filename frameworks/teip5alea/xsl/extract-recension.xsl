@@ -12,7 +12,7 @@ We define a default mode in order to make stylesheet composition simpler.
     xmlns:math="http://www.w3.org/2005/xpath-functions/math" exclude-result-prefixes="xs math"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0"
     default-mode="extract-recension">
-    
+
     <xsl:mode name="extract-recension" on-no-match="shallow-copy"/>
     <xsl:mode name="single-recension" on-no-match="shallow-copy"/>
 
@@ -20,10 +20,37 @@ We define a default mode in order to make stylesheet composition simpler.
 
     <xsl:param name="debug" as="xs:boolean" select="false()" required="false"/>
 
+    <xsl:param name="work-id-xpath">
+        <xsl:text>(/@xml:id, //idno[@type eq 'canonical-id'], //idno[@type eq 'work-identifier'], tokenize(tokenize(base-uri(/), '/')[last()], '\.')[1])[1]</xsl:text>
+    </xsl:param>
+
+    <xsl:variable name="work-id" as="xs:string">
+        <xsl:variable name="id">
+            <xsl:evaluate as="xs:string" context-item="/" xpath="$work-id-xpath" expand-text="true"
+            />
+        </xsl:variable>
+        <xsl:value-of select="concat(replace($source, '[a-z]', ''), $id)"/>
+    </xsl:variable>
+
+    <!-- delete MRE app info -->
+    <xsl:template match="application[@ident eq 'oxmre']"/>
+    <xsl:template match="appInfo[not(exists(application[@ident ne 'oxmre']))]"/>
+
+    <xsl:template name="warning">
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:comment>
+            <xsl:text>Extracted from </xsl:text>
+            <xsl:value-of select="tokenize(base-uri(/), '/')[last()]"/>
+            <xsl:text>. Do NOT change!</xsl:text>
+        </xsl:comment>
+        <xsl:text>&#xa;</xsl:text>
+    </xsl:template>
+
     <xsl:template match="/">
         <xsl:if test="$debug">
             <xsl:message>extracting recension '<xsl:value-of select="$source"/>'</xsl:message>
         </xsl:if>
+        <xsl:call-template name="warning"/>
         <xsl:choose>
             <xsl:when test="exists(//teiHeader//sourceDesc//listWit[@xml:id eq $source])">
                 <xsl:apply-templates/>
@@ -42,6 +69,14 @@ We define a default mode in order to make stylesheet composition simpler.
         </xsl:choose>
     </xsl:template>
 
+    <xsl:template match="TEI">
+        <xsl:copy>
+            <xsl:apply-templates select="@* except @xml:id"/>
+            <xsl:attribute name="xml:id" select="$work-id"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+
     <!-- delete recension and its witnesses from the source description -->
     <xsl:template match="sourceDesc//listWit[@xml:id ne $source]"/>
 
@@ -56,14 +91,38 @@ We define a default mode in order to make stylesheet composition simpler.
                     satisfies $s eq concat('#', $source)]/node()"/>
     </xsl:template>
 
+    <!-- this rule applies to positive recension encoding -->
+    <xsl:template match="*[@source]">
+        <xsl:choose>
+            <xsl:when test="
+                    some $s in tokenize(@source, '\s+')
+                        satisfies $s eq concat('#', $source)">
+                <xsl:if test="$debug">
+                    <xsl:message>selecting <xsl:value-of select="name(.)"/> of
+                        recension</xsl:message>
+                </xsl:if>
+                <xsl:copy>
+                    <xsl:apply-templates select="@* except @source"/>
+                    <xsl:apply-templates select="node()"/>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="$debug">
+                    <xsl:message>unselecting <xsl:value-of select="name(.)"/> of
+                        recension</xsl:message>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <!-- delete apparatus entries that only belong to other recensions -->
     <xsl:template match="
-            app[every $wit in (string-join(child::rdg/@wit, ' ') => tokenize()) ! substring(., 2)
+            app[every $wit in (string-join((child::rdg/@wit | child::witDetail/@wit), ' ') => tokenize()) ! substring(., 2)
                 satisfies not(exists(//teiHeader//sourceDesc//listWit[@xml:id eq $source]//witness[@xml:id eq $wit]))]">
         <!-- handle the lemma according to variant encoding -->
         <xsl:if test="$debug">
             <xsl:message>delete whole app with readings from <xsl:value-of
-                    select="string-join(child::rdg/@wit, ' ')"/>
+                    select="string-join((child::rdg/@wit, child::witDetail/@wit), ' ')"/>
             </xsl:message>
         </xsl:if>
         <xsl:apply-templates select="lem" mode="lemma"/>
@@ -83,8 +142,8 @@ We define a default mode in order to make stylesheet composition simpler.
 
     <!-- remove variant readings not from the current recension -->
     <xsl:template match="
-            rdg[every $wit in tokenize(@wit) ! substring(., 2)
-                satisfies not(exists(//teiHeader//sourceDesc//listWit[@xml:id eq $source]//witness[@xml:id eq $wit]))]">
+            (rdg | witDetail)[every $wit in (tokenize(@wit) ! substring(., 2))
+                satisfies empty(//teiHeader//sourceDesc//listWit[@xml:id eq $source]//witness[@xml:id eq $wit])]">
         <xsl:if test="$debug">
             <xsl:message>deleting single reading</xsl:message>
         </xsl:if>

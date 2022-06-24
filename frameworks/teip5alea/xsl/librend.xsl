@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- XSLT module for the preview: font rendering -->
-<!DOCTYPE stylesheet [
-    <!ENTITY lre "&#x202a;" >
-    <!ENTITY rle "&#x202b;" >
-    <!ENTITY pdf "&#x202c;" >
-    <!ENTITY nbsp "&#xa0;" >
-    <!ENTITY emsp "&#x2003;" >
-    <!ENTITY lb "&#xa;" >
-]>
+<!-- generic XSLT library for basic text formatting
+
+This is to be imported once into your main stylesheet if you want basic formatting
+in the base text, the apparatus and in the editorial notes. -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    exclude-result-prefixes="xs scdh" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    version="3.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0">
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
-    <xsl:template mode="#all" match="hi[@rend eq 'bold']" priority="2">
+    <xsl:import href="libi18n.xsl"/>
+
+    <xsl:template mode="text apparatus-reading-text editorial-note" match="hi[@rend eq 'bold']">
         <b>
             <xsl:call-template name="lang-attributes">
                 <xsl:with-param name="context" select="."/>
@@ -24,7 +20,7 @@
         </b>
     </xsl:template>
 
-    <xsl:template mode="#all" match="hi[@rend eq 'italic']" priority="2">
+    <xsl:template mode="text apparatus-reading-text editorial-note" match="hi[@rend eq 'italic']">
         <i>
             <xsl:call-template name="lang-attributes">
                 <xsl:with-param name="context" select="."/>
@@ -33,16 +29,17 @@
         </i>
     </xsl:template>
 
-    <xsl:template mode="#all" match="hi[@rend eq 'underline']" priority="2">
-        <span style="text-decoration: underline;">
+    <xsl:template mode="text apparatus-reading-text editorial-note" match="hi[@rend eq 'underline']">
+        <u>
             <xsl:call-template name="lang-attributes">
                 <xsl:with-param name="context" select="."/>
             </xsl:call-template>
             <xsl:apply-templates mode="#current"/>
-        </span>
+        </u>
     </xsl:template>
 
-    <xsl:template mode="#all" match="hi[@rend eq 'superscript']" priority="2">
+    <xsl:template mode="text apparatus-reading-text editorial-note"
+        match="hi[@rend eq 'superscript']">
         <sup>
             <xsl:call-template name="lang-attributes">
                 <xsl:with-param name="context" select="."/>
@@ -51,7 +48,8 @@
         </sup>
     </xsl:template>
 
-    <xsl:template mode="#all" match="title[@type eq 'lemma'] | q | quote" priority="2">
+    <xsl:template mode="text apparatus-reading-text editorial-note"
+        match="title[@type eq 'lemma'] | q | quote">
         <xsl:variable name="content">
             <xsl:apply-templates mode="#current"/>
         </xsl:variable>
@@ -63,7 +61,8 @@
         </span>
     </xsl:template>
 
-    <xsl:template mode="#all" match="seg[matches(@type, 'booktitle')] | title">
+    <xsl:template mode="text apparatus-reading-text editorial-note"
+        match="seg[matches(@type, 'booktitle')] | title">
         <i>
             <xsl:call-template name="lang-attributes">
                 <xsl:with-param name="context" select="."/>

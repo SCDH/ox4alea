@@ -63,7 +63,7 @@
 						<Boolean>false</Boolean>
 					</field>
 					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
+						<Boolean>false</Boolean>
 					</field>
 					<field name="showInSVGPane">
 						<Boolean>false</Boolean>
@@ -76,30 +76,6 @@
 					</field>
 					<field name="xsltParams">
 						<list>
-							<transformationParameter>
-								<field name="paramDescription">
-									<paramDescriptor>
-										<field name="localName">
-											<String>biblio</String>
-										</field>
-										<field name="prefix">
-											<null/>
-										</field>
-										<field name="namespace">
-											<null/>
-										</field>
-									</paramDescriptor>
-								</field>
-								<field name="value">
-									<String>${framework}/samples/biblio.xml</String>
-								</field>
-								<field name="hasXPathValue">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isStatic">
-									<Boolean>false</Boolean>
-								</field>
-							</transformationParameter>
 							<transformationParameter>
 								<field name="paramDescription">
 									<paramDescriptor>
@@ -152,7 +128,7 @@
 								<field name="paramDescription">
 									<paramDescriptor>
 										<field name="localName">
-											<String>witness-cat</String>
+											<String>witnesses-xpath</String>
 										</field>
 										<field name="prefix">
 											<null/>
@@ -163,7 +139,33 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${pdu}/WitnessCatalogue.xml</String>
+									<!--String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String-->
+									<String>doc('${pdu}/WitnessCatalogue.xml')//text//listWit//witness</String>
+								</field>
+								<field name="hasXPathValue">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isStatic">
+									<Boolean>false</Boolean>
+								</field>
+							</transformationParameter>
+							<transformationParameter>
+								<field name="paramDescription">
+									<paramDescriptor>
+										<field name="localName">
+											<String>witness-siglum-xpath</String>
+										</field>
+										<field name="prefix">
+											<null/>
+										</field>
+										<field name="namespace">
+											<null/>
+										</field>
+									</paramDescriptor>
+								</field>
+								<field name="value">
+									<!--String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String-->
+									<String>descendant::abbr[@type eq 'siglum'][1]</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
@@ -260,7 +262,7 @@
 								<field name="paramDescription">
 									<paramDescriptor>
 										<field name="localName">
-											<String>witness-cat</String>
+											<String>witnesses-xpath</String>
 										</field>
 										<field name="prefix">
 											<null/>
@@ -271,7 +273,33 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${pdu}/WitnessCatalogue.xml</String>
+									<!--String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String-->
+									<String>doc('${pdu}/WitnessCatalogue.xml')//text//listWit//witness</String>
+								</field>
+								<field name="hasXPathValue">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isStatic">
+									<Boolean>false</Boolean>
+								</field>
+							</transformationParameter>
+							<transformationParameter>
+								<field name="paramDescription">
+									<paramDescriptor>
+										<field name="localName">
+											<String>witness-siglum-xpath</String>
+										</field>
+										<field name="prefix">
+											<null/>
+										</field>
+										<field name="namespace">
+											<null/>
+										</field>
+									</paramDescriptor>
+								</field>
+								<field name="value">
+									<!--String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String-->
+									<String>descendant::abbr[@type eq 'siglum'][1]</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>
@@ -710,7 +738,667 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA :: extract reading</String>
+						<String>ALEA :: Extract Reading</String>
+					</field>
+					<field name="baseURL">
+						<null/>
+					</field>
+					<field name="footerURL">
+						<null/>
+					</field>
+					<field name="fOPMethod">
+						<null/>
+					</field>
+					<field name="fOProcessorName">
+						<null/>
+					</field>
+					<field name="headerURL">
+						<null/>
+					</field>
+					<field name="inputXSLURL">
+						<null/>
+					</field>
+					<field name="inputXMLURL">
+						<null/>
+					</field>
+					<field name="defaultScenario">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="isFOPPerforming">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="type">
+						<String>ANT</String>
+					</field>
+					<field name="saveAs">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="openInBrowser">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="outputResource">
+						<null/>
+					</field>
+					<field name="openOtherLocationInBrowser">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="locationToOpenInBrowserURL">
+						<String>${cfd}</String>
+					</field>
+					<field name="openInEditor">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInHTMLPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInXMLPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInSVGPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInResultSetPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="useXSLTInput">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="xsltParams">
+						<list/>
+					</field>
+					<field name="cascadingStylesheets">
+						<String-array/>
+					</field>
+					<field name="xslTransformer">
+						<String>ANT</String>
+					</field>
+					<field name="extensionURLs">
+						<String-array>
+							<String>${oxygenHome}/lib/*.jar</String>
+						</String-array>
+					</field>
+				</antScenario>
+				<antScenario>
+					<field name="additionalAntArgs">
+						<String></String>
+					</field>
+					<field name="buildTarget">
+						<String>add-multiple-recensions-editor-appinfo</String>
+					</field>
+					<field name="buildFilePath">
+						<String>${frameworkDir}/anttasks.xml</String>
+					</field>
+					<field name="ditaParams">
+						<list>
+							<antParameter>
+								<field name="name">
+									<String>inputFile</String>
+								</field>
+								<field name="description">
+									<String></String>
+								</field>
+								<field name="value">
+									<String>${cf}</String>
+								</field>
+								<field name="defaultValue">
+									<null/>
+								</field>
+								<field name="type">
+									<Integer>5</Integer>
+								</field>
+								<field name="possibleValues">
+									<null/>
+								</field>
+								<field name="possibleValuesDescriptions">
+									<null/>
+								</field>
+							</antParameter>
+							<antParameter>
+								<field name="name">
+									<String>outputFile</String>
+								</field>
+								<field name="description">
+									<String></String>
+								</field>
+								<field name="value">
+									<String>${cf}</String>
+								</field>
+								<field name="defaultValue">
+									<null/>
+								</field>
+								<field name="type">
+									<Integer>5</Integer>
+								</field>
+								<field name="possibleValues">
+									<null/>
+								</field>
+								<field name="possibleValuesDescriptions">
+									<null/>
+								</field>
+							</antParameter>
+						</list>
+					</field>
+					<field name="jvmArgs">
+						<String>-Xmx256m</String>
+					</field>
+					<field name="useCustomJavaHome">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="customJavaHomeDir">
+						<String></String>
+					</field>
+					<field name="useCustomANTHome">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="customANTHomeDir">
+						<String></String>
+					</field>
+					<field name="workingDir">
+						<String>${cfd}</String>
+					</field>
+					<field name="showConsoleAlways">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="advancedOptionsMap">
+						<null/>
+					</field>
+					<field name="name">
+						<String>ALEA :: add MRE app info</String>
+					</field>
+					<field name="baseURL">
+						<null/>
+					</field>
+					<field name="footerURL">
+						<null/>
+					</field>
+					<field name="fOPMethod">
+						<null/>
+					</field>
+					<field name="fOProcessorName">
+						<null/>
+					</field>
+					<field name="headerURL">
+						<null/>
+					</field>
+					<field name="inputXSLURL">
+						<null/>
+					</field>
+					<field name="inputXMLURL">
+						<null/>
+					</field>
+					<field name="defaultScenario">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="isFOPPerforming">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="type">
+						<String>ANT</String>
+					</field>
+					<field name="saveAs">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="openInBrowser">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="outputResource">
+						<null/>
+					</field>
+					<field name="openOtherLocationInBrowser">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="locationToOpenInBrowserURL">
+						<String>${cfd}</String>
+					</field>
+					<field name="openInEditor">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInHTMLPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInXMLPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInSVGPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInResultSetPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="useXSLTInput">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="xsltParams">
+						<list/>
+					</field>
+					<field name="cascadingStylesheets">
+						<String-array/>
+					</field>
+					<field name="xslTransformer">
+						<String>ANT</String>
+					</field>
+					<field name="extensionURLs">
+						<String-array>
+							<String>${oxygenHome}/lib/*.jar</String>
+						</String-array>
+					</field>
+				</antScenario>
+				<antScenario>
+					<field name="additionalAntArgs">
+						<String></String>
+					</field>
+					<field name="buildTarget">
+						<String>mre-reset</String>
+					</field>
+					<field name="buildFilePath">
+						<String>${frameworkDir}/anttasks.xml</String>
+					</field>
+					<field name="ditaParams">
+						<list>
+							<antParameter>
+								<field name="name">
+									<String>inputFile</String>
+								</field>
+								<field name="description">
+									<String></String>
+								</field>
+								<field name="value">
+									<String>${cf}</String>
+								</field>
+								<field name="defaultValue">
+									<null/>
+								</field>
+								<field name="type">
+									<Integer>5</Integer>
+								</field>
+								<field name="possibleValues">
+									<null/>
+								</field>
+								<field name="possibleValuesDescriptions">
+									<null/>
+								</field>
+							</antParameter>
+							<antParameter>
+								<field name="name">
+									<String>outputFile</String>
+								</field>
+								<field name="description">
+									<String></String>
+								</field>
+								<field name="value">
+									<String>${cf}</String>
+								</field>
+								<field name="defaultValue">
+									<null/>
+								</field>
+								<field name="type">
+									<Integer>5</Integer>
+								</field>
+								<field name="possibleValues">
+									<null/>
+								</field>
+								<field name="possibleValuesDescriptions">
+									<null/>
+								</field>
+							</antParameter>
+						</list>
+					</field>
+					<field name="jvmArgs">
+						<String>-Xmx256m</String>
+					</field>
+					<field name="useCustomJavaHome">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="customJavaHomeDir">
+						<String></String>
+					</field>
+					<field name="useCustomANTHome">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="customANTHomeDir">
+						<String></String>
+					</field>
+					<field name="workingDir">
+						<String>${cfd}</String>
+					</field>
+					<field name="showConsoleAlways">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="advancedOptionsMap">
+						<null/>
+					</field>
+					<field name="name">
+						<String>ALEA :: MRE reset</String>
+					</field>
+					<field name="baseURL">
+						<null/>
+					</field>
+					<field name="footerURL">
+						<null/>
+					</field>
+					<field name="fOPMethod">
+						<null/>
+					</field>
+					<field name="fOProcessorName">
+						<null/>
+					</field>
+					<field name="headerURL">
+						<null/>
+					</field>
+					<field name="inputXSLURL">
+						<null/>
+					</field>
+					<field name="inputXMLURL">
+						<null/>
+					</field>
+					<field name="defaultScenario">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="isFOPPerforming">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="type">
+						<String>ANT</String>
+					</field>
+					<field name="saveAs">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="openInBrowser">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="outputResource">
+						<null/>
+					</field>
+					<field name="openOtherLocationInBrowser">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="locationToOpenInBrowserURL">
+						<String>${cfd}</String>
+					</field>
+					<field name="openInEditor">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInHTMLPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInXMLPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInSVGPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInResultSetPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="useXSLTInput">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="xsltParams">
+						<list/>
+					</field>
+					<field name="cascadingStylesheets">
+						<String-array/>
+					</field>
+					<field name="xslTransformer">
+						<String>ANT</String>
+					</field>
+					<field name="extensionURLs">
+						<String-array>
+							<String>${oxygenHome}/lib/*.jar</String>
+						</String-array>
+					</field>
+				</antScenario>
+				<antScenario>
+					<field name="additionalAntArgs">
+						<String></String>
+					</field>
+					<field name="buildTarget">
+						<String>mre-next</String>
+					</field>
+					<field name="buildFilePath">
+						<String>${frameworkDir}/anttasks.xml</String>
+					</field>
+					<field name="ditaParams">
+						<list>
+							<antParameter>
+								<field name="name">
+									<String>inputFile</String>
+								</field>
+								<field name="description">
+									<String></String>
+								</field>
+								<field name="value">
+									<String>${cf}</String>
+								</field>
+								<field name="defaultValue">
+									<null/>
+								</field>
+								<field name="type">
+									<Integer>5</Integer>
+								</field>
+								<field name="possibleValues">
+									<null/>
+								</field>
+								<field name="possibleValuesDescriptions">
+									<null/>
+								</field>
+							</antParameter>
+							<antParameter>
+								<field name="name">
+									<String>outputFile</String>
+								</field>
+								<field name="description">
+									<String></String>
+								</field>
+								<field name="value">
+									<String>${cf}</String>
+								</field>
+								<field name="defaultValue">
+									<null/>
+								</field>
+								<field name="type">
+									<Integer>5</Integer>
+								</field>
+								<field name="possibleValues">
+									<null/>
+								</field>
+								<field name="possibleValuesDescriptions">
+									<null/>
+								</field>
+							</antParameter>
+						</list>
+					</field>
+					<field name="jvmArgs">
+						<String>-Xmx256m</String>
+					</field>
+					<field name="useCustomJavaHome">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="customJavaHomeDir">
+						<String></String>
+					</field>
+					<field name="useCustomANTHome">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="customANTHomeDir">
+						<String></String>
+					</field>
+					<field name="workingDir">
+						<String>${cfd}</String>
+					</field>
+					<field name="showConsoleAlways">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="advancedOptionsMap">
+						<null/>
+					</field>
+					<field name="name">
+						<String>ALEA :: MRE next</String>
+					</field>
+					<field name="baseURL">
+						<null/>
+					</field>
+					<field name="footerURL">
+						<null/>
+					</field>
+					<field name="fOPMethod">
+						<null/>
+					</field>
+					<field name="fOProcessorName">
+						<null/>
+					</field>
+					<field name="headerURL">
+						<null/>
+					</field>
+					<field name="inputXSLURL">
+						<null/>
+					</field>
+					<field name="inputXMLURL">
+						<null/>
+					</field>
+					<field name="defaultScenario">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="isFOPPerforming">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="type">
+						<String>ANT</String>
+					</field>
+					<field name="saveAs">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="openInBrowser">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="outputResource">
+						<null/>
+					</field>
+					<field name="openOtherLocationInBrowser">
+						<Boolean>true</Boolean>
+					</field>
+					<field name="locationToOpenInBrowserURL">
+						<String>${cfd}</String>
+					</field>
+					<field name="openInEditor">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInHTMLPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInXMLPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInSVGPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="showInResultSetPane">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="useXSLTInput">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="xsltParams">
+						<list/>
+					</field>
+					<field name="cascadingStylesheets">
+						<String-array/>
+					</field>
+					<field name="xslTransformer">
+						<String>ANT</String>
+					</field>
+					<field name="extensionURLs">
+						<String-array>
+							<String>${oxygenHome}/lib/*.jar</String>
+						</String-array>
+					</field>
+				</antScenario>
+				<antScenario>
+					<field name="additionalAntArgs">
+						<String></String>
+					</field>
+					<field name="buildTarget">
+						<String>mre-complement</String>
+					</field>
+					<field name="buildFilePath">
+						<String>${frameworkDir}/anttasks.xml</String>
+					</field>
+					<field name="ditaParams">
+						<list>
+							<antParameter>
+								<field name="name">
+									<String>inputFile</String>
+								</field>
+								<field name="description">
+									<String></String>
+								</field>
+								<field name="value">
+									<String>${cf}</String>
+								</field>
+								<field name="defaultValue">
+									<null/>
+								</field>
+								<field name="type">
+									<Integer>5</Integer>
+								</field>
+								<field name="possibleValues">
+									<null/>
+								</field>
+								<field name="possibleValuesDescriptions">
+									<null/>
+								</field>
+							</antParameter>
+							<antParameter>
+								<field name="name">
+									<String>outputFile</String>
+								</field>
+								<field name="description">
+									<String></String>
+								</field>
+								<field name="value">
+									<String>${cf}</String>
+								</field>
+								<field name="defaultValue">
+									<null/>
+								</field>
+								<field name="type">
+									<Integer>5</Integer>
+								</field>
+								<field name="possibleValues">
+									<null/>
+								</field>
+								<field name="possibleValuesDescriptions">
+									<null/>
+								</field>
+							</antParameter>
+						</list>
+					</field>
+					<field name="jvmArgs">
+						<String>-Xmx256m</String>
+					</field>
+					<field name="useCustomJavaHome">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="customJavaHomeDir">
+						<String></String>
+					</field>
+					<field name="useCustomANTHome">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="customANTHomeDir">
+						<String></String>
+					</field>
+					<field name="workingDir">
+						<String>${cfd}</String>
+					</field>
+					<field name="showConsoleAlways">
+						<Boolean>false</Boolean>
+					</field>
+					<field name="advancedOptionsMap">
+						<null/>
+					</field>
+					<field name="name">
+						<String>ALEA :: MRE complement</String>
 					</field>
 					<field name="baseURL">
 						<null/>
@@ -795,7 +1483,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ALEA :: extract recension</String>
+						<String>ALEA :: Extract Recension</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -849,7 +1537,7 @@
 						<Boolean>false</Boolean>
 					</field>
 					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
+						<Boolean>false</Boolean>
 					</field>
 					<field name="showInSVGPane">
 						<Boolean>false</Boolean>
@@ -962,7 +1650,7 @@
 						<Boolean>false</Boolean>
 					</field>
 					<field name="showInXMLPane">
-						<Boolean>true</Boolean>
+						<Boolean>false</Boolean>
 					</field>
 					<!--
 					<field name="saveAs">
@@ -1104,7 +1792,7 @@
 								<field name="paramDescription">
 									<paramDescriptor>
 										<field name="localName">
-											<String>witness-cat</String>
+											<String>witnesses-xpath</String>
 										</field>
 										<field name="prefix">
 											<null/>
@@ -1115,7 +1803,33 @@
 									</paramDescriptor>
 								</field>
 								<field name="value">
-									<String>${pdu}/WitnessCatalogue.xml</String>
+									<!--String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String-->
+									<String>doc('${pdu}/WitnessCatalogue.xml')//text//listWit//witness</String>
+								</field>
+								<field name="hasXPathValue">
+									<Boolean>false</Boolean>
+								</field>
+								<field name="isStatic">
+									<Boolean>false</Boolean>
+								</field>
+							</transformationParameter>
+							<transformationParameter>
+								<field name="paramDescription">
+									<paramDescriptor>
+										<field name="localName">
+											<String>witness-siglum-xpath</String>
+										</field>
+										<field name="prefix">
+											<null/>
+										</field>
+										<field name="namespace">
+											<null/>
+										</field>
+									</paramDescriptor>
+								</field>
+								<field name="value">
+									<!--String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String-->
+									<String>descendant::abbr[@type eq 'siglum'][1]</String>
 								</field>
 								<field name="hasXPathValue">
 									<Boolean>false</Boolean>

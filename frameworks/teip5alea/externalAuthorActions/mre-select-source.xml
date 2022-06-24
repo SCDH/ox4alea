@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- user action -->
 <!-- editing atom -->
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="atom.select.source">
+  id="mre.select.source">
   <a:name>@source</a:name>
   <a:description>Select @source.</a:description>
+  <a:smallIconPath href="${framework}/images/mre-source-16.png"/>
+  <a:largeIconPath href="${framework}/images/mre-source-24.png"/>
   <a:operations>
     <a:operation id="de.wwu.scdh.oxbytei.SelectAttributeValueOperation">
-      <a:xpathCondition>self::*</a:xpathCondition>
+      <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
         <a:argument name="name">source</a:argument>
         <a:argument name="elementLocation">self::*</a:argument>

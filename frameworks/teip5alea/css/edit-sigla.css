@@ -1,8 +1,0 @@
-lem:before, rdg:before {
-  background-color: inherit;
-  content:
-    " "
-    oxy_textfield(
-      edit, "@wit")
-    " ";
-}
