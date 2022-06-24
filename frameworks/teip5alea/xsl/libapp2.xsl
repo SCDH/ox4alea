@@ -260,6 +260,12 @@
         <xsl:variable name="lemma-text-nodes" as="text()*">
             <xsl:apply-templates select="$entry" mode="lemma-text-nodes-dspt"/>
         </xsl:variable>
+        <xsl:sequence select="scdh:mk-entry-map($entry, $lemma-text-nodes)"/>
+    </xsl:function>
+
+    <xsl:function name="scdh:mk-entry-map" as="map(*)">
+        <xsl:param name="entry" as="element()"/>
+        <xsl:param name="lemma-text-nodes" as="text()*"/>
         <xsl:variable name="non-whitespace-text-nodes" as="text()*"
             select="$lemma-text-nodes[normalize-space(.) ne '']"/>
         <xsl:variable name="lemma-text-node-ids" as="xs:string*"
