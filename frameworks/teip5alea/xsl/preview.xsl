@@ -28,7 +28,7 @@
     <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
     <xsl:param name="locales-directory" select="'./locales'" as="xs:string"/>
 
-    <xsl:param name="debug" select="true()" as="xs:boolean"/>
+    <xsl:param name="debug" select="false()" as="xs:boolean"/>
 
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
     <xsl:param name="ui-language" as="xs:string" select="''"/>
