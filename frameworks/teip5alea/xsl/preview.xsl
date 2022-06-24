@@ -24,12 +24,6 @@
     <xsl:import href="libcommon.xsl"/>
     <xsl:import href="libbiblio.xsl"/>
 
-    <!-- URI of witness catalogue. -->
-    <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
-
-    <!-- URI of bibliography -->
-    <xsl:param name="biblio" as="xs:string" select="'../samples/biblio.xml'"/>
-
     <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
     <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
     <xsl:param name="locales-directory" select="'./locales'" as="xs:string"/>
@@ -144,11 +138,8 @@
                 </style>
             </head>
             <body>
-                <xsl:if test="not(doc-available($witness-cat)) or $debug">
+                <xsl:if test="$debug">
                     <section>
-                        <xsl:text>Witness Catalogue: </xsl:text>
-                        <xsl:value-of select="$witness-cat"/>
-                        <br/>
                         <xsl:text>UI language: </xsl:text>
                         <xsl:value-of select="$ui-language"/>
                     </section>
