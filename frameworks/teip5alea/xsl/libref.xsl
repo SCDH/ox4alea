@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- A generic implementation of processing references.
 This includes the expansion of local URIs defined with <prefixDef> and processing the XML Base property.
+The suggestion to use the XML Base property either of the occurrence or of the definition context like
+proposed on TEI-L on 2022-05-29 is convered in this implementation.
+Cf. https://tei-l.markmail.org/thread/eogjsbfing65ubm4
 
 Example usage:
 
@@ -66,6 +69,7 @@ scdh:references-from-attribute(@target)[1] => scdh:dereference()
     <xsl:function name="scdh:process-reference" as="xs:string">
         <xsl:param name="reference" as="xs:string"/>
         <xsl:param name="occurrence" as="node()"/>
+        <!-- TODO: improve performance by testing for same-doc ref before getting prefix definitons -->
         <xsl:variable name="definitions" as="node()*"
             select="($occurrence/ancestor-or-self::TEI | (root($occurrence) treat as document-node())/teiCorpus)/teiHeader/encodingDesc/listPrefixDef//prefixDef[matches($reference, concat('^', @ident, ':', @matchPattern))]"/>
         <xsl:choose>
@@ -79,7 +83,8 @@ scdh:references-from-attribute(@target)[1] => scdh:dereference()
                 <!-- expand/replace the URI -->
                 <xsl:variable name="href" as="xs:string"
                     select="replace($reference, concat($definition/@ident, ':', $definition/@matchPattern), $definition/@replacementPattern)"/>
-                <!-- get XML Base property of definition or occurrence -->
+                <!-- get XML Base property of definition or occurrence
+                    Cf. https://tei-l.markmail.org/thread/eogjsbfing65ubm4 -->
                 <xsl:variable name="base">
                     <xsl:choose>
                         <xsl:when
