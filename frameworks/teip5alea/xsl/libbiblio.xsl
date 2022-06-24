@@ -17,10 +17,13 @@
     <xsl:import href="libi18n.xsl"/>
     <xsl:import href="libref.xsl"/>
 
+    <!-- whether or not to make automatic reference for an empty <bibl> element with @corresp -->
+    <xsl:param name="empty-reference-autotext" as="xs:boolean" select="true()"/>
+
     <!-- bibliographic reference that needs text pulled from the bibliography -->
     <xsl:template
-        match="bibl[@corresp and normalize-space(string-join(child::node() except child::biblScope, '')) eq '']"
-        mode="#all">
+        match="bibl[@corresp and normalize-space(string-join(child::node() except child::biblScope, '')) eq '' and $empty-reference-autotext]"
+        mode="text apparatus-reading-text editorial-note">
         <xsl:variable name="biblnode" select="."/>
         <xsl:variable name="autotext" as="xs:boolean"
             select="exists(parent::note[normalize-space(string-join((text() | *) except bibl, '')) eq ''])"/>
@@ -62,7 +65,7 @@
     <!-- bibliographic reference where reference text is already present -->
     <xsl:template
         match="bibl[@corresp and normalize-space(string-join(child::node() except child::biblScope, '')) ne '']"
-        mode="#all">
+        mode="text apparatus-reading-text editorial-note">
         <xsl:variable name="biblnode" select="."/>
         <xsl:variable name="hasBiblText" as="xs:boolean"
             select="normalize-space(node() except biblScope) ne ''"/>
