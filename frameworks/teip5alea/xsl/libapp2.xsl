@@ -174,7 +174,7 @@
                 </xsl:if>
 
                 <div class="apparatus-line">
-                    <span class="apparatus-line-number">
+                    <span class="apparatus-line-number line-number">
                         <xsl:value-of select="current-grouping-key()"/>
                         <xsl:text>&sp;</xsl:text>
                     </span>
