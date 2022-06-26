@@ -17,8 +17,4 @@
     <uriSuffix uriSuffix="css/font.css" uri="css/font.css"/>
     <systemSuffix systemIdSuffix="css/font.css" uri="css/font.css"/>
 
-    <!-- override bibliography of ALEA framework -->
-    <systemSuffix systemIdSuffix="samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
-    <uriSuffix uriSuffix="samples/biblio.xml" uri="../Literaturverzeichnis.xml"/>
-
 </catalog>
