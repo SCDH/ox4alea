@@ -9,8 +9,9 @@
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    xmlns:scdhx="http://scdh.wwu.de/xslt#" exclude-result-prefixes="xs scdh"
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0" default-mode="preview">
+    xmlns:scdhx="http://scdh.wwu.de/xslt#" xmlns:xi="http://www.w3.org/2001/XInclude"
+    exclude-result-prefixes="xs scdh scdhx xi" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
+    version="3.0" default-mode="preview">
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
@@ -57,6 +58,16 @@
 
     <xsl:template match="/ | TEI">
         <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&lb;</xsl:text>
+        <xsl:for-each select="//xi:include">
+            <xsl:message>
+                <xsl:text>WARNING: </xsl:text>
+                <xsl:text>XInclude element not expanded! @href="</xsl:text>
+                <xsl:value-of select="@href"/>
+                <xsl:text>" @xpointer="</xsl:text>
+                <xsl:value-of select="@xpointer"/>
+                <xsl:text>"</xsl:text>
+            </xsl:message>
+        </xsl:for-each>
         <html lang="{scdh:language(/*)}">
             <head>
                 <meta charset="utf-8"/>
