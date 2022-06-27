@@ -3,16 +3,17 @@
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="mre.reset">
+  id="mre.reset.update">
   <a:name>Reset MRE</a:name>
   <a:description>Reset the MRE</a:description>
-  <a:smallIconPath href="${framework}/images/reset-mre-16.png"/>
-  <a:largeIconPath href="${framework}/images/reset-mre-24.png"/>
   <a:operations>
-    <a:operation id="ExecuteMultipleActionsOperation">
+    <a:operation id="XSLTOperation">
       <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
-        <a:argument name="actionIDs">mre.save.position, mre.reset.update, mre.restore.position</a:argument>
+        <a:argument name="sourceLocation">/*</a:argument>
+        <a:argument name="targetLocation">//appInfo/application[@ident eq 'oxmre']</a:argument>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="script">${framework}/xsl/mre-reset.xsl</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
