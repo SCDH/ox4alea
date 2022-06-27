@@ -117,6 +117,18 @@ ant -buildfile THISFILE \
 		<move file="${inputFile}.temp" toFile="${outputFile}"/>
 	</target>
 
+	<target name="mre-prev">
+		<!-- This tasks resets the multiple recensions editor (MRE) -->
+		<xslt style="xsl/mre-prev.xsl" in="${inputFile}" out="${outputFile}.temp">
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+			<classpath location="${saxon.jar}"/>
+			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+				value="org.apache.xerces.parsers.XML11Configuration"/>			
+		</xslt>
+		<!-- the xslt task fails when writing to the same file. -->
+		<move file="${inputFile}.temp" toFile="${outputFile}"/>
+	</target>
+	
 	<target name="mre-complement">
 		<!-- This tasks resets the multiple recensions editor (MRE) -->
 		<xslt style="xsl/mre-complement.xsl" in="${inputFile}" out="${outputFile}.temp">

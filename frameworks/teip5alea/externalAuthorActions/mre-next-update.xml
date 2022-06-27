@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- user action -->
+<!-- editing atom -->
+<!-- the current editing position should be stored before and restored after this operation -->
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="mre.next">
+  id="mre.next.update">
   <a:name>MRE next</a:name>
   <a:description>Set the MRE: add the recension 'in progress' to the recensions in 'done' and shift to the next.</a:description>
-  <a:smallIconPath href="${framework}/images/mre-next-16.png"/>
-  <a:largeIconPath href="${framework}/images/mre-next-24.png"/>
   <a:operations>
-    <a:operation id="ExecuteMultipleActionsOperation">
+    <a:operation id="XSLTOperation">
       <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
-        <a:argument name="actionIDs">mre.save.position, mre.next.update, mre.restore.position</a:argument>
+        <a:argument name="sourceLocation">/*</a:argument>
+        <a:argument name="targetLocation">//appInfo/application[@ident eq 'oxmre']</a:argument>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="script">${framework}/xsl/mre-next.xsl</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>

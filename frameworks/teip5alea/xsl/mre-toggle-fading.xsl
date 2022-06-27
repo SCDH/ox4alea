@@ -9,11 +9,12 @@
 
     <xsl:import href="mre-common.xsl"/>
 
+    <!-- leave current recension unchanged -->
     <xsl:variable name="recension-to-become-current" as="xs:integer" select="$current-index"/>
 
-    <!-- set 'othertarget'/'done' to all recensions but the current one -->
+    <!-- fading empty: set 'fading' to all recensions but the one to become current -->
     <xsl:template match="
-            application[@ident eq 'oxmre']/ptr[@subtype eq 'othertarget']">
+            application[@ident eq 'oxmre']/ptr[@subtype eq 'fading' and not(@target)]">
         <xsl:copy>
             <xsl:apply-templates select="@* except @target"/>
             <xsl:attribute name="target">
@@ -21,6 +22,15 @@
                     select="string-join($recensions[position() ne $recension-to-become-current], ' ')"
                 />
             </xsl:attribute>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <!-- fading non-empty: reset 'fading' -->
+    <xsl:template match="
+            application[@ident eq 'oxmre']/ptr[@subtype eq 'fading' and @target]">
+        <xsl:copy>
+            <xsl:apply-templates select="@* except @target"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>

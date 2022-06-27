@@ -3,16 +3,16 @@
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="mre.next">
-  <a:name>MRE next</a:name>
-  <a:description>Set the MRE: add the recension 'in progress' to the recensions in 'done' and shift to the next.</a:description>
-  <a:smallIconPath href="${framework}/images/mre-next-16.png"/>
-  <a:largeIconPath href="${framework}/images/mre-next-24.png"/>
+  id="mre.toggle.fading">
+  <a:name>Toggle fading</a:name>
+  <a:description>Toggle fading</a:description>
+  <a:smallIconPath href="${framework}/images/mre-toggle-fading-16.png"/>
+  <a:largeIconPath href="${framework}/images/mre-toggle-fading-24.png"/>
   <a:operations>
     <a:operation id="ExecuteMultipleActionsOperation">
       <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
-        <a:argument name="actionIDs">mre.save.position, mre.next.update, mre.restore.position</a:argument>
+        <a:argument name="actionIDs">mre.save.position, mre.toggle.fading.update, mre.restore.position</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
