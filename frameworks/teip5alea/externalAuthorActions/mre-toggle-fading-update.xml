@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- editing atom -->
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="mre.toggle.fading.update">
+  <a:name>Toggle fading</a:name>
+  <a:description>Toggle fading in the MRE</a:description>
+  <a:operations>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="sourceLocation">/*</a:argument>
+        <a:argument name="targetLocation">//appInfo/application[@ident eq 'oxmre']</a:argument>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="script">${framework}/xsl/mre-toggle-fading.xsl</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>

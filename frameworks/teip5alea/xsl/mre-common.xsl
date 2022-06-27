@@ -79,7 +79,7 @@ This module contains components reused by other stylesheets.
 
     <!-- set 'fading' to all recensions but the next one -->
     <xsl:template match="
-            application[@ident eq 'oxmre']/ptr[@subtype eq 'fading']">
+            application[@ident eq 'oxmre']/ptr[@subtype eq 'fading' and @target]">
         <xsl:copy>
             <xsl:apply-templates select="@* except @target"/>
             <xsl:attribute name="target">
