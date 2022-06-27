@@ -8,9 +8,9 @@
     <!ENTITY lb "&#xa;" >
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    xmlns:scdhx="http://scdh.wwu.de/xslt#" xmlns:xi="http://www.w3.org/2001/XInclude"
-    exclude-result-prefixes="xs scdh scdhx xi" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA" xmlns:scdhx="http://scdh.wwu.de/xslt#"
+    exclude-result-prefixes="xs xi scdh scdhx" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="3.0" default-mode="preview">
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
@@ -171,7 +171,8 @@
                 <hr/>
                 <section class="comments">
                     <xsl:call-template name="scdhx:editorial-notes">
-                        <xsl:with-param name="notes" select="scdhx:editorial-notes(//text/body, 'descendant::note')"/>
+                        <xsl:with-param name="notes"
+                            select="scdhx:editorial-notes(//text/body, 'descendant::note')"/>
                     </xsl:call-template>
                 </section>
                 <hr/>

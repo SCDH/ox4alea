@@ -39,6 +39,13 @@ ant -buildfile THISFILE \
 	<echo> basedir: ${basedir}</echo>
 
 	<echo> using Saxon: ${saxon.jar}</echo>
+	
+	<!-- we are using foreach from ant-contrib -->
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="${basedir}/ant-contrib-1.0b3.jar"/>
+		</classpath>
+	</taskdef>
 
 	<!-- extract reading -->
 
@@ -47,6 +54,14 @@ ant -buildfile THISFILE \
 	<property name="block-ids" value="false"/>
 	<property name="keep-existing-collation" value="true"/>
 	<property name="protocoll" value="diwan"/>
+
+	<!-- preview -->
+	<property name="source" value=""/>
+	<property name="i18n" value="${basedir}/xsl/i18n.js"/>
+	<property name="locales-directory" value="${basedir}/xsl/locales"/>
+	<property name="witnesses-xpath" value="//listWit//witness"/>
+	<property name="witness-siglum-xpath" value="descendant::abbr[@type eq 'siglum'][1]"/>
+
 
 	<target name="extract-reading">
 		<!-- Task for extracting a reading in order to start encoding an other recension based on it.
@@ -112,6 +127,35 @@ ant -buildfile THISFILE \
 		</xslt>
 		<!-- the xslt task fails when writing to the same file. -->
 		<move file="${inputFile}.temp" toFile="${outputFile}"/>
+	</target>
+	
+	<target name="preview-all-recensions">
+		<xslt style="xsl/recensions-ant-property.xsl" in="${inputFile}" out="${inputFile}.recensions.txt">
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+				value="org.apache.xerces.parsers.XML11Configuration"/>						
+		</xslt>
+		<property file="${inputFile}.recensions.txt"/>
+		<echo>Generating Preview for recensions ${recensions}</echo>
+		<foreach list="${recensions}" target="preview-recension" param="source">
+		</foreach>
+	</target>
+
+	<target name="preview-recension">
+		<property name="htmlOutput" value="${inputFile}.${source}.html"/>
+		<echo>Generating preview for recension ${source}</echo>
+		<echo>Getting witnesses' labels from ${witnesses-xpath}</echo>
+		<xslt style="xsl/preview-recension.xsl" in="${inputFile}" out="${htmlOutput}">
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/xinclude-aware" value="on"/>
+			</factory>
+			<param name="source" expression="${source}" type="STRING"/>
+			<param name="i18n" expression="${i18n}" type="STRING"/>
+			<param name="locales-directory" expression="${locales-directory}"/>
+			<param name="witnesses-xpath" expression="${witnesses-xpath}" type="STRING"/>
+			<param name="witness-siglum-xpath" expression="${witness-siglum-xpath}" type="STRING"/>
+			<param name="debug" expression="true" type="BOOLEAN"/>
+		</xslt>
 	</target>
 
 </project>

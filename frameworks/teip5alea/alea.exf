@@ -100,6 +100,8 @@
         <addAction id="mre.complement"/>
         <addAction id="mre.to.done"/>
         <addAction id="mre.select.source"/>
+        <separator/>
+        <addAction id="mre.preview.all"/>
         <!--addAction id="mre.to.all.but.current"/-->
       </toolbar>
 
