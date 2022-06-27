@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- author action -->
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="mre.preview.all">
+  <a:name>Preview</a:name>
+  <a:description>Update the preview of all recensions.</a:description>
+  <a:smallIconPath href="${framework}/images/mre-preview-16.png"/>
+  <a:largeIconPath href="${framework}/images/mre-preview-24.png"/>
+  <a:operations>
+    <a:operation id="ExecuteTransformationScenariosOperation">
+      <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="scenarioNames">ALEA :: Update all Recensions' Preview</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
