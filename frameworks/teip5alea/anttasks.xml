@@ -132,7 +132,6 @@ ant -buildfile THISFILE \
 	<target name="preview-all-recensions">
 		<xslt style="xsl/recensions-ant-property.xsl" in="${inputFile}" out="${inputFile}.recensions.txt">
 			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
-			<classpath location="${saxon.jar}"/>
 			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
 				value="org.apache.xerces.parsers.XML11Configuration"/>						
 		</xslt>
@@ -147,11 +146,9 @@ ant -buildfile THISFILE \
 		<echo>Generating preview for recension ${source}</echo>
 		<echo>Getting witnesses' labels from ${witnesses-xpath}</echo>
 		<xslt style="xsl/preview-recension.xsl" in="${inputFile}" out="${htmlOutput}">
-			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
-			<classpath location="${saxon.jar}"/>
-			<!-- FIXME: turn on expanding XInlcude -->
-			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
-				value="org.apache.xerces.parsers.XML11Configuration"/>			
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/xinclude-aware" value="on"/>
+			</factory>
 			<param name="source" expression="${source}" type="STRING"/>
 			<param name="i18n" expression="${i18n}" type="STRING"/>
 			<param name="locales-directory" expression="${locales-directory}"/>
