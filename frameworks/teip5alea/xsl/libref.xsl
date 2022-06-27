@@ -48,6 +48,8 @@ scdh:references-from-attribute(@target)[1] => scdh:dereference()
     <!-- whether to handle references starting with the number sign '#' as same-document references -->
     <xsl:param name="is-fragment-same-doc" as="xs:boolean" select="true()"/>
 
+    <xsl:param name="debug" as="xs:boolean" select="false()" required="no"/>
+
 
     <!-- same as resolve-uri(), but returns the href it is a fragment identifier -->
     <xsl:function name="scdh:resolve-uri-or-fragment" as="xs:string">
@@ -69,6 +71,14 @@ scdh:references-from-attribute(@target)[1] => scdh:dereference()
     <xsl:function name="scdh:process-reference" as="xs:string">
         <xsl:param name="reference" as="xs:string"/>
         <xsl:param name="occurrence" as="node()"/>
+        <xsl:if test="$debug">
+            <xsl:message>
+                <xsl:text>Resolving </xsl:text>
+                <xsl:value-of select="$reference"/>
+                <xsl:text> in the context of </xsl:text>
+                <xsl:value-of select="name($occurrence)"/>
+            </xsl:message>
+        </xsl:if>
         <xsl:choose>
             <xsl:when test="starts-with($reference, '#') and $is-fragment-same-doc">
                 <xsl:value-of select="$reference"/>
@@ -76,6 +86,12 @@ scdh:references-from-attribute(@target)[1] => scdh:dereference()
             <xsl:otherwise>
                 <xsl:variable name="definitions" as="node()*"
                     select="($occurrence/ancestor-or-self::TEI | (root($occurrence) treat as document-node())/teiCorpus)/teiHeader/encodingDesc/listPrefixDef//prefixDef[matches($reference, concat('^', @ident, ':', @matchPattern))]"/>
+                <xsl:if test="$debug">
+                    <xsl:message>
+                        <xsl:text>prefixDef found: </xsl:text>
+                        <xsl:value-of select="count($definitions)"/>
+                    </xsl:message>
+                </xsl:if>
                 <xsl:choose>
                     <xsl:when test="empty($definitions)">
                         <!-- not a local URI, return without expanding/replacing -->
@@ -89,6 +105,14 @@ scdh:references-from-attribute(@target)[1] => scdh:dereference()
                         <!-- expand/replace the URI -->
                         <xsl:variable name="href" as="xs:string"
                             select="replace($reference, concat($definition/@ident, ':', $definition/@matchPattern), $definition/@replacementPattern)"/>
+                        <xsl:if test="$debug">
+                            <xsl:message>
+                                <xsl:text>Local URI </xsl:text>
+                                <xsl:value-of select="$reference"/>
+                                <xsl:text> expanded to </xsl:text>
+                                <xsl:value-of select="$href"/>
+                            </xsl:message>
+                        </xsl:if>
                         <xsl:choose>
                             <xsl:when test="starts-with($href, '#') and $is-fragment-same-doc">
                                 <xsl:value-of select="$href"/>
@@ -112,6 +136,14 @@ scdh:references-from-attribute(@target)[1] => scdh:dereference()
     <!-- process all references given in an attribute -->
     <xsl:function name="scdh:references-from-attribute" as="xs:string*">
         <xsl:param name="attribute" as="attribute()"/>
+        <xsl:if test="$debug">
+            <xsl:message>
+                <xsl:text>Processing references form attribute </xsl:text>
+                <xsl:value-of select="$attribute/parent::* => name()"/>
+                <xsl:text>/@</xsl:text>
+                <xsl:value-of select="name($attribute)"/>
+            </xsl:message>
+        </xsl:if>
         <xsl:for-each select="tokenize($attribute)">
             <xsl:value-of select="scdh:process-reference(., $attribute)"/>
         </xsl:for-each>

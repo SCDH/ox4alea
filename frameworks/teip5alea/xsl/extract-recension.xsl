@@ -21,11 +21,11 @@ We define a default mode in order to make stylesheet composition simpler.
     <xsl:param name="debug" as="xs:boolean" select="false()" required="false"/>
 
     <xsl:param name="work-id-xpath">
-        <xsl:text>(/@xml:id, //idno[@type eq 'canonical-id'], //idno[@type eq 'work-identifier'], tokenize(tokenize(base-uri(/), '/')[last()], '\.')[1])[1]</xsl:text>
+        <xsl:text>(/*/@xml:id, //idno[@type eq 'canonical-id'], //idno[@type eq 'work-identifier'], tokenize(tokenize(base-uri(/), '/')[last()], '\.')[1])[1]</xsl:text>
     </xsl:param>
 
     <xsl:variable name="work-id" as="xs:string">
-        <xsl:variable name="id">
+        <xsl:variable name="id" as="xs:string">
             <xsl:evaluate as="xs:string" context-item="/" xpath="$work-id-xpath" expand-text="true"
             />
         </xsl:variable>

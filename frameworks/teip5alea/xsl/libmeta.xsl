@@ -13,7 +13,7 @@
     <xsl:import href="libwit.xsl"/>
 
     <xsl:param name="work-id-xpath">
-        <xsl:text>(/@xml:id, //idno[@type eq 'canonical-id'], //idno[@type eq 'work-identifier'], tokenize(tokenize(base-uri(/), '/')[last()], '\.')[1])[1]</xsl:text>
+        <xsl:text>(/*/@xml:id, //idno[@type eq 'canonical-id'], //idno[@type eq 'work-identifier'], tokenize(tokenize(base-uri(/), '/')[last()], '\.')[1])[1]</xsl:text>
     </xsl:param>
 
     <xsl:variable name="work-id" as="xs:string">

@@ -15,6 +15,13 @@
   - old parameter that points to a central witness catalogue is gone
 - be more precise in which modes to use the templates defined in
   `librend.xsl` and `libbiblio.xsl`
+- MRE:
+  - added action `mre.prev` for shifting back to the previous
+    recension
+  - added action `mre.toggle.fading` for turning fading on/off
+  - added transformation scenario for updating the HTML preview of all
+    recensions
+  - added action for running this preview
 
 ### 2.6.1 ##
 
