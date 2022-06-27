@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- user action -->
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="mre.prev">
+  <a:name>MRE prev</a:name>
+  <a:description>Set the MRE: shift back to the previous recension.</a:description>
+  <a:smallIconPath href="${framework}/images/mre-prev-16.png"/>
+  <a:largeIconPath href="${framework}/images/mre-prev-24.png"/>
+  <a:operations>
+    <a:operation id="ExecuteMultipleActionsOperation">
+      <a:xpathCondition>true()</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="actionIDs">mre.save.position, mre.prev.update, mre.restore.position</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>

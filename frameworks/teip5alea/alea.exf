@@ -97,6 +97,7 @@
       <toolbar name="MRE">
         <addAction id="mre.reset"/>
         <addAction id="mre.next"/>
+        <addAction id="mre.prev"/>
         <addAction id="mre.complement"/>
         <addAction id="mre.to.done"/>
         <addAction id="mre.select.source"/>

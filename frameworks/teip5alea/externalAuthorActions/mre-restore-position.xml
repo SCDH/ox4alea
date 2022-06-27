@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="mre.restore.position">
+  <a:name>Restore position</a:name>
+  <a:description>Move the caret back to the last anchor save point and remove it.</a:description>
+  <a:operations>
+    <a:operation id="de.wwu.scdh.oxbytei.ExpandingDeleteElementOperation">
+      <a:xpathCondition>true()</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="elementLocation">//*[@xml:id eq '${anchorId}']</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
