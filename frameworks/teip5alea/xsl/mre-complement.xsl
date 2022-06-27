@@ -11,4 +11,18 @@
 
     <xsl:variable name="recension-to-become-current" as="xs:integer" select="$current-index"/>
 
+    <!-- set 'othertarget'/'done' to all recensions but the current one -->
+    <xsl:template match="
+            application[@ident eq 'oxmre']/ptr[@subtype eq 'othertarget']">
+        <xsl:copy>
+            <xsl:apply-templates select="@* except @target"/>
+            <xsl:attribute name="target">
+                <xsl:value-of
+                    select="string-join($recensions[position() ne $recension-to-become-current], ' ')"
+                />
+            </xsl:attribute>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+
 </xsl:stylesheet>
