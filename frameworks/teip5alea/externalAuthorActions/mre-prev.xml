@@ -10,7 +10,7 @@
   <a:largeIconPath href="${framework}/images/mre-prev-24.png"/>
   <a:operations>
     <a:operation id="ExecuteMultipleActionsOperation">
-      <a:xpathCondition>true()</a:xpathCondition>
+      <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
         <a:argument name="actionIDs">mre.save.position, mre.prev.update, mre.restore.position</a:argument>
       </a:arguments>
