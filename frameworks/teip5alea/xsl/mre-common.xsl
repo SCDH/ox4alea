@@ -23,7 +23,7 @@ This module contains components reused by other stylesheets.
         <xsl:text>//sourceDesc//listWit/@xml:id</xsl:text>
     </xsl:param>
 
-    <xsl:param name="debug" select="true()"/>
+    <xsl:param name="debug" select="false()"/>
 
     <xsl:variable name="recensions" as="xs:string*">
         <xsl:variable name="ids" as="xs:string*">
