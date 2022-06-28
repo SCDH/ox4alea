@@ -12,7 +12,7 @@
 
     <xsl:import href="libwit.xsl"/>
 
-    <xsl:param name="work-id-xpath">
+    <xsl:param name="work-id-xpath" as="xs:string">
         <xsl:text>(/*/@xml:id, //idno[@type eq 'canonical-id'], //idno[@type eq 'work-identifier'], tokenize(tokenize(base-uri(/), '/')[last()], '\.')[1])[1]</xsl:text>
     </xsl:param>
 
@@ -23,6 +23,12 @@
     <xsl:mode name="metadata" on-no-match="shallow-skip"/>
 
     <xsl:template match="/ | TEI | teiHeader" mode="metadata">
+        <xsl:variable name="work-id" as="xs:string">
+            <!-- we evaluate the XPath again in the context of the current item.
+                This is required for composition in preview-recension.xsl -->
+            <xsl:evaluate as="xs:string" context-item="." xpath="$work-id-xpath" expand-text="true"
+            />
+        </xsl:variable>
         <p>
             <xsl:value-of select="$work-id"/>
             <xsl:text>: </xsl:text>

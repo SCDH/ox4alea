@@ -72,6 +72,12 @@
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <xsl:variable name="work-id" as="xs:string">
+                    <!-- we evaluate the XPath again in the context of the current item.
+                        This is required for composition in preview-recension.xsl -->
+                    <xsl:evaluate as="xs:string" context-item="." xpath="$work-id-xpath"
+                        expand-text="true"/>
+                </xsl:variable>
                 <title>
                     <xsl:value-of select="$work-id"/>
                     <xsl:text> :: ALEA Vorschau</xsl:text>
