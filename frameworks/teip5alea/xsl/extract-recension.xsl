@@ -20,16 +20,34 @@ We define a default mode in order to make stylesheet composition simpler.
 
     <xsl:param name="debug" as="xs:boolean" select="false()" required="false"/>
 
-    <xsl:param name="work-id-xpath">
+    <xsl:param name="work-id-xpath" as="xs:string">
         <xsl:text>(/*/@xml:id, //idno[@type eq 'canonical-id'], //idno[@type eq 'work-identifier'], tokenize(tokenize(base-uri(/), '/')[last()], '\.')[1])[1]</xsl:text>
     </xsl:param>
 
-    <xsl:variable name="work-id" as="xs:string">
-        <xsl:variable name="id" as="xs:string">
+    <xsl:param name="source-work-id-delim" as="xs:string" select="'###'"/>
+
+    <xsl:param name="new-work-id-xpath" as="xs:string">
+        <xsl:text>let $ts:=tokenize(., '#') return concat(replace($ts[1], '[a-z]', ''), $ts[2])</xsl:text>
+    </xsl:param>
+
+    <xsl:variable name="new-work-id" as="xs:string">
+        <xsl:variable name="current-id" as="xs:string">
             <xsl:evaluate as="xs:string" context-item="/" xpath="$work-id-xpath" expand-text="true"
             />
         </xsl:variable>
-        <xsl:value-of select="concat(replace($source, '[a-z]', ''), $id)"/>
+        <xsl:variable name="new-id" as="xs:string">
+            <xsl:evaluate as="xs:string" context-item="concat($source, '#', $current-id)"
+                xpath="$new-work-id-xpath" expand-text="true"/>
+        </xsl:variable>
+        <xsl:if test="$debug">
+            <xsl:message>
+                <xsl:text>Changed work ID from </xsl:text>
+                <xsl:value-of select="$current-id"/>
+                <xsl:text> to </xsl:text>
+                <xsl:value-of select="$new-id"/>
+            </xsl:message>
+        </xsl:if>
+        <xsl:value-of select="$new-id"/>
     </xsl:variable>
 
     <!-- delete MRE app info -->
@@ -72,7 +90,7 @@ We define a default mode in order to make stylesheet composition simpler.
     <xsl:template match="TEI">
         <xsl:copy>
             <xsl:apply-templates select="@* except @xml:id"/>
-            <xsl:attribute name="xml:id" select="$work-id"/>
+            <xsl:attribute name="xml:id" select="$new-work-id"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>

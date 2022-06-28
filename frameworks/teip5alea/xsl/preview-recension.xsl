@@ -34,7 +34,7 @@ This is simply a composition of extract-recension and preview.
         <xsl:copy>
             <!-- we have to do everything like in the rule for TEI in extract-recension.xsl -->
             <xsl:apply-templates mode="extract-recension" select="@* except @xml:id"/>
-            <xsl:attribute name="xml:id" select="$work-id"/>
+            <xsl:attribute name="xml:id" select="$new-work-id"/>
             <!-- we use document URI from the source by explicitly passing / as a parameter. -->
             <xsl:attribute name="xml:base" select="document-uri(/)"/>
             <xsl:apply-templates mode="extract-recension" select="node()"/>
