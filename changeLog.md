@@ -1,6 +1,6 @@
 # change log #
 
-### dev ###
+### 2.7.0 ###
 
 - use `libapp2.xsl` for the apparatus
   - works for `double-end-point` and `parallel-segmentation`
@@ -22,6 +22,7 @@
   - added transformation scenario for updating the HTML preview of all
     recensions
   - added action for running this preview
+  - fix work ID for recension preview
 
 ### 2.6.1 ##
 
