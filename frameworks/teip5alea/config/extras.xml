@@ -3,6 +3,12 @@
     <properties>
         <!-- MRE: how to find recensions. Default: all sourceDesc//listWit elements with @xml:id -->
         <property name="oxbytao.mre.recensions.xpath">//sourceDesc//listWit[@xml:id]</property>
+        <!-- Preview: -->
+        <property name="alea.xsl.libwit.witnesses.xpath">doc('${pdu}/WitnessCatalogue.xml')//text//listWit//witness</property>
+        <!--
+        <property name="alea.xsl.libwit.witnesses.xpath">ancestor::TEI//sourceDesc//witness | /teiCorpus/teiHeader//sourceDesc//witness</property>
+        -->
+        <property name="alea.xsl.libwit.siglum.xpath">descendant::abbr[@type eq 'siglum'][1]</property>
     </properties>
     <plugins>
         <plugin>

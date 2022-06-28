@@ -8,26 +8,22 @@
     <!ENTITY lb "&#xa;" >
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    exclude-result-prefixes="xs scdh" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA" xmlns:scdhx="http://scdh.wwu.de/xslt#"
+    exclude-result-prefixes="xs xi scdh scdhx" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="3.0" default-mode="preview">
 
     <xsl:output media-type="text/html" method="html" encoding="UTF-8"/>
 
     <xsl:include href="libtext.xsl"/>
     <xsl:include href="librend.xsl"/>
-    <xsl:include href="libapp.xsl"/>
+    <xsl:import href="libnote2.xsl"/>
+    <xsl:import href="libapp2.xsl"/>
     <xsl:include href="libmeta.xsl"/>
     <xsl:import href="libwit.xsl"/>
     <xsl:import href="libi18n.xsl"/>
     <xsl:import href="libcommon.xsl"/>
     <xsl:import href="libbiblio.xsl"/>
-
-    <!-- URI of witness catalogue. -->
-    <xsl:param name="witness-cat" select="'WitnessCatalogue.xml'" as="xs:string"/>
-
-    <!-- URI of bibliography -->
-    <xsl:param name="biblio" as="xs:string" select="'../samples/biblio.xml'"/>
 
     <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
     <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
@@ -62,10 +58,26 @@
 
     <xsl:template match="/ | TEI">
         <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&lb;</xsl:text>
+        <xsl:for-each select="//xi:include">
+            <xsl:message>
+                <xsl:text>WARNING: </xsl:text>
+                <xsl:text>XInclude element not expanded! @href="</xsl:text>
+                <xsl:value-of select="@href"/>
+                <xsl:text>" @xpointer="</xsl:text>
+                <xsl:value-of select="@xpointer"/>
+                <xsl:text>"</xsl:text>
+            </xsl:message>
+        </xsl:for-each>
         <html lang="{scdh:language(/*)}">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <xsl:variable name="work-id" as="xs:string">
+                    <!-- we evaluate the XPath again in the context of the current item.
+                        This is required for composition in preview-recension.xsl -->
+                    <xsl:evaluate as="xs:string" context-item="." xpath="$work-id-xpath"
+                        expand-text="true"/>
+                </xsl:variable>
                 <title>
                     <xsl:value-of select="$work-id"/>
                     <xsl:text> :: ALEA Vorschau</xsl:text>
@@ -101,10 +113,20 @@
                     }
                     td.line-number, td.apparatus-line-number, td.editorial-note-number {
                         vertical-align:top;
+                        padding-left: 10px;
+                        }
+                    .line-number, .apparatus-line-number, .editor-note-number {
                         text-align:right;
                         font-size: 0.7em;
                         padding-top: 0.3em;
-                        padding-left: 10px;
+                    }
+                    div.apparatus-line,
+                    div.editorial-note {
+                        padding: 2px 0;
+                    }
+                    span.line-number {
+                        display: inline-block;
+                        min-width: 3em;
                     }
                     td.text-col1 {
                         padding-left: 40px;
@@ -118,6 +140,9 @@
                     abbr {
                         text-decoration: none;
                     }
+                    .lemma-gap {
+                        font-size:.8em;
+                    }
                     @font-face {
                         font-family:"Arabic Typesetting";
                         src:url("../../../arabt100.ttf");
@@ -130,11 +155,8 @@
                 </style>
             </head>
             <body>
-                <xsl:if test="not(doc-available($witness-cat)) or $debug">
+                <xsl:if test="$debug">
                     <section>
-                        <xsl:text>Witness Catalogue: </xsl:text>
-                        <xsl:value-of select="$witness-cat"/>
-                        <br/>
                         <xsl:text>UI language: </xsl:text>
                         <xsl:value-of select="$ui-language"/>
                     </section>
@@ -148,11 +170,16 @@
                 </section>
                 <hr/>
                 <section class="variants">
-                    <xsl:call-template name="line-referencing-apparatus"/>
+                    <xsl:call-template name="scdhx:apparatus-for-context">
+                        <xsl:with-param name="app-context" select="/"/>
+                    </xsl:call-template>
                 </section>
                 <hr/>
                 <section class="comments">
-                    <xsl:call-template name="line-referencing-comments"/>
+                    <xsl:call-template name="scdhx:editorial-notes">
+                        <xsl:with-param name="notes"
+                            select="scdhx:editorial-notes(//text/body, 'descendant::note')"/>
+                    </xsl:call-template>
                 </section>
                 <hr/>
                 <xsl:call-template name="i18n-language-chooser-html">
