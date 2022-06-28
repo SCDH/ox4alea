@@ -1525,6 +1525,7 @@
                             <String>${oxygenHome}/lib/xml-apis.jar</String>
                             <String>${oxygenHome}/lib/*log4j*.jar</String>
                             <String>${oxygenHome}/lib/*saxon*9*.jar</String>
+                            <String>${oxygenHome}/lib/*saxon*10*.jar</String>
                             <String>${oxygenHome}/lib/guava-*.jar</String>
 						</String-array>
 					</field>
