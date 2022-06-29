@@ -1,5 +1,9 @@
 # change log #
 
+### 2.7.1 ###
+
+- fix bug in shortcut action for inserting references to encyclopedia
+
 ### 2.7.0 ###
 
 - use `libapp2.xsl` for the apparatus
