@@ -12,7 +12,7 @@
       <a:arguments>
         <a:argument name="elementLocation">ancestor-or-self::TEI</a:argument>
         <a:argument name="name">xml:id</a:argument>
-        <a:argument name="value">${ask('Title / ID', generic, '${xpath_eval(@xml:id)}', @title)}</a:argument>
+        <a:argument name="value">${ask('Title / ID', generic, '${xpath_eval(ancestor-or-self::TEI/@xml:id)}', @title)}</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
