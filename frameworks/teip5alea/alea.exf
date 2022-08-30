@@ -50,6 +50,7 @@
       <addAction anchor="insert image" id="insert_verse"/>
       <addAction anchor="insert image" id="insert_stanza"/>
       <addAction anchor="insert image" id="insert_caesura"/>
+      <addAction anchor="insert image" id="edit.title"/>
       <addAction anchor="del.app" id="add_witdetail"/>
       <addAction anchor="del.app" id="register_witness"/>
       <separator anchor="del.app"/>
