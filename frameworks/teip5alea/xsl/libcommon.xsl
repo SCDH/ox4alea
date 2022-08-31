@@ -51,7 +51,7 @@
             </xsl:when>
             <xsl:when test="$el/ancestor-or-self::l">
                 <xsl:variable name="inc" select="
-                        if ($el/ancestor::rdg) then
+                        if ($el/ancestor-or-self::l/ancestor::rdg) then
                             0
                         else
                             1" as="xs:integer"/>
