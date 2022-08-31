@@ -45,9 +45,9 @@
                     select="concat('H', count($el/preceding::head[not(ancestor::rdg)]) + 1, $suffix)"
                 />
             </xsl:when>
-            <xsl:when test="$el/ancestor-or-self::p">
+            <xsl:when test="$el/ancestor-or-self::p[parent::div and preceding-sibling::head]">
                 <xsl:value-of
-                    select="concat('P', count($el/preceding::p[not(ancestor::rdg)]) + 1, $suffix)"/>
+                    select="concat('P', count($el/preceding::head[not(ancestor::rdg)]), '.', count($el/ancestor-or-self::p/preceding-sibling::p) + 1, $suffix)"/>
             </xsl:when>
             <xsl:when test="$el/ancestor-or-self::l">
                 <xsl:variable name="inc" select="

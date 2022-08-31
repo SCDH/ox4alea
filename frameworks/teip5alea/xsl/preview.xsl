@@ -124,6 +124,13 @@
                     div.editorial-note {
                         padding: 2px 0;
                     }
+                    /*
+                    section > p {
+                        padding-right: 3em;
+                        padding-left: 3em;
+                        text-indent: -3em;
+                    }
+                    */
                     span.line-number {
                         display: inline-block;
                         min-width: 3em;
