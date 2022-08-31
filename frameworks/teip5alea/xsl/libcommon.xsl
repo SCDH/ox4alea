@@ -26,7 +26,10 @@
         <!-- suffix is a marker for additional verses or paragraphs in readings.
             It is displayed in the apparatus. -->
         <xsl:variable name="suffix" select="
-                if (exists($el/ancestor-or-self::l/parent::rdg)) then
+                if (exists(
+                $el/ancestor-or-self::l/parent::rdg |
+                $el/self::app/parent::lg
+                )) then
                     '+'
                 else
                     ''"/>
@@ -55,6 +58,9 @@
                 <xsl:value-of
                     select="concat('V', count($el/preceding::l[not(ancestor::rdg)]) + $inc, $suffix)"
                 />
+            </xsl:when>
+            <xsl:when test="$el/self::app/parent::lg">
+                <xsl:value-of select="concat('V', count($el/preceding::l[not(ancestor::rdg)]), $suffix)"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="concat('?', $suffix)"/>
@@ -87,7 +93,8 @@
         USAGE: see preview.xsl -->
     <xsl:function name="scdh:shorten-string" as="xs:normalizedString">
         <xsl:param name="nodes" as="node()*"/>
-        <xsl:variable name="lemma-text" select="tokenize(normalize-space(string-join($nodes, '')), '\s+')"/>
+        <xsl:variable name="lemma-text"
+            select="tokenize(normalize-space(string-join($nodes, '')), '\s+')"/>
         <xsl:value-of select="
                 if (count($lemma-text) gt 3)
                 then
