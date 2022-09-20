@@ -12,7 +12,7 @@
     <a:operation id="ExecuteMultipleActionsOperation">
       <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
-        <a:argument name="actionIDs">mre.save.position, mre.reset.update, mre.restore.position</a:argument>
+        <a:argument name="actionIDs">mre.save.position, mre.reset.update</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
