@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- user action -->
+<!-- editing atom -->
+<!-- the current editing position should be stored before and restored after this operation -->
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="mre.complement">
+  id="mre.complement.update">
   <a:name>MRE complement</a:name>
   <a:description>Set the MRE: all recesions 'visible' and all recensions but the one in progress are set to 'done' and 'fading'.</a:description>
-  <a:smallIconPath href="${framework}/images/mre-complement-16.png"/>
-  <a:largeIconPath href="${framework}/images/mre-complement-24.png"/>
   <a:operations>
-    <a:operation id="ExecuteMultipleActionsOperation">
+    <a:operation id="XSLTOperation">
       <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
-        <a:argument name="actionIDs">mre.save.position, mre.complement.update, mre.restore.position</a:argument>
+        <a:argument name="sourceLocation">/*</a:argument>
+        <a:argument name="targetLocation">//appInfo/application[@ident eq 'oxmre']</a:argument>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="script">${framework}/xsl/mre-complement.xsl</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>

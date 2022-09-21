@@ -1,11 +1,42 @@
 # change log #
 
+### 2.7.1 ###
+
+- fix bug in shortcut action for inserting references to encyclopedia
+
+### 2.7.0 ###
+
+- use `libapp2.xsl` for the apparatus
+  - works for `double-end-point` and `parallel-segmentation`
+  - allows multiple apparatus
+- rewritten `libnote2.xsl` analogously
+- generic implementation of reference processing including the full
+  specification of `<prefixDef>` in `libref.xsl`
+- made `libwit.xsl` and Preview configurable
+  - takes XPath expressions as parameter now
+  - where to find witness information
+  - where to find the siglum of a witness
+  - old parameter that points to a central witness catalogue is gone
+- be more precise in which modes to use the templates defined in
+  `librend.xsl` and `libbiblio.xsl`
+- MRE:
+  - added action `mre.prev` for shifting back to the previous
+    recension
+  - added action `mre.toggle.fading` for turning fading on/off
+  - added transformation scenario for updating the HTML preview of all
+    recensions
+  - added action for running this preview
+  - fix work ID for recension preview
+
 ### 2.6.1 ##
 
 - inproved Preview
   - internal double end-point attachted apparatus make use of new
     `libbetween.xsl` XSLT library
   - fixed some apparatus entries
+  - new generic `libref.xsl` that fully implements the specification
+	of `<prefixDef>` and the addition suggested by CL on TEI-L on
+	2022-05-29.
 
 ## 2.6.0 ##
 

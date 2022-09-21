@@ -50,6 +50,7 @@
       <addAction anchor="insert image" id="insert_verse"/>
       <addAction anchor="insert image" id="insert_stanza"/>
       <addAction anchor="insert image" id="insert_caesura"/>
+      <addAction anchor="insert image" id="edit.title"/>
       <addAction anchor="del.app" id="add_witdetail"/>
       <addAction anchor="del.app" id="register_witness"/>
       <separator anchor="del.app"/>
@@ -97,9 +98,14 @@
       <toolbar name="MRE">
         <addAction id="mre.reset"/>
         <addAction id="mre.next"/>
+        <addAction id="mre.prev"/>
         <addAction id="mre.complement"/>
+        <addAction id="mre.toggle.fading"/>
+        <separator/>
         <addAction id="mre.to.done"/>
         <addAction id="mre.select.source"/>
+        <separator/>
+        <addAction id="mre.preview.all"/>
         <!--addAction id="mre.to.all.but.current"/-->
       </toolbar>
 

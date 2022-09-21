@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- editing atom -->
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="work.id.to.idno">
+  <a:name>Work ID to idno</a:name>
+  <a:description>Store the inserted work ID to the appropriate &lt;idno&gt; element.</a:description>
+  <a:operations>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>ancestor-or-self::TEI/descendant::idno[@type eq 'local-work-id']</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="sourceLocation">ancestor-or-self::TEI</a:argument>
+        <a:argument name="targetLocation">ancestor-or-self::TEI/descendant::idno[@type eq 'local-work-id']</a:argument>
+        <a:argument name="script">${framework}/xsl/update-local-work-id.xsl</a:argument>
+      </a:arguments>
+    </a:operation>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>ancestor-or-self::TEI</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="sourceLocation">ancestor-or-self::TEI</a:argument>
+        <a:argument name="targetLocation">ancestor-or-self::TEI/teiHeader/fileDesc/titleStmt/title</a:argument>
+        <a:argument name="script">${framework}/xsl/update-local-work-id.xsl</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>

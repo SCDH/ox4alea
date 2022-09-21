@@ -3,16 +3,14 @@
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="mre.next">
-  <a:name>MRE next</a:name>
-  <a:description>Set the MRE: add the recension 'in progress' to the recensions in 'done' and shift to the next.</a:description>
-  <a:smallIconPath href="${framework}/images/mre-next-16.png"/>
-  <a:largeIconPath href="${framework}/images/mre-next-24.png"/>
+  id="edit.title">
+  <a:name>Change Title/ID</a:name>
+  <a:description>Change Title/ID.</a:description>
   <a:operations>
     <a:operation id="ExecuteMultipleActionsOperation">
-      <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
+      <a:xpathCondition>self::TEI | ancestor-or-self::titleStmt/title</a:xpathCondition>
       <a:arguments>
-        <a:argument name="actionIDs">mre.save.position, mre.next.update, mre.restore.position</a:argument>
+        <a:argument name="actionIDs">work.id.edit, work.id.to.idno</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>

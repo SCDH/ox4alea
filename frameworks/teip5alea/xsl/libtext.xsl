@@ -20,12 +20,50 @@
     <xsl:include href="libbiblio.xsl"/>
 
     <!-- Prose -->
-    <xsl:template match="p[not(ancestor::note)]">
+
+    <xsl:template match="div[descendant-or-self::div/p]" mode="#default prose">
+        <section>
+            <xsl:apply-templates mode="prose"/>
+        </section>
+    </xsl:template>
+
+    <xsl:template match="head" mode="prose">
+        <header>
+            <h3>
+                <span class="line-number paragraph-number">
+                    <xsl:value-of select="scdh:line-number(.)"/>
+                </span>
+                <xsl:text> </xsl:text>
+                <!-- return to default mode -->
+                <xsl:apply-templates/>
+            </h3>
+        </header>
+    </xsl:template>
+
+    <!-- verse embedded in prose -->
+    <xsl:template match="l" mode="prose">
         <p>
             <span class="line-number paragraph-number">
                 <xsl:value-of select="scdh:line-number(.)"/>
             </span>
             <xsl:text> </xsl:text>
+            <!-- return to default mode -->
+            <xsl:apply-templates/>
+        </p>
+    </xsl:template>
+
+    <!-- this should only be reached from prose -->
+    <xsl:template match="caesura">
+        <xsl:text> || </xsl:text>
+    </xsl:template>
+
+    <xsl:template match="p[not(ancestor::note)]" mode="#default prose">
+        <p>
+            <span class="line-number paragraph-number">
+                <xsl:value-of select="scdh:line-number(.)"/>
+            </span>
+            <xsl:text> </xsl:text>
+            <!-- return to default mode -->
             <xsl:apply-templates/>
         </p>
     </xsl:template>

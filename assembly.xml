@@ -27,6 +27,14 @@
 		<exclude>**/oxbytei_externalAuthorActions</exclude>
 	    </excludes>
 	</fileSet>
+	<fileSet>
+	    <!-- include third party jar files -->
+	    <directory>${project.build.directory}/lib</directory>
+	    <outputDirectory>/</outputDirectory>
+	    <includes>
+		<include>ant-contrib-1.0.3.jar</include>
+	    </includes>
+	</fileSet>
     </fileSets>
 
 </assembly>

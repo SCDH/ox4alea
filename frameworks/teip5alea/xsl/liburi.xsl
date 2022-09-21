@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
+<!-- DEPRECATED: use libref.xsl instead!
+
 Function for handling URIs locally defined with <prefixDef>.
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"

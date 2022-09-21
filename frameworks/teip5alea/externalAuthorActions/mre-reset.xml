@@ -9,10 +9,10 @@
   <a:smallIconPath href="${framework}/images/reset-mre-16.png"/>
   <a:largeIconPath href="${framework}/images/reset-mre-24.png"/>
   <a:operations>
-    <a:operation id="ExecuteTransformationScenariosOperation">
+    <a:operation id="ExecuteMultipleActionsOperation">
       <a:xpathCondition>//appInfo/application[@ident eq 'oxmre']</a:xpathCondition>
       <a:arguments>
-        <a:argument name="scenarioNames">ALEA :: MRE reset</a:argument>
+        <a:argument name="actionIDs">mre.save.position, mre.reset.update</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
