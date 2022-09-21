@@ -1,5 +1,14 @@
 # change log #
 
+### 2.7.2 ###
+
+- preview:
+  - fix line numbering and nested `<unclear>` etc. in `<rdg>`
+  - minimal support for prose
+- action for editing `title` and `TEI/@xml:id` simultaneously
+- remove restrictions `<caesura>` action, because we hand restriction
+  over to ODD
+
 ### 2.7.1 ###
 
 - fix bug in shortcut action for inserting references to encyclopedia
