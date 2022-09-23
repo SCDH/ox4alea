@@ -85,6 +85,16 @@
         </xsl:value-of>
     </xsl:param>
 
+    <!-- XPath how to get a pLike container given an app entry.
+        Note: this should not evaluate to an empty sequence. -->
+    <xsl:param name="app-entry-container-xpath" as="xs:string" required="false">
+        <xsl:value-of>
+            <xsl:text>ancestor::p</xsl:text>
+            <xsl:text>| ancestor::l</xsl:text>
+            <xsl:text>| ancestor::head</xsl:text>
+        </xsl:value-of>
+    </xsl:param>
+
     <!-- for convenience this will be '@location-@method' -->
     <xsl:variable name="variant-encoding">
         <xsl:variable name="ve"
@@ -244,14 +254,18 @@
                 <xsl:when test="$full-lemma ne ''">
                     <xsl:value-of select="$full-lemma"/>
                 </xsl:when>
+                <xsl:when test="$full-lemma eq ''">
+                    <!-- empty lemma: we get the text from empty replacement -->
+                    <xsl:variable name="empty-replacement"
+                        select="map:get($entry, 'lemma-replacement')"/>
+                    <xsl:value-of select="map:get($empty-replacement, 'text')"/>
+                </xsl:when>
                 <xsl:otherwise>
-                    <!-- FIXME -->
-                    <xsl:text>empty</xsl:text>
+                    <xsl:text>???</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
         </span>
     </xsl:template>
-
 
     <!-- this generates a map (object) for an apparatus entry
         with all there is needed for grouping and creating the entry -->
@@ -283,6 +297,75 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+
+        <!-- in case of an empty lemma, we make a replacement: the preceding or following word -->
+        <xsl:variable name="full-lemma" as="xs:string"
+            select="$lemma-text-nodes => alea:shorten-string()"/>
+        <xsl:variable name="lemma-replacement" as="map(xs:string, xs:string)">
+            <xsl:choose>
+                <xsl:when test="$full-lemma ne ''">
+                    <!-- we do not need a replacement -->
+                    <xsl:sequence select="map {}"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- TODO: for a non-internal apparatus we have to make $lemma-node
+                        something different from $entry, e.g. start or end anchors -->
+                    <xsl:variable name="lemma-node" select="$entry"/>
+                    <xsl:variable name="pLike-container" as="element()*">
+                        <xsl:evaluate context-item="$lemma-node" as="element()*" expand-text="true"
+                            xpath="$app-entry-container-xpath"/>
+                    </xsl:variable>
+                    <xsl:if test="$debug">
+                        <xsl:message>
+                            <xsl:text>libapp2: pLike-container for </xsl:text>
+                            <xsl:value-of select="name($entry)"/>
+                            <xsl:text>: </xsl:text>
+                            <xsl:value-of select="name($pLike-container)"/>
+                        </xsl:message>
+                    </xsl:if>
+                    <xsl:variable name="pLike-container-id" select="generate-id($pLike-container)"
+                        as="xs:string"/>
+                    <!-- the last string-join('') make this robust against empty sequences in $pLike-container -->
+                    <xsl:variable name="preceding-word" as="xs:string" select="
+                            (($lemma-node/preceding::text()[ancestor::*[generate-id(.) eq $pLike-container-id]])
+                            => string-join('')
+                            => normalize-space()
+                            => tokenize())[last()]
+                            => string-join('')"/>
+                    <xsl:variable name="following-word" as="xs:string" select="
+                            (($lemma-node/following::text()[ancestor::*[generate-id(.) eq $pLike-container-id]])
+                            => string-join('')
+                            => normalize-space()
+                            => tokenize())[1]
+                            => string-join('')"/>
+                    <xsl:choose>
+                        <xsl:when test="$preceding-word ne ''">
+                            <xsl:sequence select="
+                                    map {
+                                        'position': 'preceding',
+                                        'text': $preceding-word
+                                    }"/>
+                        </xsl:when>
+                        <xsl:when test="$following-word ne ''">
+                            <xsl:sequence select="
+                                    map {
+                                        'position': 'following',
+                                        'text': $following-word
+                                    }"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- If we have an empty sequence in $pLike-container, this branch is evaluated. -->
+                            <xsl:sequence select="
+                                    map {
+                                        'position': 'replacement',
+                                        'text': 'empty'
+                                    }"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
         <xsl:variable name="lemma-node-for-line" as="node()">
             <!-- this variable's type is node() and not text(),
                 since we may have had an empty element. -->
@@ -321,8 +404,10 @@
         <xsl:sequence select="
                 map {
                     'entry': $entry,
+                    'entry-id': generate-id($entry),
                     'lemma-text-nodes': $lemma-text-nodes,
                     'lemma-grouping-ids': $lemma-grouping-ids,
+                    'lemma-replacement': $lemma-replacement,
                     'line-number': $line-number
                 }"/>
     </xsl:function>
@@ -438,7 +523,10 @@
 
     <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) ne '']">
         <span class="reading">
-            <xsl:apply-templates select="node()" mode="apparatus-reading-text"/>
+            <!-- we have to evaluate the entry: if the lemma is empty, we need to prepend or append the empty replacement -->
+            <xsl:call-template name="scdh:apparatus-xpend-if-lemma-empty">
+                <xsl:with-param name="reading" select="node()"/>
+            </xsl:call-template>
             <xsl:if test="@wit">
                 <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
                     >:</span>
@@ -451,6 +539,40 @@
                     >;</span>
             </xsl:if>
         </span>
+    </xsl:template>
+
+    <!-- prepend or append a replacement for an empty lemma to a reading.
+        The nodes of the reading must be passed in as parameter -->
+    <xsl:template name="scdh:apparatus-xpend-if-lemma-empty">
+        <xsl:param name="reading" as="node()*"/>
+        <xsl:param name="apparatus-entry-map" as="map(*)" tunnel="true"/>
+        <xsl:variable name="full-lemma" as="xs:string"
+            select="map:get($apparatus-entry-map, 'lemma-text-nodes') => alea:shorten-string()"/>
+        <xsl:choose>
+            <xsl:when test="$full-lemma ne ''">
+                <xsl:apply-templates mode="apparatus-reading-text" select="$reading"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="lemma-replacement"
+                    select="map:get($apparatus-entry-map, 'lemma-replacement')"/>
+                <xsl:choose>
+                    <xsl:when test="map:get($lemma-replacement, 'position') eq 'preceding'">
+                        <xsl:value-of select="map:get($lemma-replacement, 'text')"/>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="apparatus-reading-text" select="$reading"/>
+                    </xsl:when>
+                    <xsl:when test="map:get($lemma-replacement, 'position') eq 'following'">
+                        <xsl:apply-templates mode="apparatus-reading-text" select="$reading"/>
+                        <xsl:text> </xsl:text>
+                        <xsl:value-of select="map:get($lemma-replacement, 'text')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- in this case we still printed 'empty' in the lemma -->
+                        <xsl:apply-templates mode="apparatus-reading-text" select="$reading"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) eq '']">
