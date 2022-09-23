@@ -95,6 +95,13 @@
         </xsl:value-of>
     </xsl:param>
 
+    <xsl:param name="app-text-nodes-mutet-ancestors" as="xs:string" required="false">
+        <xsl:value-of>
+            <xsl:text>ancestor::rdg</xsl:text>
+            <xsl:text>| ancestor::sic[parent::choice]</xsl:text>
+        </xsl:value-of>
+    </xsl:param>
+
     <!-- for convenience this will be '@location-@method' -->
     <xsl:variable name="variant-encoding">
         <xsl:variable name="ve"
@@ -217,10 +224,6 @@
     <xsl:template name="scdh:apparatus-entry">
         <xsl:param name="entries" as="map(*)*"/>
         <span class="apparatus-entry">
-            <!-- TODO: when the lemma is empty
-                call a function/template for generating a prefix or suffix from the base text.
-                Pass this suffix via tunnel parameters on to mode 'apparatus-reading', so that
-                the prefix or suffix can be added in the reading -->
             <xsl:call-template name="scdh:apparatus-lemma">
                 <xsl:with-param name="entry" select="$entries[1]"/>
             </xsl:call-template>
@@ -327,18 +330,19 @@
                         as="xs:string"/>
                     <!-- the last string-join('') make this robust against empty sequences in $pLike-container -->
                     <xsl:variable name="preceding-word" as="xs:string" select="
-                            (($lemma-node/preceding::text()[ancestor::*[generate-id(.) eq $pLike-container-id]])
+                            (($lemma-node/preceding::text()[ancestor::*[generate-id(.) eq $pLike-container-id] and scdh:text-node-in-text(.)])
                             => string-join('')
                             => normalize-space()
                             => tokenize())[last()]
                             => string-join('')"/>
                     <xsl:variable name="following-word" as="xs:string" select="
-                            (($lemma-node/following::text()[ancestor::*[generate-id(.) eq $pLike-container-id]])
+                            (($lemma-node/following::text()[ancestor::*[generate-id(.) eq $pLike-container-id] and scdh:text-node-in-text(.)])
                             => string-join('')
                             => normalize-space()
                             => tokenize())[1]
                             => string-join('')"/>
                     <xsl:choose>
+                        <!-- TODO: if directly after <caesura> then use following word. -->
                         <xsl:when test="$preceding-word ne ''">
                             <xsl:sequence select="
                                     map {
@@ -415,6 +419,17 @@
     <xsl:function name="scdh:lemma-text-nodes" as="text()*">
         <xsl:param name="element" as="element()"/>
         <xsl:apply-templates select="$element" mode="lemma-text-nodes"/>
+    </xsl:function>
+
+    <!-- Returns true if the text() node is in the edited text (lemma) -->
+    <xsl:function name="scdh:text-node-in-text" as="xs:boolean">
+        <xsl:param name="context" as="text()"/>
+        <!-- An other implementation could use the libtext module. But this would be difficult. -->
+        <xsl:variable name="mutet-ancestors" as="node()*">
+            <xsl:evaluate as="node()*" context-item="$context" expand-text="true"
+                xpath="$app-text-nodes-mutet-ancestors"/>
+        </xsl:variable>
+        <xsl:sequence select="empty($mutet-ancestors)"/>
     </xsl:function>
 
 
