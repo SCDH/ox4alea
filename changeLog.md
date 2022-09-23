@@ -1,5 +1,11 @@
 # change log #
 
+### dev ###
+
+- preview for apparatus:
+  - when lemma is empty, print the preceding or following word and
+    repeat it in the reading
+
 ### 2.7.2 ###
 
 - preview:
