@@ -163,7 +163,7 @@ ant -buildfile THISFILE \
 			</factory>
 			<param name="source" expression="${source}" type="STRING"/>
 			<param name="i18n" expression="${i18n}" type="STRING"/>
-			<param name="locales-directory" expression="${locales-directory}"/>
+			<!--param name="locales-directory" expression="${locales-directory}"/-->
 			<param name="witnesses-xpath" expression="${witnesses-xpath}" type="STRING"/>
 			<param name="witness-siglum-xpath" expression="${witness-siglum-xpath}" type="STRING"/>
 			<param name="debug" expression="true" type="BOOLEAN"/>
