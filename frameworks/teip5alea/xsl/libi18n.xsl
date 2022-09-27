@@ -165,13 +165,13 @@
             // the translations JSON record
             const resources = {
                 en: {
-                    translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/en/translation.json'))"/><xsl:text>
+                    translation: </xsl:text><xsl:value-of select="unparsed-text(resolve-uri(concat($locales-directory, '/en/translation.json'), static-base-uri()))"/><xsl:text>
                 },
                 de: {
-                translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/de/translation.json'))"/><xsl:text>
+                translation: </xsl:text><xsl:value-of select="unparsed-text(resolve-uri(concat($locales-directory, '/de/translation.json'), static-base-uri()))"/><xsl:text>
                 },
                 ar: {
-                translation: </xsl:text><xsl:value-of select="unparsed-text(concat($locales-directory, '/ar/translation.json'))"/><xsl:text>
+                translation: </xsl:text><xsl:value-of select="unparsed-text(resolve-uri(concat($locales-directory, '/ar/translation.json'), static-base-uri()))"/><xsl:text>
                 }
             };
             const defaultLanguage = 'dev';
