@@ -17,7 +17,17 @@
 
     <!-- If true, this an extra space is added on the end of an ltr-to-rtl changeover. -->
     <xsl:param name="ltr-to-rtl-extra-space" as="xs:boolean" select="true()" required="no"/>
+    
+    <!-- path to your i18n.js -->
+    <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
+    
+    <!-- path to i18next.js -->
+    <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
+    
+    <!-- path to the translation files -->
+    <xsl:param name="locales-directory" select="'locales'" as="xs:string"/>
 
+    <!-- name of XML translation file -->
     <xsl:variable name="translations" select="'translation.xml'"/>
 
     <xsl:function name="scdh:language">
@@ -160,7 +170,6 @@
     </xsl:template>
 
     <xsl:template name="i18n-language-resources-inline">
-        <xsl:param name="locales-directory" as="xs:string" select="locales"/>
         <xsl:text>
             // the translations JSON record
             const resources = {
@@ -177,6 +186,14 @@
             const defaultLanguage = 'dev';
             const initialLanguage = 'ar'; // TODO: parse @xml:lang
         </xsl:text>
+    </xsl:template>
+    
+    <xsl:template name="i18n-load-javascript">
+        <script src="{$i18next}"/>
+        <script>
+            <xsl:call-template name="i18n-language-resources-inline"/>
+        </script>
+        <script src="{$i18n}"/>
     </xsl:template>
 
     <xsl:template name="lang-attributes">

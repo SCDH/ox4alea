@@ -25,10 +25,6 @@
     <xsl:import href="libcommon.xsl"/>
     <xsl:import href="libbiblio.xsl"/>
 
-    <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
-    <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
-    <xsl:param name="locales-directory" select="'locales'" as="xs:string"/>
-
     <xsl:param name="debug" select="false()" as="xs:boolean"/>
 
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
@@ -193,13 +189,7 @@
                     <xsl:with-param name="debug" select="$debug"/>
                 </xsl:call-template>
                 <!--xsl:call-template name="i18n-direction-indicator"/-->
-                <script src="{$i18next}"/>
-                <script>
-                    <xsl:call-template name="i18n-language-resources-inline">
-                        <xsl:with-param name="locales-directory" select="$locales-directory"/>
-                    </xsl:call-template>
-                </script>
-                <script src="{$i18n}"/>
+                <xsl:call-template name="i18n-load-javascript"/>
             </body>
         </html>
     </xsl:template>
