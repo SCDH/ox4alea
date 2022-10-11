@@ -67,39 +67,6 @@ See i18next documentation for more info: https://www.i18next.com
 
     <!-- tempates for generating java script needed for i18next -->
 
-    <!-- this template makes java script code for lazy loading translation files -->
-    <xsl:template name="i18n-language-resources">
-        <xsl:for-each select="$locales">
-            <xsl:variable name="translation-file"
-                select="resolve-uri(concat($locales-directory, '/', ., '/', $i18n-default-namespace, '.json'), static-base-uri())"/>
-            <!-- FIXME: why doesn't doc-available() work as expected? -->
-            <xsl:if test="true() or doc-available($translation-file)">
-                <xsl:text>&newline;import translation</xsl:text>
-                <xsl:value-of select="upper-case(.)"/>
-                <xsl:text> from '</xsl:text>
-                <xsl:value-of select="$translation-file"/>
-                <xsl:text>';</xsl:text>
-            </xsl:if>
-        </xsl:for-each>
-        <xsl:text>
-            // translations JOSON record
-            const resources = {
-        </xsl:text>
-        <xsl:for-each select="$locales">
-            <xsl:value-of select="."/>
-            <xsl:text>: {</xsl:text>
-            <!-- FIXME: why doesn't doc-available() work as expected? -->
-            <xsl:if
-                test="true() or doc-available(resolve-uri(concat($locales-directory, '/', ., '/', $i18n-default-namespace, '.json'), static-base-uri()))">
-                <xsl:text>translation: translation</xsl:text>
-                <xsl:value-of select="upper-case(.)"/>
-            </xsl:if>
-            <xsl:text>},&newline;</xsl:text>
-        </xsl:for-each>
-        <xsl:text>dev: {}&newline;</xsl:text>
-        <xsl:text>};</xsl:text>
-    </xsl:template>
-
     <!-- this template makes java script code for inlining the translation files into a <script> block (strict loading) -->
     <xsl:template name="i18n-language-resources-inline">
         <xsl:param name="namespace" as="xs:string"/>
@@ -150,16 +117,6 @@ See i18next documentation for more info: https://www.i18next.com
                 <xsl:with-param name="namespace" select="$i18n-default-namespace"/>
             </xsl:call-template>
         </script>
-    </xsl:template>
-
-    <!-- do everything needed for i18next, lazy loading (broken?)  -->
-    <xsl:template name="i18n-load-javascript-lazy">
-        <script src="{$i18next}"/>
-        <script>
-            <xsl:call-template name="i18n-initialisation"/>
-            <xsl:call-template name="i18n-language-resources"/>
-        </script>
-        <script src="{$i18n}"/>
     </xsl:template>
 
     <!-- language chooser  -->
