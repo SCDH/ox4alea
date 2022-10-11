@@ -28,7 +28,7 @@ See i18next documentation for more info: https://www.i18next.com
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:scdh="http://scdh.wwu.de/oxygen#ALEA"
-    xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="xs scdh"
+    exclude-result-prefixes="xs scdh"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0">
 
     <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
@@ -50,7 +50,7 @@ See i18next documentation for more info: https://www.i18next.com
     <xsl:param name="locales" as="xs:string*" select="('ar', 'de', 'en')"/>
 
     <!-- name of i18next JSON translations file in $locales-directory/LOCALE/ -->
-    <xsl:param name="translations" select="'translation.json'"/>
+    <xsl:param name="i18n-default-namespace" select="'translation'"/>
 
     <!-- how to get the default language. E.g. say $locales[1] or 'de' here. -->
     <xsl:param name="default-language-xpath" as="xs:string" select="'/TEI/@xml:lang'"/>
@@ -71,7 +71,7 @@ See i18next documentation for more info: https://www.i18next.com
     <xsl:template name="i18n-language-resources">
         <xsl:for-each select="$locales">
             <xsl:variable name="translation-file"
-                select="resolve-uri(concat($locales-directory, '/', ., '/', $translations), static-base-uri())"/>
+                select="resolve-uri(concat($locales-directory, '/', ., '/', $i18n-default-namespace, '.json'), static-base-uri())"/>
             <!-- FIXME: why doesn't doc-available() work as expected? -->
             <xsl:if test="true() or doc-available($translation-file)">
                 <xsl:text>&newline;import translation</xsl:text>
@@ -90,7 +90,7 @@ See i18next documentation for more info: https://www.i18next.com
             <xsl:text>: {</xsl:text>
             <!-- FIXME: why doesn't doc-available() work as expected? -->
             <xsl:if
-                test="true() or doc-available(resolve-uri(concat($locales-directory, '/', ., '/', $translations), static-base-uri()))">
+                test="true() or doc-available(resolve-uri(concat($locales-directory, '/', ., '/', $i18n-default-namespace, '.json'), static-base-uri()))">
                 <xsl:text>translation: translation</xsl:text>
                 <xsl:value-of select="upper-case(.)"/>
             </xsl:if>
@@ -102,46 +102,61 @@ See i18next documentation for more info: https://www.i18next.com
 
     <!-- this template makes java script code for inlining the translation files into a <script> block (strict loading) -->
     <xsl:template name="i18n-language-resources-inline">
-        <xsl:text>
-            // the translations JSON record
-            const resources = {
-        </xsl:text>
+        <xsl:param name="namespace" as="xs:string"/>
+        <xsl:text>&newline;</xsl:text>
+        <xsl:text>//import i18next from 'i18next';&newline;</xsl:text>
         <xsl:for-each select="$locales">
             <xsl:variable name="translation-file"
-                select="resolve-uri(concat($locales-directory, '/', ., '/', $translations), static-base-uri())"/>
+                select="resolve-uri(concat($locales-directory, '/', ., '/', $namespace, '.json'), static-base-uri())"/>
             <!-- FIXME: why doesn't doc-available() work as expected? -->
             <xsl:if test="true() or doc-available($translation-file)">
                 <xsl:text>&newline;</xsl:text>
+                <xsl:text>i18next.addResourceBundle('</xsl:text>
                 <xsl:value-of select="."/>
-                <xsl:text>: {&newline;   translation: </xsl:text>
+                <xsl:text>', '</xsl:text>
+                <xsl:value-of select="$namespace"/>
+                <xsl:text>', </xsl:text>
                 <xsl:value-of select="unparsed-text($translation-file)"/>
-                <xsl:text>&newline;}</xsl:text>
-                <xsl:if test="last()">
-                    <xsl:text>,</xsl:text>
-                </xsl:if>
+                <xsl:text>);&newline;</xsl:text>
             </xsl:if>
         </xsl:for-each>
-        <xsl:text>
-            };
-            const defaultLanguage = 'dev';
-            const initialLanguage = '</xsl:text>
+        <xsl:text>i18next.addResourceBundle('dev', '</xsl:text>
+        <xsl:value-of select="$namespace"/>
+        <xsl:text>', {});&newline;</xsl:text>
+    </xsl:template>
+
+    <xsl:template name="i18n-initialisation">
+        <xsl:text>&newline;</xsl:text>
+        <xsl:text>const defaultNamespace = '</xsl:text>
+        <xsl:value-of select="$i18n-default-namespace"/>
+        <xsl:text>';&newline;</xsl:text>
+        <xsl:text>const defaultLanguage = 'dev';&newline;</xsl:text>
+        <xsl:text>const initialLanguage = '</xsl:text>
         <xsl:value-of select="$default-language"/>
-        <xsl:text>';</xsl:text>
+        <xsl:text>';&newline;</xsl:text>
     </xsl:template>
 
     <!-- do everything needed for i18next -->
     <xsl:template name="i18n-load-javascript">
         <script src="{$i18next}"/>
         <script>
-            <xsl:call-template name="i18n-language-resources-inline"/>
+            <xsl:call-template name="i18n-initialisation"/>
         </script>
-        <script src="{$i18n}"/>
+        <script src="{$i18n}">
+            <!--xsl:value-of select="unparsed-text(resolve-uri($i18n, static-base-uri()))"/-->
+        </script>
+        <script type="module">
+            <xsl:call-template name="i18n-language-resources-inline">
+                <xsl:with-param name="namespace" select="$i18n-default-namespace"/>
+            </xsl:call-template>
+        </script>
     </xsl:template>
 
     <!-- do everything needed for i18next, lazy loading (broken?)  -->
     <xsl:template name="i18n-load-javascript-lazy">
         <script src="{$i18next}"/>
         <script>
+            <xsl:call-template name="i18n-initialisation"/>
             <xsl:call-template name="i18n-language-resources"/>
         </script>
         <script src="{$i18n}"/>
