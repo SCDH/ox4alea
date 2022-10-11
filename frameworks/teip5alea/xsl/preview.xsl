@@ -24,6 +24,7 @@
     <xsl:import href="libi18n.xsl"/>
     <xsl:import href="libcommon.xsl"/>
     <xsl:import href="libbiblio.xsl"/>
+    <xsl:include href="libsurah.xsl"/><!-- include for overriding -->
 
     <xsl:param name="font-css" as="xs:string" select="''"/>
     <xsl:param name="font-name" as="xs:string" select="'Arabic Typesetting'"/>
@@ -157,6 +158,7 @@
                 <xsl:call-template name="i18n-language-chooser-html"/>
                 <!--xsl:call-template name="i18n-direction-indicator"/-->
                 <xsl:call-template name="i18n-load-javascript"/>
+                <xsl:call-template name="surah-translations"/>
             </body>
         </html>
     </xsl:template>

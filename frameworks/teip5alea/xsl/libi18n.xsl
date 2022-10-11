@@ -69,12 +69,13 @@ See i18next documentation for more info: https://www.i18next.com
 
     <!-- this template makes java script code for inlining the translation files into a <script> block (strict loading) -->
     <xsl:template name="i18n-language-resources-inline">
+        <xsl:param name="directory" as="xs:string"/>
         <xsl:param name="namespace" as="xs:string"/>
         <xsl:text>&newline;</xsl:text>
         <xsl:text>//import i18next from 'i18next';&newline;</xsl:text>
         <xsl:for-each select="$locales">
             <xsl:variable name="translation-file"
-                select="resolve-uri(concat($locales-directory, '/', ., '/', $namespace, '.json'), static-base-uri())"/>
+                select="resolve-uri(concat($directory, '/', ., '/', $namespace, '.json'), static-base-uri())"/>
             <!-- FIXME: why doesn't doc-available() work as expected? -->
             <xsl:if test="true() or doc-available($translation-file)">
                 <xsl:text>&newline;</xsl:text>
@@ -114,6 +115,7 @@ See i18next documentation for more info: https://www.i18next.com
         </script>
         <script type="module">
             <xsl:call-template name="i18n-language-resources-inline">
+                <xsl:with-param name="directory" select="$locales-directory"/>
                 <xsl:with-param name="namespace" select="$i18n-default-namespace"/>
             </xsl:call-template>
         </script>
