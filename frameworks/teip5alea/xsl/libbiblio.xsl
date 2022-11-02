@@ -44,7 +44,9 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="$ref">
-                    <xsl:apply-templates select="$ref" mode="biblio"/>
+                    <xsl:apply-templates select="$ref" mode="biblio">
+                        <xsl:with-param name="tpBiblScope" as="element()*" select="biblScope" tunnel="true"/>
+                    </xsl:apply-templates>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="@corresp"/>

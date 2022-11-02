@@ -1,5 +1,18 @@
 # change log #
 
+### dev ####
+
+- preview:
+  - make libi18n.xsl generic
+  - print surah titles instead of surah number
+
+### 2.7.3 ###
+
+- preview:
+  - apparatus: when lemma is empty, print the preceding or following
+    word and repeat it in the reading
+  - preview all recensions: made this work on Windows
+
 ### 2.7.2 ###
 
 - preview:
