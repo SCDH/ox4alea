@@ -24,37 +24,10 @@
     <xsl:import href="libi18n.xsl"/>
     <xsl:import href="libcommon.xsl"/>
     <xsl:import href="libbiblio.xsl"/>
-
-    <xsl:param name="i18n" select="'i18n.js'" as="xs:string"/>
-    <xsl:param name="i18next" select="'https://unpkg.com/i18next/i18next.min.js'" as="xs:string"/>
-    <xsl:param name="locales-directory" select="'locales'" as="xs:string"/>
-
-    <xsl:param name="debug" select="false()" as="xs:boolean"/>
-
-    <!-- language of the user interface, i.e. static text e.g. in the apparatus -->
-    <xsl:param name="ui-language" as="xs:string" select="''"/>
+    <xsl:include href="libsurah.xsl"/><!-- include for overriding -->
 
     <xsl:param name="font-css" as="xs:string" select="''"/>
     <xsl:param name="font-name" as="xs:string" select="'Arabic Typesetting'"/>
-
-    <xsl:function name="scdh:ui-language">
-        <xsl:param name="context" as="node()"/>
-        <xsl:param name="default" as="xs:string"/>
-        <xsl:value-of select="
-                if ($ui-language eq '') then
-                    scdh:language($context, $default)
-                else
-                    $ui-language"/>
-    </xsl:function>
-
-    <xsl:function name="scdh:ui-language">
-        <xsl:param name="context" as="node()"/>
-        <xsl:value-of select="
-                if ($ui-language eq '') then
-                    scdh:language($context, 'ar')
-                else
-                    $ui-language"/>
-    </xsl:function>
 
     <xsl:template match="/ | TEI">
         <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&lb;</xsl:text>
@@ -158,16 +131,9 @@
                         font-family:"Amiri Regular";
                         src:url("../../../resources/css/Amiri-Regular.ttf");
                     }
-                    
                 </style>
             </head>
             <body>
-                <xsl:if test="$debug">
-                    <section>
-                        <xsl:text>UI language: </xsl:text>
-                        <xsl:value-of select="$ui-language"/>
-                    </section>
-                </xsl:if>
                 <section class="metadata">
                     <xsl:apply-templates select="/TEI/teiHeader" mode="metadata"/>
                 </section>
@@ -189,17 +155,10 @@
                     </xsl:call-template>
                 </section>
                 <hr/>
-                <xsl:call-template name="i18n-language-chooser-html">
-                    <xsl:with-param name="debug" select="$debug"/>
-                </xsl:call-template>
+                <xsl:call-template name="i18n-language-chooser-html"/>
                 <!--xsl:call-template name="i18n-direction-indicator"/-->
-                <script src="{$i18next}"/>
-                <script>
-                    <xsl:call-template name="i18n-language-resources-inline">
-                        <xsl:with-param name="locales-directory" select="$locales-directory"/>
-                    </xsl:call-template>
-                </script>
-                <script src="{$i18n}"/>
+                <xsl:call-template name="i18n-load-javascript"/>
+                <xsl:call-template name="surah-translations"/>
             </body>
         </html>
     </xsl:template>
