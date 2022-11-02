@@ -5,6 +5,7 @@
 - preview:
   - make libi18n.xsl generic
   - print surah titles instead of surah number
+  - fixed arabic translations for "omisit" and "conieci"
 
 ### 2.7.3 ###
 
