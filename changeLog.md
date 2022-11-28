@@ -1,6 +1,6 @@
 # change log #
 
-### dev ####
+### 2.8.0 ####
 
 - preview:
   - make libi18n.xsl generic
