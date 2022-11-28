@@ -1,6 +1,15 @@
 # change log #
 
-### 2.8.0 ####
+### 2.8.1 ###
+
+- preview:
+  - i18n: introduced namespace `decimal` for translating decimal
+	numbers to i18n language, e.g. translating arabic numbers to
+	arabic numbers in arabic script
+  - translate surah verse numbers to i18n language
+  - libapp2: replace `<caesura>` to space in apparatus lemma.
+
+### 2.8.0 ###
 
 - preview:
   - make libi18n.xsl generic
@@ -204,7 +213,7 @@
 ## 2.3.2 ##
 
 - Changed "Insert/Change Segmentation" to "Insert Segmentation",
-  because it prevents nested segmentations 
+  because it prevents nested segmentations
 
 ## 2.3.1 ##
 
