@@ -14,6 +14,13 @@
                 </xsl:matching-substring>
             </xsl:analyze-string>
         </xsl:variable>
+        <xsl:variable name="verse">
+            <xsl:analyze-string select="$tpBiblScope => normalize-space()" regex="^(\d+):(\d+)?$">
+                <xsl:matching-substring>
+                    <xsl:value-of select="regex-group(2)"/>
+                </xsl:matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
         <span data-i18n-key="Quran" data-i18n-ns="quran">
             <xsl:apply-templates mode="biblio"/>
         </span>
@@ -21,6 +28,12 @@
         <span data-i18n-key="surah-{$surah}" data-i18n-ns="quran">
             <xsl:apply-templates mode="biblio" select="$tpBiblScope"/>
         </span>
+        <xsl:if test="$verse ne ''">
+            <span data-i18n-key="quran-surah-verse-delim" data-i18n-ns="quran">, </span>
+            <span data-i18n-key="{$verse}" data-i18n-ns="decimal">
+                <xsl:value-of select="$verse"/>
+            </span>
+        </xsl:if>
     </xsl:template>
 
     <!-- do not print biblScope for quran -->

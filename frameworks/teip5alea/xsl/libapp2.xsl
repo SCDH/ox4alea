@@ -440,6 +440,11 @@
         <xsl:sequence select="."/>
     </xsl:template>
 
+    <!-- caesura is replaced with a space. Override this if needed! -->
+    <xsl:template mode="lemma-text-nodes" match="caesura" as="text()">
+        <xsl:text>&#x20;</xsl:text>
+    </xsl:template>
+
     <!-- things that do not go into the base text -->
     <xsl:template mode="lemma-text-nodes"
         match="rdg | choice[corr]/sic | choice[reg]/orig | span | index | note | witDetail"/>
