@@ -43,7 +43,7 @@
             <xsl:text>| descendant::choice[sic and corr]</xsl:text>
             <xsl:text>| descendant::unclear[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::choice[unclear]</xsl:text>
-            <xsl:text>| descendant::gap</xsl:text>
+            <xsl:text>| descendant::gap[not(parent::rdg)]</xsl:text>
         </xsl:value-of>
     </xsl:param>
 
@@ -57,7 +57,7 @@
             <xsl:text>| descendant::choice[sic and corr]</xsl:text>
             <xsl:text>| descendant::unclear[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::choice[unclear]</xsl:text>
-            <xsl:text>| descendant::gap</xsl:text>
+            <xsl:text>| descendant::gap[not(parent::rdg)]</xsl:text>
         </xsl:value-of>
     </xsl:param>
 
@@ -70,7 +70,7 @@
             <xsl:text>| descendant::choice[sic and corr]</xsl:text>
             <xsl:text>| descendant::unclear[not(parent::choice)]</xsl:text>
             <xsl:text>| descendant::choice[unclear]</xsl:text>
-            <xsl:text>| descendant::gap</xsl:text>
+            <xsl:text>| descendant::gap[not(parent::rdg)]</xsl:text>
         </xsl:value-of>
     </xsl:param>
 
@@ -467,6 +467,10 @@
 
     <xsl:template mode="apparatus-reading-text" match="choice[sic and corr]">
         <xsl:apply-templates mode="apparatus-reading-text" select="corr"/>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-text" match="gap[parent::rdg]">
+        <xsl:text> [...]</xsl:text>
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-text" match="caesura">
