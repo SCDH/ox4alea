@@ -470,7 +470,7 @@
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-text" match="gap[parent::rdg]">
-        <xsl:text> [...]</xsl:text>
+        <xsl:text>[...]</xsl:text>
     </xsl:template>
 
     <xsl:template mode="apparatus-reading-text" match="caesura">
@@ -551,6 +551,11 @@
             <xsl:call-template name="scdh:apparatus-xpend-if-lemma-empty">
                 <xsl:with-param name="reading" select="node()"/>
             </xsl:call-template>
+            <!-- handle nested gap, unclear etc.: print @reason at end -->
+            <xsl:if test="*/@reason">
+                <span class="apparatus-sep" data-i18n-key="rdg-annotation-sep">, </span>
+                <span class="static-text" data-i18n-key="{*/@reason[1]}">&lre;om.&pdf;</span>
+            </xsl:if>
             <xsl:if test="@wit">
                 <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
                     >:</span>
@@ -602,6 +607,25 @@
     <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) eq '']">
         <span class="reading">
             <span class="static-text" data-i18n-key="omisit">&lre;om.&pdf;</span>
+            <xsl:if test="@wit">
+                <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
+                    >:</span>
+                <xsl:call-template name="witness-siglum-html">
+                    <xsl:with-param name="wit" select="@wit"/>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="position() ne last()">
+                <span class="apparatus-sep" style="padding-left: 4px" data-i18n-key="rdgs-sep"
+                    >;</span>
+            </xsl:if>
+        </span>
+    </xsl:template>
+
+    <!-- e.g. <rdg><gap reason="..."/></rdg> -->
+    <xsl:template mode="apparatus-reading-dspt" match="rdg[*/@reason and normalize-space(.) eq '']"
+        priority="5">
+        <span class="reading">
+            <span class="static-text" data-i18n-key="{*/@reason[1]}">&lre;om.&pdf;</span>
             <xsl:if test="@wit">
                 <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
                     >:</span>
