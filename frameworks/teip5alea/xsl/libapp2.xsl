@@ -559,7 +559,9 @@
             <xsl:call-template name="scdh:apparatus-xpend-if-lemma-empty">
                 <xsl:with-param name="reading" select="node()"/>
             </xsl:call-template>
-            <xsl:call-template name="rdg-annotation"/>
+            <xsl:call-template name="rdg-annotation">
+                <xsl:with-param name="separator" select="true()"/>
+            </xsl:call-template>
             <xsl:if test="@wit">
                 <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
                     >:</span>
@@ -580,17 +582,31 @@
         the apparatus entry is generated for. -->
     <xsl:template name="rdg-annotation">
         <xsl:context-item as="element()" use="required"/>
+        <xsl:param name="separator" as="xs:boolean" select="false()"/>
         <!-- handle nested gap, unclear etc.: print @reason at end -->
-        <xsl:for-each select="*/@reason">
-            <span class="apparatus-sep" data-i18n-key="rdg-annotation-sep">, </span>
-            <span class="static-text" data-i18n-key="{string(.)}">
-                <xsl:value-of select="."/>
+        <xsl:variable name="annotations">
+            <span class="reading-annotation">
+                <xsl:apply-templates mode="apparatus-reading-annotation"/>
             </span>
+        </xsl:variable>
+        <xsl:for-each select="$annotations">
+            <xsl:if test="position() gt 1 or $separator">
+                <span class="apparatus-sep" data-i18n-key="rdg-annotation-sep">, </span>
+            </xsl:if>
+            <xsl:sequence select="."/>
         </xsl:for-each>
-        <xsl:if test="space">
-            <span class="apparatus-sep" data-i18n-key="rdg-annotation-sep">, </span>
-            <span class="apparatus-sep" data-i18n-key="space">&lre;space&pdf;</span>
-        </xsl:if>
+    </xsl:template>
+
+    <xsl:mode name="apparatus-reading-annotation" on-no-match="deep-skip"/>
+
+    <xsl:template mode="apparatus-reading-annotation" match="*[@reason]">
+        <span class="static-text" data-i18n-key="{string(.)}">
+            <xsl:value-of select="."/>
+        </span>
+    </xsl:template>
+
+    <xsl:template mode="apparatus-reading-annotation" match="space">
+        <span class="apparatus-sep" data-i18n-key="space">&lre;space&pdf;</span>
     </xsl:template>
 
     <!-- prepend or append a replacement for an empty lemma to a reading.
@@ -627,7 +643,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template mode="apparatus-reading-dspt" match="rdg[normalize-space(.) eq '']">
+    <xsl:template mode="apparatus-reading-dspt" match="rdg[not(node())]">
         <span class="reading">
             <span class="static-text" data-i18n-key="omisit">&lre;om.&pdf;</span>
             <xsl:if test="@wit">
@@ -645,10 +661,10 @@
     </xsl:template>
 
     <!-- e.g. <rdg><gap reason="..."/></rdg> -->
-    <xsl:template mode="apparatus-reading-dspt" match="rdg[*/@reason and normalize-space(.) eq '']"
+    <xsl:template mode="apparatus-reading-dspt" match="rdg[node() and normalize-space(.) eq '']"
         priority="5">
         <span class="reading">
-            <span class="static-text" data-i18n-key="{*/@reason[1]}">&lre;om.&pdf;</span>
+            <xsl:call-template name="rdg-annotation"/>
             <xsl:if test="@wit">
                 <span class="apparatus-sep" style="padding-left: 3px" data-i18n-key="rdg-siglum-sep"
                     >:</span>
