@@ -600,8 +600,8 @@
     <xsl:mode name="apparatus-reading-annotation" on-no-match="deep-skip"/>
 
     <xsl:template mode="apparatus-reading-annotation" match="*[@reason]">
-        <span class="static-text" data-i18n-key="{string(.)}">
-            <xsl:value-of select="."/>
+        <span class="static-text" data-i18n-key="{string(@reason)}">
+            <xsl:value-of select="@reason"/>
         </span>
     </xsl:template>
 
