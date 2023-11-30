@@ -1,5 +1,13 @@
 # change log #
 
+### 2.8.4
+
+- generate apparatus entries for `<space>` nested in `<rdg>`
+
+### 2.8.3
+
+- output `@reason` for gaps and unclear text nested `<rdg>`
+
 ### 2.8.1 ###
 
 - preview:

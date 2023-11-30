@@ -10,7 +10,9 @@ update mechanism. Therefore, the following URL has to be entered into
 the form "Show addons from:" of the dialogue box from "Help" -> "Install
 new addons...".
 
-[https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/descriptor.xml](https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/descriptor.xml)
+```
+https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/descriptor.xml
+```
 
 As an alternative, the framework can be packaged locally for
 installation or it can be installed for hacking.

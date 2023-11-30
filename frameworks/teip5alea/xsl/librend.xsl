@@ -61,7 +61,7 @@ in the base text, the apparatus and in the editorial notes. -->
         </span>
     </xsl:template>
 
-    <xsl:template mode="text apparatus-reading-text editorial-note"
+    <xsl:template mode="apparatus-reading-text editorial-note"
         match="seg[matches(@type, 'booktitle')] | title">
         <i>
             <xsl:call-template name="lang-attributes">
