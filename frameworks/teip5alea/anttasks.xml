@@ -39,7 +39,7 @@ ant -buildfile THISFILE \
 	<echo> basedir: ${basedir}</echo>
 
 	<echo> using Saxon: ${saxon.jar}</echo>
-	
+
 	<!-- we are using foreach from ant-contrib -->
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
 		<classpath>
@@ -75,12 +75,13 @@ ant -buildfile THISFILE \
 			<param name="note-references" expression="true" type="BOOLEAN"/>
 			<param name="authorname" expression="${authorname}" type="STRING"/>
 			<param name="block-ids" expression="${block-ids}" type="BOOLEAN"/>
-			<param name="keep-existing-collation" expression="${keep-existing-collation}" type="BOOLEAN"/>
+			<param name="keep-existing-collation" expression="${keep-existing-collation}"
+				type="BOOLEAN"/>
 			<param name="protocoll" expression="${protocoll}" type="STRING"/>
 		</xslt>
 		<echo>Extracted text stored in ${outputFile}</echo>
 	</target>
-	
+
 	<target name="add-multiple-recensions-editor-appinfo">
 		<!-- This task adds <appInfo> for the multiple recensions editor -->
 		<xslt style="xsl/recensions-appinfo.xsl" in="${inputFile}" out="${inputFile}.temp">
@@ -99,7 +100,7 @@ ant -buildfile THISFILE \
 			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
 			<classpath location="${saxon.jar}"/>
 			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
-				value="org.apache.xerces.parsers.XML11Configuration"/>			
+				value="org.apache.xerces.parsers.XML11Configuration"/>
 		</xslt>
 		<!-- the xslt task fails when writing to the same file. -->
 		<move file="${inputFile}.temp" toFile="${outputFile}"/>
@@ -111,7 +112,7 @@ ant -buildfile THISFILE \
 			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
 			<classpath location="${saxon.jar}"/>
 			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
-				value="org.apache.xerces.parsers.XML11Configuration"/>			
+				value="org.apache.xerces.parsers.XML11Configuration"/>
 		</xslt>
 		<!-- the xslt task fails when writing to the same file. -->
 		<move file="${inputFile}.temp" toFile="${outputFile}"/>
@@ -123,34 +124,34 @@ ant -buildfile THISFILE \
 			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
 			<classpath location="${saxon.jar}"/>
 			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
-				value="org.apache.xerces.parsers.XML11Configuration"/>			
+				value="org.apache.xerces.parsers.XML11Configuration"/>
 		</xslt>
 		<!-- the xslt task fails when writing to the same file. -->
 		<move file="${inputFile}.temp" toFile="${outputFile}"/>
 	</target>
-	
+
 	<target name="mre-complement">
 		<!-- This tasks resets the multiple recensions editor (MRE) -->
 		<xslt style="xsl/mre-complement.xsl" in="${inputFile}" out="${outputFile}.temp">
 			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
 			<classpath location="${saxon.jar}"/>
 			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
-				value="org.apache.xerces.parsers.XML11Configuration"/>			
+				value="org.apache.xerces.parsers.XML11Configuration"/>
 		</xslt>
 		<!-- the xslt task fails when writing to the same file. -->
 		<move file="${inputFile}.temp" toFile="${outputFile}"/>
 	</target>
-	
+
 	<target name="preview-all-recensions">
-		<xslt style="xsl/recensions-ant-property.xsl" in="${inputFile}" out="${inputFile}.recensions.txt">
+		<xslt style="xsl/recensions-ant-property.xsl" in="${inputFile}"
+			out="${inputFile}.previews.txt">
 			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
 			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
-				value="org.apache.xerces.parsers.XML11Configuration"/>						
+				value="org.apache.xerces.parsers.XML11Configuration"/>
 		</xslt>
-		<property file="${inputFile}.recensions.txt"/>
+		<property file="${inputFile}.previews.txt"/>
 		<echo>Generating Preview for recensions ${recensions}</echo>
-		<foreach list="${recensions}" target="preview-recension" param="source">
-		</foreach>
+		<foreach list="${recensions}" target="preview-recension" param="source"> </foreach>
 	</target>
 
 	<target name="preview-recension">
@@ -169,5 +170,34 @@ ant -buildfile THISFILE \
 			<param name="debug" expression="true" type="BOOLEAN"/>
 		</xslt>
 	</target>
+
+	<target name="extract-all-recensions">
+		<xslt style="xsl/recensions-ant-property.xsl" in="${inputFile}"
+			out="${inputFile}.recensions.txt">
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+				value="org.apache.xerces.parsers.XML11Configuration"/>
+		</xslt>
+		<property file="${inputFile}.recensions.txt"/>
+		<echo>Extracting recensions ${recensions}</echo>
+		<foreach list="${recensions}" target="extract-recension" param="source"> </foreach>
+	</target>
+
+	<target name="extract-recension">
+		<property name="htmlOutput" value="${inputFile}.${source}.xml"/>
+		<echo>Extracting recension ${source}</echo>
+		<echo>Getting witnesses' labels from ${witnesses-xpath}</echo>
+		<xslt style="xsl/extract-recension.xsl" in="${inputFile}" out="${htmlOutput}">
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/xinclude-aware" value="on"/>
+			</factory>
+			<param name="source" expression="${source}" type="STRING"/>
+			<!--param name="locales-directory" expression="${locales-directory}"/-->
+			<param name="witnesses-xpath" expression="${witnesses-xpath}" type="STRING"/>
+			<param name="witness-siglum-xpath" expression="${witness-siglum-xpath}" type="STRING"/>
+			<param name="debug" expression="true" type="BOOLEAN"/>
+		</xslt>
+	</target>
+
 
 </project>
