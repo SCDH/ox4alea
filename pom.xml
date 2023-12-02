@@ -23,6 +23,10 @@
 			<id>gitlab-maven</id>
 			<url>${distribution.url}</url>
 		</repository>
+		<repository>
+			<id>gitlab-seed-tei-transformations</id>
+			<url>https://zivgitlab.uni-muenster.de/api/v4/projects/5496/packages/maven</url>
+		</repository>
 	</repositories>
 
 	<distributionManagement>
@@ -42,6 +46,13 @@
 			<groupId>ant-contrib</groupId>
 			<artifactId>ant-contrib</artifactId>
 			<version>${ant.contrib.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>de.wwu.scdh.tei</groupId>
+			<artifactId>seed-tei-transformations</artifactId>
+			<version>0.4.0</version>
+			<classifier>package</classifier>
+			<type>zip</type>
 		</dependency>
 	</dependencies>
 
@@ -137,6 +148,17 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<version>3.1.1</version>
 				<executions>
+					<execution>
+						<id>copy-xslt</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>frameworks/teip5alea/seed-tei-transformations</outputDirectory>
+							<includeArtifactIds>seed-tei-transformations</includeArtifactIds>
+						</configuration>
+					</execution>
 					<execution>
 						<phase>prepare-package</phase>
 						<goals>
