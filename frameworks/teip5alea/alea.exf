@@ -15,7 +15,7 @@
   <transformationScenarios>
     <addScenarios href="transformation.scenarios"/>
     <defaultScenarios>
-      <name>ALEA :: Preview</name>
+      <name>ALEA :: Preview Diwan</name>
     </defaultScenarios>
   </transformationScenarios>
 
