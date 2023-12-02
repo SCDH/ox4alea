@@ -5,11 +5,71 @@
 			<String>scenarios</String>
 			<scenario-array>
 				<scenario>
-					<field name="advancedOptionsMap">
-						<null/>
-					</field>
+                                <field name="advancedOptionsMap">
+                                    <serializableOrderedMap>
+                                        <entry>
+                                            <String>Saxon-PE</String>
+                                            <xsltSaxonBAdvancedOptions>
+                                                <field name="allowCallsOnExtensionFunctions">
+                                                    <Boolean>true</Boolean>
+                                                </field>
+                                                <field name="registerSaxonCEExtensions">
+                                                    <Boolean>true</Boolean>
+                                                </field>
+                                                <field name="enableAssertions">
+                                                    <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="showVersionWarnings">
+                                                    <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="dtdSourceValidation">
+                                                    <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="dtdSourceValidationRecover">
+                                                    <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="lineNumbering">
+                                                    <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="initialMode">
+                                                    <null/>
+                                                </field>
+                                                <field name="initialTemplate">
+                                                    <null/>
+                                                </field>
+                                                <field name="traceXPathExpression">
+                                                    <Boolean>true</Boolean>
+                                                </field>
+                                                <field name="expandAttributeDefaults">
+                                                    <Boolean>true</Boolean>
+                                                </field>
+                                                <field name="stripWS">
+                                                    <String>saxon.strip.ws.none</String>
+                                                </field>
+                                                <field name="optimizationEnabled">
+                                                    <Boolean>true</Boolean>
+                                                </field>
+                                                <field name="useConfigFile">
+                                                    <Boolean>true</Boolean>
+                                                </field>
+                                                <field name="configSystemID">
+                                                    <String>${framework}/seed-tei-transformations/saxon.pe.xml</String>
+                                                </field>
+                                                <field name="initializer">
+                                                    <String></String>
+                                                </field>
+                                                <field name="profilingOutputFile">
+                                                    <String></String>
+                                                </field>
+                                                <field name="isProfilingEnabled">
+                                                    <Boolean>false</Boolean>
+                                                </field>
+                                            </xsltSaxonBAdvancedOptions>
+                                        </entry>
+                                    </serializableOrderedMap>
+                                </field>
 					<field name="name">
-						<String>ALEA :: Preview</String>
+						<String>ALEA :: Preview Diwan</String>
 					</field>
 					<field name="baseURL">
 						<String></String>
@@ -27,7 +87,7 @@
 						<String></String>
 					</field>
 					<field name="inputXSLURL">
-						<String>${framework}/xsl/preview.xsl</String>
+						<String>${framework}/seed-tei-transformations/xsl/projects/alea/html/diwan.xsl</String>
 					</field>
 					<field name="inputXMLURL">
 						<String>${currentFileURL}</String>
@@ -74,108 +134,34 @@
 					<field name="useXSLTInput">
 						<Boolean>true</Boolean>
 					</field>
-					<field name="xsltParams">
-						<list>
-							<transformationParameter>
-								<field name="paramDescription">
-									<paramDescriptor>
-										<field name="localName">
-											<String>i18n</String>
-										</field>
-										<field name="prefix">
-											<null/>
-										</field>
-										<field name="namespace">
-											<null/>
-										</field>
-									</paramDescriptor>
-								</field>
-								<field name="value">
-									<String>${framework}/xsl/i18n.js</String>
-								</field>
-								<field name="hasXPathValue">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isStatic">
-									<Boolean>false</Boolean>
-								</field>
-							</transformationParameter>
-							<transformationParameter>
-								<field name="paramDescription">
-									<paramDescriptor>
-										<field name="localName">
-											<String>locales-directory</String>
-										</field>
-										<field name="prefix">
-											<null/>
-										</field>
-										<field name="namespace">
-											<null/>
-										</field>
-									</paramDescriptor>
-								</field>
-								<field name="value">
-									<String>${framework}/xsl/locales</String>
-								</field>
-								<field name="hasXPathValue">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isStatic">
-									<Boolean>false</Boolean>
-								</field>
-							</transformationParameter>
-							<transformationParameter>
-								<field name="paramDescription">
-									<paramDescriptor>
-										<field name="localName">
-											<String>witnesses-xpath</String>
-										</field>
-										<field name="prefix">
-											<null/>
-										</field>
-										<field name="namespace">
-											<null/>
-										</field>
-									</paramDescriptor>
-								</field>
-								<field name="value">
-									<!--String>${teilspProp(alea.xsl.libwit.witnesses.xpath)}</String-->
-									<String>doc('${pdu}/WitnessCatalogue.xml')//text//listWit//witness</String>
-								</field>
-								<field name="hasXPathValue">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isStatic">
-									<Boolean>false</Boolean>
-								</field>
-							</transformationParameter>
-							<transformationParameter>
-								<field name="paramDescription">
-									<paramDescriptor>
-										<field name="localName">
-											<String>witness-siglum-xpath</String>
-										</field>
-										<field name="prefix">
-											<null/>
-										</field>
-										<field name="namespace">
-											<null/>
-										</field>
-									</paramDescriptor>
-								</field>
-								<field name="value">
-									<!--String>${teilspProp(alea.xsl.libwit.siglum.xpath)}</String-->
-									<String>descendant::abbr[@type eq 'siglum'][1]</String>
-								</field>
-								<field name="hasXPathValue">
-									<Boolean>false</Boolean>
-								</field>
-								<field name="isStatic">
-									<Boolean>false</Boolean>
-								</field>
-							</transformationParameter>
-						</list>
-					</field>
+                                <field name="xsltParams">
+                                    <list>
+                                        <transformationParameter>
+                                            <field name="paramDescription">
+                                                <paramDescriptor>
+                                                    <field name="localName">
+                                                        <String>wit-catalog</String>
+                                                    </field>
+                                                    <field name="prefix">
+                                                        <null/>
+                                                    </field>
+                                                    <field name="namespace">
+                                                        <null/>
+                                                    </field>
+                                                </paramDescriptor>
+                                            </field>
+                                            <field name="value">
+                                                <String>${pdu}/WitnessCatalogue.xml</String>
+                                            </field>
+                                            <field name="hasXPathValue">
+                                                <Boolean>false</Boolean>
+                                            </field>
+                                            <field name="isStatic">
+                                                <Boolean>false</Boolean>
+                                            </field>
+                                        </transformationParameter>
+                                    </list>
+                                </field>
 					<field name="cascadingStylesheets">
 						<String-array/>
 					</field>
