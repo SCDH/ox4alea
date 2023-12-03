@@ -6,7 +6,7 @@
 
 	<groupId>de.wwu.scdh.oxygen.alea</groupId>
 	<artifactId>scdh-alea-oxygen-extension</artifactId>
-	<version>2.8.5</version>
+	<version>${revision}${changelist}</version>
 
 	<name>scdh-alea-oxygen-extension</name>
 	<url>https://zivgitlab.uni-muenster.de/SCDH/hees-alea/oxygen-framework</url>
