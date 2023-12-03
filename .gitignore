@@ -10,6 +10,7 @@ default-oxygen-frameworks
 /frameworks/oxbytei
 /frameworks/oxbytao
 /frameworks/teip5alea/*.jar
+/frameworks/teip5alea/seed-tei-transformations
 oxbytei_externalAuthorActions
 oxbytao_externalAuthorActions
 
