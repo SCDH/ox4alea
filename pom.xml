@@ -27,6 +27,10 @@
 			<id>gitlab-seed-tei-transformations</id>
 			<url>https://zivgitlab.uni-muenster.de/api/v4/projects/5496/packages/maven</url>
 		</repository>
+		<repository>
+			<id>gitlab-alea-transformations</id>
+			<url>https://zivgitlab.uni-muenster.de/api/v4/projects/7517/packages/maven</url>
+		</repository>
 	</repositories>
 
 	<distributionManagement>
@@ -51,6 +55,13 @@
 			<groupId>de.wwu.scdh.tei</groupId>
 			<artifactId>seed-tei-transformations</artifactId>
 			<version>0.5.0</version>
+			<classifier>package</classifier>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>de.wwu.alea</groupId>
+			<artifactId>alea-transformations</artifactId>
+			<version>0.3.1</version>
 			<classifier>package</classifier>
 			<type>zip</type>
 		</dependency>
@@ -149,7 +160,7 @@
 				<version>3.1.1</version>
 				<executions>
 					<execution>
-						<id>copy-xslt</id>
+						<id>copy-seed-tei-transformations</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>unpack-dependencies</goal>
@@ -157,6 +168,17 @@
 						<configuration>
 							<outputDirectory>frameworks/teip5alea/seed-tei-transformations</outputDirectory>
 							<includeArtifactIds>seed-tei-transformations</includeArtifactIds>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-alea-transformations</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>frameworks/teip5alea/alea-transformations</outputDirectory>
+							<includeArtifactIds>alea-transformations</includeArtifactIds>
 						</configuration>
 					</execution>
 					<execution>
