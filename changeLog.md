@@ -1,5 +1,13 @@
 # change log #
 
+### 3.0.0
+
+- dependencies on SEED TEI Transformations and ALEA Transformations
+- preview replaced with components from SEED TEI Transformations
+- added transformation and scenario for registries, i.e., places,
+  persons, bibliography, importet from ALEA Transformations
+
+
 ### 2.8.4
 
 - generate apparatus entries for `<space>` nested in `<rdg>`
