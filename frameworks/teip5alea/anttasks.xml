@@ -141,6 +141,25 @@ ant -buildfile THISFILE \
 		<move file="${inputFile}.temp" toFile="${outputFile}"/>
 	</target>
 
+
+	<target name="registry">
+		<xslt style="alea-transformations/xsl/html/registry.xsl" in="${inputFile}"
+			out="${outputFile}">
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/configuration-file"
+					value="${alea.saxon.config}"/>
+				<!-- Its important to override XInclude option in config file! -->
+				<!-- currently this transformation only runs without XInclude -->
+				<!--attribute name="http://saxon.sf.net/feature/xinclude-aware" value="off"/-->
+			</factory>
+			<classpath location="${saxon.jar}"/>
+			<sysproperty key="org.apache.xerces.xni.parser.XMLParserConfiguration"
+				value="org.apache.xerces.parsers.XML11Configuration"/>
+		</xslt>
+	</target>
+
+
+
 	<target name="preview-all-recensions">
 		<xslt style="xsl/recensions-ant-property.xsl" in="${inputFile}"
 			out="${inputFile}.previews.txt">
