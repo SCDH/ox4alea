@@ -58,8 +58,9 @@ ant -buildfile THISFILE \
 	<!-- preview -->
 	<property name="source" value=""/>
 	<property name="wit-catalog" value="${basedir}/../WitnessCatalogue.xml"/>
-	<property name="saxon.config" value="${basedir}/seed-tei-transformations/saxon.he.xml"/>
-
+	<property name="seed.saxon.config" value="${basedir}/seed-tei-transformations/saxon.he.xml"/>
+	<property name="alea.saxon.config" value="${basedir}/alea-transformations/saxon.he.xml"/>
+	
 
 	<target name="extract-reading">
 		<!-- Task for extracting a reading in order to start encoding an other recension based on it.
@@ -156,10 +157,11 @@ ant -buildfile THISFILE \
 		<property name="htmlOutput" value="${inputFile}.${source}.html"/>
 		<echo>Generating preview for recension ${source}</echo>
 		<echo>Getting witnesses' labels from ${witnesses-xpath}</echo>
-		<xslt style="seed-tei-transformations/xsl/projects/alea/html/diwan-recension.xsl" in="${inputFile}" out="${htmlOutput}">
+		<xslt style="seed-tei-transformations/xsl/projects/alea/html/diwan-recension.xsl"
+			in="${inputFile}" out="${htmlOutput}">
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/configuration-file"
-					   value="${saxon.config}"/>
+					value="${seed.saxon.config}"/>
 				<!-- Its important to override XInclude option in config file! -->
 				<attribute name="http://saxon.sf.net/feature/xinclude-aware" value="on"/>
 			</factory>
