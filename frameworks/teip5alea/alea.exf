@@ -113,6 +113,7 @@
         <addAction id="short.seg.note"/>
         <addAction id="short.cite.ref"/>
         <addAction id="short.koran"/>
+        <addAction id="short.seg.note.tag.term"/>
         <addAction id="short.encyclopedia"/>
         <addAction id="short.seg.lang"/>
         <addAction id="insert.tag.terms"/>
