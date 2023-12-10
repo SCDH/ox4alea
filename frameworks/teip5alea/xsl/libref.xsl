@@ -42,7 +42,7 @@ scdh:references-from-attribute(@target)[1] => scdh:dereference()
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:priv="http:://visibility.org/private"
-    xmlns:scdh="http://scdh.wwu.de/xslt#" exclude-result-prefixes="xs scdh"
+    xmlns:scdh="http://scdh.wwu.de/xslt#" exclude-result-prefixes="#all"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
 
     <!-- whether to handle references starting with the number sign '#' as same-document references -->
