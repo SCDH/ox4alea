@@ -11,7 +11,7 @@
     <a:operation id="ExecuteMultipleActionsOperation">
       <a:xpathCondition>true()</a:xpathCondition>
       <a:arguments>
-        <a:argument name="actionIDs">atom.seg, atom.move.caret.end, atom.seg.type.verbatim, atom.bibref.note, sel.bibref, atom.bibref.scope</a:argument>
+        <a:argument name="actionIDs">annotate, atom.tag.Tadmin, atom.bibref.note, sel.bibref, atom.bibref.scope</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
