@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="insert.tag.terms">
+  <a:name>Tag terms</a:name>
+  <a:description>Insert the terms from tags to the current position.</a:description>
+  <a:smallIconPath href="${framework}/images/tag-terms-16.png"/>
+  <a:largeIconPath href="${framework}/images/tag-terms-24.png"/>
+  <a:operations>
+    <a:operation id="ExecuteMultipleActionsOperation">
+      <a:xpathCondition>ancestor-or-self::*/@ana</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="actionIDs">atom.here.seg,atom.insert.tag.terms</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>

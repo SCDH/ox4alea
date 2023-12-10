@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="atom.insert.tag.terms">
+  <a:name>Tag terms</a:name>
+  <a:description>Insert the terms from tags to the current position.</a:description>
+  <a:smallIconPath href="${framework}/images/tag-terms-16.png"/>
+  <a:largeIconPath href="${framework}/images/tag-terms-24.png"/>
+  <a:operations>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>ancestor-or-self::*/@ana</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="script">${framework}/xsl/insert-tag-terms.xsl</a:argument>
+        <!-- we need the whole document in order to evaluate the <prefixDef> -->
+        <a:argument name="sourceLocation">/*</a:argument>
+        <a:argument name="targetLocation">self::*</a:argument>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="caretPosition">End</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
