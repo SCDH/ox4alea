@@ -115,6 +115,7 @@
         <addAction id="short.koran"/>
         <addAction id="short.encyclopedia"/>
         <addAction id="short.seg.lang"/>
+        <addAction id="insert.tag.terms"/>
       </toolbar>
 
       <!--toolbar name="ALEA Recensions">
