@@ -8,6 +8,12 @@
   <a:description>Insert a note with a bibliographic reference.</a:description>
   <a:operations>
     <a:operation id="InsertFragmentOperation">
+      <a:xpathCondition>self::*:note</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="fragment"><![CDATA[<bibl xmlns="http://www.tei-c.org/ns/1.0" >${caret}</bibl>]]></a:argument>
+      </a:arguments>
+    </a:operation>
+    <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>true()</a:xpathCondition>
       <a:arguments>
         <!-- FIXME: use an editor variable for the language -->
