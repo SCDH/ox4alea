@@ -1,5 +1,10 @@
 # change log #
 
+### 3.2.0
+
+- improved author action for citations
+- bump SEED TEI Transformations to 0.10.0
+
 ### 3.0.0
 
 - dependencies on SEED TEI Transformations and ALEA Transformations
