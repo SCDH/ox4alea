@@ -4,6 +4,8 @@
 
 - improved author action for citations
 - bump SEED TEI Transformations to 0.10.0
+- added transformation scenarios for Diwan that ask for font size
+  - this enable to get prints for team meatings
 
 ### 3.0.0
 
