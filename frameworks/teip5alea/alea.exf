@@ -19,6 +19,12 @@
     </defaultScenarios>
   </transformationScenarios>
 
+  <validationScenarios>
+    <addScenarios href="validation.scenarios"/>
+    <defaultScenarios>
+      <name>ALEA</name>
+    </defaultScenarios>
+  </validationScenarios>
 
   <author>
     <!-- 
