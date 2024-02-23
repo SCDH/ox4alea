@@ -1,5 +1,13 @@
 # change log #
 
+### 3.3.0
+
+- activate validation scenarios and made `ALEA` the default scenario
+  - the `ALEA` scenario points directly to
+    `${pdu}/resources/schema/ALEA.rng`
+  - Breaks the separation of project and framework. However, having
+    validation without any individual config is vital at the moment.
+
 ### 3.2.0
 
 - improved author action for citations
