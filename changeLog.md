@@ -7,6 +7,8 @@
     `${pdu}/resources/schema/ALEA.rng`
   - Breaks the separation of project and framework. However, having
     validation without any individual config is vital at the moment.
+- update to SEED TEI Transformations 0.11.0
+- update to ALEA Transformations 0.7.5
 
 ### 3.2.0
 

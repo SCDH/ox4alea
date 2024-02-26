@@ -55,14 +55,14 @@
 		<dependency>
 			<groupId>de.wwu.scdh.tei</groupId>
 			<artifactId>seed-tei-transformations</artifactId>
-			<version>0.10.0</version>
+			<version>0.11.0</version>
 			<classifier>package</classifier>
 			<type>zip</type>
 		</dependency>
 		<dependency>
 			<groupId>de.wwu.alea</groupId>
 			<artifactId>alea-transformations</artifactId>
-			<version>0.3.2</version>
+			<version>0.7.5</version>
 			<classifier>package</classifier>
 			<type>zip</type>
 		</dependency>
