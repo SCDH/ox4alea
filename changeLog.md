@@ -1,5 +1,9 @@
 # change log #
 
+### 3.3.1
+
+- update SEED TEI Transformations to bug fix version 0.11.1
+
 ### 3.3.0
 
 - activate validation scenarios and made `ALEA` the default scenario
