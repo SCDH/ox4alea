@@ -9,8 +9,7 @@
     <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>true()</a:xpathCondition>
       <a:arguments>
-        <a:argument name="fragment"><![CDATA[<seg xmlns="http://www.tei-c.org/ns/1.0" n="here">${caret}</seg>]]>
-        </a:argument>
+        <a:argument name="fragment"><![CDATA[<seg xmlns="http://www.tei-c.org/ns/1.0" n="here">${caret}</seg>]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>

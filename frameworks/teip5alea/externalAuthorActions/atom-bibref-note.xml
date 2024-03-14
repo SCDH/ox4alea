@@ -19,8 +19,7 @@
         <!-- FIXME: use an editor variable for the language -->
         <a:argument name="fragment"><![CDATA[<note xmlns="http://www.tei-c.org/ns/1.0" xml:id="${id}" xml:lang="en">
     <bibl>${caret}</bibl>
-  </note>]]>
-        </a:argument>
+  </note>]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
