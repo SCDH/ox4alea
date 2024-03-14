@@ -1,5 +1,11 @@
 # change log #
 
+### 3.3.3
+
+- update SEED TEI Transformations to bug fix version
+- fix author mode actions that insert spaces, related to #69.
+
+
 ### 3.3.2
 
 - update SEED TEI Transformations to bug fix version 0.11.1
