@@ -46,8 +46,10 @@
 
     <css>
       <addCss path="${framework}/css/note.css" alternate="true" title="+ Kommentare"/>
-      <addCss path="${framework}/css/recensions_.css" alternate="true" title="+ MRE Multiple Recensions Editor"/>
-      <addCss path="${framework}/css/mre-apparatus_.css" alternate="true" title="+ MRE Hide Other Readings"/>
+      <addCss path="${framework}/css/recensions_.css" alternate="true"
+        title="+ MRE Multiple Recensions Editor"/>
+      <addCss path="${framework}/css/mre-apparatus_.css" alternate="true"
+        title="+ MRE Hide Other Readings"/>
     </css>
 
     <menu>
@@ -77,7 +79,7 @@
     </menu>
 
     <toolbars>
-      <toolbar>
+      <toolbar name="TEI">
         <removeAction id="item"/>
         <removeAction id="itemizedlist"/>
         <removeAction id="sort"/>
@@ -89,16 +91,17 @@
         <removeAction id="insert.table.cell"/>
         <removeAction id="table.join"/>
         <removeAction id="table.split"/>
+      </toolbar>
+
+      <toolbar name="Editorial">
+        <separator/>
+        <addAction id="mark-unclear"/>
+        <addAction id="add-gap"/>
+      </toolbar>
+
+      <toolbar name="Critical Apparatus">
         <addAction anchor="del.app" id="add_witdetail"/>
         <addAction anchor="del.app" id="register_witness"/>
-        <separator anchor="del.app"/>
-        <addAction anchor="note" id="mark-unclear"/>
-        <addAction anchor="note" id="add-gap"/>
-        <separator anchor="note"/>
-
-        <!-- 
-      
-      -->
       </toolbar>
 
       <toolbar name="MRE">
