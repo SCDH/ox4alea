@@ -67,26 +67,26 @@
 	<build>
 		<plugins>
 
-		  <plugin>
-                <groupId>io.github.download-maven-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
-                <version>2.0.0</version>
-                <executions>
-                    <!-- download SEED TEI Transformations -->
-                    <execution>
-                        <id>get-seed-tei-transformations</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>https://github.com/SCDH/seed-tei-transformations/releases/download/${seed-tei-transformations.version}/seed-tei-transformations-${seed-tei-transformations.version}-package.zip</url>
-                            <unpack>true</unpack>
-			    <outputDirectory>frameworks/teip5alea</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+			<plugin>
+				<groupId>io.github.download-maven-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<version>2.0.0</version>
+				<executions>
+					<!-- download SEED TEI Transformations -->
+					<execution>
+						<id>get-seed-tei-transformations</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/SCDH/seed-tei-transformations/releases/download/${seed-tei-transformations.version}/seed-tei-transformations-${seed-tei-transformations.version}-package.zip</url>
+							<unpack>true</unpack>
+							<outputDirectory>frameworks/teip5alea</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
 
 			<plugin>
