@@ -1,5 +1,11 @@
 # change log #
 
+### 3.4.0
+
+- reflect changes in oXbytei and oXbytao
+  - re-distribute toolbar actions
+- update to SEED TEI Transformations 0.14.8
+
 ### 3.3.3
 
 - update SEED TEI Transformations to bug fix version
