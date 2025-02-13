@@ -17,6 +17,9 @@
 		<!--distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/2415/packages/maven</distribution.url-->
 		<!-- also hardwired to anttask.xml -->
 		<ant.contrib.version>1.0b3</ant.contrib.version>
+
+		<!-- XSLT/XQuery dependencies -->
+		<seed-tei-transformations.version>0.14.8</seed-tei-transformations.version>
 	</properties>
 
 	<repositories>
@@ -26,7 +29,7 @@
 		</repository>
 		<repository>
 			<id>gitlab-seed-tei-transformations</id>
-			<url>https://zivgitlab.uni-muenster.de/api/v4/projects/5496/packages/maven</url>
+			<url>https://maven.pkg.github.com/SCDH/seed-tei-transformations</url>
 		</repository>
 		<repository>
 			<id>gitlab-alea-transformations</id>
@@ -53,13 +56,6 @@
 			<version>${ant.contrib.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>de.wwu.scdh.tei</groupId>
-			<artifactId>seed-tei-transformations</artifactId>
-			<version>0.11.2</version>
-			<classifier>package</classifier>
-			<type>zip</type>
-		</dependency>
-		<dependency>
 			<groupId>de.wwu.alea</groupId>
 			<artifactId>alea-transformations</artifactId>
 			<version>0.7.5</version>
@@ -70,6 +66,28 @@
 
 	<build>
 		<plugins>
+
+		  <plugin>
+                <groupId>io.github.download-maven-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <executions>
+                    <!-- download SEED TEI Transformations -->
+                    <execution>
+                        <id>get-seed-tei-transformations</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://github.com/SCDH/seed-tei-transformations/releases/download/${seed-tei-transformations.version}/seed-tei-transformations-${seed-tei-transformations.version}-package.zip</url>
+                            <unpack>true</unpack>
+			    <outputDirectory>frameworks/teip5alea</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
 
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -176,17 +194,6 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<version>3.1.1</version>
 				<executions>
-					<execution>
-						<id>copy-seed-tei-transformations</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>unpack-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>frameworks/teip5alea/seed-tei-transformations</outputDirectory>
-							<includeArtifactIds>seed-tei-transformations</includeArtifactIds>
-						</configuration>
-					</execution>
 					<execution>
 						<id>copy-alea-transformations</id>
 						<phase>generate-sources</phase>
