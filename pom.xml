@@ -20,6 +20,7 @@
 
 		<!-- XSLT/XQuery dependencies -->
 		<seed-tei-transformations.version>0.14.8</seed-tei-transformations.version>
+		<alea-transformations.version>0.8.0</alea-transformations.version>
 	</properties>
 
 	<repositories>
@@ -54,13 +55,6 @@
 			<groupId>ant-contrib</groupId>
 			<artifactId>ant-contrib</artifactId>
 			<version>${ant.contrib.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>de.wwu.alea</groupId>
-			<artifactId>alea-transformations</artifactId>
-			<version>0.7.5</version>
-			<classifier>package</classifier>
-			<type>zip</type>
 		</dependency>
 	</dependencies>
 
@@ -195,14 +189,23 @@
 				<version>3.1.1</version>
 				<executions>
 					<execution>
-						<id>copy-alea-transformations</id>
+						<id>unpack-alea-transformations</id>
 						<phase>generate-sources</phase>
 						<goals>
-							<goal>unpack-dependencies</goal>
+							<goal>unpack</goal>
 						</goals>
 						<configuration>
 							<outputDirectory>frameworks/teip5alea/alea-transformations</outputDirectory>
 							<includeArtifactIds>alea-transformations</includeArtifactIds>
+							<artifactItems>
+								<artifactItem>
+									<groupId>de.wwu.alea</groupId>
+									<artifactId>alea-transformations</artifactId>
+									<version>${alea-transformations.version}</version>
+									<classifier>package</classifier>
+									<type>zip</type>
+								</artifactItem>
+							</artifactItems>
 						</configuration>
 					</execution>
 					<execution>
