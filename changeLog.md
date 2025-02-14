@@ -5,6 +5,7 @@
 - reflect changes in oXbytei and oXbytao
   - re-distribute toolbar actions
 - update to SEED TEI Transformations 0.14.8
+- update to ALEA Transformations 0.8.0
 
 ### 3.3.3
 
