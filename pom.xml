@@ -29,7 +29,7 @@
 			<url>${distribution.url}</url>
 		</repository>
 		<repository>
-			<id>gitlab-seed-tei-transformations</id>
+			<id>github-seed-tei-transformations</id>
 			<url>https://maven.pkg.github.com/SCDH/seed-tei-transformations</url>
 		</repository>
 		<repository>
