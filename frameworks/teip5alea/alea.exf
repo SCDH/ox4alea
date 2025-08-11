@@ -8,6 +8,10 @@
   <description>An oXygen framework for the edition of the works of Ibn Nubatah</description>
   <priority>High</priority>
 
+  <xmlCatalogs inherit="all">
+    <addEntry path="catalog.xml" position="before"/>
+  </xmlCatalogs>
+
   <documentTemplates>
     <addEntry path="${pd}/templates" position="before"/>
   </documentTemplates>

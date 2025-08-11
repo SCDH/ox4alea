@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE catalog PUBLIC "-//OASIS//DTD XML Catalogs V1.1//EN" "http://www.oasis-open.org/committees/entity/release/1.1/catalog.dtd">
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+
+    <!-- redirect to oXbytei config for project -->
+    <uriSuffix uriSuffix="config/default.xml" uri="oxbytei-config.xml"/>
+    <systemSuffix systemIdSuffix="config/default.xml" uri="oxbytei-config.xml"/>
+
+    <!-- RDF-Annotatioen -/->
+    <uriSuffix uriSuffix="oxbytei/xsl/annotation.xsl" uri="../frameworks/oxbytei/xsl/annotation-oa-rdfxml.xsl"/>
+    <systemSuffix systemIdSuffix="oxbytei/xsl/annotation.xsl" uri="../frameworks/oxbytei/xsl/annotation-oa-rdfxml.xsl"/>
+    -->
+    
+    <!-- Stylesheet zum Generieren von Kommentaren: voreingestllte Sprache -->
+    <uriSuffix uriSuffix="oxbytao/xsl/note.xsl" uri="xsl/note.xsl"/>
+    <systemSuffix systemIdSuffix="oxbytao/xsl/note.xsl" uri="xsl/note.xsl"/>
+
     <uriSuffix uriSuffix="font.css" uri="css/font.css"/>
 </catalog>
