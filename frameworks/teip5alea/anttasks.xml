@@ -31,6 +31,9 @@ ant -buildfile THISFILE \
 	<!-- author name -->
 	<property name="authorname" value="${user.name}"/>
 
+	<!-- the edition's base directory, ${pdu} in oXygen -->
+	<property name="edition" value="${basedir}/.."/>
+
 	<!-- directories -->
 	<dirname property="outputDir" file="${outputFile}"/>
 	<dirname property="inputDir" file="${inputFile}"/>
@@ -57,10 +60,12 @@ ant -buildfile THISFILE \
 
 	<!-- preview -->
 	<property name="source" value=""/>
-	<property name="wit-catalog" value="${basedir}/../WitnessCatalogue.xml"/>
-	<property name="seed.saxon.config" value="${basedir}/seed-tei-transformations/saxon.he.xml"/>
-	<property name="alea.saxon.config" value="${basedir}/alea-transformations/saxon.he.xml"/>
-	
+	<property name="wit-catalog" value="${edition}/WitnessCatalogue.xml"/>
+	<property name="seed-tei-transformations" value="${basedir}/seed-tei-transformations"/>
+	<property name="seed.saxon.config" value="${seed-tei-transformations}/saxon.he.xml"/>
+	<property name="alea-transformations" value="${basedir}/alea-transformations"/>
+	<property name="alea.saxon.config" value="${alea-transformations}/saxon.he.xml"/>
+
 
 	<target name="extract-reading">
 		<!-- Task for extracting a reading in order to start encoding an other recension based on it.
@@ -205,7 +210,8 @@ ant -buildfile THISFILE \
 		<property name="htmlOutput" value="${inputFile}.${source}.xml"/>
 		<echo>Extracting recension ${source}</echo>
 		<echo>Getting witnesses' labels from ${witnesses-xpath}</echo>
-		<xslt style="xsl/extract-recension.xsl" in="${inputFile}" out="${htmlOutput}">
+		<xslt style="${seed-tei-transformations}/xsl/projects/alea/tei/extract-recension.xsl"
+			in="${inputFile}" out="${htmlOutput}">
 			<factory name="net.sf.saxon.TransformerFactoryImpl">
 				<attribute name="http://saxon.sf.net/feature/xinclude-aware" value="on"/>
 			</factory>
