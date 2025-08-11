@@ -6,6 +6,9 @@
 target
 test/xspec/xspec
 default-oxygen-frameworks
+.classpath
+.project
+.settings
 
 /frameworks/oxbytei
 /frameworks/oxbytao
