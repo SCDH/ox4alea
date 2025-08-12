@@ -19,8 +19,17 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
-      - name: run maven
+      - name: build
         run: ./mvnw -Drevision=${{github.ref_name}} -Dchangelist="" --batch-mode --update-snapshots package
+
+      - name: Extract release changes
+        id: extract_changes
+        run: |
+          TAG=${{ github.ref_name }}
+          CHANGES="$(perl -nle '($v = "'"$TAG"'") =~ s/^v//; print if /^### $v / ... /^### / and not /^###/' CHANGES.md)"
+          echo "CHANGES<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: create release
         uses: actions/create-release@v1
@@ -30,7 +39,7 @@ jobs:
           prerelease: false
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
-          body_path: changeLog.md
+          body: ${{ steps.extract_changes.outputs.CHANGES }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
