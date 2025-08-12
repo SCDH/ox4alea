@@ -20,7 +20,7 @@ jobs:
           cache: maven
 
       - name: generate descriptor.xml file by running maven
-        run: mvn -Drelease.url=https://github.com/SCDH/oxbytei/releases/download/${{ github.ref_name }}/ -Drevision=${{github.ref_name}} -Dchangelist="" --batch-mode --update-snapshots generate-resources
+        run: mvn -Drelease.url=https://github.com/SCDH/ox4alea/releases/download/${{ github.ref_name }}/ -Drevision=${{github.ref_name}} -Dchangelist="" --batch-mode --update-snapshots generate-resources
 
       - name: create directory for github pages
         run: mkdir -p public
