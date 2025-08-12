@@ -4,26 +4,36 @@
 ![tests](https://github.com/scdh/ox4alea/actions/workflows/test-main.yml/badge.svg)
 
 
-An &lt;oXygen/> extension developed for the edition of the works of
-Ibn Nubata al Misri by the ALEA research group.
+An &lt;oXygen/> extension developed for the [edition of the works of
+Ibn Nubata al Misri by the ALEA research
+group](https://www.uni-muenster.de/ALEA/DFGlangfristvorhaben/index.html).
 
 ## Installation
 
-Install from [https://scdh.github.io/ox4alea/descriptor.xml](https://scdh.github.io/ox4alea/descriptor.xml).
+Install from
+
+```
+https://scdh.github.io/ox4alea/descriptor.xml
+```
+
 
 The framework can be installed with &lt;oXygen/>'s installation and
 update mechanism. Therefore, the above URL has to be entered into
 the form "Show addons from:" of the dialogue box from "Help" ->
 "Install new addons...".
 
-This framework works on top of oXbytei and oXbytao, which must also be
+This framework works on top of
+[oXbytei](https://github.com/scdh/oxbytei) and
+[oXbytao](https://github.com/scdh/oxbytei), which must also be
 installed.
+
 ```
-https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/descriptor.xml
+https://scdh.github.io/oxbytei/descriptor.xml
 ```
 
-- [oXbytei](https://github.com/SCDH/oxbytei)
-- [oXbytao](https://github.com/SCDH/oxbytoa)
+```
+https://scdh.github.io/oxbytao/descriptor.xml
+```
 
 Alternative installation methods are explained in [oXbytei's
 documentation](https://github.com/SCDH/oxbytei#installation) and can
@@ -42,10 +52,11 @@ of oXbytei and oXbytao.
     bibliography and presents them for selection
   - etc.
   
-- an HTML preview with a line-referencing critical apparatus and two
-  column text presentation for verses with caesura
-
 - transformations useful for editing multiple recensions of the same text
+
+- this framework comes packed with the [SEED TEI
+  Transformations](https://github.com/scdh/seed-tei-transformations)
+  for generating the HTML previews
 
 ### Project specific CSS ###
 
@@ -72,36 +83,6 @@ for the used languages through the project specific CSS file (see
     direction: ltr !important;
 }
 ```
-
-
-## Unit Tests
-
-There are unit tests for the XSL transformations based on
-[`XSpec`](https://github.com/xspec/xspec) in `test/xspec`. The tests
-can easily be run with maven from the root directory of the
-repository:
-
-	mvn test
-
-Maven will install all required packages for running the tests,
-e.g. `XSpec` and `Saxon-HE`. A detailed test report can be viewed with
-the browser in `target/xspec-reports/index.html`.
-
-The test suite or single tests can also be run from the root of this
-repository with
-
-	<path-to/xspec.sh> -catalog catalog.xml test/xspec/*.xspec
-
-This requires `XSpec` and `Saxon-HE` and the [XML
-Resolver](https://mvnrepository.com/artifact/xml-resolver/xml-resolver)
-installed. Provided that you've run maven before and maven caches its
-downloads under the `~/.m2/repository` folder you can set an
-environment variable as follows:
-
-	export SAXON_CP=~/.m2/repository/net/sf/saxon/Saxon-HE/9.9.1-6/Saxon-HE-9.9.1-6.jar:~/.m2/repository/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar
-
-The test result is in `test/xspec/xspec/*-review.html`.
-
 
 # License #
 
