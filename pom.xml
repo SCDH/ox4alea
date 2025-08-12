@@ -9,12 +9,11 @@
 	<version>${revision}${changelist}</version>
 
 	<name>ALEA oXygen framework</name>
-	<url>https://zivgitlab.uni-muenster.de/SCDH/hees-alea/oxygen-framework</url>
+	<url>https://github.com/SCDH/ox4alea</url>
 
 	<properties>
 		<release.url/>
-		<distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</distribution.url>
-		<!--distribution.url>https://zivgitlab.uni-muenster.de/api/v4/projects/2415/packages/maven</distribution.url-->
+		<distribution.url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</distribution.url>
 		<!-- also hardwired to anttask.xml -->
 		<ant.contrib.version>1.0b3</ant.contrib.version>
 
@@ -27,10 +26,6 @@
 		<repository>
 			<id>gitlab-maven</id>
 			<url>${distribution.url}</url>
-		</repository>
-		<repository>
-			<id>github-seed-tei-transformations</id>
-			<url>https://maven.pkg.github.com/SCDH/seed-tei-transformations</url>
 		</repository>
 		<repository>
 			<id>gitlab-alea-transformations</id>

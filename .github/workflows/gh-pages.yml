@@ -1,0 +1,35 @@
+name: Update github pages
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: generate descriptor.xml file by running maven
+        run: mvn -Drelease.url=https://github.com/SCDH/oxbytei/releases/download/${{ github.ref_name }}/ -Drevision=${{github.ref_name}} -Dchangelist="" --batch-mode --update-snapshots generate-resources
+
+      - name: create directory for github pages
+        run: mkdir -p public
+
+      - name: copy descriptor file
+        run: cp target/descriptor.xml public/descriptor.xml
+
+      - name: Deploy descriptor file on Github pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
