@@ -1,5 +1,10 @@
 # change log #
 
+### 4.0.0
+
+- make this framework self-contained: moved many resources from the
+  edition's `resources` folder to the framework
+
 ### 3.4.0
 
 - reflect changes in oXbytei and oXbytao
