@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teilspConfiguration xmlns="http://wwu.de/scdh/teilsp/config/">
+
+    <properties>
+
+        <property name="alea.default.encyclopedia">bibl:EI2</property>
+        <property name="alea.quotationmark.double.open">«</property>
+        <property name="alea.quotationmark.double.close">›</property>
+        
+        <!-- FIXME -->
+        <property name="alea.extract.reading.reading.OFF">${ask('Choose reading', (${xpath_eval(concat("'lemma':'lemma';", "'a':'a'"))}), 'lemma')}</property>
+        <property name="alea.extract.reading.reading">lemma</property>
+        
+        <property name="alea.action.bibref.holy.reference">bibl:Quran</property>
+        
+        <property name="alea.xsl.libwit.witnesses.xpath">doc('${pdu}/WitnessCatalogue.xml')//text//listWit//witness</property>
+        <property name="alea.xsl.libwit.siglum.xpath">descendant::abbr[@type eq 'siglum'][1]</property>
+        
+        
+        <property name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</property>
+        <property name="oxbytei.id.scheme">'a_${id}'</property>
+
+        <!-- what to select for automatic IDs generation -->
+        <property name="oxbytei.action.select.for.ids.xpathLocation">/*</property>
+
+        <!-- properties for select tag action -->
+        <property name="oxbytei.action.sel.tag.attributeName">ana</property>
+
+        <!-- properties for annotation action -->
+        <property name="oxbytei.action.annotate.startAnchor">anchor</property>
+        <property name="oxbytei.action.annotate.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.annotate.startId">'${id}'</property>
+        <property name="oxbytei.action.annotate.endAnchor">anchor</property>
+        <property name="oxbytei.action.annotate.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.annotate.endId">'${id}'</property>
+        <property name="oxbytei.action.annotate.sourceLocation">/*</property>
+        <property name="oxbytei.action.annotate.targetLocation">//*[@xml:id eq '${endAnchorId}']</property>
+        <property name="oxbytei.action.annotate.action">Replace</property>
+        <property name="oxbytei.action.annotate.externalParams">has-end-anchor=false</property>
+        <property name="oxbytei.action.annotate.attribute">tag</property>
+
+
+        <!-- common properties for apparatus actions -->
+        <property name="oxbytei.action.app.anchors.startAnchor">anchor</property>
+        <property name="oxbytei.action.app.anchors.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.app.anchors.startId">'${id}'</property>
+        <property name="oxbytei.action.app.anchors.endAnchor">anchor</property>
+        <property name="oxbytei.action.app.anchors.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.app.anchors.endId">'${id}'</property>
+        <property name="oxbytei.action.app.anchors.moveToEnd">true</property>
+        
+        <!-- properties for internal double-end point attached apparatus -->
+        <property name="oxbytei.action.app.dep.int.sourceLocation">/*</property>
+        <property name="oxbytei.action.app.dep.int.targetLocation">//*[@xml:id eq '${endAnchorId}']</property>
+        <property name="oxbytei.action.app.dep.int.action">Replace</property>
+        <property name="oxbytei.action.app.dep.int.externalParams">withLemma=false</property>
+        
+        <!-- properties for external double-end point attached apparatus -->
+        <property name="oxbytei.action.app.dep.ext.sourceLocation">/*</property>
+        <property name="oxbytei.action.app.dep.ext.targetLocation">following::listApp[1]</property>
+        <property name="oxbytei.action.app.dep.ext.action">Inside as last child</property>
+        <property name="oxbytei.action.app.dep.ext.externalParams"></property>
+        
+        
+        <!-- Styles -->
+        
+        <!-- Properties for analytic style -->
+        <property name="oxbytei.style.analytic.moveToEnd">false</property>
+        <property name="oxbytei.style.analytic.sourceLocation">/*</property>
+        <property name="oxbytei.style.analytic.targetLocation">following::*:spanGrp</property>
+        <property name="oxbytei.style.analytic.action">Inside as last child</property>
+        <property name="oxbytei.style.analytic.style">analytic</property>
+        
+        <!-- Properties for spanTo-Style -->
+        <property name="oxbytei.style.spanTo.moveToEnd">false</property>
+        <property name="oxbytei.style.spanTo.sourceLocation">/*</property>
+        <property name="oxbytei.style.spanTo.targetLocation">//*[@xml:id eq '${startAnchorId}']</property>
+        <property name="oxbytei.style.spanTo.action">Replace</property>
+        <property name="oxbytei.style.spanTo.style">spanTo</property>
+        
+        <!-- Properties for restricted-aggregative style -->
+        <property name="oxbytei.style.restrictive-aggregative.moveToEnd">false</property>
+        <property name="oxbytei.style.restrictive-aggregative.sourceLocation">/*</property>
+        <property name="oxbytei.style.restrictive-aggregative.targetLocation">${anchorsContainer}</property>
+        <property name="oxbytei.style.restrictive-aggregative.action">Replace</property>
+        <property name="oxbytei.style.restrictive-aggregative.style">restricted-aggregative</property>
+        
+        <!-- Properties for aggregative style -->
+        <property name="oxbytei.style.aggregative.moveToEnd">false</property>
+        <property name="oxbytei.style.aggregative.sourceLocation">/*</property>
+        <property name="oxbytei.style.aggregative.targetLocation">${anchorsContainer}</property>
+        <property name="oxbytei.style.aggregative.action">Replace</property>
+        <property name="oxbytei.style.aggregative.style">aggregative</property>
+        
+        
+        <!-- properties for person linking action -->
+        <property name="oxbytei.action.anchors.person.startAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.person.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.person.startId">'${id}'</property>
+        <property name="oxbytei.action.anchors.person.endAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.person.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.person.endId">'${id}'</property>
+        <!-- use analytic style -->
+        <property name="oxbytei.action.anchors.person.moveToEnd">false</property>
+        <property name="oxbytei.action.markup.person.sourceLocation">/*</property>
+        <property name="oxbytei.action.markup.person.targetLocation">if (true() or ancestor-or-self::note or //variantEncoding[@method ne 'parallel-segmentation'] or not(following::*:spanGrp)) then ${anchorsContainer} else following::*:spanGrp</property>
+        <property name="oxbytei.action.markup.person.action">${xpath_eval(if (true() or ancestor-or-self::note or //variantEncoding[@method ne 'parallel-segmentation'] or not(following::*:spanGrp)) then 'Replace' else 'Inside as last child')}</property>
+        <property name="oxbytei.action.markup.person.externalParams">tag=persName, style=${xpath_eval(if (true() or ancestor-or-self::note or //variantEncoding[@method ne 'parallel-segmentation'] or not(following::*:spanGrp)) then 'aggregative' else 'analytic')}</property>
+        <property name="oxbytei.action.sel.person.name">ref</property>
+        
+        <!-- properties for place linking action -->
+        <property name="oxbytei.action.anchors.place.startAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.place.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.place.startId">'${id}'</property>
+        <property name="oxbytei.action.anchors.place.endAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.place.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.place.endId">'${id}'</property>
+        <!-- use analytic style -->
+        <property name="oxbytei.action.anchors.place.moveToEnd">false</property>
+        <property name="oxbytei.action.markup.place.sourceLocation">/*</property>
+        <property name="oxbytei.action.markup.place.targetLocation">${anchorsContainer}</property>
+        <property name="oxbytei.action.markup.place.action">Replace</property>
+        <property name="oxbytei.action.markup.place.externalParams">tag=placeName, style=aggregative</property>
+        <property name="oxbytei.action.sel.place.name">ref</property>
+        
+        <!-- properties for bibref linking action -->
+        <property name="oxbytei.action.anchors.bibref.startAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.bibref.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.bibref.startId">'${id}'</property>
+        <property name="oxbytei.action.anchors.bibref.endAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.bibref.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.bibref.endId">'${id}'</property>
+        <property name="oxbytei.action.anchors.bibref.moveToEnd">false</property>
+        <property name="oxbytei.action.markup.bibref.sourceLocation">/*</property>
+        <property name="oxbytei.action.markup.bibref.targetLocation">${anchorsContainer}</property>
+        <property name="oxbytei.action.markup.bibref.action">Replace</property>
+        <property name="oxbytei.action.markup.bibref.externalParams">tag=bibl, style=aggregative</property>
+        <property name="oxbytei.action.sel.bibref.name">corresp</property>
+
+        <!-- properties for rs linking action -->
+        <property name="oxbytei.action.anchors.rs.startAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.rs.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.rs.startId">'${id}'</property>
+        <property name="oxbytei.action.anchors.rs.endAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.rs.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.rs.endId">'${id}'</property>
+        <property name="oxbytei.action.anchors.rs.moveToEnd">false</property>
+        <property name="oxbytei.action.markup.rs.sourceLocation">/*</property>
+        <property name="oxbytei.action.markup.rs.targetLocation">${anchorsContainer}</property>
+        <property name="oxbytei.action.markup.rs.action">Replace</property>
+        <property name="oxbytei.action.markup.rs.externalParams">tag=rs, style=aggregative</property>
+        <property name="oxbytei.action.sel.rs.name">ref</property>
+        <property name="oxbytei.action.sel.rs.type.name">type</property>
+
+
+        <!-- properties for inserting single anchors, used by several actions -->
+        <property name="oxbytei.action.anchor.anchor">anchor</property>
+        <property name="oxbytei.action.anchor.anchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchor.anchorId">'${id}'</property>
+
+
+        <!-- properties for notes -->
+        <property name="oxbytei.action.note.action">Replace</property>
+        <property name="oxbytei.action.note.sourceLocation">/*</property>
+        <property name="oxbytei.action.note.targetLocation">//*[@xml:id eq '${anchorId}']</property>
+        <property name="oxbytei.action.note.externalParams">note-id=${id}</property>
+
+        <!-- Properties for inline notes -->
+        <property name="oxbytei.style.inline.note.action">Replace</property>
+        <property name="oxbytei.style.inline.note.sourceLocation">/*</property>
+        <property name="oxbytei.style.inline.note.targetLocation">//*[@xml:id eq '${anchorId}']</property>
+        <property name="oxbytei.style.inline.note.externalParams"></property>
+
+        <!-- Properties for external notes -->
+        <property name="oxbytei.style.note.external.action">Inside as last child</property>
+        <property name="oxbytei.style.note.external.sourceLocation">/*</property>
+        <property name="oxbytei.style.note.external.targetLocation">following::*:noteGrp[1]</property>
+        <property name="oxbytei.style.note.external.externalParams">style=external</property>
+
+
+        <!-- Properties for the navigation actions -->
+        <property name="oxbytei.action.goto.refering.referers">
+            //app, @from, @to, "concat(name(self::*), ': ', substring(normalize-space(.), 1, 50))", tei,
+            //span[not(child::*)], @from, @to, "concat('span: ', substring(normalize-space(.), 1, 50))", tei,
+            //span[child::*], @from, @to, "concat(name((child::*)[1]), ': ', substring(normalize-space(.), 1, 50))", tei
+        </property>
+        <property name="oxbytei.action.goto.refering.position">Inside, at the beginning</property>
+        <property name="oxbytei.action.goto.refering.message">Choose</property>
+
+
+        <!-- Properties for RDF annotations -->
+        <property name="oxbytei.action.anchors.rdf.range.startAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.rdf.range.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.rdf.range.startId">'${id}'</property>
+        <property name="oxbytei.action.anchors.rdf.range.endAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.rdf.range.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.rdf.range.endId">'${id}'</property>
+        <property name="oxbytei.action.anchors.rdf.range.moveToEnd">false</property>
+        <property name="oxbytei.action.rdf.range.annotations">${pdu}/Annotationen.xml</property>
+        <property name="oxbytei.action.rdf.range.annotationURI">http://alea.wwu.de/annot/${uuid}</property>
+        <property name="oxbytei.action.rdf.range.reproduceText">true</property>
+        <property name="oxbytei.action.rdf.range.wrapper"></property>
+        <property name="oxbytei.action.rdf.range.docids">docids.ent</property>
+        <property name="oxbytei.action.rdf.range.registry">${pdu}/registry.xml</property>
+
+        <!-- Properties for the document registry and the document identifier entities -->
+        <property name="oxbytei.action.docids.registryFile">${pdu}/registry.xml</property>
+        <property name="oxbytei.action.docids.entityFile">${pdu}/docids.ent</property>
+        <property name="oxbytei.action.docids.docidsSystemId">docids.ent</property>
+        <property name="oxbytei.action.docids.identifierXPath">tokenize(tokenize(base-uri(/), '/')[last()], '\.')[1]</property>
+        <property name="oxbytei.action.docids.docSuffix">.tei</property>
+
+
+        <!-- Properties for oxbytei.xinclude -->
+        <property name="oxbytei.action.oxbytei.xinclude.elementXPath">self::note</property>
+        
+        <!-- MRE: how to find recensions -->
+        <property name="oxbytao.mre.recensions.xpath">//sourceDesc//listWit[@xml:id]</property>
+
+        <!-- CSS: links -->
+        <property name="oxbytao.css.prefixDef.relBase">'definition'</property>
+        <property name="oxbytao.css.reference.evaluation">$context := self::*, $protocol := //prefixDef[matches($first, concat('^', @ident, ':', @matchPattern))][1], $base := (if (${teilspProp(oxbytao.css.prefixDef.relBase)} eq 'definition') then base-uri($protocol) else base-uri($context)), $href := if ($protocol) then replace($first, concat($protocol/@ident, ':', $protocol/@matchPattern), $protocol/@replacementPattern) else $first return resolve-uri($href, ($base, base-uri(/))[1])</property>
+
+    </properties>
+
+    <plugins>
+        
+        <!--
+        <plugin>
+            <class>de.wwu.scdh.oxbytei.extensions.SchemaAttributeValuesProvider</class>
+            <type>de.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">not(@wit)</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">*</condition>
+                    </conditions>
+                    <arguments/>
+                </configuration>
+            </configurations>
+        </plugin>
+        -->
+
+        <plugin>
+            <class>de.wwu.scdh.teilsp.extensions.LabelledEntriesFromXMLByPrefixDef</class>
+            <type>de.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <!--
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:placeName and //*:teiHeader//*:prefixDef[matches(@ident, '^(pl|plc|place)')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">ref</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:text/descendant::t:place[@xml:id]</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">normalize-space(t:placeName)</argument>
+                        <argument name="prefixDef">//t:teiHeader//t:prefixDef[matches(@ident, '^(pl|plc|place)')]</argument>
+                        <argument name="prefixDefRef">tokenize(@replacementPattern, '#')[1]</argument>
+                    </arguments>
+                </configuration>
+                -->
+                <!-- references to encyclopedia -->
+                <!--
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:bibl[child::*:title[@type eq 'lemma']] and //*:teiHeader//*:prefixDef[matches(@ident, '^(b$|bib$|bibl$|biblio)')]</condition>
+                        <condition domain="priority">20</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">corresp</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:text/descendant::t:listBibl/t:bibl[@xml:id][@type eq 'encyclopedia'] | //t:text/descendant::t:listBibl/t:biblStruct[@xml:id]</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">normalize-space(.)</argument>
+                        <argument name="prefixDef">//t:teiHeader//t:prefixDef[matches(@ident, '^(b$|bib$|bibl$|biblio)')]</argument>
+                        <argument name="prefixDefRef">'${pdu}/Literaturverzeichnis.xml'</argument>
+                    </arguments>
+                </configuration>
+                -->
+                <!-- bibliographic references -->
+                <!--
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:bibl[not(child::*:title[@type eq 'lemma'])] and //*:teiHeader//*:prefixDef[matches(@ident, '^(b$|bib$|bibl$|biblio)')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">corresp</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:text/descendant::t:listBibl/t:bibl[@xml:id] | //t:text/descendant::t:listBibl/t:biblStruct[@xml:id]</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">normalize-space(descendant::t:abbr)</argument>
+                        <argument name="prefixDef">//t:teiHeader//t:prefixDef[matches(@ident, '^(b$|bib$|bibl$|biblio)')]</argument>
+                        <argument name="prefixDefRef">'${pdu}/Literaturverzeichnis.xml'</argument>
+                    </arguments>
+                </configuration>
+                -->
+                <configuration>
+                    <!-- Auswahl der Rezension aus dem Handschriftenkatalog für sourceDesc//listWit/@corresp  -->
+                    <conditions>
+                        <condition domain="context">self::*:listWit[ancestor::*:sourceDesc] and //*:teiHeader//*:prefixDef[matches(@ident, '^rez$')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">corresp</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:body//t:listWit[@xml:id]</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">normalize-space(t:head)</argument>
+                        <argument name="prefixDef">//t:teiHeader//t:prefixDef[matches(@ident, '^rez')]</argument>
+                        <argument name="prefixDefRef">'${pdu}/WitnessCatalogue.xml'</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+        
+        
+        <plugin>
+            <class>de.wwu.scdh.teilsp.extensions.LabelledEntriesXSLTWithContext</class>
+            <type>de.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">(self::*:persName | self::*:person | self::*:rs[@type eq 'person']) and //*:teiHeader//*:prefixDef[matches(@ident, '^(psn|prs|pers|person)')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">ref</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="script">${framework(ALEA NG)}/xsl/entries-persons.xsl</argument>
+                        <argument name="parameters">prefix=psn</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">(self::*:placeName | self::*:place | self::*:rs[@type eq 'place']) and //*:teiHeader//*:prefixDef[matches(@ident, '^(plc|pl|pc|place)')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">ref</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="script">${framework(ALEA NG)}/xsl/entries-places.xsl</argument>
+                        <argument name="parameters">prefix=plc</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:bibl[not(child::*:title[@type eq 'lemma'])] and //*:teiHeader//*:prefixDef[matches(@ident, '^(b$|bib$|bibl$|biblio)')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">corresp</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="script">${framework(ALEA NG)}/xsl/entries-biblio.xsl</argument>
+                        <argument name="parameters">prefix=bibl</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:bibl[child::*:title[@type eq 'lemma']] and //*:teiHeader//*:prefixDef[matches(@ident, '^(b$|bib$|bibl$|biblio)')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">corresp</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="script">${framework(ALEA NG)}/xsl/entries-lexica.xsl</argument>
+                        <argument name="parameters">prefix=bibl</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:lem | self::*:rdg</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">wit</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="script">${framework(ALEA NG)}/xsl/entries-wit.xsl</argument>
+                        <argument name="parameters">witness-catalog=${pdu}/WitnessCatalogue.xml</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:seg</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">type</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="script">${framework(ALEA NG)}/xsl/entries-taxonomy-enumerated.xsl</argument>
+                        <argument name="parameters">taxonomy=${pdu}/tags.xml taxonomy-ids=segment</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">ana</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="script">${framework(ALEA NG)}/xsl/entries-ana.xsl</argument>
+                        <argument name="parameters">prefix=tag</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+
+        <plugin>
+            <class>de.wwu.scdh.teilsp.extensions.LabelledEntriesFromConfig</class>
+            <type>e.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:rs</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">type</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="keys">person;place;org</argument>
+                        <argument name="labels">Person;Place;Organization</argument>
+                        <argument name="separator">;</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+
+        <!--
+        <plugin>
+            <class>de.wwu.scdh.teilsp.extensions.LabelledEntriesXQuery</class>
+            <type>de.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:lem | self::*:rdg</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">wit</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="xquery">${framework(ALEA NG)}/xql/witnesses.xql</argument>
+                        <argument name="external">witness-catalog=${pdu}/WitnessCatalogue.xml</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+        <plugin>
+            <class>de.wwu.scdh.teilsp.extensions.LabelledEntriesXSLTWithContext</class>
+            <type>de.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:lem | self::*:rdg</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">wit</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="script">${framework(ALEA NG)}/xsl/entries-wit.xsl</argument>
+                        <argument name="parameters">witness-catalog=${pdu}/WitnessCatalogue.xml</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+        -->
+        
+        <plugin>
+            <class>de.wwu.scdh.teilsp.extensions.LabelledEntriesFromXML</class>
+            <type>de.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:span and //*:interpGrp/*:interp</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">ana</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:interpGrp/t:interp</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">@xml:id</argument>
+                        <argument name="prefix">#</argument>
+                    </arguments>
+                </configuration>
+                <!--
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:lem | self::*:rdg | self::*:witDetail</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">wit</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:teiHeader//t:sourceDesc/t:listWit//t:witness</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">let $ID := @xml:id, $recension := parent::t:listWit/@xml:id, $witness := doc('${pdu}/WitnessCatalogue.xml')//*[@xml:id eq $ID] return concat($recension, ':  ', normalize-space($witness))</argument>
+                        <argument name="prefix">#</argument>
+                    </arguments>
+                </configuration>
+                -->
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:witness[ancestor::*:sourceDesc]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">xml:id</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">doc('${pdu}/WitnessCatalogue.xml')//t:body//t:listWit/t:witness</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">normalize-space(.)</argument>
+                        <argument name="prefix"></argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">source</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:teiHeader//t:sourceDesc//t:listWit[@xml:id]</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">let $ID := @xml:id, $recension := doc('${pdu}/WitnessCatalogue.xml')//*[@xml:id eq $ID]/t:head return normalize-space($recension)</argument>
+                        <argument name="labelOFF">'label'</argument>
+                        <argument name="prefix">#</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:lg | self::*:l</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">met</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:teiHeader//t:metDecl/t:medSym[@xml:id]</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">normalize-space(.)</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+
+        <plugin>
+            <class>de.wwu.scdh.teilsp.extensions.LabelledEntriesFromConfig</class>
+            <type>de.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:unclear | self::*:gap</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">reason</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="keys">illegible;faded;eccentric_ductus</argument>
+                        <argument name="labels">unleserlich;ausgeblichen;exzentrischer Duktus</argument>
+                        <argument name="separator">;</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:unclear | self::*:gap</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">unit</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="keys">word;char;line</argument>
+                        <argument name="labels">Wort;Zeichen;Zeile</argument>
+                        <argument name="separator">;</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+        
+        
+        <!-- UI -->
+        <plugin>
+            <class>de.wwu.scdh.teilsp.ui.CheckBoxSelectDialog</class>
+            <type>de.wwu.scdh.teilsp.ui.ISelectionDialog</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:lem | self::*:rdg | self::*:witDetail</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">wit</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Select witnesses</argument>
+                        <argument name="icon">${framework(oXbytei)}/images/sheetsquestion-24.png</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">source</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Select recension</argument>
+                        <argument name="icon">${framework(oXbytei)}/images/sheetsquestion-24.png</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">ana</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Select category</argument>
+                        <argument name="icon">${framework(oXbytei)}/images/tag-24.png</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+        <plugin>
+            <class>de.wwu.scdh.teilsp.ui.ComboBoxSelectDialog</class>
+            <type>de.wwu.scdh.teilsp.ui.ISelectionDialog</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:bibl</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">corresp</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Select bibliographic item</argument>
+                        <argument name="icon">${framework(oXbytei)}/images/bibref-24.png</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <!-- @type is of tei.enumerated, i.e. no space allowed! So: single select. -->
+                    <conditions>
+                        <condition domain="context">self::*:seg</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">type</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Select type</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:gap | self::*:unclear</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">reason</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Grund</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:gap | self::*:unclear</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">unit</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Längeneinheit</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+        <plugin>
+            <class>de.wwu.scdh.teilsp.ui.ComboBoxSelectDialog</class>
+            <type>de.wwu.scdh.teilsp.ui.ISelectionDialog</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:persName | self::*:person | self::*:rs[@type eq 'person']</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">ref</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Select person</argument>
+                        <argument name="icon">${framework(oXbytei)}/images/person-24.png</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+        <plugin>
+            <class>de.wwu.scdh.teilsp.ui.ComboBoxSelectDialog</class>
+            <type>de.wwu.scdh.teilsp.ui.ISelectionDialog</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:placeName | self::*:place | self::*:rs[@type eq 'place']</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">ref</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Select person</argument>
+                        <argument name="icon">${framework(oXbytei)}/images/pin-24.png</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+        <plugin>
+            <class>de.wwu.scdh.teilsp.ui.ComboBoxSelectDialog</class>
+            <type>de.wwu.scdh.teilsp.ui.ISelectionDialog</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:lg | self::*:l</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">met</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Select metrum</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+        <plugin>
+            <class>de.wwu.scdh.teilsp.ui.ComboBoxSelectDialog</class>
+            <type>de.wwu.scdh.teilsp.ui.ISelectionDialog</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:rs</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">type</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="title">Select type of entity (referring string)</argument>
+                        <argument name="icon">${framework(oXbytei)}/images/rs-24.png</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+    </plugins>
+</teilspConfiguration>

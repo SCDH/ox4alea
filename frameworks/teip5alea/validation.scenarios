@@ -123,7 +123,7 @@
 								<field name="validationType">
 									<validationUnitType>
 										<field name="validationInputType">
-											<String>text/any</String>
+											<String>text/xml</String>
 										</field>
 									</validationUnitType>
 								</field>
@@ -147,6 +147,22 @@
 									<null/>
 								</field>
 								<field name="validationSchema">
+									<validationUnitSchema>
+										<field name="dtdSchemaPublicID">
+											<null/>
+										</field>
+										<field name="schematronPhase">
+											<null/>
+										</field>
+										<field name="type">
+											<Integer>6</Integer>
+										</field>
+										<field name="uri">
+											<String>${pdu}/resources/schema/ALEA.rng</String>
+										</field>
+									</validationUnitSchema>
+								</field>
+								<field name="validationAdvancedSettings">
 									<null/>
 								</field>
 							</validationUnit>
@@ -156,7 +172,7 @@
 						<String>Validation_scenario</String>
 					</field>
 					<field name="name">
-						<String>ALEA - oXygen default validation</String>
+						<String>ALEA</String>
 					</field>
 				</validationScenario>
 			</validationScenario-array>

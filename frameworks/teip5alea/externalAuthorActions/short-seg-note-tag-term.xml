@@ -2,16 +2,16 @@
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="short.seg.note">
+  id="short.seg.note.tag.term">
   <a:name>Note on selected text</a:name>
-  <a:description>Surround the user selection with &lt;anchor&gt; and &lt;span&gt; and insert a note in it.</a:description>
-  <a:smallIconPath href="${framework}/images/short-seg-note-16.png"/>
-  <a:largeIconPath href="${framework}/images/short-seg-note-24.png"/>
+  <a:description>Surround the user selection with &lt;anchor&gt; and &lt;span&gt;, then tag it and add a foot note with the tags' terms.</a:description>
+  <a:smallIconPath href="${framework}/images/short-seg-note-tag-term-16.png"/>
+  <a:largeIconPath href="${framework}/images/short-seg-note-tag-term-24.png"/>
   <a:operations>
     <a:operation id="ExecuteMultipleActionsOperation">
       <a:xpathCondition>true()</a:xpathCondition>
       <a:arguments>
-        <a:argument name="actionIDs">annotate, note</a:argument>
+        <a:argument name="actionIDs">annotate, sel.tag, note, atom.here.seg, atom.insert.tag.terms</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>

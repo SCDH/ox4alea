@@ -18,6 +18,9 @@ the form "Show addons from:" of the dialogue box from "Help" ->
 
 This framework works on top of oXbytei and oXbytao, which must also be
 installed.
+```
+https://scdh.zivgitlabpages.uni-muenster.de/hees-alea/oxygen-framework/descriptor.xml
+```
 
 - [oXbytei](https://github.com/SCDH/oxbytei)
 - [oXbytao](https://github.com/SCDH/oxbytoa)

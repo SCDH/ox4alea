@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teilspConfiguration xmlns="http://wwu.de/scdh/teilsp/config/">
+
+    <properties>
+        <property name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</property>
+        <property name="oxbytei.id.scheme">'a_${id}'</property>
+        
+        <!-- properties for annotation action -->
+        <property name="oxbytei.action.annotate.startAnchor">anchor</property>
+        <property name="oxbytei.action.annotate.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.annotate.startId">'${id}'</property>
+        <property name="oxbytei.action.annotate.endAnchor">anchor</property>
+        <property name="oxbytei.action.annotate.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.annotate.endId">'${id}'</property>
+        <property name="oxbytei.action.annotate.sourceLocation">/*</property>
+        <property name="oxbytei.action.annotate.targetLocation">//xenoData[1]/*[1]</property>
+        <property name="oxbytei.action.annotate.action">Inside as last child</property>
+        <property name="oxbytei.action.annotate.externalParams">reproduce-text=true</property>
+        <property name="oxbytei.action.annotate.attribute">ana</property>
+        
+        <!-- properties for internal double-end point attached apparatus -->
+        <property name="oxbytei.action.app.dep.int.startAnchor">anchor</property>
+        <property name="oxbytei.action.app.dep.int.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.app.dep.int.startId">'${id}'</property>
+        <property name="oxbytei.action.app.dep.int.endAnchor">anchor</property>
+        <property name="oxbytei.action.app.dep.int.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.app.dep.int.endId">'${id}'</property>
+        <property name="oxbytei.action.app.dep.int.moveToEnd">true</property>
+        <property name="oxbytei.action.app.dep.int.sourceLocation">/*</property>
+        <property name="oxbytei.action.app.dep.int.targetLocation">self::*</property>
+        <property name="oxbytei.action.app.dep.int.action">Replace</property>
+        <property name="oxbytei.action.app.dep.int.externalParams"></property>
+        
+        <!-- properties for external double-end point attached apparatus -->
+        <property name="oxbytei.action.app.dep.ext.startAnchor">anchor</property>
+        <property name="oxbytei.action.app.dep.ext.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.app.dep.ext.startId">'${id}'</property>
+        <property name="oxbytei.action.app.dep.ext.endAnchor">anchor</property>
+        <property name="oxbytei.action.app.dep.ext.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.app.dep.ext.endId">'${id}'</property>
+        <property name="oxbytei.action.app.dep.ext.sourceLocation">/*</property>
+        <property name="oxbytei.action.app.dep.ext.targetLocation">following::listApp[1]</property>
+        <property name="oxbytei.action.app.dep.ext.action">Inside as last child</property>
+        <property name="oxbytei.action.app.dep.ext.externalParams"></property>
+        
+        
+        <!-- Styles -->
+        
+        <!-- Properties for analytic style -->
+        <property name="oxbytei.style.analytic.moveToEnd">false</property>
+        <property name="oxbytei.style.analytic.sourceLocation">/*</property>
+        <property name="oxbytei.style.analytic.targetLocation">following::*:spanGrp</property>
+        <property name="oxbytei.style.analytic.action">Inside as last child</property>
+        <property name="oxbytei.style.analytic.style">analytic</property>
+        
+        <!-- Properties for spanTo-Style -->
+        <property name="oxbytei.style.spanTo.moveToEnd">false</property>
+        <property name="oxbytei.style.spanTo.sourceLocation">/*</property>
+        <property name="oxbytei.style.spanTo.targetLocation">//*[@xml:id eq '${startAnchorId}']</property>
+        <property name="oxbytei.style.spanTo.action">Replace</property>
+        <property name="oxbytei.style.spanTo.style">spanTo</property>
+        
+        <!-- Properties for restricted-aggregative style -->
+        <property name="oxbytei.style.restrictive-aggregative.moveToEnd">false</property>
+        <property name="oxbytei.style.restrictive-aggregative.sourceLocation">/*</property>
+        <property name="oxbytei.style.restrictive-aggregative.targetLocation">${anchorsContainer}</property>
+        <property name="oxbytei.style.restrictive-aggregative.action">Replace</property>
+        <property name="oxbytei.style.restrictive-aggregative.style">restricted-aggregative</property>
+        
+        <!-- Properties for aggregative style -->
+        <property name="oxbytei.style.aggregative.moveToEnd">false</property>
+        <property name="oxbytei.style.aggregative.sourceLocation">/*</property>
+        <property name="oxbytei.style.aggregative.targetLocation">${anchorsContainer}</property>
+        <property name="oxbytei.style.aggregative.action">Replace</property>
+        <property name="oxbytei.style.aggregative.style">aggregative</property>
+        
+        
+        <!-- properties for person linking action -->
+        <property name="oxbytei.action.anchors.person.startAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.person.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.person.startId">'${id}'</property>
+        <property name="oxbytei.action.anchors.person.endAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.person.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.person.endId">'${id}'</property>
+        <!-- use analytic style -->
+        <property name="oxbytei.action.anchors.person.moveToEnd">false</property>
+        <property name="oxbytei.action.markup.person.sourceLocation">/*</property>
+        <property name="oxbytei.action.markup.person.targetLocation">following::*:spanGrp</property>
+        <property name="oxbytei.action.markup.person.action">Inside as last child</property>
+        <property name="oxbytei.action.markup.person.externalParams">tag=persName, style=analytic</property>
+        <property name="oxbytei.action.sel.person.name">ref</property>
+        
+        <!-- properties for place linking action -->
+        <property name="oxbytei.action.anchors.place.startAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.place.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.place.startId">'${id}'</property>
+        <property name="oxbytei.action.anchors.place.endAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.place.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.place.endId">'${id}'</property>
+        <!-- use analytic style -->
+        <property name="oxbytei.action.anchors.place.moveToEnd">false</property>
+        <property name="oxbytei.action.markup.place.sourceLocation">/*</property>
+        <property name="oxbytei.action.markup.place.targetLocation">following::*:spanGrp</property>
+        <property name="oxbytei.action.markup.place.action">Inside as last child</property>
+        <property name="oxbytei.action.markup.place.externalParams">tag=placeName, style=analytic</property>
+        <property name="oxbytei.action.sel.place.name">ref</property>
+        
+        <!-- properties for bibref linking action -->
+        <property name="oxbytei.action.anchors.bibref.startAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.bibref.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.bibref.startId">'${id}'</property>
+        <property name="oxbytei.action.anchors.bibref.endAnchor">anchor</property>
+        <property name="oxbytei.action.anchors.bibref.startAnchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchors.bibref.endId">'${id}'</property>
+        <property name="oxbytei.action.anchors.bibref.moveToEnd">false</property>
+        <property name="oxbytei.action.markup.bibref.sourceLocation">/*</property>
+        <property name="oxbytei.action.markup.bibref.targetLocation">${anchorsContainer}</property>
+        <property name="oxbytei.action.markup.bibref.action">Replace</property>
+        <property name="oxbytei.action.markup.bibref.externalParams">tag=bibl, style=aggregative</property>
+        <property name="oxbytei.action.sel.bibref.name">corresp</property>
+
+
+        <!-- properties for inserting single anchors, used by several actions -->
+        <property name="oxbytei.action.anchor.anchor">anchor</property>
+        <property name="oxbytei.action.anchor.anchorNamespace">http://www.tei-c.org/ns/1.0</property>
+        <property name="oxbytei.action.anchor.anchorId">'${id}'</property>
+
+
+        <!-- properties for notes -->
+        <property name="oxbytei.action.note.action">Replace</property>
+        <property name="oxbytei.action.note.sourceLocation">/*</property>
+        <property name="oxbytei.action.note.targetLocation">//*[@xml:id eq '${anchorId}']</property>
+        <property name="oxbytei.action.note.externalParams"></property>
+
+        <!-- Properties for inline notes -->
+        <property name="oxbytei.style.inline.note.action">Replace</property>
+        <property name="oxbytei.style.inline.note.sourceLocation">/*</property>
+        <property name="oxbytei.style.inline.note.targetLocation">//*[@xml:id eq '${anchorId}']</property>
+        <property name="oxbytei.style.inline.note.externalParams"></property>
+
+        <!-- Properties for external notes -->
+        <property name="oxbytei.style.note.external.action">Inside as last child</property>
+        <property name="oxbytei.style.note.external.sourceLocation">/*</property>
+        <property name="oxbytei.style.note.external.targetLocation">following::*:noteGrp[1]</property>
+        <property name="oxbytei.style.note.external.externalParams">style=external</property>
+
+
+        <!-- Properties for the navigation actions -->
+        <property name="oxbytei.action.goto.refering.referers">//app, @from, @to, "concat(name(self::*), ': ', substring(normalize-space(.), 1, 50))", tei, //span, @from, @to, "concat(name((child::*)[1]), ': ', substring(normalize-space(.), 1, 50))", tei</property>
+        <property name="oxbytei.action.goto.refering.position">Inside, at the beginning</property>
+        <property name="oxbytei.action.goto.refering.message">Choose</property>
+        
+    </properties>
+
+    <plugins>
+        <plugin>
+            <class>de.wwu.scdh.teilsp.extensions.LabelledEntriesFromXMLByPrefixDef</class>
+            <type>de.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:persName and //*:teiHeader//*:prefixDef[matches(@ident, '^(psn|prs|pers|person)')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">ref</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:text/descendant::t:person[@xml:id]</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">normalize-space(concat(t:persName, ', *', t:birth))</argument>
+                        <argument name="prefixDef">//t:teiHeader//t:prefixDef[matches(@ident, '(psn|prs|pers)')]</argument>
+                        <argument name="prefixDefRef">tokenize(@replacementPattern, '#')[1]</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:placeName and //*:teiHeader//*:prefixDef[matches(@ident, '^(pl|plc|place)')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">ref</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:text/descendant::t:place[@xml:id]</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">normalize-space(t:placeName)</argument>
+                        <argument name="prefixDef">//t:teiHeader//t:prefixDef[matches(@ident, '^(pl|plc|place)')]</argument>
+                        <argument name="prefixDefRef">tokenize(@replacementPattern, '#')[1]</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:bibl and //*:teiHeader//*:prefixDef[matches(@ident, '^(b$|bib$|biblio)')]</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                        <condition domain="nodeName">corresp</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:text/descendant::t:listBibl/t:bibl[@xml:id] | //t:text/descendant::t:listBibl/t:biblStruct[@xml:id]</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">normalize-space(t:bibl | t:biblStruct)</argument>
+                        <argument name="prefixDef">//t:teiHeader//t:prefixDef[matches(@ident, '^(b$|bib$|biblio)')]</argument>
+                        <argument name="prefixDefRef">tokenize(@replacementPattern, '#')[1]</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+
+        <plugin>
+            <class>de.wwu.scdh.teilsp.extensions.LabelledEntriesFromXML</class>
+            <type>e.wwu.scdh.teilsp.services.extensions.ILabelledEntriesProvider</type>
+            <configurations>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:span and //*:interpGrp/*:interp</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">ana</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:interpGrp/t:interp</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">@xml:id</argument>
+                        <argument name="prefix">#</argument>
+                    </arguments>
+                </configuration>
+                <configuration>
+                    <conditions>
+                        <condition domain="context">self::*:lem | self::*:rdg</condition>
+                        <condition domain="priority">10</condition>
+                        <condition domain="nodeName">wit</condition>
+                        <condition domain="nodeType">attributeValue</condition>
+                    </conditions>
+                    <arguments>
+                        <argument name="namespaces">t:http://www.tei-c.org/ns/1.0 xml:http://www.w3.org/XML/1998/namespace</argument>
+                        <argument name="selection">//t:teiHeader//t:sourceDesc/t:listWit//t:witness</argument>
+                        <argument name="key">@xml:id</argument>
+                        <argument name="label">let $ID := @xml:id, $witness := doc('${pdu}/WitnessCatalogue.xml')//*[@xml:id eq $ID] return normalize-space($witness)</argument>
+                        <argument name="prefix">#</argument>
+                    </arguments>
+                </configuration>
+            </configurations>
+        </plugin>
+
+    </plugins>
+</teilspConfiguration>

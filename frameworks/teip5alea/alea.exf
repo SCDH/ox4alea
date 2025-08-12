@@ -8,6 +8,10 @@
   <description>An oXygen framework for the edition of the works of Ibn Nubatah</description>
   <priority>High</priority>
 
+  <xmlCatalogs inherit="all">
+    <addEntry path="catalog.xml" position="before"/>
+  </xmlCatalogs>
+
   <documentTemplates>
     <addEntry path="${pd}/templates" position="before"/>
   </documentTemplates>
@@ -15,10 +19,16 @@
   <transformationScenarios>
     <addScenarios href="transformation.scenarios"/>
     <defaultScenarios>
-      <name>ALEA :: Preview</name>
+      <name>ALEA :: Preview Diwan</name>
     </defaultScenarios>
   </transformationScenarios>
 
+  <validationScenarios>
+    <addScenarios href="validation.scenarios"/>
+    <defaultScenarios>
+      <name>ALEA</name>
+    </defaultScenarios>
+  </validationScenarios>
 
   <author>
     <!-- 
@@ -40,8 +50,10 @@
 
     <css>
       <addCss path="${framework}/css/note.css" alternate="true" title="+ Kommentare"/>
-      <addCss path="${framework}/css/recensions_.css" alternate="true" title="+ MRE Multiple Recensions Editor"/>
-      <addCss path="${framework}/css/mre-apparatus_.css" alternate="true" title="+ MRE Hide Other Readings"/>
+      <addCss path="${framework}/css/recensions_.css" alternate="true"
+        title="+ MRE Multiple Recensions Editor"/>
+      <addCss path="${framework}/css/mre-apparatus_.css" alternate="true"
+        title="+ MRE Hide Other Readings"/>
     </css>
 
     <menu>
@@ -50,6 +62,7 @@
       <addAction anchor="insert image" id="insert_verse"/>
       <addAction anchor="insert image" id="insert_stanza"/>
       <addAction anchor="insert image" id="insert_caesura"/>
+      <addAction anchor="insert image" id="edit.title"/>
       <addAction anchor="del.app" id="add_witdetail"/>
       <addAction anchor="del.app" id="register_witness"/>
       <separator anchor="del.app"/>
@@ -70,7 +83,7 @@
     </menu>
 
     <toolbars>
-      <toolbar>
+      <toolbar name="TEI">
         <removeAction id="item"/>
         <removeAction id="itemizedlist"/>
         <removeAction id="sort"/>
@@ -82,16 +95,17 @@
         <removeAction id="insert.table.cell"/>
         <removeAction id="table.join"/>
         <removeAction id="table.split"/>
+      </toolbar>
+
+      <toolbar name="Editorial">
+        <separator/>
+        <addAction id="mark-unclear"/>
+        <addAction id="add-gap"/>
+      </toolbar>
+
+      <toolbar name="Critical Apparatus">
         <addAction anchor="del.app" id="add_witdetail"/>
         <addAction anchor="del.app" id="register_witness"/>
-        <separator anchor="del.app"/>
-        <addAction anchor="note" id="mark-unclear"/>
-        <addAction anchor="note" id="add-gap"/>
-        <separator anchor="note"/>
-
-        <!-- 
-      
-      -->
       </toolbar>
 
       <toolbar name="MRE">
@@ -112,8 +126,10 @@
         <addAction id="short.seg.note"/>
         <addAction id="short.cite.ref"/>
         <addAction id="short.koran"/>
+        <addAction id="short.seg.note.tag.term"/>
         <addAction id="short.encyclopedia"/>
         <addAction id="short.seg.lang"/>
+        <addAction id="insert.tag.terms"/>
       </toolbar>
 
       <!--toolbar name="ALEA Recensions">

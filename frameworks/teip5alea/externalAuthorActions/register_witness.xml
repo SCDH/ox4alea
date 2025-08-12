@@ -18,8 +18,7 @@
           if (doc-available($catFile))
               then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', normalize-space($w/*:choice), "'"), ';'))
               else ("'error':'no witness catalogue found'") )}),
-'')}"/>]]>
-        </a:argument>
+'')}"/>]]></a:argument>
         <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>
     </a:operation>
@@ -32,8 +31,7 @@
           if (doc-available($catFile))
               then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', normalize-space($w/*:choice), "'"), ';'))
               else ("'error':'no witness catalogue found'") )}),
-'')}"/></listWit>]]>
-        </a:argument>
+'')}"/></listWit>]]></a:argument>
       </a:arguments>
     </a:operation>
     <a:operation id="InsertFragmentOperation">
@@ -45,8 +43,7 @@
           if (doc-available($catFile))
               then (string-join(for $w in doc($catFile)/*:TEI/*:text/*:body//*:witness return concat("'", $w/@xml:id, "':'", $w/@xml:id, ' = ', normalize-space($w/*:choice), "'"), ';'))
               else ("'error':'no witness catalogue found'") )}),
-'')}"/>]]>
-        </a:argument>
+'')}"/>]]></a:argument>
         <a:argument name="insertLocation">ancestor::*:listWit</a:argument>
         <a:argument name="insertPosition">Inside as last child</a:argument>
       </a:arguments>

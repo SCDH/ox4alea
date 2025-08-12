@@ -1,5 +1,91 @@
 # change log #
 
+### 3.4.0
+
+- reflect changes in oXbytei and oXbytao
+  - re-distribute toolbar actions
+- update to SEED TEI Transformations 0.14.8
+- update to ALEA Transformations 0.8.0
+
+### 3.3.3
+
+- update SEED TEI Transformations to bug fix version
+- fix author mode actions that insert spaces, related to #69.
+
+
+### 3.3.2
+
+- update SEED TEI Transformations to bug fix version 0.11.1
+
+### 3.3.0
+
+- activate validation scenarios and made `ALEA` the default scenario
+  - the `ALEA` scenario points directly to
+    `${pdu}/resources/schema/ALEA.rng`
+  - Breaks the separation of project and framework. However, having
+    validation without any individual config is vital at the moment.
+- update to SEED TEI Transformations 0.11.0
+- update to ALEA Transformations 0.7.5
+
+### 3.2.0
+
+- improved author action for citations
+- bump SEED TEI Transformations to 0.10.0
+- added transformation scenarios for Diwan that ask for font size
+  - this enable to get prints for team meatings
+
+### 3.0.0
+
+- dependencies on SEED TEI Transformations and ALEA Transformations
+- preview replaced with components from SEED TEI Transformations
+- added transformation and scenario for registries, i.e., places,
+  persons, bibliography, importet from ALEA Transformations
+
+
+### 2.8.4
+
+- generate apparatus entries for `<space>` nested in `<rdg>`
+
+### 2.8.3
+
+- output `@reason` for gaps and unclear text nested `<rdg>`
+
+### 2.8.1 ###
+
+- preview:
+  - i18n: introduced namespace `decimal` for translating decimal
+	numbers to i18n language, e.g. translating arabic numbers to
+	arabic numbers in arabic script
+  - translate surah verse numbers to i18n language
+  - libapp2: replace `<caesura>` to space in apparatus lemma.
+
+### 2.8.0 ###
+
+- preview:
+  - make libi18n.xsl generic
+  - print surah titles instead of surah number
+  - fixed arabic translations for "omisit" and "conieci"
+
+### 2.7.3 ###
+
+- preview:
+  - apparatus: when lemma is empty, print the preceding or following
+    word and repeat it in the reading
+  - preview all recensions: made this work on Windows
+
+### 2.7.2 ###
+
+- preview:
+  - fix line numbering and nested `<unclear>` etc. in `<rdg>`
+  - minimal support for prose
+- action for editing `title` and `TEI/@xml:id` simultaneously
+- remove restrictions `<caesura>` action, because we hand restriction
+  over to ODD
+
+### 2.7.1 ###
+
+- fix bug in shortcut action for inserting references to encyclopedia
+
 ### 2.7.0 ###
 
 - use `libapp2.xsl` for the apparatus
@@ -177,7 +263,7 @@
 ## 2.3.2 ##
 
 - Changed "Insert/Change Segmentation" to "Insert Segmentation",
-  because it prevents nested segmentations 
+  because it prevents nested segmentations
 
 ## 2.3.1 ##
 

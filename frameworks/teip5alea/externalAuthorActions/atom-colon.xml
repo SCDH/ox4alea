@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- editing atom
+This inserts a colon and a space: ": " -->
 <a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
-  id="short.seg.note">
-  <a:name>Note on selected text</a:name>
-  <a:description>Surround the user selection with &lt;anchor&gt; and &lt;span&gt; and insert a note in it.</a:description>
-  <a:smallIconPath href="${framework}/images/short-seg-note-16.png"/>
-  <a:largeIconPath href="${framework}/images/short-seg-note-24.png"/>
+  id="atom.colon">
+  <a:name>Add Colon</a:name>
+  <a:description>Inserts a colon and a space.</a:description>
   <a:operations>
-    <a:operation id="ExecuteMultipleActionsOperation">
+    <a:operation id="InsertFragmentOperation">
       <a:xpathCondition>true()</a:xpathCondition>
       <a:arguments>
-        <a:argument name="actionIDs">annotate, note</a:argument>
+        <a:argument name="fragment"><![CDATA[: ]]></a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
