@@ -1,5 +1,10 @@
 # Change Log #
 
+### 4.1.0
+
+- add `ALEA :: MRE Synopsis` transformation scenario for showing all
+  recensions of a poem side by side
+
 ### 4.0.1
 
 - fix release pipeline on gh
