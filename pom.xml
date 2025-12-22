@@ -18,7 +18,7 @@
 		<ant.contrib.version>1.0b3</ant.contrib.version>
 
 		<!-- XSLT/XQuery dependencies -->
-		<seed-tei-transformations.version>0.17.0</seed-tei-transformations.version>
+		<seed-tei-transformations.version>0.17.1</seed-tei-transformations.version>
 		<alea-transformations.version>0.8.0</alea-transformations.version>
 	</properties>
 
