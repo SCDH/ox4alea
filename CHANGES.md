@@ -4,6 +4,7 @@
 
 - add `ALEA :: MRE Synopsis` transformation scenario for showing all
   recensions of a poem side by side
+- update to SEED TEI Transformations 0.17.1
 
 ### 4.0.1
 
