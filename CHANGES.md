@@ -1,5 +1,9 @@
 # Change Log #
 
+### 4.1.1
+
+- adds `libref.xsl` after reported missing for annotating figures
+
 ### 4.1.0
 
 - add `ALEA :: MRE Synopsis` transformation scenario for showing all
