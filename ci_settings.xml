@@ -12,5 +12,16 @@
         </httpHeaders>
       </configuration>
     </server>
+    <server>
+      <id>github-scdh-x2tei-transformations</id>
+      <configuration>
+        <httpHeaders>
+          <property>
+            <name>Authorization</name>
+            <value>Bearer ${env.GITHUB_TOKEN}</value>
+          </property>
+        </httpHeaders>
+      </configuration>
+    </server>
   </servers>
 </settings>
