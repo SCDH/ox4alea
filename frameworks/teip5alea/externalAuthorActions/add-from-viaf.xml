@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- editing action -->
+<a:authorAction xmlns:a="http://www.oxygenxml.com/ns/author/external-action"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/author/external-action http://www.oxygenxml.com/ns/author/external-action/authorAction.xsd"
+  id="add.from.viaf">
+  <a:name>Add from VIAF</a:name>
+  <a:description>Inserts an entry based on a VIAF ID.</a:description>
+  <a:operations>
+    <a:operation id="de.wwu.scdh.oxbytei.ExpandingXSLTOperation">
+      <a:xpathCondition>self::*:listPerson | self::*:listPlace | self::*:listBibl</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="script">${framework}/xsl/viaf.xsl</a:argument>
+        <a:argument name="action">At cursor position</a:argument>
+        <a:argument name="caretPosition">After</a:argument>
+        <a:argument name="externalParams">id=${ask('VIAF Identifier', generic, '')}</a:argument>
+      </a:arguments>
+    </a:operation>
+  </a:operations>
+  <a:accessKey/>
+</a:authorAction>
