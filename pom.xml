@@ -56,12 +56,6 @@
 			<artifactId>ant-contrib</artifactId>
 			<version>${ant.contrib.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>de.uni-ms.scdh.tei</groupId>
-			<artifactId>x2tei-transformations</artifactId>
-			<version>${x2tei-transformations.version}</version>
-			<type>pom</type>
-		</dependency>
 	</dependencies>
 
 	<build>

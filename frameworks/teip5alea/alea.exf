@@ -8,19 +8,6 @@
   <description>An oXygen framework for the edition of the works of Ibn Nubatah</description>
   <priority>High</priority>
 
-  <classpath>
-    <addEntry path="${framework(teip5alea)}/ant-contrib.jar"/>
-    <addEntry path="${framework(teip5alea)}/commons-codec.jar"/>
-    <addEntry path="${framework(teip5alea)}/httpclient5.jar"/>
-    <addEntry path="${framework(teip5alea)}/http-client-java.jar"/>
-    <addEntry path="${framework(teip5alea)}/http-client-saxon.jar"/>
-    <addEntry path="${framework(teip5alea)}/httpcore5-h2.jar"/>
-    <addEntry path="${framework(teip5alea)}/httpcore5.jar"/>
-    <addEntry path="${framework(teip5alea)}/httpcore.jar"/>
-    <addEntry path="${framework(teip5alea)}/pkg-java.jar"/>
-    <addEntry path="${framework(teip5alea)}/pkg-saxon.jar"/>
-  </classpath>
-
   <xmlCatalogs inherit="all">
     <addEntry path="catalog.xml" position="before"/>
   </xmlCatalogs>
