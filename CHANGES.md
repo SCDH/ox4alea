@@ -1,5 +1,10 @@
 # Change Log #
 
+### 4.2.0
+
+- add author mode action for inserting registry entries based on
+  RDF/XML from viaf.org
+
 ### 4.1.0
 
 - add `ALEA :: MRE Synopsis` transformation scenario for showing all
