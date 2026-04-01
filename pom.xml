@@ -20,6 +20,7 @@
 		<!-- XSLT/XQuery dependencies -->
 		<seed-tei-transformations.version>0.17.1</seed-tei-transformations.version>
 		<alea-transformations.version>0.8.0</alea-transformations.version>
+		<x2tei-transformations.version>0.9.1</x2tei-transformations.version>
 	</properties>
 
 	<repositories>
@@ -30,6 +31,10 @@
 		<repository>
 			<id>gitlab-alea-transformations</id>
 			<url>https://zivgitlab.uni-muenster.de/api/v4/projects/7517/packages/maven</url>
+		</repository>
+		<repository>
+		    <id>github-scdh-x2tei-transformations</id>
+		    <url>https://maven.pkg.github.com/SCDH/x2tei-transformations</url>
 		</repository>
 	</repositories>
 
@@ -70,6 +75,19 @@
 						</goals>
 						<configuration>
 							<url>https://github.com/SCDH/seed-tei-transformations/releases/download/${seed-tei-transformations.version}/seed-tei-transformations-${seed-tei-transformations.version}-package.zip</url>
+							<unpack>true</unpack>
+							<outputDirectory>frameworks/teip5alea</outputDirectory>
+						</configuration>
+					</execution>
+					<!-- download x2TEI Transformations -->
+					<execution>
+						<id>get-x2tei-transformations</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/SCDH/x2tei-transformations/releases/download/${x2tei-transformations.version}/x2tei-transformations-${x2tei-transformations.version}-package.zip</url>
 							<unpack>true</unpack>
 							<outputDirectory>frameworks/teip5alea</outputDirectory>
 						</configuration>
@@ -210,7 +228,9 @@
 						</goals>
 						<configuration>
 							<outputDirectory>${project.build.directory}/lib</outputDirectory>
-							<includeArtifactIds>ant-contrib</includeArtifactIds>
+							<!--includeArtifactIds>ant-contrib</includeArtifactIds-->
+							<stripVersion>true</stripVersion>
+							<excludeArtifactIds>slf4j-api,ant,Saxon-HE,xmlresolver,xmlresolver-data</excludeArtifactIds>
 						</configuration>
 					</execution>
 				</executions>

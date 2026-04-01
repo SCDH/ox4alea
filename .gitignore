@@ -15,6 +15,7 @@ default-oxygen-frameworks
 /frameworks/teip5alea/*.jar
 /frameworks/teip5alea/seed-tei-transformations
 /frameworks/teip5alea/alea-transformations
+/frameworks/teip5alea/x2tei-transformations
 oxbytei_externalAuthorActions
 oxbytao_externalAuthorActions
 

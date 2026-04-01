@@ -17,6 +17,7 @@
 	    <outputDirectory>/</outputDirectory>
 	    <includes>
 		<include>**/*</include>
+		<include>resources/META-INF/services/*</include>
 	    </includes>
 	    <excludes>
 		<exclude>**/*.xcf</exclude>
@@ -32,7 +33,7 @@
 	    <directory>${project.build.directory}/lib</directory>
 	    <outputDirectory>/</outputDirectory>
 	    <includes>
-		<include>ant-contrib-1.0.3.jar</include>
+		<include>*.jar</include>
 	    </includes>
 	</fileSet>
     </fileSets>

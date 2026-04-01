@@ -132,6 +132,10 @@
         <addAction id="insert.tag.terms"/>
       </toolbar>
 
+      <toolbar name="NAF">
+        <addAction id="add.from.viaf"/>
+      </toolbar>
+
       <!--toolbar name="ALEA Recensions">
         <addAction id="set-visible-D1"/>
         <addAction id="set-visible-D2"/>
