@@ -5,6 +5,10 @@
 - add author mode action for inserting registry entries based on
   RDF/XML from viaf.org
 
+### 4.1.1
+
+- adds `libref.xsl` after reported missing for annotating figures
+
 ### 4.1.0
 
 - add `ALEA :: MRE Synopsis` transformation scenario for showing all
