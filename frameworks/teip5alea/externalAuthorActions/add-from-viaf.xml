@@ -14,7 +14,7 @@
         <a:argument name="targetLocation">ancestor-or-self::*:person | ancestor-or-self::*:place | ancestor-or-self::*:bibl</a:argument>
         <a:argument name="action">After</a:argument>
         <a:argument name="caretPosition">Before</a:argument>
-        <a:argument name="externalParams">id=${ask('VIAF Identifier', generic, '')}</a:argument>
+        <a:argument name="externalParams">id=${ask('VIAF Identifier', generic, '')},config-url=${pdu}/resources/viaf-config.xml</a:argument>
       </a:arguments>
     </a:operation>
   </a:operations>
