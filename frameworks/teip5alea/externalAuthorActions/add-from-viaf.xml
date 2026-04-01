@@ -7,12 +7,13 @@
   <a:name>Add from VIAF</a:name>
   <a:description>Inserts an entry based on a VIAF ID.</a:description>
   <a:operations>
-    <a:operation id="de.wwu.scdh.oxbytei.ExpandingXSLTOperation">
-      <a:xpathCondition>self::*:listPerson | self::*:listPlace | self::*:listBibl</a:xpathCondition>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>ancestor-or-self::*:person | ancestor-or-self::*:place | ancestor-or-self::*:bibl</a:xpathCondition>
       <a:arguments>
         <a:argument name="script">${framework}/xsl/viaf.xsl</a:argument>
-        <a:argument name="action">At cursor position</a:argument>
-        <a:argument name="caretPosition">After</a:argument>
+        <a:argument name="targetLocation">ancestor-or-self::*:person | ancestor-or-self::*:place | ancestor-or-self::*:bibl</a:argument>
+        <a:argument name="action">After</a:argument>
+        <a:argument name="caretPosition">Before</a:argument>
         <a:argument name="externalParams">id=${ask('VIAF Identifier', generic, '')}</a:argument>
       </a:arguments>
     </a:operation>
