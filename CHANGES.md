@@ -1,5 +1,9 @@
 # Change Log #
 
+### 4.3.0
+
+- add cleanup author mode action for entries in person registry
+
 ### 4.2.0
 
 - add author mode action for inserting registry entries based on
