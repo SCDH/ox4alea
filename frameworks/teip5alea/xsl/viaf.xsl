@@ -5,8 +5,44 @@
 
     <xsl:import href="../x2tei-transformations/xsl/rdf/viaf.xsl"/>
 
-    <xsl:template mode="oxy-action" match="node()">
-        <xsl:call-template name="from-viaf"/>
+    <xsl:param name="template-id" as="xs:string" select="'TEMPLATE'"/>
+
+    <xsl:param name="template" as="element()?" select="/id($template-id)"/>
+
+    <xsl:template mode="oxy-action" match="/">
+        <xsl:variable name="viaf" as="element()">
+            <xsl:call-template name="from-viaf"/>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="not($template)">
+                <xsl:sequence select="$viaf"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- merge template and viaf data -->
+                <xsl:variable name="element-names-in-template" as="xs:string*"
+                    select="$template/* ! local-name() => distinct-values()"/>
+                <xsl:copy select="$viaf">
+                    <xsl:sequence select="$viaf/@*"/>
+                    <xsl:for-each select="$element-names-in-template">
+                        <xsl:variable name="element-name" as="xs:string" select="."/>
+                        <xsl:copy-of select="$viaf/*[local-name() = $element-name]"/>
+                        <xsl:for-each select="$template/*[local-name() = $element-name]">
+                            <xsl:variable name="template-element" as="element()" select="."/>
+                            <xsl:copy-of select="$template-element"/>
+                            <!-- copy mediately following text nodes and comments -->
+                            <xsl:variable name="next-template-element" as="element()?"
+                                select="./following-sibling::*[1]"/>
+                            <xsl:if test="$next-template-element">
+                                <xsl:copy-of
+                                    select="($template-element/following-sibling::node() intersect $next-template-element/preceding-sibling::node()) => outermost()"
+                                />
+                            </xsl:if>
+                        </xsl:for-each>
+                    </xsl:for-each>
+                    <xsl:copy-of select="$viaf/*[not(local-name() = $element-names-in-template)]"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>
