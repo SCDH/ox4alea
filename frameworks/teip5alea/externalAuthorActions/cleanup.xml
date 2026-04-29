@@ -21,6 +21,36 @@
         <a:argument name="externalParams">entry-id=${xpath_eval(ancestor-or-self::*:person/@xml:id)}</a:argument>
       </a:arguments>
     </a:operation>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>ancestor-or-self::*:place</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="script">${framework}/xsl/cleanup.xsl</a:argument>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="targetLocation">ancestor-or-self::*:place</a:argument>
+        <a:argument name="sourceLocation">ancestor::*:TEI</a:argument>
+        <a:argument name="externalParams">entry-id=${xpath_eval(ancestor-or-self::*:place/@xml:id)}</a:argument>
+      </a:arguments>
+    </a:operation>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>ancestor-or-self::*:event</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="script">${framework}/xsl/cleanup.xsl</a:argument>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="targetLocation">ancestor-or-self::*:event</a:argument>
+        <a:argument name="sourceLocation">ancestor::*:TEI</a:argument>
+        <a:argument name="externalParams">entry-id=${xpath_eval(ancestor-or-self::*:event/@xml:id)}</a:argument>
+      </a:arguments>
+    </a:operation>
+    <a:operation id="XSLTOperation">
+      <a:xpathCondition>ancestor-or-self::*:org</a:xpathCondition>
+      <a:arguments>
+        <a:argument name="script">${framework}/xsl/cleanup.xsl</a:argument>
+        <a:argument name="action">Replace</a:argument>
+        <a:argument name="targetLocation">ancestor-or-self::*:org</a:argument>
+        <a:argument name="sourceLocation">ancestor::*:TEI</a:argument>
+        <a:argument name="externalParams">entry-id=${xpath_eval(ancestor-or-self::*:org/@xml:id)}</a:argument>
+      </a:arguments>
+    </a:operation>
   </a:operations>
   <a:accessKey/>
 </a:authorAction>
