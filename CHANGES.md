@@ -1,5 +1,12 @@
 # Change Log #
 
+### 4.4.0
+
+- adding from viaf merges data from the webservice with the fields
+  from the template present in the file
+- makes cleanup available for persons as well as places, events and
+  organizations
+
 ### 4.3.0
 
 - add cleanup author mode action for entries in person registry
