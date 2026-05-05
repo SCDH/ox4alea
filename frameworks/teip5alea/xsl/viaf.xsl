@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- generates an person or place etc. entry from a VIAF API call
+
+The fetched data is merged with the existing data from
+the element with the $template-id ID, if present. This
+can be used to merge with template data or an existing
+data record.
+
+USAGE: see 'add.from.viaf' author action
+
+-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="#all" version="3.0"
     default-mode="oxy-action">
@@ -8,6 +18,9 @@
     <xsl:param name="template-id" as="xs:string" select="'TEMPLATE'"/>
 
     <xsl:param name="template" as="element()?" select="/id($template-id)"/>
+
+    <!-- which ID to use for the resulting entry -->
+    <xsl:param name="id-from-template" as="xs:boolean" select="false()"/>
 
     <xsl:template mode="oxy-action" match="/">
         <xsl:variable name="viaf" as="element()">
@@ -19,10 +32,22 @@
             </xsl:when>
             <xsl:otherwise>
                 <!-- merge template and viaf data -->
-                <xsl:variable name="element-names-in-template" as="xs:string*"
-                    select="$template/* ! local-name() => distinct-values()"/>
                 <xsl:copy select="$viaf">
-                    <xsl:sequence select="$viaf/@*"/>
+                    <!-- @xml:id -->
+                    <xsl:choose>
+                        <xsl:when test="$id-from-template">
+                            <xsl:sequence select="$template/@xml:id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:sequence select="$viaf/@xml:id"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <!-- other attributes -->
+                    <xsl:sequence select="$viaf/(@* except @xml:id)"/>
+                    <xsl:sequence select="$template/(@* except @xml:id)"/>
+                    <!-- elements -->
+                    <xsl:variable name="element-names-in-template" as="xs:string*"
+                        select="$template/* ! local-name() => distinct-values()"/>
                     <xsl:for-each select="$element-names-in-template">
                         <xsl:variable name="element-name" as="xs:string" select="."/>
                         <xsl:copy-of select="$viaf/*[local-name() = $element-name]"/>

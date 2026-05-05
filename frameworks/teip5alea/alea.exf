@@ -134,6 +134,7 @@
 
       <toolbar name="NAF">
         <addAction id="add.from.viaf"/>
+        <addAction id="merge.with.viaf"/>
         <addAction id="cleanup"/>
       </toolbar>
 
