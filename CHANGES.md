@@ -1,8 +1,13 @@
 # Change Log #
 
+### 4.5.0
+
+- add author mode action for merging data from VIAF into an existing
+  person, places etc. entry
+
 ### 4.4.0
 
-- adding from viaf merges data from the webservice with the fields
+- adding from VIAF merges data from the webservice with the fields
   from the template present in the file
 - makes cleanup available for persons as well as places, events and
   organizations
