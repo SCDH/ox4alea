@@ -1,5 +1,11 @@
 # Change Log #
 
+
+### 4.5.1
+
+- updates SEED TEI Transformations 0.19.1 in order to get support for
+  `orig` and `reg`
+
 ### 4.5.0
 
 - add author mode action for merging data from VIAF into an existing
