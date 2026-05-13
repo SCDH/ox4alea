@@ -132,11 +132,11 @@
         <addAction id="insert.tag.terms"/>
       </toolbar>
 
-      <toolbar name="NAF">
+      <!--toolbar name="NAF">
         <addAction id="add.from.viaf"/>
         <addAction id="merge.with.viaf"/>
         <addAction id="cleanup"/>
-      </toolbar>
+      </toolbar-->
 
       <!--toolbar name="ALEA Recensions">
         <addAction id="set-visible-D1"/>

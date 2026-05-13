@@ -1,5 +1,9 @@
 # Change Log #
 
+### 4.6.0
+
+- VIAF-related actions have been moved to oXbytei
+
 
 ### 4.5.1
 
