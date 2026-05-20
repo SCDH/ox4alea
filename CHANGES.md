@@ -1,5 +1,11 @@
 # Change Log #
 
+### 4.7.0
+
+- adds two new transformations scenorios intended for prose and
+  registers, one with app and nodes in popups and one with footnotes
+- updates to SEED TEI Transformations 0.20.0
+
 ### 4.6.0
 
 - VIAF-related actions have been moved to oXbytei
